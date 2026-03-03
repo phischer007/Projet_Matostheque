@@ -1,4 +1,4 @@
 logs/
 .env
 node_modules
-matostheque_venv/
+matostheque_venv
