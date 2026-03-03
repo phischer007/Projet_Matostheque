@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Activation Template</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        .button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>You're loan is activated!</h2>
+        <p>Hi {{ borrower.first_name }},</p>
+        <p>Your loan for the material : {{ material.name }} is activated!</p>
+        <p>Bellow is the details of your request:</p>
+        <table>
+            <tr>
+                <th>Material Name</th>
+                <td>{{ material.name }}</td>
+            </tr>
+            <tr>
+                <th>Material ID</th>
+                <td>{{ material.id }}</td>
+            </tr>
+            <tr>
+                <th>Owner</th>
+                <td>{{ owner.full_name }}</td>
+            </tr>
+            <tr>
+                <th>Loan Date</th>
+                <td>{{ loan_date }}</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>{{ duration }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ location }}</td>
+            </tr>
+        </table>
+        <p>Let's remember to take care the material we borrow. Nice Job!</p>
+        <p>If this action doesn't concern you, please ignore this email.</p>
+        <p>Thanks,<br><b>Team Matostheque</b></p>
+    </div>
+
+</body>
+</html>

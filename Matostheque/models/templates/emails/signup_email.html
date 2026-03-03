@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Template</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        .button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Welcome to the Matostheque Family!</h2>
+        <p>Hi {{ user.first_name }},</p>
+        <p>Thank you for signing up for our service. We're excited to have you on board!</p>
+        <p>To get started, please verify your email address by clicking on the link below:</p>
+        <p><a href="https://google.com" class="button">Verify Email</a></p>
+        <p>If you did not sign up for our service, please ignore this email.</p>
+        <p>Thanks,<br>Team Matostheque</p>
+    </div>
+
+</body>
+</html>

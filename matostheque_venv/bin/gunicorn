@@ -1,0 +1,12 @@
+#!/home/nomena/Matostheque_App/matostheque_venv/bin/python3
+# -*- coding: utf-8 -*-
+import re
+import sys
+from gunicorn.app.wsgiapp import run
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    try:
+        run()
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        sys.exit(1) # Exit with status 1 for failure

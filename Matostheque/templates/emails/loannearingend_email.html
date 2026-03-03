@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Reminder Template</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        .button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>You're loan is nearing the  due date!</h2><br />
+        <p>Hi {{ borrower.first_name }},</p>
+        <p>The material : {{ material.name }} that you borrowed is to be returned tomorrow.</p>
+        <p>Let's remember to put it at its original place for others to use. 
+            You can also notify your collegues of its location by keeping the information updated.</p>
+        <p><em>If this action doesn't concern you, please ignore this email.</em></p>
+        <p>Thanks,<br><b>Team Matostheque</b></p>
+    </div>
+
+</body>
+</html>

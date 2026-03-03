@@ -1,0 +1,5031 @@
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2024-06-14 10:02:02.054655
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+System check identified some issues:
+
+WARNINGS:
+?: (staticfiles.W004) The directory '/home/nomena/Matostheque_App/fronttheque/.next/static' in the STATICFILES_DIRS setting does not exist.
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 277, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 147, in update_loans
+    for loan in loans:
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/backends/postgresql/base.py", line 277, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 69, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 69, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 149, in update_loans
+    check_if_should_be_returned(loan, email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 271, in check_if_should_be_returned
+    send_reminder_email(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 85, in send_reminder_email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 86, in open
+    self.connection = self.connection_class(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 341, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 312, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/home/nomena/python/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2024-11-25 09:00:01.804547
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2024-12-29 09:00:02.349743
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-01-03 09:00:01.639931
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-01-26 09:00:01.862486
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-01-29 09:00:01.991346
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-01-30 09:00:02.112419
+Sending reminder email. Date:
+2025-01-30 09:00:02.177745
+Sending reminder email. Date:
+2025-01-30 09:00:02.223383
+Completed update_loans
+Completed with emails: {'count': 3}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-02-05 09:00:01.644518
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-02-26 09:00:02.127876
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-03-05 09:00:02.438551
+Sending reminder email. Date:
+2025-03-05 09:00:02.480787
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-03-10 09:00:01.776362
+Sending reminder email. Date:
+2025-03-10 09:00:01.840949
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-03-12 09:00:02.609583
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-03-18 09:00:02.161044
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-03-26 09:00:02.351885
+Sending reminder email. Date:
+2025-03-26 09:00:02.396453
+Sending reminder email. Date:
+2025-03-26 09:00:02.437301
+Completed update_loans
+Completed with emails: {'count': 3}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-04-02 09:00:02.557496
+Sending reminder email. Date:
+2025-04-02 09:00:02.602186
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-04-03 09:00:02.197289
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-04-17 09:00:02.310534
+Sending reminder email. Date:
+2025-04-17 09:00:02.360528
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-04-22 09:00:02.662089
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-04-23 09:00:02.010710
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-04-27 09:00:01.782875
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-04-29 09:00:01.812952
+Sending reminder email. Date:
+2025-04-29 09:00:01.862990
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-05-05 09:00:02.301786
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-05-07 09:00:02.368940
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-05-08 09:00:02.304123
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-05-19 09:00:02.255378
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-05-23 09:00:01.878700
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-05-28 09:00:02.394339
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-05-30 09:00:02.410240
+Sending reminder email. Date:
+2025-05-30 09:00:02.450249
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-06-02 09:00:02.454382
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-06-10 09:00:02.449435
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-06-15 09:00:02.078107
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-06-27 09:00:01.890183
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-06-28 09:00:01.663119
+Sending reminder email. Date:
+2025-06-28 09:00:01.709507
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-06-29 09:00:01.582069
+Sending reminder email. Date:
+2025-06-29 09:00:01.619059
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-07-02 09:00:02.142324
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-07-03 09:00:02.249936
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-07-14 09:00:02.313522
+Sending reminder email. Date:
+2025-07-14 09:00:02.350800
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-07-17 09:00:02.349874
+Sending reminder email. Date:
+2025-07-17 09:00:02.391158
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-07-18 09:00:01.562241
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-07-30 09:00:02.381686
+Sending reminder email. Date:
+2025-07-30 09:00:02.427196
+Sending reminder email. Date:
+2025-07-30 09:00:02.466545
+Sending reminder email. Date:
+2025-07-30 09:00:02.513383
+Sending reminder email. Date:
+2025-07-30 09:00:02.558157
+Completed update_loans
+Completed with emails: {'count': 5}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-07-31 09:00:01.659631
+Sending reminder email. Date:
+2025-07-31 09:00:01.700023
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-08-11 09:00:01.655364
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-08-27 09:00:02.247200
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-08-29 09:00:02.184443
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-08-31 09:00:02.402726
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-11-02 09:00:02.126183
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-11-19 09:00:01.865785
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+An error occurred while saving the loan: '<=' not supported between instances of 'NoneType' and 'int'
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 28, in handle
+    update_loans(email_count)
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 144, in update_loans
+    loan.update_overdue_flag()
+  File "/home/nomena/Matostheque_App/Matostheque/models/loan_model.py", line 319, in update_overdue_flag
+    self.save()
+  File "/home/nomena/Matostheque_App/Matostheque/models/loan_model.py", line 307, in save
+    super().save(*args, **kwargs)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/models/base.py", line 822, in save
+    self.save_base(
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/db/models/base.py", line 924, in save_base
+    post_save.send(
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/dispatch/dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/signals.py", line 16, in update_material_availability
+    material.update_availability()
+  File "/home/nomena/Matostheque_App/Matostheque/models/material_model.py", line 243, in update_availability
+    if self.quantity_available <= 0:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<=' not supported between instances of 'NoneType' and 'int'
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-11-27 09:00:02.047574
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-11-29 09:00:02.627439
+Sending reminder email. Date:
+2025-11-29 09:00:02.668248
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-11-30 09:00:02.480479
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 454, in execute
+    self.check()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 486, in check
+    all_issues = checks.run_checks(
+                 ^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/checks/urls.py", line 14, in check_url_config
+    return check_resolver(resolver)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/checks/urls.py", line 24, in check_resolver
+    return check_method()
+           ^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 519, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 738, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 731, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/nomena/Matostheque_App/MatosthequeRestApis/urls.py", line 8, in <module>
+    path('api/', include('Matostheque.urls')),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/nomena/Matostheque_App/Matostheque/urls.py", line 37, in <module>
+    path('loans/stats/', loan_views.get_loan_statistics), #get loan statistics
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'Matostheque.views.loan_views' has no attribute 'get_loan_statistics'
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 454, in execute
+    self.check()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 486, in check
+    all_issues = checks.run_checks(
+                 ^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/checks/urls.py", line 14, in check_url_config
+    return check_resolver(resolver)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/checks/urls.py", line 24, in check_resolver
+    return check_method()
+           ^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 519, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 738, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 731, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/nomena/Matostheque_App/MatosthequeRestApis/urls.py", line 8, in <module>
+    path('api/', include('Matostheque.urls')),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/nomena/Matostheque_App/Matostheque/urls.py", line 37, in <module>
+    path('loans/stats/', loan_views.get_loan_statistics), #get loan statistics
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'Matostheque.views.loan_views' has no attribute 'get_loan_statistics'
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 454, in execute
+    self.check()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 486, in check
+    all_issues = checks.run_checks(
+                 ^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/checks/urls.py", line 14, in check_url_config
+    return check_resolver(resolver)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/checks/urls.py", line 24, in check_resolver
+    return check_method()
+           ^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 519, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 738, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 731, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/nomena/Matostheque_App/MatosthequeRestApis/urls.py", line 8, in <module>
+    path('api/', include('Matostheque.urls')),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/python/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/nomena/Matostheque_App/Matostheque/urls.py", line 37, in <module>
+    path('loans/stats/', loan_views.get_loan_statistics), #get loan statistics
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'Matostheque.views.loan_views' has no attribute 'get_loan_statistics'
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-12-09 09:00:01.908660
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-12-10 09:00:02.505812
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-12-18 09:00:02.732131
+Sending reminder email. Date:
+2025-12-18 09:00:02.782379
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-12-23 09:00:01.678785
+Sending reminder email. Date:
+2025-12-23 09:00:01.715978
+Completed update_loans
+Completed with emails: {'count': 2}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2025-12-30 09:00:01.655527
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Sending reminder email. Date:
+2026-02-22 09:00:01.648583
+Completed update_loans
+Completed with emails: {'count': 1}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+
+Running update_loans
+In update loans
+Completed update_loans
+Completed with emails: {'count': 0}
+=========================================
+

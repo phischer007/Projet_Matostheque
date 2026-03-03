@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Validation Template</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        .button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .message-highlight {
+            background-color: lightgray;
+            padding: 10px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>You have a pending request!</h2>
+        <p>Hi {{ owner.first_name }},</p>
+        <p>A new request was made to borrow one of your materials!</p>
+        <p>Below is the details of the request:</p>
+        <table>
+            <tr>
+                <th>Material Name</th>
+                <td>{{ material.name }}</td>
+            </tr>
+            <tr>
+                <th>Requestee</th>
+                <td>{{ requestee.full_name }}</td>
+            </tr>
+            <tr>
+                <th>Loan Date</th>
+                <td>{{ loan_date }}</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>{{ duration }}</td>
+            </tr>
+        </table>
+        <p>From {{ requestee.full_name }}:</p>
+        <p class="message-highlight">{{ message }}</p>
+        <p>To validate or reject the request, please follow link below:</p>
+        <p><a href="https://liphy-annuaire.univ-grenoble-alpes.fr/matostheque/" class="button">View Request</a></p>
+        <p><em>If this action doesn't concern you, please ignore this email.</em></em></p>
+        <p>Thanks,<br>Team Matostheque</p>
+    </div>
+
+</body>
+</html>
