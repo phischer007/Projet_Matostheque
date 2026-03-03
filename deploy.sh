@@ -42,7 +42,8 @@ sudo apt install postgresql postgresql-contrib
 sudo systemctl status postgresql
 
 # Connect as postgres user
-psql -U postgres
+sudo -i -u postgres
+psql
 
 # Create database and a new user
 CREATE DATABASE matostheque;
@@ -208,7 +209,7 @@ nano /etc/systemd/system/matostheque-frontend.service # add the commands below
     # Specify the working directory
     WorkingDirectory=/home/user_name/Matostheque_App/
     Environment=NODE_ENV=production
-    ExecStart=/bin/bash -c 'cd /home/nomena/Matostheque_App/fronttheque/ && npm run build && npm run start'
+    ExecStart=/bin/bash -c 'cd /home/user_name/Matostheque_App/fronttheque/ && npm run build && npm run start'
 
     # Restart the service on failure
     Restart=on-failure

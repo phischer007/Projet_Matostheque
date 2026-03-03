@@ -84,7 +84,7 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:8081',  # Debugger
     'http://localhost:3000',  # Frontend
-    # 'http://localhost:3001',  # Frontend
+
     'https://liphy-annuaire.univ-grenoble-alpes.fr',  # Production domain
     'https://authentification.univ-grenoble-alpes.fr',  # CAS authentication
 )
@@ -203,19 +203,6 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 USE_I18N = True
 USE_L10N = True
-
-########################################################
-# Multi-Language configuration
-########################################################
-# LANGUAGES = [
-    # ('en', _('English')),
-    # ('fr', _('French')),
-# ]
-
-# LOCALE_PATHS = [
-     # BASE_DIR / 'locale/',
-# ]
-#########################################################
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

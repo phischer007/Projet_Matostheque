@@ -9,11 +9,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-# urlpatterns = il8n_patterns(
-    # path('api/', include('Matostheque.urls')),
-    # path('admin/', admin.site.urls),
-# )
-
 # Serve media files during development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
