@@ -52,4 +52,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 **7.TERMINATION**
 
 **7.1** This license remains in effect for the duration of the intellectual property rights in the Software.
+
 **7.2** The license granted herein shall terminate automatically if the Institution fails to comply with the terms of the EUPL.
