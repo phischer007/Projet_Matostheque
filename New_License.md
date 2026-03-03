@@ -3,7 +3,7 @@
 # Frontend Original Work (in folder fronttheque):
 Copyright (c) 2021 Devias
 
-# Backend and Frontend Original Work
+# Backend and Frontend
 **Copyright (c) 2024**
 
 **Between:**
