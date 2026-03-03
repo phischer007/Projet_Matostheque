@@ -20,9 +20,8 @@ Whereas both parties agree that the Software shall be governed by the European U
 IT IS AGREED AS FOLLOWS:
 
 **2.GRANT OF LICENSE**
-
-**2.1**	The Licensor hereby grants the Institution a non-exclusive, worldwide, royalty-free license to use, reproduce, modify, adapt, and distribute the Software under the terms of the European Union Public Licence, Version 1.2 (hereinafter "EUPL").
-**2.2**	A copy of the EUPL v.1.2 is attached as Annex A and forms an integral part of this Agreement. The official text is also available at:
+- The Licensor hereby grants the Institution a non-exclusive, worldwide, royalty-free license to use, reproduce, modify, adapt, and distribute the Software under the terms of the European Union Public Licence, Version 1.2 (hereinafter "EUPL").
+- A copy of the EUPL v.1.2 is attached as Annex A and forms an integral part of this Agreement. The official text is also available at:
 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12 
 
 **3.DISTRIBUTION OBLIGATIONS**
@@ -37,9 +36,8 @@ https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
 
 **4.INTELLECTUAL PROPERTY**
 
-**4.1** The Licensor retains full ownership of the copyright and all other intellectual property rights in the Software.
-
-**4.2** This Agreement does not transfer ownership of the Software; it only grants usage and distribution rights under the EUPL.
+- The Licensor retains full ownership of the copyright and all other intellectual property rights in the Software.
+- This Agreement does not transfer ownership of the Software; it only grants usage and distribution rights under the EUPL.
 
 **5.WARRANTY DISCLAIMER**
 
@@ -47,11 +45,8 @@ AS REQUIRED BY ARTICLE 8 OF THE EUPL:
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 **6.GOVERNING LAW**
-
-**6.1** This Agreement shall be governed by the law of France.
+- This Agreement shall be governed by the law of France.
 
 **7.TERMINATION**
-
-**7.1** This license remains in effect for the duration of the intellectual property rights in the Software.
-
-**7.2** The license granted herein shall terminate automatically if the Institution fails to comply with the terms of the EUPL.
+- This license remains in effect for the duration of the intellectual property rights in the Software.
+- The license granted herein shall terminate automatically if the Institution fails to comply with the terms of the EUPL.
