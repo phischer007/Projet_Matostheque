@@ -1,21 +1,29 @@
-CUSTOM PROPRIETARY SOFTWARE LICENSE
-Between:
+# CUSTOM PROPRIETARY SOFTWARE LICENSE
+
+# Frontend Original Work (in folder fronttheque):
+Copyright (c) 2021 Devias
+
+# Backend and Frontend Original Work
+**Copyright (c) 2024 Nomena I.S. RANDRIANIAINA and Laboratoire interdisciplinaire de physique (LIPhy)**
+
+*** Between: ***
 Nomena I.S. Randrianiaina, student of Université Grenoble Alpes ("Licensor")
 And :
 Laboratoire Interdisciplinaire de Physique (LIPhy) of CNRS and Université Grenoble Alpes, 140 rue de la physique, Saint-Martin d’Hères ("Institution")
 Regarding the Software: Matosthèque, Version [1.0]
 
-1.	PREAMBLE
+**1.PREAMBLE**
 Whereas the Licensor has developed the Software and holds the copyright and related rights thereto;
 Whereas the Institution wishes to use, distribute, and potentially modify the Software for its operational purposes and to distribute it throughout the European Union;
 Whereas both parties agree that the Software shall be governed by the European Union Public Licence (EUPL);
 IT IS AGREED AS FOLLOWS:
-2.	GRANT OF LICENSE
+**2.GRANT OF LICENSE**
 2.1	The Licensor hereby grants the Institution a non-exclusive, worldwide, royalty-free license to use, reproduce, modify, adapt, and distribute the Software under the terms of the European Union Public Licence, Version 1.2 (hereinafter "EUPL").
 2.2	A copy of the EUPL v.1.2 is attached as Annex A and forms an integral part of this Agreement. The official text is also available at:
 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12 
-3.	DISTRIBUTION OBLIGATIONS
-3.1 The Institution undertakes to comply with the EUPL requirements when distributing the Software, including but not limited to:
+
+**3.DISTRIBUTION OBLIGATIONS**
+**3.1** The Institution undertakes to comply with the EUPL requirements when distributing the Software, including but not limited to:
 a)	Retaining all copyright notices and the EUPL license notice in the source code;
 b)	Making the source code available to any recipient who receives the Software;
 c)	Licensing any derivative works under the EUPL or a compatible license as defined in Article 5 of the EUPL.
