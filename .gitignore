@@ -1,3 +1,6 @@
 logs/
 .env
 node_modules
+matostheque_venv/
+__pycache__/
+*.pyc
