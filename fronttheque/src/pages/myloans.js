@@ -43,7 +43,7 @@ const Page = () => {
   const [activeTab, setActiveTab] = useState('loans');
   const user = useAuth().user;
   const btnTitle = user.is_staff ? "All loans" : "My loans";
-  const btnCreateUrl = user.is_staff ? "settings" : "/create/create-loan"; //coming soon super user
+  const btnCreateUrl =  "/create/create-loan";
 
   useEffect(() => {
     let apiUrl;
@@ -122,10 +122,10 @@ const Page = () => {
                   <Button
                     component={NextLink}
                     href={btnCreateUrl}
-                    startIcon={<SvgIcon fontSize="small">{user.is_staff ? <CogIcon /> : <PlusIcon />}</SvgIcon>}
+                    startIcon={<SvgIcon fontSize="small"><PlusIcon /></SvgIcon>}
                     variant="contained"
                   >
-                    {user.is_staff ? 'Loan Settings' : 'Borrow'}
+                    Borrow
                   </Button>
               </Grid>
             </Grid>
