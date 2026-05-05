@@ -1,0 +1,41 @@
+import { useCallback, useState, useEffect } from 'react';
+import { Box, Card, CardContent, CardHeader, Typography, Grid, Divider, CardActions, Button, ImageList, ImageListItem } from '@mui/material';
+import { useAuth } from 'src/hooks/use-auth';
+import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon';
+import CheckCircleIcon from '@heroicons/react/24/solid/CheckCircleIcon';
+
+export const MaterialDetailBilanGES = (props) => {
+    const data = props.data;
+    const [ codeNacre , setCodeNacre ] =  useState("");
+    const [ price, setPrice ] = useState(0);
+
+    return (
+        <>
+            {data &&
+                <Card>
+
+                    <CardHeader
+                        subheader="Waiting for more information"
+                        title="Bilan GES"
+                    />
+                    <CardContent
+                        sx={{
+                            p: 2
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                alignItems: 'center',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            Coming Right Up
+                        </Box>
+                    </CardContent>
+                </Card>
+            }
+        </>
+    )
+}

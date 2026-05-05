@@ -1,0 +1,197 @@
+Running update_loans
+In update loans
+Completed update_loans
+Running update_loans
+In update loans
+Completed update_loans
+Running update_loans
+In update loans
+Completed update_loans
+Running update_loans
+In update loans
+Completed update_loans
+Running update_loans
+In update loans
+Completed update_loans
+Running update_loans
+In update loans
+Completed update_loans
+Running update_loans
+In update loans
+Completed update_loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 11, in handle
+    update_loans()
+        ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 143, in update_loans
+    check_if_should_be_returned(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 182, in check_if_should_be_returned
+    loan.material.update_availability()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 66, in send_reminder_email
+    from_email = settings.EMAIL_HOST_USER
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 136, in send_messages
+    sent = self._send(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 155, in _send
+    self.connection.sendmail(
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 890, in sendmail
+    raise SMTPRecipientsRefused(senderrs)
+smtplib.SMTPRecipientsRefused: {'nomena.randrianiaina@etu.univ-grenoble-alpes.fr': (554, b"5.7.1 <liphy-annuaire.u-ga.fr[129.88.174.215]:52370>: Client host rejected: Access denied\n5.7.1 Acces refuse - Veuillez contacter l'assistance de la DGD SI UGA au 21313")}
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 11, in handle
+    update_loans()
+        ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 143, in update_loans
+    check_if_should_be_returned(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 182, in check_if_should_be_returned
+    loan.material.update_availability()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 66, in send_reminder_email
+    from_email = settings.EMAIL_HOST_USER
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 136, in send_messages
+    sent = self._send(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 155, in _send
+    self.connection.sendmail(
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 890, in sendmail
+    raise SMTPRecipientsRefused(senderrs)
+smtplib.SMTPRecipientsRefused: {'nomena.randrianiaina@etu.univ-grenoble-alpes.fr': (554, b"5.7.1 <liphy-annuaire.u-ga.fr[129.88.174.215]:33302>: Client host rejected: Access denied\n5.7.1 Acces refuse - Veuillez contacter l'assistance de la DGD SI UGA au 21313")}
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 11, in handle
+    update_loans()
+        ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 143, in update_loans
+    check_if_should_be_returned(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 182, in check_if_should_be_returned
+    loan.material.update_availability()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 66, in send_reminder_email
+    from_email = settings.EMAIL_HOST_USER
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 136, in send_messages
+    sent = self._send(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 155, in _send
+    self.connection.sendmail(
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 890, in sendmail
+    raise SMTPRecipientsRefused(senderrs)
+smtplib.SMTPRecipientsRefused: {'nomena.randrianiaina@etu.univ-grenoble-alpes.fr': (554, b"5.7.1 <liphy-annuaire.u-ga.fr[129.88.174.215]:51840>: Client host rejected: Access denied\n5.7.1 Acces refuse - Veuillez contacter l'assistance de la DGD SI UGA au 21313")}
+In update loans
+Traceback (most recent call last):
+  File "/home/nomena/Matostheque_App/manage.py", line 15, in <module>
+    execute_from_command_line(sys.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 413, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/management/base.py", line 459, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/management/commands/update_loans.py", line 11, in handle
+    update_loans()
+        ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/views/loan_views.py", line 143, in update_loans
+    check_if_should_be_returned(loan)
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/loans_controller.py", line 182, in check_if_should_be_returned
+    loan.material.update_availability()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/Matostheque/controllers/emails_controller.py", line 66, in send_reminder_email
+    from_email = settings.EMAIL_HOST_USER
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/message.py", line 300, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 136, in send_messages
+    sent = self._send(message)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/nomena/Matostheque_App/matostheque_venv/lib/python3.12/site-packages/django/core/mail/backends/smtp.py", line 155, in _send
+    self.connection.sendmail(
+  File "/home/nomena/python/lib/python3.12/smtplib.py", line 890, in sendmail
+    raise SMTPRecipientsRefused(senderrs)
+smtplib.SMTPRecipientsRefused: {'nomena.randrianiaina@etu.univ-grenoble-alpes.fr': (554, b"5.7.1 <liphy-annuaire.u-ga.fr[129.88.174.215]:58478>: Client host rejected: Access denied\n5.7.1 Acces refuse - Veuillez contacter l'assistance de la DGD SI UGA au 21313")}
