@@ -83,7 +83,7 @@ export const MaterialDetailEdit = (props) => {
           { key: 'team', value: formData.team },
           { key: 'manual_link', value: formData.manual_link },
           { key: 'datasheet_link', value: formData.datasheet_link },
-          { key: 'owner', value: selectedOwner.owner_id },
+          { key: 'user', value: selectedOwner.user_id },
           { key: 'origin', value: formData.origin },
           { key: 'validation', value: formData.validation },
           { key: 'availability', value: true }, // Default value
@@ -181,9 +181,9 @@ export const MaterialDetailEdit = (props) => {
       setFormData(newData);
       setChecked(newData.validation);
       setMaterialID(props.data.material_id);
-
+      setSelectedOwner(ownersList.find((owner)=> Number(owner.user_id) === Number(newData.user)))
     }
-  }, [props.data]);
+  }, [props.data,ownersList,user]);
 
   useEffect(() => {
     setFormData((prevData) => ({
@@ -240,6 +240,7 @@ export const MaterialDetailEdit = (props) => {
                         label="Owner"
                         name="user_id"
                         required
+                        value={selectedOwner}
                         options={ownersList}
                         getOptionLabel={option => option.owner_name}
                         onChange={onSelectChange}
@@ -341,6 +342,7 @@ export const MaterialDetailEdit = (props) => {
                     <LocalizationProvider>
                       <DatePicker
                         label="Expiration Date"
+                        disabled={isFormDisabled}
                         value={formData.expiration_date}
                         onChange={handleExpirationDateChange}
                         format="dd/MM/yyyy"

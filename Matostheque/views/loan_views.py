@@ -36,8 +36,8 @@ def loan_list(request):
             'return_date', 
             'rejection_date',
             material_title=F('material__material_title'),
-            owner_first_name=F('material__owner__user__first_name'),
-            owner_last_name=F('material__owner__user__last_name'),
+            user_first_name=F('material__user__first_name'),
+            user_last_name=F('material__user__last_name'),
             borrower_first_name=F('borrower__first_name'),
             borrower_last_name=F('borrower__last_name'),
         )
@@ -82,15 +82,14 @@ def loan_detail(request, pk):
         
 @login_required
 @api_view(['GET'])
-def inDepth_detail_loan(request, pk, isSingleRow = False, isOwner = False): 
+def inDepth_detail_loan(request, pk, isSingleRow = False, isOwner = False):
     try:
         if isSingleRow :
             loans = Loans.objects.filter(pk=pk)
         else :
-            loans = Loans.objects.filter(material__owner_id=pk) if isOwner else Loans.objects.filter(borrower=pk)
+            loans = Loans.objects.filter(material__user_id=pk) if isOwner else Loans.objects.filter(borrower=pk)
     except Loans.DoesNotExist: 
         return JsonResponse({'message': 'No loan under that name'}, status=status.HTTP_404_NOT_FOUND) 
-    
     ordered_loans = loans.order_by('-created_at') #ordering a bit before rendering
     if request.method == 'GET': 
         b_detailed_loans = get_detailed_loans(ordered_loans)
@@ -132,8 +131,8 @@ def latest_loan(request, pk):
         'loan_status',
         'duration',
         material_title=F('material__material_title'),
-        owner_first_name=F('material__owner__user__first_name'),
-        owner_last_name=F('material__owner__user__last_name')
+        owner_first_name=F('material__user__first_name'),
+        owner_last_name=F('material__user__last_name')
     )
     if request.method == 'GET': 
         #serializer = LoanSerializer(loans_filtered, many=True)

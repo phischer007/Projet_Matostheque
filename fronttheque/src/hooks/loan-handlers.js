@@ -4,6 +4,7 @@ import { addDays, subDays, isSameDay, isWithinInterval } from 'date-fns';
 import { useAuth } from './use-auth';
 import { toast } from 'react-toastify';
 import { useNotification } from 'src/contexts/notification-context';
+import { getCookie } from '../utils/csrf';
 
 
 export const useLoanHandlers = (props) => {
@@ -19,7 +20,7 @@ export const useLoanHandlers = (props) => {
     
     useEffect(()=>{
         if(loanData){
-            const valid = user && (user.user_id === loanData.borrower || 
+            const valid = user && (user.user_id === loanData.borrower ||
                 user.user_id === loanData.owner_details.user_id || 
                 user.is_staff) ;
             setAuthorization(valid);

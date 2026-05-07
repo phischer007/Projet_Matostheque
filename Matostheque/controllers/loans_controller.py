@@ -96,17 +96,13 @@ def on_create_loan(request):
             return JsonResponse({'message': 'Loan duration exceed allowed time allocation!'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
         try:
-            print("test")
             loan = loan_serializer.save() # saving the instance created to the database
             # Sending a validation email to owner if material needs validation, and if the borrower is not the owner of the material
-            if(material.validation and loan.borrower != loan.material.owner.user):
+            if(material.validation and loan.borrower != loan.material.user):
                 send_validation_email(loan)
             # Return the newly saved instance
             return JsonResponse(loan_serializer.data, status=status.HTTP_201_CREATED) 
         except Exception as e:
-            print("Exception in create loan")
-            print(e)
-            
             # Catching any error during the saving process
             return JsonResponse({'message': 'Error occurred while creating the loan.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
@@ -217,11 +213,12 @@ def get_detailed_loans(loans):
         detailed_loans: list of detailed information
     """
     detailed_loans = []
+    print(loans)
     for loan in loans:
         loan_data = LoanSerializer(loan).data
         material = loan.material
         borrower = loan.borrower
-        owner = material.owner.user
+        owner = material.user
         
         # Selecting the needed fields instead of sending the whole record
         # data protecting purpose

@@ -110,19 +110,19 @@ export const LoansTable = (props) => {
                           spacing={2}
                         >
                           <Typography variant="subtitle2">
-                            {user.is_staff ? loan.material_title : loan.material_details.title}
+                            {user.is_staff ? loan.material_details.title : loan.material_details.title}
                           </Typography>
                         </Stack>
                       </TableCell>
                       <TableCell>
                         {user.is_staff ?
-                          `${loan.owner_first_name} ${loan.owner_last_name}` :
+                          `${loan.owner_details.first_name} ${loan.owner_details.last_name}` :
                           activeTab == 'loans' ?
                             `${loan.owner_details.first_name} ${loan.owner_details.last_name}` :
                             `${loan.borrower_details.first_name} ${loan.borrower_details.last_name}`
                         }
                       </TableCell>
-                      <TableCell> {user.is_staff ? `${loan.borrower_first_name} ${loan.borrower_last_name}` : loan.duration}</TableCell>
+                      <TableCell> {user.is_staff ? `${loan.borrower_details.first_name} ${loan.borrower_details.last_name}` : loan.duration}</TableCell>
                       <TableCell> {formatDate(loan.loan_date)} </TableCell>
                       <TableCell>
                         <SeverityPill color={statusMap[loan.loan_status]}>

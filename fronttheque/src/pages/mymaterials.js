@@ -43,8 +43,8 @@ const Page = () => {
   const btnCreateUrl = "/create/create-material";
 
   useEffect(() => {
-    let loanApiUrl = `${config.apiUrl}/loans/details/owner/${user.owner_id}/`;
-    let materialApiUrl = `${config.apiUrl}/materials/owner/${user.owner_id}/`;
+    let loanApiUrl = `${config.apiUrl}/loans/details/owner/${user.user_id}/`;
+    let materialApiUrl = `${config.apiUrl}/materials/owner/${user.user_id}`;
 
     //TODO to erase loan data
     // Fetch loans data

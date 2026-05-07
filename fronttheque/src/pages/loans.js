@@ -60,7 +60,7 @@ const Page = () => {
       if (activeTab === 'loans') {
         apiUrl = `${config.apiUrl}/loans/details/user/${user.user_id}/`;
       } else {
-        apiUrl = `${config.apiUrl}/loans/details/owner/${user.owner_id}/`;
+        apiUrl = `${config.apiUrl}/loans/details/owner/${user.user_id}/`;
       }
     }
     const csrftoken = getCookie('csrftoken');

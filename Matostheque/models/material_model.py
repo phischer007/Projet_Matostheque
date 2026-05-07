@@ -105,8 +105,8 @@ class Materials(models.Model):
     # The purchase price of the material.
     purchase_price =  models.FloatField(default=0.0, null=True)
     
-    # The owner associated to/ of the material
-    owner = models.ForeignKey('Owners', on_delete=models.CASCADE, null=True, related_name='owner_materials')
+    # The user associated to/ of the material
+    user = models.ForeignKey('CustomUsers', on_delete=models.CASCADE, null=True, related_name='User_materials')
     
     # The date and time when the material was created.
     created_at = models.DateTimeField(default=timezone.now)

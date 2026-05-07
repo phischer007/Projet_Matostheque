@@ -10,8 +10,8 @@ export const MaterialsCard = (props) => {
   // const images =  JSON.parse(material.images);
   const images = material.images && material.images.length !== 0 ? JSON.parse(material.images) : {};
 
-  // let profil_image = JSON.parse(material.owner_profil);
-  let profil_image = material.owner_profil && material.owner_profil.length !== 0 ? JSON.parse(material.owner_profil) : {};
+  // let profil_image = JSON.parse(material.user_profil);
+  let profil_image = material.user_profil && material.user_profil.length !== 0 ? JSON.parse(material.user_profil) : {};
 
   const profil_path = profil_image ? `${process.env.NEXT_PUBLIC_ASSETS}/${profil_image[0]}` : '';
   const image_path = images ? `${process.env.NEXT_PUBLIC_ASSETS}/${images[0]}` : '';
@@ -111,7 +111,7 @@ export const MaterialsCard = (props) => {
             display="inline"
             variant="body2"
           >
-            Owner: {material.owner_first_name} {material.owner_last_name}
+            Owner: {material.user_first_name} {material.user_last_name}
           </Typography>
         </Stack>
         <Stack

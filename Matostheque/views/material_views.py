@@ -37,10 +37,10 @@ def get_materials(request):
         'type',
         'consumable_type',
         'lab_supply_type',
-        owner_first_name=F('owner__user__first_name'),
-        owner_last_name=F('owner__user__last_name'),
-        owner_email=F('owner__user__email'),
-        owner_profil=F('owner__user__profil_pic')
+        user_first_name=F('user__first_name'),
+        user_last_name=F('user__last_name'),
+        user_email=F('user__email'),
+        user_profil=F('user__profil_pic')
     )
     return JsonResponse(list(selected_materials), safe=False)
 
@@ -63,7 +63,7 @@ def get_materials_lite(request):
         'loan_duration',
         'validation', 
         'availability', 
-        'owner__user_id',
+        'user_id',
         'created_at'
     ) 
 
@@ -77,25 +77,25 @@ def create_material(request):
    
 @api_view(['GET', 'PUT', 'DELETE'])
 def material_detail(request, pk):
-    print(request.data)
-    try: 
-        material = get_material(pk) 
-    except Materials.DoesNotExist: 
+    try:
+        material = get_material(pk)
+    except Materials.DoesNotExist:
         return JsonResponse({'message': 'The material does not exist'}, status=status.HTTP_404_NOT_FOUND) 
  
     if request.method == 'GET': 
         try:
             material.update_availability() #TODO: to erase after signal success
             details_data = get_detailed_material(pk)
-            return JsonResponse(details_data) 
+            return JsonResponse(details_data)
         except : 
             return JsonResponse({'message': 'Error fetching material details!'}, status=status.HTTP_204_NO_CONTENT)
  
     elif request.method == 'PUT':
         material_data = request.data
+        print(material_data)
         material_serializer = MaterialSerializer(material, data=material_data, partial=True) 
         if material_serializer.is_valid(): 
-            updated_material = material_serializer.save() 
+            updated_material = material_serializer.save()
             #Image uploading
             if request.FILES:
                 
@@ -133,7 +133,7 @@ def material_list_available(request):
 @login_required
 @api_view(['GET'])
 def material_list_per_owner(request, pk):
-    materials = Materials.objects.filter(owner=pk)
+    materials = Materials.objects.filter(user=pk)
         
     if request.method == 'GET': 
         materials_serializer = MaterialSerializer(materials, many=True)
@@ -174,7 +174,6 @@ def get_total_count(request):
         created_at__month=current_month,
         created_at__year=current_year
     ).count()
-
     # --- NEW: Filter materials created in the current year ---
     materials_added_this_year = Materials.objects.filter(
         created_at__year=current_year
@@ -185,13 +184,6 @@ def get_total_count(request):
     materials_per_team = Materials.objects.values('team').annotate(
         count=Count('material_id')
     ).order_by('-count')
-
-    # 3. Users (Owners) per Team
-    # Counts distinct owners associated with materials in each team
-    # Note: This relies on the material's team field and the owner relation.
-    users_per_team = Materials.objects.values('team').annotate(
-        user_count=Count('owner', distinct=True)
-    ).order_by('-user_count')
 
     if request.method == 'GET': 
         return JsonResponse({

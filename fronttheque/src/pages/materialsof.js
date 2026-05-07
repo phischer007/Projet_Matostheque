@@ -45,7 +45,7 @@ const Page = () => {
   }, []);
 
   function getMaterials () {
-    let materialApiUrl = `${config.apiUrl}/materials/owner/${user.owner_id}/`;
+    let materialApiUrl = `${config.apiUrl}/materials/owner/${user.user_id}/`;
 
     // Fetch Materials -- recent fix for JSON.parse() crashes in MaterialTable
     fetch(materialApiUrl,{

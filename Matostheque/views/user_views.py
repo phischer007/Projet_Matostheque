@@ -11,11 +11,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from rest_framework.decorators import api_view
 from rest_framework import status
+
+from Matostheque.models import CustomUsers
+from Matostheque.models.material_model import Materials
 from Matostheque.serializers import UserSerializer
 from Matostheque.controllers.emails_controller import send_registration_email
 from Matostheque.controllers.user_controller import *
-from Matostheque.controllers.owner_controller import update_owner, generate_owner_record
-from Matostheque.custom_exception import *
 
 
 @login_required
@@ -64,20 +65,14 @@ def user_detail(request, pk):
         user_serializer = UserSerializer(user, data=user_data, partial=True)
 
         if user_serializer.is_valid():
-            updated_user = user_serializer.save()
-
             # Handle Role Changes
             new_role = user_data.get('role')
-            if new_role == 'owner' and role != 'owner':
-                generate_owner_record(
-                    user=pk,
-                    contact=user_data.get('contact')
-                )
-            elif new_role == 'user' and role != 'user':
-                update_owner(pk, {'is_active': False})
-            elif role == 'owner' and 'contact' in user_data:
-                update_owner(pk, {'contact': user_data.get('contact')})
+            if new_role == 'user' and role != 'user':
+                materials = Materials.objects.filter(user=user.user_id)
+                if materials.exists():
+                    return JsonResponse({'message': "You can't become a simple user"},status=status.HTTP_403_FORBIDDEN)
 
+            updated_user = user_serializer.save()
             detailed_user = get_formatted_user(updated_user)
             return JsonResponse(detailed_user, safe=False)
 
@@ -166,6 +161,13 @@ def changeActivity(request,pk):
     except Exception:
         return JsonResponse({'message': 'Error occured when trying to update the Activity'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+@login_required
+@api_view(['GET'])
+def active_owners_lite(request):
+    users = CustomUsers.objects.filter(is_active=True,role='owner')
+    data = get_lite_Users(users)
+    return JsonResponse(data, safe=False)
 
 # --------------------------------------------------------------------------
 # AUTHENTICATION & SESSION

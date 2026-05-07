@@ -1,6 +1,5 @@
 from rest_framework import serializers 
 from Matostheque.models.material_model import Materials
-from Matostheque.models.owner_model import Owners
 from Matostheque.models.loan_model import Loans
 from Matostheque.models.user_model import CustomUsers
 from Matostheque.models.notification_model import Notifications
@@ -13,12 +12,6 @@ class MaterialSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = Materials
-        fields = '__all__'
-
-class OwnerSerializer(serializers.ModelSerializer):
- 
-    class Meta:
-        model = Owners
         fields = '__all__'
         
 class UserSerializer(serializers.ModelSerializer):

@@ -15,7 +15,8 @@ def send_registration_email(user):
     subject = 'Welcome Aboard!'
     from_email = settings.EMAIL_HOST_USER
     to_email = user['email']
-    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
+    #todo fix
+    #send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
 
 
 # Function to send an email to notify the owner of a pending request 
@@ -31,7 +32,7 @@ def send_validation_email(loan):
             'full_name': loan.borrower.first_name + " " + loan.borrower.last_name,
         },
         'owner': {
-            'first_name': loan.material.owner.user.first_name
+            'first_name': loan.material.user.first_name
         },
         'loan_date': loan.loan_date,
         'duration': loan.duration,
@@ -43,9 +44,9 @@ def send_validation_email(loan):
     # Send the email
     subject = 'New Request Matostheque'
     from_email = settings.EMAIL_HOST_USER
-    to_email = loan.material.owner.user.email
-    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
-
+    to_email = loan.material.user.email
+    #Todo fix email
+    #send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
 
 
 # Function to send an email of reminder for return to the borrower of the equipment
@@ -67,7 +68,8 @@ def send_reminder_email(loan):
     subject = 'Reminder Matostheque'
     from_email = settings.EMAIL_HOST_USER
     to_email = loan.borrower.email
-    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    #todo fix
+    #send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
 
 # Function to send an email to notify an owner of an equipment that was returned
 def send_returned_email(loan):
@@ -79,7 +81,7 @@ def send_returned_email(loan):
             'link': f"/matostheque/details/material-detail/{loan.material.material_id}"
         },
         'owner': {
-            'first_name': loan.material.owner.user.first_name
+            'first_name': loan.material.user.first_name
         },
         'borrower': {
             'name': loan.borrower.first_name + " " + loan.borrower.last_name
@@ -90,9 +92,9 @@ def send_returned_email(loan):
     # Send the email
     subject = 'Material Return'
     from_email = settings.EMAIL_HOST_USER
-    to_email = loan.material.owner.user.email
-    
-    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
+    to_email = loan.material.user.email
+    #todo fix
+    #send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
 
 # Function to send an email to notify the borrower after validation of a pending request
 def send_approved_email(loan):
@@ -113,6 +115,6 @@ def send_approved_email(loan):
     subject = 'Loan Approved'
     from_email = settings.EMAIL_HOST_USER
     to_email =  loan.borrower.email
-    
-    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
+    #Todo fix
+    #send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
 

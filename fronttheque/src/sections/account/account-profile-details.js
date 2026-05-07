@@ -70,6 +70,10 @@ export const AccountProfileDetails = (user) => {
           } else if (decodeResponse.message === "Session token not found") {
             // Handle session token not found error
             toast.error("Session token not found. Please try again.", { autoClose: false });
+          } else if (decodeResponse.message === "You can't become a simple user") {
+            // Handle session token not found error
+            toast.error("You can't become a user because you still own materials", { autoClose: false });
+            setIsChecked(!isChecked)
           } else {
             // Handle other errors
             toast.error("An error occurred. Please try again later.", { autoClose: false });
@@ -156,22 +160,21 @@ export const AccountProfileDetails = (user) => {
                   value={values.email}
                 />
               </Grid>
-              {isChecked?
-                <Grid
-                  xs={12}
-                  md={6}
-                >
-                  <TextField
-                    type="number"
-                    fullWidth
-                    label="Phone Number"
-                    name="owner_contact"
-                    onChange={handleChange}
-                    value={values.owner_contact}
-                    placeholder='Ex. 0612354525'
-                    InputLabelProps={{ shrink: true }}
-                  />
-                </Grid> : null}
+              <Grid
+                xs={12}
+                md={6}
+              >
+                <TextField
+                  type="number"
+                  fullWidth
+                  label="Phone Number"
+                  name="owner_contact"
+                  onChange={handleChange}
+                  value={values.owner_contact}
+                  placeholder='Ex. 0612354525'
+                  InputLabelProps={{ shrink: true }}
+                />
+              </Grid>
               <Grid
                 xs={12}
                 md={6}

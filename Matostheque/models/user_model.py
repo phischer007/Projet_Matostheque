@@ -25,7 +25,10 @@ class CustomUsers(AbstractBaseUser, PermissionsMixin):
     
     # The email address of the user.
     email = models.EmailField(unique=True)
-    
+
+    # The contact information of the owner.
+    phone_number = models.CharField(max_length=100, null=True)
+
     # The role of the user.
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default=USER_ROLE)
     

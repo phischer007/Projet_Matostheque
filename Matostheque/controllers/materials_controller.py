@@ -152,17 +152,16 @@ def get_detailed_material(pk):
     Returns:
        detailed_materials (obj): A list of information related to the material instance.
     """
-    material = get_object_or_404(Materials.objects.select_related('owner__user'), pk=pk)
+    material = get_object_or_404(Materials.objects.select_related('user'), pk=pk)
+    print(material)
     detailed_materials = MaterialSerializer(material).data
-    owner = material.owner
-    user = owner.user
-    
+    user = material.user
+
     detailed_materials['owner_details'] = {
-        "owner_id": owner.owner_id,
-        "contact": owner.contact,
         "user_id": user.user_id,
         "first_name": user.first_name,
         "last_name": user.last_name,
+        "phone_number": user.phone_number,
         "email": user.email
     }
     

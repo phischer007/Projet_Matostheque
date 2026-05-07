@@ -1,7 +1,6 @@
 #file that defines the administration interface: used to register models with the django admin panel
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from Matostheque.models.owner_model import Owners
 from Matostheque.models.material_model import Materials
 from Matostheque.models.loan_model import Loans
 from Matostheque.models.notification_model import Notifications
@@ -25,7 +24,7 @@ class CustomUserAdmin(UserAdmin):
     # Group fields into sections for better organization in the admin interface
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'role')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'role', 'phone_number')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined', 'updated_at')}),
     )
@@ -34,7 +33,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}
+            'fields': ('email', 'password1', 'password2','phone_number', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}
         ),
     )
     
@@ -47,29 +46,21 @@ class CustomUserAdmin(UserAdmin):
     # Specify fields that should be read-only in the admin interface
     readonly_fields = ('date_joined', 'updated_at')
 
-#
-class OwnersAdmin(admin.ModelAdmin):
-    # Define which fields to display in the list view and provide filtering options
-    list_display = ("user", "is_active",)
-    list_filter = ("user", "is_active",)
-    
-    # Specify fields that should be read-only in the admin interface
-    readonly_fields = ('created_at', 'updated_at')
 
 class MaterialsAdmin(admin.ModelAdmin):
     # Define which fields to display in the list view and provide filtering options
-    list_display = ("material_title", "get_owner_username", "availability", "validation")
-    list_filter = ("material_title", "owner", "availability", "validation")
+    list_display = ("material_title", "get_user_username", "availability", "validation")
+    list_filter = ("material_title", "user", "availability", "validation")
     
     # Specify fields that should be read-only in the admin interface
     readonly_fields = ('created_at', 'updated_at')
     
     # A custom method to get the owner's username
-    def get_owner_username(self, obj):
-        return obj.owner.user if obj.owner else None
+    def get_user_username(self, obj):
+        return obj.user if obj.user else None
     
     # Set a custom description for the owner field in the admin interface
-    get_owner_username.short_description = 'Owner'
+    get_user_username.short_description = 'Owner'
 
 class LoansAdmin(admin.ModelAdmin):
     # Define which fields to display in the list view and provide filtering options
@@ -97,7 +88,6 @@ class CommentsAdmin(admin.ModelAdmin):
 
 # Registering the models
 admin.site.register(CustomUsers, CustomUserAdmin)
-admin.site.register(Owners, OwnersAdmin)
 admin.site.register(Materials, MaterialsAdmin)
 admin.site.register(Loans, LoansAdmin)
 admin.site.register(Notifications, NotificationsAdmin)
