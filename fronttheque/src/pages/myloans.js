@@ -54,7 +54,9 @@ const Page = () => {
       apiUrl = `${config.apiUrl}/loans/details/user/${user.user_id}/`;
     }
 
-    fetch(apiUrl)
+    fetch(apiUrl, {
+      credentials: 'include'
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

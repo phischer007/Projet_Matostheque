@@ -30,6 +30,7 @@ import {
   PresentationChartBarIcon, 
 } from '@heroicons/react/24/outline';
 import { toast } from 'react-toastify';
+import { getCookie } from '../utils/csrf';
 
 // -------------------------------------------------------------------------------------------------------- //
 
@@ -64,6 +65,7 @@ const Page = () => {
     try {
       const response = await fetch(`${config.apiUrl}/users/${user.user_id}/`, {
         method: 'PUT',
+        credentials: 'include',// Add this so the session cookie is sent!
         headers: {
           'Content-Type': 'application/json'
         },
@@ -95,7 +97,10 @@ const Page = () => {
 
   useEffect(() => {
     // 1. Fetch Dashboard Stats (Total, Teams)
-    fetch(`${config.apiUrl}/materials/count/`)
+    const csrftoken = getCookie('csrftoken');
+    fetch(`${config.apiUrl}/materials/count/`,{
+      credentials: 'include'
+    })
       .then(response => response.json())
       .then(data => {
         setDashboardStats(data);
@@ -103,14 +108,18 @@ const Page = () => {
       .catch(error => console.error('Error fetching stats:', error));
 
     // 2. Fetch Latest Materials
-    fetch(`${config.apiUrl}/materials/latest/`)
+    fetch(`${config.apiUrl}/materials/latest/`,{
+      credentials: 'include'// Add this so the session cookie is sent!
+    })
       .then(response => response.json())
       .then(data => { setLastMaterialList(data);})
       .catch(error => console.error('Error fetching data:', error));
 
     // 3. Fetch Latest Loans
     let loanUrl = !user.is_staff ? `${config.apiUrl}/loans/latest/${user.user_id}/` : `${config.apiUrl}/loans/`
-    fetch(loanUrl)
+    fetch(loanUrl,{
+      credentials: 'include'// Add this so the session cookie is sent!
+    })
       .then(response => response.json())
       .then(data => {
         let to_loan = !user.is_staff ? data : data.slice(0, 5);
@@ -119,7 +128,9 @@ const Page = () => {
       .catch(error => console.error('Error fetching data:', error));
 
     // 4. Fetch Notifications
-    fetch(`${config.apiUrl}/notifications/important/${user.user_id}/`)
+    fetch(`${config.apiUrl}/notifications/important/${user.user_id}/`,{
+      credentials: 'include'// Add this so the session cookie is sent!
+    })
       .then(response => response.json())
       .then(data => {
         if (data && Array.isArray(data)) {
@@ -130,7 +141,9 @@ const Page = () => {
       .catch(error => console.error('Error fetching data:', error));
 
       // 5. Fetch Loan Statistics
-      fetch(`${config.apiUrl}/loans/stats/`) 
+      fetch(`${config.apiUrl}/loans/stats/`,{
+      credentials: 'include'// Add this so the session cookie is sent!
+    })
       .then(response => response.json())
       .then(data => {
         setLoanStats(data);

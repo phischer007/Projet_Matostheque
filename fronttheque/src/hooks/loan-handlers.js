@@ -66,10 +66,13 @@ export const useLoanHandlers = (props) => {
     const handleLoanAction = async (loanId, action, dateField, message, priority, title) => {
         try {
             const {genericMessage, ownerMessage , borrowerMessage} = message;
+            const csrftoken = getCookie('csrftoken');
             const response = await fetch(`${config.apiUrl}/loans/${loanId}/`, {
                 method: 'PUT',
+                credentials:"include",
                 headers: {
-                    'Content-Type': 'application/json',
+                  'Content-Type': 'application/json',
+                  'X-CSRFToken': csrftoken,
                 },
                 body: JSON.stringify({
                     [dateField]: new Date().toISOString(),
@@ -172,12 +175,15 @@ export const useLoanHandlers = (props) => {
 
     useEffect(() => {
         if (loanId) {
-
-            fetch(`${config.apiUrl}/loans/details/${loanId}`)
+            fetch(`${config.apiUrl}/loans/details/${loanId}`, {
+              method: 'GET',
+              credentials: 'include',
+            })
                 .then(response => response.json())
                 .then(data => {
                     setLoanData(data[0]);
                 })
+
                 .catch(error => console.error('Error fetching data:', error));
         }
     }, [loanId]);

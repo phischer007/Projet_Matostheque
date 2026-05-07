@@ -4,6 +4,7 @@ import config from 'src/utils/config';
 import { formatDate } from 'src/utils/get-formatted-date';
 import { useNotification } from 'src/contexts/notification-context';
 import { useAuth } from './use-auth';
+import { getCookie } from '../utils/csrf';
 
 
 export const useLoanDetailHandlers = (data) => {
@@ -109,10 +110,11 @@ export const useLoanDetailHandlers = (data) => {
             await checkValidDuration().then(async (result) => {
                 if (result) {
                     try {
-
+                        const csrftoken = getCookie('csrftoken');
                         const response = await fetch(`${config.apiUrl}/loans/${data.loan_id}/`, {
                             method: 'PUT',
                             headers: {
+                                'X-CSRFToken': csrftoken,
                                 'Content-Type': 'application/json',
                             },
                             credentials:"include",
@@ -163,12 +165,13 @@ export const useLoanDetailHandlers = (data) => {
     const handleDelete = useCallback(
         async (e) => {
             e.preventDefault();
-
+            const csrftoken = getCookie('csrftoken');
             try {
                 const response = await fetch(`${config.apiUrl}/loans/${data.loan_id}/`, {
                     method: 'DELETE',
                     credentials:"include",
                     headers: {
+                        'X-CSRFToken': csrftoken,
                         'Content-Type': 'application/json',
                     },
                 });

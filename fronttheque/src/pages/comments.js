@@ -12,7 +12,9 @@ const Page = () => {
   const user = useAuth().user;
 
   useEffect(() => {
-    fetch(`${config.apiUrl}/comments/detailed/`)
+    fetch(`${config.apiUrl}/comments/detailed/`,{
+      credentials:"include"
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

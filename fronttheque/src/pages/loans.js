@@ -63,8 +63,13 @@ const Page = () => {
         apiUrl = `${config.apiUrl}/loans/details/owner/${user.owner_id}/`;
       }
     }
-
-    fetch(apiUrl)
+    const csrftoken = getCookie('csrftoken');
+    fetch(apiUrl, {
+      credentials:'include',
+      headers: {
+        'X-CSRFToken': csrftoken,
+      }
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

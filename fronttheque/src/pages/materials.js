@@ -65,7 +65,9 @@ const Page = () => {
 
   // 1. Fetch and SORT data immediately
   useEffect(() => {
-    fetch(`${config.apiUrl}/materials/`)
+    fetch(`${config.apiUrl}/materials/`, {
+      credentials: 'include'
+    })
       .then(response => response.json())
       .then(data => {
         // Sort alphabetically by title
