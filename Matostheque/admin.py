@@ -49,8 +49,8 @@ class CustomUserAdmin(UserAdmin):
 
 class MaterialsAdmin(admin.ModelAdmin):
     # Define which fields to display in the list view and provide filtering options
-    list_display = ("material_title", "get_user_username", "availability", "validation")
-    list_filter = ("material_title", "user", "availability", "validation")
+    list_display = ("material_title", "get_user_username", "validation","available_for_loan")
+    list_filter = ("material_title", "user", "validation","available_for_loan")
     
     # Specify fields that should be read-only in the admin interface
     readonly_fields = ('created_at', 'updated_at')

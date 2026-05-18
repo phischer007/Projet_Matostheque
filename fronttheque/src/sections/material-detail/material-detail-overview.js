@@ -81,13 +81,13 @@ export const MaterialDetailOverview = (props) => {
             }}
           >
             <Stack>
-              <Tooltip title="Manual" placement="left">
-                <IconButton onClick={onManualOpen} color='primary' sx={{ height: 40, width: 40 }} >
+              <Tooltip title="Manual" placement="left" >
+                <IconButton onClick={onManualOpen} color='primary' sx={{ height: 40, width: 40 }} disabled={data.manual_link === null}>
                   <GlobeAsiaAustraliaIcon />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Datasheet" placement="left">
-                <IconButton onClick={onDataSheetOpen} color='primary' sx={{ height: 40, width: 40 }} >
+                <IconButton onClick={onDataSheetOpen} color='primary' sx={{ height: 40, width: 40 }} disabled={data.datasheet_link === null}>
                   <PresentationChartBarIcon />
                 </IconButton>
               </Tooltip>

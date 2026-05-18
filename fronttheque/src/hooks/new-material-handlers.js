@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 import imageCompression from 'browser-image-compression';
 import codes from 'src/data/code_nacre/code_nacre.json'
 import { getCookie } from 'src/utils/csrf';
+import { useAuth } from './use-auth';
+import { stringify } from 'node:querystring';
 
 
 
@@ -37,20 +39,20 @@ const indefiniteDuration = 365;
 
 export const useNewMaterialHandlers = (data) => {
   let ownersArray = data;
+  const user = useAuth().user
   const router = useRouter();
   const [wordIndex, setWordIndex] = useState({});
   const [isUploading, setIsUploading] = useState(false);
   const [isValidationChecked, setIsValidationChecked] = useState(true);
-  const [isShared, setIsShared] = useState(false);
-  const [superOwner, setSuperOwner] = useState(null);
   const [codeError, setCodeError] = useState(false);
   const [images, setImages] = useState([]);
-  const [selectedOwner, setSelectedOwner] = useState(null);
-  const [isDurationEnabled, setIsDurationEnabled] = useState(false);
+  const [selectedOwner, setSelectedOwner] = useState( null);
   const [filesSelected, setFilesSelected] = useState(false);
   const [inputCNValue, setInputCNValue] = useState('');
   const [selectedCode, setSelectedCode] = useState(null);
   const [filteredCNOptions, setFilteredCNOptions] = useState([]);
+  const [isMovable, setisMovable] = useState(false);
+  const [is_formation_required, setis_formation_required] = useState(false);
   const [expandedSections, setExpandedSections] = useState({
     general: true,
     supplier: true,
@@ -65,23 +67,20 @@ export const useNewMaterialHandlers = (data) => {
   const [formData, setFormData] = useState({
     material_title: null,
     description: null,
-    team: "",
-    manual_link: null,
-    datasheet_link: null,
     owner: null,
     origin: null,
     loan_duration: null,
     code_nacre: null,
     purchase_price: null,
     type: null,
-    consumable_type: null,
     quantity_available: null,
-    unit: null,
     expiration_date: null,
-
-    // new code section for supply
-    lab_supply_type: null,
-    lab_supply_quantity: null // for lab supplies
+    manual_link: null,
+    datasheet_link: null,
+    sub_type:null,
+    isMovable:false,
+    is_formation_required:false,
+    validation:true,
   });
 
   const [message, setMessage] = useState({
@@ -101,10 +100,15 @@ export const useNewMaterialHandlers = (data) => {
   const handleCheckChange = () => {
     setIsValidationChecked(!isValidationChecked);
   };
+  const handleisMovableBoxChange = useCallback(() => {
+    setisMovable((prevState) => !prevState);
+  }, []);
 
-  const handleSharedChange = useCallback(() => {
-    setIsShared(!isShared);
-  }, [isShared]);
+  const handleis_formation_requiredBoxChange = useCallback(() => {
+    setis_formation_required((prevState) => !prevState);
+  }, []);
+
+
 
   const handleChange = useCallback(
     (event) => {
@@ -115,6 +119,29 @@ export const useNewMaterialHandlers = (data) => {
     },
     []
   );
+
+const handleChangeNumDec = useCallback((event) => {
+  const { name, value } = event.target;
+
+  let cleaned = value
+    .replace(/[^0-9.]/g, "") // garde chiffres + point
+    .replace(/(\..*)\./g, "$1"); // empêche plusieurs points
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: cleaned
+  }));
+}, []);
+
+
+const handleChangeNum = useCallback((event) => {
+  const { name, value } = event.target;
+
+  setFormData((prevState) => ({
+    ...prevState,
+    [name]: value.replace(/\D/g, "") // garde seulement les chiffres
+  }));
+}, []);
 
   // Handle file upload
   const handleFileChange = useCallback(
@@ -146,19 +173,11 @@ export const useNewMaterialHandlers = (data) => {
       }
     }, [formData]);
 
-  const handleToggleChange = useCallback(
-    () => {
-      setIsDurationEnabled(!isDurationEnabled);
-    },
-    [isDurationEnabled]
-  );
 
   const onSelectChange = useCallback(
     (event, values) => {
       setSelectedOwner(values);
-      const isOwnerShared = values && superOwner && superOwner.owner_id !== undefined ? values.owner_id === superOwner.owner_id : false;
-      setIsShared(isOwnerShared);
-    }, [superOwner]
+    }, []
   );
 
   const handleAccordionChange = useCallback((section) => {
@@ -180,18 +199,16 @@ export const useNewMaterialHandlers = (data) => {
 
       const images = Array.from(formData.images);
       const compressedImages = images ? await compressAndUploadImages(images) : null;
-
       const newErrors = {
         title: formData.material_title === null,
         description: formData.description === null,
         owner: selectedOwner === null,
         location: formData.origin === null,
-        team: formData.team === '',
-        loan_duration: isDurationEnabled && formData.loan_duration === null,
+        type : formData.type === null,
+        sub_type: formData.sub_type === null,
       };
       //TODO: Add error for consummables
       setFormErrors(newErrors);
-
       if (!Object.values(newErrors).some(error => error)) {
         // try {
           //creating a new FormData to allow sending pictures
@@ -199,38 +216,31 @@ export const useNewMaterialHandlers = (data) => {
           const fieldsToAppend = [
             { key: 'material_title', value: formData.material_title },
             { key: 'description', value: formData.description },
-            { key: 'team', value: formData.team },
             { key: 'manual_link', value: formData.manual_link },
             { key: 'datasheet_link', value: formData.datasheet_link },
-            { key: 'owner', value: selectedOwner.owner_id },
+            { key: 'user', value: selectedOwner.user_id },
             { key: 'origin', value: formData.origin },
-            { key: 'validation', value: formData.validation },
-            { key: 'availability', value: true }, // Default value
-            { key: 'available_for_loan', value: true }, // Default value
-            { key: 'loan_duration', value: isDurationEnabled ? formData.loan_duration : indefiniteDuration },
             { key: 'code_nacre', value: formData.code_nacre },
             { key: 'purchase_price', value: formData.purchase_price },
             { key: 'type', value: formData.type },
-          ];
-        
-          // Append additional fields based on specific conditions
-          if (formData.type === "CONSUMABLES") {
-            fieldsToAppend.push(
-              { key: 'consumable_type', value: formData.consumable_type },
-              { key: 'quantity_available', value: formData.quantity_available },
-              { key: 'unit', value: formData.unit },
-              { key: 'expiration_date', value: formData.expiration_date ? moment(formData.expiration_date, 'YYYY-MM-DDTHH:mm:ss.SSS[Z]') : null }
-            );
-          }
+            { key: 'sub_type', value: formData.sub_type },
+            { key: 'quantity_available', value: formData.quantity_available },
+            { key: 'is_Movable', value: formData.isMovable },
+            { key: 'is_formation_required', value: formData.is_formation_required },
+            { key: 'validation', value: formData.validation },
 
+          ];
           // New append field for Lab Supply category conditions
           if (formData.type === "LAB_SUPPLIES") {
             fieldsToAppend.push(
-              { key: 'lab_supply_type', value: formData.lab_supply_type },
-              { key: 'lab_supply_quantity', value: formData.lab_supply_quantity }
+            { key: 'loan_duration', value: formData.loan_duration },
             );
           }
-
+          else if (formData.type === "CONSUMABLES") {
+            fieldsToAppend.push(
+            { key: 'expiration_date', value: formData.expiration_date },
+            );
+          }
 
           // Append image files
           if (compressedImages) {
@@ -258,7 +268,7 @@ export const useNewMaterialHandlers = (data) => {
 
 
           if (!response.ok) {
-            if (response.status == 413) {
+            if (response.status === 413) {
               setMessage({
                 status: 'error',
                 value: "Please consider compressing your images or try ulteriorly."
@@ -266,12 +276,11 @@ export const useNewMaterialHandlers = (data) => {
             } else {
               const errorMessage = await response.text();
               let decodeResponse = JSON.parse(errorMessage);
-
               // Get the first key
               let [firstKey] = Object.keys(decodeResponse);
               setMessage({
                 status: 'error',
-                value: `${firstKey} : ${decodeResponse[firstKey][0]}`
+                value: `${firstKey} : ${decodeResponse[firstKey]}`
               });
             }
           } else {
@@ -295,7 +304,7 @@ export const useNewMaterialHandlers = (data) => {
 
       setIsUploading(false);
 
-    }, [formData, isDurationEnabled, router, codeError]);
+    }, [formData, router, codeError, selectedOwner]);
   
     const filterOptions = useCallback((value) => {
       const inputWords = value.toLowerCase().split(' ');
@@ -313,8 +322,23 @@ export const useNewMaterialHandlers = (data) => {
 
       const filteredOptions = Array.from(matchingLabels);
       setFilteredCNOptions(filteredOptions);
-    }, [filteredCNOptions]);
+    }, [wordIndex]);
     
+  const handleDateChange = (newValue) => {
+    let newdate =moment(newValue).format("YYYY-MM-DD")
+    if (newdate !== "Invalid date"){
+      setFormData({
+      ...formData,
+      expiration_date: newdate ,
+    });
+    }else {
+      setFormData({
+      ...formData,
+      expiration_date: null ,
+    });
+    }
+
+  };
 
   const handleInputCNChange = useCallback((e, newValue) => {
     setFilteredCNOptions([]);
@@ -329,7 +353,7 @@ export const useNewMaterialHandlers = (data) => {
     }else{
       filterOptions(newValue);
     }
-  },[filteredCNOptions, formData]);
+  },[filterOptions]);
 
   const handleCodeNChange = (value) => {
     let code_object = codes.find(code => code.Label === value);
@@ -342,17 +366,6 @@ export const useNewMaterialHandlers = (data) => {
     }
   };
 
-
-  useEffect(() => {
-    if (ownersArray) {
-      let owner = ownersArray.find(owner => {
-        if (owner.is_staff && owner.owner_name.toLowerCase().includes("liphy")) {
-          return true;
-        }
-      });
-      setSuperOwner(owner);
-    }
-  }, [ownersArray]);
 
   useEffect(() => {
     const formData = new FormData();
@@ -375,14 +388,18 @@ export const useNewMaterialHandlers = (data) => {
   }, [isValidationChecked]);
 
   useEffect(() => {
-    if (isShared) {
-      setSelectedOwner(superOwner);
-      setIsValidationChecked(false);
-    } else {
-      setSelectedOwner(null);
-      setIsValidationChecked(true);
-    }
-  }, [isShared]);
+    setFormData((prevState) => ({
+      ...prevState,
+      isMovable: isMovable
+    }));
+  }, [isMovable]);
+
+  useEffect(() => {
+    setFormData((prevState) => ({
+      ...prevState,
+      is_formation_required: is_formation_required
+    }));
+  }, [is_formation_required]);
 
   /*Creating an index of the keywords, speed the search process*/
   useEffect(() => {
@@ -400,34 +417,43 @@ export const useNewMaterialHandlers = (data) => {
     });
     setWordIndex(indexes);
   }, []);
+
+  useEffect(() => {
+  if (ownersArray?.length) {
+    const owner = ownersArray.find(
+      owner => Number(owner.user_id) === Number(owner.user_id)
+    );
+    setSelectedOwner(owner || null);
+  }
+}, [ownersArray, user]);
   
 
   return {
     isValidationChecked,
-    isShared,
-    images,
     formData,
     message,
     selectedOwner,
     handleCheckChange,
-    handleSharedChange,
     handleChange,
+    handleChangeNum,
+    handleChangeNumDec,
     handleSubmit,
     handleFileChange,
     filesSelected,
     onSelectChange,
-    codeError,
-    handleCodeNacreValidation,
     isUploading,
     formErrors,
-    isDurationEnabled,
-    handleToggleChange,
     expandedSections,
     handleAccordionChange,
     filteredCNOptions,
     selectedCode,
     inputCNValue,
     handleInputCNChange,
-    handleCodeNChange
+    handleCodeNChange,
+    handleis_formation_requiredBoxChange,
+    is_formation_required,
+    handleisMovableBoxChange,
+    isMovable,
+    handleDateChange,
   };
 };

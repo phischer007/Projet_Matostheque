@@ -48,29 +48,32 @@ const NewMaterialDetails = (props) => {
 
   const {
     isValidationChecked,
-    isShared,
     formData,
     message,
     selectedOwner,
     handleCheckChange,
-    handleSharedChange,
     handleChange,
+    handleChangeNum,
+    handleChangeNumDec,
     handleSubmit,
     handleFileChange,
     filesSelected,
     onSelectChange,
-    codeError,
     isUploading,
     formErrors,
-    isDurationEnabled,
-    handleToggleChange,
     expandedSections,
     handleAccordionChange,
     filteredCNOptions,
     selectedCode,
     inputCNValue,
     handleInputCNChange,
-    handleCodeNChange
+    handleCodeNChange,
+    handleis_formation_requiredBoxChange,
+    is_formation_required,
+    handleisMovableBoxChange,
+    isMovable,
+    handleDateChange,
+
 
   } = useNewMaterialHandlers(ownersArray);
 
@@ -113,26 +116,10 @@ const NewMaterialDetails = (props) => {
                     <Select
                       labelId="material-type-label"
                       name="type"
+                      required
                       value={formData.type || ''}
+                      error={formErrors.type}
                       onChange={handleChange}
-                      MenuProps={{
-                        PaperProps: {
-                          style: {
-                            maxHeight: '200px',
-                            overflowY: 'auto',
-                          },
-                        },
-                      }}
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          '&:hover .MuiOutlinedInput-notchedOutline': {
-                            borderColor: 'transparent',
-                          },
-                          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                            borderColor: 'transparent',
-                          },
-                        },
-                      }}
                       displayEmpty
                       renderValue={(value) => (
                         <Typography
@@ -143,7 +130,7 @@ const NewMaterialDetails = (props) => {
 
                           }}
                         >
-                          {value ? materialTypes.find(type => type.value === value)?.label : 'Material Type'}
+                          {value ? materialTypes.find(type => type.value === value)?.label : 'Material Type *'}
                         </Typography>
                       )}
                     >
@@ -175,7 +162,7 @@ const NewMaterialDetails = (props) => {
           </Accordion>
           {/* \end{code} */}
 
-          {/* Consummables Information section */}
+          {/* Consummables Information section
           {formData.type == 'CONSUMABLES' &&
             <Accordion expanded={expandedSections['consumable']} onChange={() => handleAccordionChange('consumable')}>
               <AccordionSummary aria-controls="consumable-content" id="consumable-header">
@@ -196,24 +183,6 @@ const NewMaterialDetails = (props) => {
                           name="consumable_type"
                           value={formData.consumable_type || ''}
                           onChange={handleChange}
-                          MenuProps={{
-                            PaperProps: {
-                              style: {
-                                maxHeight: '200px',
-                                overflowY: 'auto',
-                              },
-                            },
-                          }}
-                          sx={{
-                            '& .MuiOutlinedInput-root': {
-                              '&:hover .MuiOutlinedInput-notchedOutline': {
-                                borderColor: 'transparent',
-                              },
-                              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                borderColor: 'transparent',
-                              },
-                            },
-                          }}
                           displayEmpty
                           renderValue={(value) => (
                             <Typography
@@ -235,7 +204,7 @@ const NewMaterialDetails = (props) => {
                           ))}
                         </Select>
                       </FormControl>
-                    </Grid>
+                    </Grid>*/}
 
                     {/* <Grid item xs={12}>
                       <LocalizationProvider>
@@ -247,24 +216,9 @@ const NewMaterialDetails = (props) => {
                       </LocalizationProvider>
                     </Grid> */}
 
-                    <Grid item xs={12}>
-                      <LocalizationProvider>
-                        {/* Added slotProps to enable the Clear button */}
-                        <DatePicker
-                          label="Expiration Date"
-                          format="dd/MM/yyyy"
-                          sx={{ width: "100%" }}
-                          slotProps={{
-                            actionBar: {
-                              actions: ['clear']
-                            }
-                          }}
-                        />
-                      </LocalizationProvider>
-                    </Grid>
-                  </Grid>
 
-                  <Grid container spacing={2} xs={12} sm={6}>
+
+{/*                  <Grid container spacing={2} xs={12} sm={6}>
                     <Grid item xs={12}>
                       <TextField
                         fullWidth
@@ -325,15 +279,15 @@ const NewMaterialDetails = (props) => {
                 </Grid>
               </AccordionDetails>
             </Accordion>
-          }
+          }*/}
           {/* End of Consumables information */}
-          
+
           {/* Supply Information section */}
-          {formData.type == "LAB_SUPPLIES" && (
-            <Accordion expanded={expandedSections['lab_supply']} onChange={() => handleAccordionChange('lab_supply')}>
-            <AccordionSummary aria-controls="lab_supply-content" id="lab_supply-header">
+          {(formData.type === "LAB_SUPPLIES" || formData.type === 'CONSUMABLES') && (
+            <Accordion expanded={expandedSections[formData.type]} onChange={() => handleAccordionChange(formData.type)} defaultExpanded>
+            <AccordionSummary >
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Typography variant="overline">Supply Information</Typography>
+                <Typography variant="overline">{formData.type} Information</Typography>
                 <SvgIcon fontSize="smaller">
                   <ChevronRightIcon />
                 </SvgIcon>
@@ -341,70 +295,91 @@ const NewMaterialDetails = (props) => {
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={3}>
-                <Grid container spacing={2} xs={12} sm={6}>
-                  {/* Supply Category Dropdown */}
                   <Grid item xs={12}>
-                    <FormControl fullWidth>
-                      <Select
-                        labelId="lab_supply-category-label"
-                        name="lab_supply_type" // Update to match formData
-                        value={formData.lab_supply_type || ''}
-                        onChange={handleChange}
-                        MenuProps={{
-                          PaperProps: {
-                            style: {
-                              maxHeight: '200px',
-                              overflowY: 'auto',
-                            },
-                          },
-                        }}
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            '&:hover .MuiOutlinedInput-notchedOutline': {
-                              borderColor: 'transparent',
-                            },
-                            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                              borderColor: 'transparent',
-                            },
-                          },
-                        }}
-                        displayEmpty
-                        renderValue={(value) => (
-                          <Typography
-                            variant="subtitle2"
-                            style={{
-                              fontFamily: 'inherit',
-                              color: value ? 'inherit' : theme.palette.text.secondary,
-                            }}
-                          >
-                            {value ? lab_supplyTypes.find(type => type.value === value)?.label : 'Lab Supply Type'}
-                            {/* {value ? suplyType.find(type => type.value === value)?.label : 'Lab Supply Type'} */}
-                          </Typography>
-                        )}
-                      >
-                        {lab_supplyTypes.map((type) => (
+                  <FormControl fullWidth>
+                    <Select
+                      labelId="sub-type-label"
+                      name="sub_type"
+                      error={formErrors.sub_type}
+                      value={formData.sub_type}
+                      onChange={handleChange}
+                      displayEmpty
+                      renderValue={(value) => {
+                        if (formData.type === "LAB_SUPPLIES") {
+                          return (
+                            <Typography>
+                              {value
+                                ? lab_supplyTypes.find((type) => type.value === value)?.label
+                                : "Lab Supply Type"}
+                            </Typography>
+                          );
+                        }
+
+                        if (formData.type === "CONSUMABLES") {
+                          return (
+                            <Typography>
+                              {value
+                                ? consumableTypes.find((type) => type.value === value)?.label
+                                : "Consumable Type"}
+                            </Typography>
+                          );
+                        }
+
+                        return <Typography>Select a type</Typography>;
+                      }}
+                    >
+                      {formData.type === "LAB_SUPPLIES" &&
+                        lab_supplyTypes.map((type) => (
                           <MenuItem key={type.value} value={type.value}>
                             {type.label}
                           </MenuItem>
                         ))}
-                      </Select>
-                    </FormControl>
+
+                      {formData.type === "CONSUMABLES" &&
+                        consumableTypes.map((type) => (
+                          <MenuItem key={type.value} value={type.value}>
+                            {type.label}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
                   </Grid>
-        
-                  {/* Quantity Input */}
-                  <Grid item xs={12}>
+                {formData.type === "LAB_SUPPLIES" &&
+                  <Grid item >
+                    <Typography variant="caption" color="textSecondary">
+                      Type a number in days.<span>*</span>
+                    </Typography>
                     <TextField
+                      label="Allowed Loan Duration"
+                      name="loan_duration"
+                      value={formData.loan_duration || ''}
+                      onChange={handleChangeNum}
+                      error={formErrors.loan_duration}
+                      helperText={formErrors.loan_duration}
+                      inputProps={{inputMode: "decimal"}}
                       fullWidth
-                      label="Quantity"
-                      name="lab_supply_quantity"
-                      value={formData.lab_supply_quantity || ''}  // Set the value from formData
-                      onChange={handleChange}
-                      type="number"
-                      inputProps={{ min: 0 }}
                     />
                   </Grid>
-                </Grid>
-              </Grid>
+                }
+                {formData.type === "CONSUMABLES" &&
+                  <Grid item >
+                      <LocalizationProvider>
+                        {/* Added slotProps to enable the Clear button */}
+                        <DatePicker
+                          label="Expiration Date"
+                          onChange={handleDateChange}
+                          format="dd/MM/yyyy"
+                          sx={{ width: "100%" }}
+                          slotProps={{
+                            actionBar: {
+                              actions: ['clear']
+                            }
+                          }}
+                        />
+                      </LocalizationProvider>
+                  </Grid>
+                }
+                    </Grid>
             </AccordionDetails>
           </Accordion>
           )}
@@ -446,7 +421,7 @@ const NewMaterialDetails = (props) => {
                       </Grid>
                     )}
 
-                    <Grid item xs={4}>
+{/*                    <Grid item xs={4}>
                       <Box display="flex" alignItems="center">
                         <Checkbox
                           checked={isShared}
@@ -458,7 +433,7 @@ const NewMaterialDetails = (props) => {
                           Shared material
                         </Typography>
                       </Box>
-                    </Grid>
+                    </Grid>*/}
                   </Grid>
                 </Grid>
 
@@ -515,7 +490,7 @@ const NewMaterialDetails = (props) => {
                   </Select>
                 </Grid> */}
 
-                <Grid item xs={12} sm={6}>
+{/*                <Grid item xs={12} sm={6}>
                   <Select
                     fullWidth
                     labelId="team-select"
@@ -555,7 +530,7 @@ const NewMaterialDetails = (props) => {
                       </Typography>
                     )}
                   >
-                    {/* CHANGE 2c: Mapped over sortedTeams instead of teams */}
+                     CHANGE 2c: Mapped over sortedTeams instead of teams
                     {sortedTeams.map((team, index) => (
                       <MenuItem key={index} value={team}
                         // sx={{
@@ -567,7 +542,7 @@ const NewMaterialDetails = (props) => {
                       </MenuItem>
                     ))}
                   </Select>
-                </Grid>
+                </Grid>*/}
 
               </Grid>
             </AccordionDetails>
@@ -593,7 +568,7 @@ const NewMaterialDetails = (props) => {
                     onChange={handleChange}
                     required
                     type="text"
-                    placeholder='Ex. Room 203'
+                    placeholder="140 Rue de la Physique, 38402 Saint-Martin-d'Hères"
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -619,7 +594,7 @@ const NewMaterialDetails = (props) => {
                     Ask for validation
                   </Typography>
                 </Grid>
-                <Grid container xs={12} sm={12}>
+{/*                <Grid container xs={12} sm={12}>
                   <Grid item xs={12} sm={12}>
                     <FormControlLabel
                       control={
@@ -656,7 +631,21 @@ const NewMaterialDetails = (props) => {
                     </Grid>
 
                   </>)}
-                </Grid>
+                </Grid>*/}
+
+                  {/* Quantity Input */}
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Quantity"
+                      name="quantity_available"
+                      value={formData.quantity_available || "" }
+                      onChange={formData.type === "CONSUMABLES" ? handleChangeNumDec : handleChangeNum}
+                      inputProps={{
+                        inputMode: "decimal", // clavier numérique mobile
+                      }}
+                    />
+                  </Grid>
               </Grid>
             </AccordionDetails>
           </Accordion>
@@ -710,24 +699,11 @@ const NewMaterialDetails = (props) => {
                           }}
                           renderInput={(params) => (
                             <TextField
+                              fullWidth
                               {...params}
                               variant="standard"
                               label="Code Nacre"
                               margin="normal"
-                              sx={{ marginTop: 0 }}
-                              fullWidth
-
-                              // adding MagnifyingGlass to the Code Nacre textbox
-			                        InputProps={{
-                                ...params.InputProps,
-                                startAdornment: (
-                                  <>
-                                    <MagnifyingGlassIcon style={{ marginRight: 480 }} />
-                                    {params.InputProps.startAdornment}
-                                  </>
-                                ),
-                              }}
-
                             />
                           )}
                           renderOption={(option) => {
@@ -745,12 +721,14 @@ const NewMaterialDetails = (props) => {
                     <Grid container direction="row" spacing={2}>
                       <Grid item sm={8} style={{ flexGrow: 1 }}>
                         <TextField
-                          type="number"
                           label="Purchase Price (Approximatively)"
                           name="purchase_price"
-                          min={1}
-                          onChange={handleChange}
-                          fullWidth  // Set TextField to take up full width
+                          value={formData.purchase_price || ""}
+                          onChange={handleChangeNumDec}
+                          fullWidth
+                          inputProps={{
+                            inputMode: "decimal",
+                          }}
                         />
                       </Grid>
                       <Grid item sm={4}>
@@ -760,6 +738,28 @@ const NewMaterialDetails = (props) => {
                       </Grid>
                     </Grid>
                   </Grid>
+              <Grid>
+                <Checkbox
+                  name="is_Movable"
+                  checked={isMovable}
+                  onChange={handleisMovableBoxChange}
+                  color="primary"
+                  inputProps={{ 'aria-label': 'checkbox' }}
+                />
+                <Typography variant="caption" color="textSecondary">
+                  If checked, The material will be diplayed as not movable from the lab.
+                </Typography>
+                <Checkbox
+                  name="is_formation_required"
+                  checked={is_formation_required}
+                  onChange={handleis_formation_requiredBoxChange}
+                  color="primary"
+                  inputProps={{ 'aria-label': 'checkbox' }}
+                />
+                <Typography variant="caption" color="textSecondary">
+                  If checked, The material will require a formation.
+                </Typography>
+              </Grid>
                 </Grid>
               </Grid>
             </AccordionDetails>

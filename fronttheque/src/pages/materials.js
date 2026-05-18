@@ -33,7 +33,7 @@ const useMaterials = (materials, page, cardPerPage) => {
 };
 
 const deepSearch = (obj, searchTerm) => {
-  const searchableFields = ['material_title', 'owner_first_name', 'owner_last_name', 'material_id', 'team', 'description'];
+  const searchableFields = ['material_title', 'user_first_name', 'user_last_name', 'material_id', 'description'];
   let normalizedSearchTerm = searchTerm;
   if (!isNaN(searchTerm)) {
     normalizedSearchTerm = searchTerm.toString().padStart(3, '0');
@@ -88,7 +88,7 @@ const Page = () => {
         }
       })
       .catch(error => console.error('Error fetching data:', error));
-  }, []);
+  }, [user.is_staff]);
 
   // 2. Filter Effect (Preserves Order)
   useEffect(() => {
@@ -153,40 +153,6 @@ const Page = () => {
                     direction="row" 
                     spacing={1}
                   >
-                    <PDFDownloadLink
-                      document={<MaterialListDoc materials={materialList ? materialList : []} />}
-                      fileName={"Matostheque Material List"}
-                    >
-                      {({ blob, url, loading, error }) => (
-                        <Button color="primary" 
-                          startIcon={
-                            <SvgIcon fontSize="small">
-                              <ArrowDownOnSquareIcon />
-                            </SvgIcon>
-                          } 
-                          style={{ width: '150px' }}
-                        >
-                          Export list
-                        </Button>
-                      )}
-                    </PDFDownloadLink>
-                    <PDFDownloadLink
-                      document={<MaterialQRCodeDoc documentData={qrCodeDataArray ? qrCodeDataArray : []} />}
-                      fileName={"Matostheqye QRCode list"}
-                    >
-                      {({ blob, url, loading, error }) => (
-                        <Button color="primary" 
-                          startIcon={
-                            <SvgIcon fontSize="small">
-                              <ArrowDownOnSquareIcon />
-                            </SvgIcon>
-                          } 
-                          style={{ width: '200px' }}
-                        >
-                          Export qrcodes
-                        </Button>
-                      )}
-                    </PDFDownloadLink>
                   </Stack>
                 )}
               </Stack>

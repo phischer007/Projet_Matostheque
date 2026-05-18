@@ -97,8 +97,6 @@ class Loans(models.Model):
         calculated_status = self.calculate_loan_status()
         if self.loan_status != calculated_status:
             self.loan_status = calculated_status
-            if self.loan_status == "Borrowed" or self.loan_status == "Closed":
-                self.material.update_availability() #TODO: to erase after signal success
     
     #overriding the save method
     def save(self, *args, **kwargs):
@@ -117,8 +115,6 @@ class Loans(models.Model):
                 if self.return_date != original_loan.return_date:
                     # Update is_active based on return_date
                     self.is_active = False
-                    self.material.update_availability() #TODO: to erase after signal success
-
                 # Updating if approved for the first and only time
                 if self.approval_date != original_loan.approval_date:
                     # Update is_active based on approval_date

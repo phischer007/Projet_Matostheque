@@ -28,15 +28,14 @@ def get_materials(request):
         'material_id',
         'material_title',
         'description',
-        'team',
         'images',
         'loan_duration',
-        'availability',
         'validation',
         'qrcode',
         'type',
-        'consumable_type',
-        'lab_supply_type',
+        'sub_type',
+        'is_Movable',
+        'is_formation_required',
         user_first_name=F('user__first_name'),
         user_last_name=F('user__last_name'),
         user_email=F('user__email'),
@@ -59,10 +58,8 @@ def get_materials_lite(request):
     selected_materials = materials.values(
         'material_id',
         'material_title', 
-        'team', 
         'loan_duration',
         'validation', 
-        'availability', 
         'user_id',
         'created_at'
     ) 
@@ -73,7 +70,10 @@ def get_materials_lite(request):
 @api_view(['POST'])
 def create_material(request):
     if request.method == 'POST':
-       return on_create_material(request)
+        try:
+            return on_create_material(request)
+        except Exception as e:
+            return JsonResponse({"error": str(e)},status=status.HTTP_400_BAD_REQUEST)
    
 @api_view(['GET', 'PUT', 'DELETE'])
 def material_detail(request, pk):
@@ -84,57 +84,58 @@ def material_detail(request, pk):
  
     if request.method == 'GET': 
         try:
-            material.update_availability() #TODO: to erase after signal success
             details_data = get_detailed_material(pk)
             return JsonResponse(details_data)
         except : 
             return JsonResponse({'message': 'Error fetching material details!'}, status=status.HTTP_204_NO_CONTENT)
  
     elif request.method == 'PUT':
-        material_data = request.data
-        print(material_data)
-        material_serializer = MaterialSerializer(material, data=material_data, partial=True) 
-        if material_serializer.is_valid(): 
-            updated_material = material_serializer.save()
-            #Image uploading
-            if request.FILES:
-                
-                images_response = upload_images(request.FILES, updated_material.material_id)
-                
-                if images_response is not None:
-                    existing_images = json.loads(updated_material.images) if updated_material.images else []
-                    loaded_response = json.loads(images_response) if images_response else []
+        if not request.user.is_staff or request.user.pk != material.user_id:
+            return JsonResponse({'message': 'You are not authorized to delete this Materials.'},status=status.HTTP_403_FORBIDDEN)
+        try:
+            material_data = request.data
+            #we check that the qrcode is not modified
+            if material_data.get('qrcode') is not None:
+                return JsonResponse({'message': "You can't add a qrcode yourself"},status=status.HTTP_400_BAD_REQUEST)
+            #we check that the id is not modified
+            if int(material_data.get('material_id')) != int(pk):
+                return JsonResponse({'message': "You can't change the id of the materials"},status=status.HTTP_400_BAD_REQUEST)
 
-                    for item in loaded_response:
-                        existing_images.append(item)
-                    
-                    updated_material.images = json.dumps(existing_images)
-                    print(json.dumps(existing_images))
-                    
-                    updated_material.save()
-            return JsonResponse(material_serializer.data)
+            material_serializer = MaterialSerializer(material, data=material_data, partial=True)
+            if material_serializer.is_valid():
+                updated_material = material_serializer.save()
+                #Image uploading
+                if request.FILES:
 
-        print(material_serializer.errors) 
-        return JsonResponse(material_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+                    images_response = upload_images(request.FILES, updated_material.material_id)
+
+                    if images_response is not None:
+                        existing_images = json.loads(updated_material.images) if updated_material.images else []
+                        loaded_response = json.loads(images_response) if images_response else []
+
+                        for item in loaded_response:
+                            existing_images.append(item)
+
+                        updated_material.images = json.dumps(existing_images)
+
+                        updated_material.save()
+                return JsonResponse(material_serializer.data)
+
+            return JsonResponse(material_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return JsonResponse({'message': str(e)},status=status.HTTP_400_BAD_REQUEST)
  
-    elif request.method == 'DELETE': 
-        material.delete() 
+    elif request.method == 'DELETE':
+        if not request.user.is_staff or request.user.pk != material.user_id:
+            return JsonResponse({'message': 'You are not authorized to delete this Materials.'},status=status.HTTP_403_FORBIDDEN)
+        material.delete()
         return JsonResponse({'message': 'Material was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
-    
-@login_required     
-@api_view(['GET'])
-def material_list_available(request):
-    materials = Materials.objects.filter(availability=True)
-        
-    if request.method == 'GET': 
-        materials_serializer = MaterialSerializer(materials, many=True)
-        return JsonResponse(materials_serializer.data, safe=False)
+
 
 @login_required
 @api_view(['GET'])
 def material_list_per_owner(request, pk):
     materials = Materials.objects.filter(user=pk)
-        
     if request.method == 'GET': 
         materials_serializer = MaterialSerializer(materials, many=True)
         return JsonResponse(materials_serializer.data, safe=False)
@@ -181,15 +182,21 @@ def get_total_count(request):
 
     # 2. Materials per Team (For the Bar Chart)
     # Groups by 'team' field and counts material_ids
-    materials_per_team = Materials.objects.values('team').annotate(
-        count=Count('material_id')
-    ).order_by('-count')
+    #materials_per_team = Materials.objects.values('team').annotate(
+    #    count=Count('material_id')
+    #).order_by('-count')
 
     if request.method == 'GET': 
         return JsonResponse({
             'total_count': materials_count,
             'added_this_month': materials_added_this_month,
             'added_this_year': materials_added_this_year,
-            'materials_per_team': list(materials_per_team), # Converted to list for JSON serialization
+            #'materials_per_team': list(materials_per_team), # Converted to list for JSON serialization
             # 'users_per_team': list(users_per_team)
         })
+
+def update_Consumable_Availability():
+    Materials.objects.filter(
+        expiration_date__lte=timezone.now(),
+        is_available_to_loan=True
+    ).update(is_available_to_loan=False)

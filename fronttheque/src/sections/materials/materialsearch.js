@@ -20,7 +20,7 @@ export const MaterialsSearch = ({ searchTerm, onSearchChange }) => {
           onChange={onSearchChange}
           fullWidth
           // placeholder="Material name/ Material number/ Owner name/ Team"
-          placeholder="Material name/ Material number/ Owner name/ Team/ Description"
+          placeholder="Material name/ Material number/ Owner name/ Description"
 
           startAdornment={(
             <InputAdornment position="start">
@@ -56,7 +56,7 @@ export const MaterialsSearch = ({ searchTerm, onSearchChange }) => {
             variant="caption"
           >
             You can search a material by the material&apos;s name,
-            the owner&apos;s name, description, the team name or the material number on the qrcode (ex. Matostheque-001, type 001)
+            the owner&apos;s name, description, the material number on the qrcode (ex. Matostheque-001, type 001)
           </Typography>
         </Stack>
         : null}

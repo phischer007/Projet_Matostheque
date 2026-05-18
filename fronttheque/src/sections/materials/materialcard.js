@@ -45,7 +45,7 @@ export const MaterialsCard = (props) => {
               variant="overline"
               size="small"
             >
-              {material.team}
+              {material.user_first_name + " " + material.user_last_name}
             </Typography>
             <Avatar
               sx={{
@@ -114,25 +114,27 @@ export const MaterialsCard = (props) => {
             Owner: {material.user_first_name} {material.user_last_name}
           </Typography>
         </Stack>
-        <Stack
-          alignItems="center"
-          direction="row"
-          spacing={1}
-        >
-          <SvgIcon
-            color="action"
-            fontSize="small"
+        {material.loan_duration &&
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={1}
           >
-            <ClockIcon />
-          </SvgIcon>
-          <Typography
-            color="text.secondary"
-            display="inline"
-            variant="body2"
-          >
-            {material.loan_duration} Days
-          </Typography>
-        </Stack>
+            <SvgIcon
+              color="action"
+              fontSize="small"
+            >
+              <ClockIcon />
+            </SvgIcon>
+            <Typography
+              color="text.secondary"
+              display="inline"
+              variant="body2"
+            >
+              {material.loan_duration} Days
+            </Typography>
+          </Stack>
+        }
       </Stack>
     </Card>
   );

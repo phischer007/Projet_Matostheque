@@ -3,6 +3,8 @@ from django.core.management.base import BaseCommand
 from Matostheque.views.loan_views import update_loans
 import threading
 
+from Matostheque.views.material_views import update_Consumable_Availability
+
 # Create a lock object
 update_loans_lock = threading.Lock()
 
@@ -30,5 +32,6 @@ class Command(BaseCommand):
             print("Completed update_loans")
             print("Completed with emails:", email_count)
             print("=========================================")
-            print("")
-   
+            update_Consumable_Availability()
+            print("Completed update_Consumable_Availability")
+            print("=========================================")

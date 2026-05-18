@@ -9,11 +9,6 @@ from Matostheque.models.notification_model import Notifications
 from Matostheque.models.material_model import Materials
 from django.utils import timezone
 
-# Function to update material availability on receipt of signal from loans 
-@receiver(post_save, sender=Loans)
-def update_material_availability(sender, instance, **kwargs):
-    material = instance.material
-    material.update_availability()
 
 # Function the notification status on loan update
 @receiver(post_save, sender=Loans)

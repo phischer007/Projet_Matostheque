@@ -15,37 +15,66 @@ import {
   TextField,
   Typography,
   Checkbox,
-  FormGroup,
   Unstable_Grid2 as Grid,
-  getTouchRippleUtilityClass,
-  checkboxClasses, Autocomplete
+Autocomplete
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useAuth } from 'src/hooks/use-auth';
 import { toast } from 'react-toastify';
 import config from 'src/utils/config';
-import { useTheme } from '@mui/material/styles';
 import { consumableTypes, lab_supplyTypes } from 'src/data/static_data';
 import moment from 'moment';
 import { getCookie } from '../../utils/csrf';
-import { formatDetailedDate } from '../../utils/get-formatted-date';
 
 
 export const MaterialDetailEdit = (props) => {
-  const theme = useTheme();
   const user = useAuth().user;
   const [isFormDisabled, setIsFormDisabled] = useState(false);
   const [materialID, setMaterialID] = useState(null);
   const [formData, setFormData] = useState({});
   const [checked, setChecked] = useState(false);
+  const [isMovable, setisMovable] = useState(false);
+  const [is_formation_required, setis_formation_required] = useState(false);
   const [ownersList, setOwnersList] = useState(null);
   const [selectedOwner, setSelectedOwner] = useState(null);
+  const [selectSubType, setSelectedSubType] = useState(null);
+  const [expiration_date, setexpiration_date] = useState(null);
 
   const handleCheckBoxChange = useCallback(() => {
     setChecked((prevState) => !prevState);
   }, []);
 
+  const handleisMovableBoxChange = useCallback(() => {
+    setisMovable((prevState) => !prevState);
+  }, []);
+
+  const handleis_formation_requiredBoxChange = useCallback(() => {
+    setis_formation_required((prevState) => !prevState);
+  }, []);
+
+  const handleChangeNumDec = useCallback((event) => {
+  const { name, value } = event.target;
+
+  let cleaned = value
+    .replace(/[^0-9.]/g, "") // garde chiffres + point
+    .replace(/(\..*)\./g, "$1"); // empêche plusieurs points
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: cleaned
+  }));
+}, []);
+
+
+const handleChangeNum = useCallback((event) => {
+  const { name, value } = event.target;
+
+  setFormData((prevState) => ({
+    ...prevState,
+    [name]: value.replace(/\D/g, "") // garde seulement les chiffres
+  }));
+}, []);
 
 
 
@@ -59,15 +88,30 @@ export const MaterialDetailEdit = (props) => {
   
   const handleExpirationDateChange = useCallback(
     (date) => {
+    let newdate = moment(date).format("YYYY-MM-DD")
+      setexpiration_date(date)
+    if (newdate !== "Invalid date") {
       setFormData((prevData) => ({
         ...prevData,
-        expiration_date: date
+        expiration_date: newdate,
       }));
+    }else {
+      setFormData({
+      ...formData,
+      expiration_date: null ,
+    });
+    }
   });
 
   const onSelectChange = useCallback(
     (event, values) => {
       setSelectedOwner(values);
+    }, []
+  );
+
+  const onSelectSubType = useCallback(
+    (event) => {
+      setSelectedSubType(event.target.value);
     }, []
   );
 
@@ -80,50 +124,39 @@ export const MaterialDetailEdit = (props) => {
           { key: 'material_id', value: materialID },
           { key: 'material_title', value: formData.material_title },
           { key: 'description', value: formData.description },
-          { key: 'team', value: formData.team },
           { key: 'manual_link', value: formData.manual_link },
           { key: 'datasheet_link', value: formData.datasheet_link },
           { key: 'user', value: selectedOwner.user_id },
           { key: 'origin', value: formData.origin },
           { key: 'validation', value: formData.validation },
-          { key: 'availability', value: true }, // Default value
-          { key: 'available_for_loan', value: true }, // Default value
-          {
-            key: 'loan_duration',
-            value: formData.loan_duration
-          },
           { key: 'code_nacre', value: formData.code_nacre },
           { key: 'purchase_price', value: formData.purchase_price },
           { key: 'type', value: formData.type },
+          { key: 'sub_type', value: selectSubType},
+          { key: 'quantity_available', value: formData.quantity_available },
+          { key: 'is_Movable', value: formData.is_Movable },
+          { key: 'is_formation_required', value: formData.is_formation_required },
         ];
 
         // Append additional fields based on specific conditions
-        if (formData.type === "CONSUMABLES") {
-          fieldsToAppend.push(
-            { key: 'consumable_type', value: formData.consumable_type },
-            { key: 'quantity_available', value: formData.quantity_available },
-            { key: 'unit', value: formData.unit },
-            {
-              key: 'expiration_date', value:new Date(formData.expiration_date).toISOString()}
-          );
-        }
-
-        // New append field for Lab Supply category conditions
-        if (formData.type === "LAB_SUPPLIES") {
-          fieldsToAppend.push(
-            { key: 'lab_supply_type', value: formData.lab_supply_type },
-            { key: 'lab_supply_quantity', value: formData.lab_supply_quantity }
-          );
-        }
+          if (formData.type === "LAB_SUPPLIES") {
+            fieldsToAppend.push(
+            { key: 'loan_duration', value: formData.loan_duration },
+            );
+          }
+          else if (formData.type === "CONSUMABLES") {
+            fieldsToAppend.push(
+            { key: 'expiration_date', value: formData.expiration_date },
+            );
+          }
 
         // Append all fields to the form
         fieldsToAppend.forEach(({ key, value }) => {
-          if (value !== undefined && value !== null && value !== "") {
+          if (value !== undefined && value !== null && value !== "" ) {
             form.append(key, value);
           }
         });
       if (materialID) {
-        console.log(form)
         try {
           const csrftoken = getCookie('csrftoken');
           const response = await fetch(`${config.apiUrl}/materials/${materialID}/`, {
@@ -150,7 +183,7 @@ export const MaterialDetailEdit = (props) => {
           toast.error(`Error trying to submit loan: ${error}`, { autoClose: false });
         }
       }
-    }, [formData, materialID,selectedOwner]);
+    }, [formData, materialID,selectedOwner,selectSubType]);
 
     useEffect(() => {
     fetch(`${config.apiUrl}/active_owners/lite/`,{
@@ -171,7 +204,7 @@ export const MaterialDetailEdit = (props) => {
       const excludedKeys = ['owner_details', 'material_id', 'created_at', 'updated_at', 'qrcode', 'available_for_loan', 'availability'];
       for (const key in props.data) {
         if (!excludedKeys.includes(key)) {
-          if(key=='expiration_date'){
+          if(key=='expiration_date' && props.data[key] !== null){
             newData[key] = new Date(props.data[key]) || null;
             continue;
           }
@@ -180,8 +213,12 @@ export const MaterialDetailEdit = (props) => {
       }
       setFormData(newData);
       setChecked(newData.validation);
+      setisMovable(newData.is_Movable);
+      setis_formation_required(newData.is_formation_required);
       setMaterialID(props.data.material_id);
       setSelectedOwner(ownersList.find((owner)=> Number(owner.user_id) === Number(newData.user)))
+      setSelectedSubType(newData.sub_type)
+      setexpiration_date(newData.expiration_date)
     }
   }, [props.data,ownersList,user]);
 
@@ -191,6 +228,20 @@ export const MaterialDetailEdit = (props) => {
       validation: checked
     }));
   }, [checked])
+
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      is_Movable: isMovable
+    }));
+  }, [isMovable])
+
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      is_formation_required: is_formation_required
+    }));
+  }, [is_formation_required])
 
   return (props.data && user ?
     <form
@@ -220,6 +271,7 @@ export const MaterialDetailEdit = (props) => {
                   name="material_title"
                   onChange={handleChange}
                   value={formData.material_title}
+                  InputLabelProps={{ shrink: true }}
                 />
               </Grid>
               <Grid
@@ -232,6 +284,7 @@ export const MaterialDetailEdit = (props) => {
                     label="Owner"
                     disabled={isFormDisabled}
                     value={props.data.owner_details && (`${props.data.owner_details.first_name} ${props.data.owner_details.last_name}`)}
+                    InputLabelProps={{ shrink: true }}
                   />
                 )}
                   {ownersList && user.is_staff &&(
@@ -252,6 +305,7 @@ export const MaterialDetailEdit = (props) => {
                             margin="normal"
                             sx={{ marginTop: 0 }}
                             fullWidth
+                            InputLabelProps={{ shrink: true }}
                               />
                             )}
                           />
@@ -269,162 +323,90 @@ export const MaterialDetailEdit = (props) => {
                   helperText={!isFormDisabled ? "This field can't be edited." : ""}
                   disabled
                   value={formData.type}
+                  InputLabelProps={{ shrink: true }}
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
-              {formData.type === "CONSUMABLES" && <FormControl fullWidth disabled={isFormDisabled}>
+              {!isFormDisabled &&
+              <Grid xs={12} md={6}>
+              <FormControl fullWidth
+                disabled={isFormDisabled}>
                   <Select
-                    labelId="consumable-type-label"
-                    name="consumable_type"
-                    value={formData.consumable_type || ''}
-                    onChange={handleChange}
-                    MenuProps={{
-                      PaperProps: {
-                        style: {
-                          maxHeight: '200px',
-                          overflowY: 'auto',
-                        },
-                      },
-                    }}
-                    sx={{
-                      '& .MuiOutlinedInput-root': {
-                        '&:hover .MuiOutlinedInput-notchedOutline': {
-                          borderColor: 'transparent',
-                        },
-                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                          borderColor: 'transparent',
-                        },
-                      },
-                    }}
-                    displayEmpty
+                    labelId="sub-type-label"
+                    name="sub_type"
+                    value={selectSubType || ""}
+                    onChange={onSelectSubType}
                     renderValue={(value) => (
-                      <Typography
-                        variant="subtitle2"
-                        style={{
-                          fontFamily: 'inherit',
-                          color: value ? 'inherit' : theme.palette.text.secondary
-
-                        }}
-                      >
-                        {value ? consumableTypes.find(type => type.value === value)?.label : 'Consumable Type'}
+                      <Typography>
+                        {(formData.type === "CONSUMABLES" ? consumableTypes : lab_supplyTypes).find(type => type.value === value)?.label}
                       </Typography>
                     )}
                   >
-                    {consumableTypes.map((type) => (
-                      <MenuItem key={type.value} value={type.value}>
+                    {(formData.type === "CONSUMABLES" ? consumableTypes : lab_supplyTypes).map((type) => (
+                      <MenuItem key={type.value}
+                        value={type.value}>
                         {type.label}
                       </MenuItem>
                     ))}
                   </Select>
-                </FormControl>}
+                </FormControl>
               </Grid>
+                }
+              {isFormDisabled &&
+                <Grid xs={12} md={6}>
+                  <TextField
+                    fullWidth
+                    label="Sub Type"
+                    disabled={isFormDisabled}
+                    value={(formData.type === "CONSUMABLES" ? consumableTypes : lab_supplyTypes).find(type => type.value === formData.sub_type)?.label}
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+              }
+
               {formData.type === "CONSUMABLES" &&
-                <Grid
-                  container
-                  xs={12}
-                >
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      fullWidth
-                      label="Available Quantity"
-                      name="quantity_available"
+                <Grid xs={12}
+                  md={6}>
+                  <LocalizationProvider>
+                    <DatePicker
+                      label="Expiration Date"
                       disabled={isFormDisabled}
-                      onChange={handleChange}
-                      type="number"
-                      value={formData.quantity_available}
-                      inputProps={{ min: 0 }}
-                      InputProps={{
-                        endAdornment: <InputAdornment position="end">M</InputAdornment>,
-                      }}
+                      value={expiration_date ?? null}
+                      onChange={handleExpirationDateChange}
+                      format="dd/MM/yyyy"
+                      sx={{ width: "100%" }}
                     />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <LocalizationProvider>
-                      <DatePicker
-                        label="Expiration Date"
-                        disabled={isFormDisabled}
-                        value={formData.expiration_date}
-                        onChange={handleExpirationDateChange}
-                        format="dd/MM/yyyy"
-                        sx={{ width: "100%" }}
-                      />
-                    </LocalizationProvider>
-                  </Grid>
+                  </LocalizationProvider>
                 </Grid>
               }
               {/* End of consumableTypes dropdown section */}
-
               {/* Begin of lab_supplies_type */}
-              <Grid container xs={12}>
-                {formData.type === "LAB_SUPPLIES" && (
-                  <>
-                    <Grid item xs={12} md={6}>
-                      <FormControl fullWidth disabled={isFormDisabled}>
-                        <Select
-                          labelId="lab_supply-category-label"
-                          name="lab_supply_type"
-                          value={formData.lab_supply_type || ''}
-                          onChange={handleChange}
-                          MenuProps={{
-                            PaperProps: {
-                              style: {
-                                maxHeight: '200px',
-                                overflowY: 'auto',
-                              },
-                            },
-                          }}
-                          sx={{
-                            '& .MuiOutlinedInput-root': {
-                              '&:hover .MuiOutlinedInput-notchedOutline': {
-                                borderColor: 'transparent',
-                              },
-                              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                borderColor: 'transparent',
-                              },
-                            },
-                          }}
-                          displayEmpty
-                          renderValue={(value) => (
-                            <Typography
-                              variant="subtitle2"
-                              style={{
-                                fontFamily: 'inherit',
-                                color: value ? 'inherit' : theme.palette.text.secondary
-                              }}
-                            >
-                              {value ? lab_supplyTypes.find(type => type.value === value)?.label : 'Lab Supply Type'}
-                            </Typography>
-                          )}
-                        >
-                          {lab_supplyTypes.map((type) => (
-                            <MenuItem key={type.value} value={type.value}>
-                              {type.label}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </Grid>
-                    
-                    <Grid item xs={12} md={6}>
-                      <TextField
-                        fullWidth
-                        label="Quantity"
-                        name="lab_supply_quantity"
-                        disabled={isFormDisabled}
-                        onChange={handleChange}
-                        type="number"
-                        value={formData.lab_supply_quantity}
-                        inputProps={{ min: 0 }}
-                        InputProps={{
-                          endAdornment: <InputAdornment position="end"></InputAdornment>,
-                        }}
-                      />
-                    </Grid>
-                  </>
-                )}
-              </Grid>
+              {formData.type === "LAB_SUPPLIES" &&
+                <Grid xs={12}
+                md={6}>
+                  <TextField
+                    fullWidth
+                    label="Duration"
+                    name="loan_duration"
+                    disabled={isFormDisabled}
+                    onChange={handleChangeNum}
+                    value={formData.loan_duration}
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+              }
               {/* End of lab_supplies_type */}
 
+              <Grid xs={12} md={6}>
+                <TextField
+                  fullWidth
+                  label="Available Quantity"
+                  name="quantity_available"
+                  disabled={isFormDisabled}
+                  onChange={formData.type === "CONSUMABLES" ? handleChangeNumDec : handleChangeNum}
+                  value={formData.quantity_available}
+                  InputLabelProps={{ shrink: true }}
+                />
+              </Grid>
               <Grid
                 xs={12}
                 md={6}
@@ -436,6 +418,7 @@ export const MaterialDetailEdit = (props) => {
                   disabled={isFormDisabled}
                   onChange={handleChange}
                   value={formData.description}
+                  InputLabelProps={{ shrink: true }}
                   sx={{
                     width: '100%',
                     overflow: 'hidden',
@@ -456,21 +439,13 @@ export const MaterialDetailEdit = (props) => {
               >
                 <Stack spacing={2}>
                   <TextField
-                    fullWidth
-                    type="number"
-                    label="Duration"
-                    name="loan_duration"
-                    disabled={isFormDisabled}
-                    onChange={handleChange}
-                    value={formData.loan_duration}
-                  />
-                  <TextField
                   fullWidth
-                  label="Location / Room Number"
+                  label="Location / address"
                   name="origin"
                   disabled={isFormDisabled}
                   onChange={handleChange}
                   value={formData.origin}
+                  InputLabelProps={{ shrink: true }}
                 />
                 </Stack>
                 
@@ -480,6 +455,34 @@ export const MaterialDetailEdit = (props) => {
                   container
                   xs={12}
                 >
+                <Grid xs={12}
+                  md={6}>
+                  <Checkbox
+                    name="is_Movable"
+                    disabled={isFormDisabled}
+                    checked={isMovable}
+                    onChange={handleisMovableBoxChange}
+                    color="primary"
+                    inputProps={{ 'aria-label': 'checkbox' }}
+                  />
+                  <Typography variant="caption" color="textSecondary">
+                    If checked, The material will be diplayed as not movable from the lab.
+                  </Typography>
+                </Grid>
+                <Grid xs={12}
+                  md={6}>
+                  <Checkbox
+                    name="is_formation_required"
+                    disabled={isFormDisabled}
+                    checked={is_formation_required}
+                    onChange={handleis_formation_requiredBoxChange}
+                    color="primary"
+                    inputProps={{ 'aria-label': 'checkbox' }}
+                  />
+                  <Typography variant="caption" color="textSecondary">
+                    If checked, The material will require a formation.
+                  </Typography>
+                </Grid>
                   <Grid item xs={12} md={6}>
                     <TextField
                       fullWidth
@@ -488,6 +491,7 @@ export const MaterialDetailEdit = (props) => {
                       onChange={handleChange}
                       type="text"
                       value={formData.manual_link}
+                      InputLabelProps={{ shrink: true }}
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>
@@ -498,10 +502,11 @@ export const MaterialDetailEdit = (props) => {
                       onChange={handleChange}
                       type="text"
                       value={formData.datasheet_link}
+                      InputLabelProps={{ shrink: true }}
                     />
                   </Grid>
-                </Grid>
-              }
+
+
               <Grid
                 xs={12}
                 md={6}
@@ -518,6 +523,32 @@ export const MaterialDetailEdit = (props) => {
                   If checked, a validation from the owner will be needed.
                 </Typography>
               </Grid>
+                </Grid>
+                }
+              {isFormDisabled && isMovable &&
+                <Grid xs={12}
+                  md={6}>
+                <Typography variant="caption" color="textSecondary">
+                 The material is not movable from the lab.
+                </Typography>
+                </Grid>
+              }
+              {isFormDisabled && is_formation_required &&
+                <Grid xs={12}
+                  md={6}>
+                <Typography variant="caption" color="textSecondary">
+                  The material require a formation to be use.
+                </Typography>
+                </Grid>
+              }
+              {isFormDisabled && checked &&
+                <Grid xs={12}
+                  md={6}>
+                <Typography variant="caption" color="textSecondary">
+                  A validation from the owner is needed.
+                </Typography>
+                </Grid>
+              }
             </Grid>
           </Box>
         </CardContent>

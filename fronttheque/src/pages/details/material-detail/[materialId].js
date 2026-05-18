@@ -72,7 +72,7 @@ const Page = () => {
     } catch (error) {
       toast.error('Could not delete material, try again later', { ...quickNotifyOption });
     }
-    setOpen(false); 
+    setOpen(false);
   });
 
   const handleCanBeLoaned =  useCallback( async () => {
@@ -89,7 +89,7 @@ const Page = () => {
             toast.error('Could not update the material status.', { ...quickNotifyOption });
         } else {
             toast.success(`The material was successfully ${canBeLoaned ? "removed from" : "put on"} loan`, { ...quickNotifyOption });
-            
+
             setTimeout(() => {
               window.location.reload();
             }, 2000); //maybe there's a better way?
@@ -98,7 +98,7 @@ const Page = () => {
     } catch (error) {
       toast.error('Could not update the material, try again later', { ...quickNotifyOption });
     }
-    setOpen(false); 
+    setOpen(false);
   });
 
 
@@ -110,7 +110,15 @@ const Page = () => {
         .then(data => {
           setMaterialData(data);
 
-          if(data.owner_details.user_id == user.user_id || user.is_staff) {
+          if(data.owner_details.user_id === user.user_id) {
+            setCanDeleteOrRemove(true);
+            setCanBeLoaned(data.available_for_loan)
+          }
+          else{
+            setCanDeleteOrRemove(false);
+            setCanBeLoaned(data.available_for_loan)
+          }
+          if (user.is_staff){
             setCanDeleteOrRemove(true);
             setCanBeLoaned(data.available_for_loan)
           }
@@ -160,7 +168,7 @@ const Page = () => {
                 <Button
                   variant="contained"
                   onClick={handleBorrow}
-                  disabled={!materialData?.available_for_loan}
+                  disabled={!materialData?.available_for_loan || materialData.owner_details.user_id === user.user_id}
                 >
                  {materialData?.available_for_loan? "Book Material" : "Not Available For Loan"}
 
@@ -199,6 +207,7 @@ const Page = () => {
                 <Grid
                   xs={12}
                 >
+
                   <MaterialDetailCalendar
                     data = {eventsData}
                   />

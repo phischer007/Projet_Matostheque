@@ -173,8 +173,6 @@ def on_delete_loan(loan):
     """
     
     try:
-        # Update the related equipment availability on delete
-        loan.material.update_availability()
         
         loan.delete() # delete instance 
         return JsonResponse({'message': 'Deleted!'}, status=status.HTTP_200_OK) 
@@ -224,7 +222,6 @@ def get_detailed_loans(loans):
         # data protecting purpose
         loan_data['material_details'] = {
             'title' : material.material_title,
-            'team' : material.team,
             'images' : material.images,
             'origin' : material.origin,
             'duration' : material.loan_duration

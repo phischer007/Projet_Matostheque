@@ -35,7 +35,7 @@ export const MaterialCategory = forwardRef(({ materials = [], setFilteredMateria
     if (onReset) onReset();
   };
 
-  const handleTagClick = (categoryValue, type) => {
+  const handleTagClick = (categoryValue) => {
     // Toggle off if clicking the already selected tag
     if (selectedCategory === categoryValue) {
       handleInternalReset();
@@ -45,12 +45,9 @@ export const MaterialCategory = forwardRef(({ materials = [], setFilteredMateria
     setSelectedCategory(categoryValue);
 
     let filtered = [];
-    if (type === "CONSUMABLES") {
-      filtered = materials.filter(material => material.consumable_type === categoryValue);
-    } else if (type === "LAB_SUPPLIES") {
-      filtered = materials.filter(material => material.lab_supply_type === categoryValue);
-    }
 
+    filtered = materials.filter(material => material.sub_type === categoryValue);
+    
     setFilteredMaterials(filtered);
     
     // Notify parent to reset pagination
@@ -107,7 +104,7 @@ export const MaterialCategory = forwardRef(({ materials = [], setFilteredMateria
               clickable
               color={selectedCategory === option.value ? "primary" : "default"}
               variant={selectedCategory === option.value ? "filled" : "outlined"}
-              onClick={() => handleTagClick(option.value, "CONSUMABLES")}
+              onClick={() => handleTagClick(option.value)}
               sx={{ bgcolor: selectedCategory === option.value ? 'primary.main' : 'background.paper' }}
             />
           ))}
@@ -125,7 +122,7 @@ export const MaterialCategory = forwardRef(({ materials = [], setFilteredMateria
               clickable
               color={selectedCategory === option.value ? "secondary" : "default"}
               variant={selectedCategory === option.value ? "filled" : "outlined"}
-              onClick={() => handleTagClick(option.value, "LAB_SUPPLIES")}
+              onClick={() => handleTagClick(option.value)}
               sx={{ bgcolor: selectedCategory === option.value ? 'secondary.main' : 'background.paper' }}
             />
           ))}

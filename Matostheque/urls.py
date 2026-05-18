@@ -11,7 +11,6 @@ urlpatterns = [
     path('materials/lite/', material_views.get_materials_lite),#get the lite version list  of all materials (only a few  fields)
     path('materials/create/', material_views.create_material),#create a new material
     path('materials/<int:pk>/', material_views.material_detail),#get one specific material by its id and return an indepth view
-    path('materials/available/', material_views.material_list_available),#get all available materials
     path('materials/owner/<int:pk>/', material_views.material_list_per_owner),#get all materials  that belong to a certain user, filtered by search string
     path('materials/latest/', material_views.latest_material),#get the latest added materials
     path('material/<int:pk>/events/', material_views.material_events_detail),#get a detailed list of all events relative to a specific material
