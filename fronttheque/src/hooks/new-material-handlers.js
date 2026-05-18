@@ -89,12 +89,12 @@ export const useNewMaterialHandlers = (data) => {
   });
 
   const [formErrors, setFormErrors] = useState({
-    title: false,
-    description: false,
-    owner: false,
-    location: false,
-    team: false,
-    loan_duration: false
+        title: false,
+        description: false,
+        owner: false,
+        location: false,
+        type : false,
+        sub_type:false,
   });
 
   const handleCheckChange = () => {

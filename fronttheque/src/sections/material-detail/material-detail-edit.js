@@ -40,6 +40,14 @@ export const MaterialDetailEdit = (props) => {
   const [selectedOwner, setSelectedOwner] = useState(null);
   const [selectSubType, setSelectedSubType] = useState(null);
   const [expiration_date, setexpiration_date] = useState(null);
+  const [formErrors, setFormErrors] = useState({
+        title: false,
+        description: false,
+        owner: false,
+        location: false,
+        type : false,
+        sub_type:false,
+  });
 
   const handleCheckBoxChange = useCallback(() => {
     setChecked((prevState) => !prevState);
@@ -118,6 +126,17 @@ const handleChangeNum = useCallback((event) => {
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+      const newErrors = {
+        title: formData.material_title === null,
+        description: formData.description === null,
+        owner: selectedOwner === null,
+        location: formData.origin === null,
+        type : formData.type === null,
+        sub_type: formData.sub_type === null,
+      };
+      setFormErrors(newErrors);
+
+      if (!Object.values(newErrors).some(error => error)) {
         //creating a new FormData to allow sending pictures
         const form = new FormData();
         const fieldsToAppend = [
@@ -132,55 +151,55 @@ const handleChangeNum = useCallback((event) => {
           { key: 'code_nacre', value: formData.code_nacre },
           { key: 'purchase_price', value: formData.purchase_price },
           { key: 'type', value: formData.type },
-          { key: 'sub_type', value: selectSubType},
+          { key: 'sub_type', value: selectSubType },
           { key: 'quantity_available', value: formData.quantity_available },
           { key: 'is_Movable', value: formData.is_Movable },
           { key: 'is_formation_required', value: formData.is_formation_required },
         ];
 
         // Append additional fields based on specific conditions
-          if (formData.type === "LAB_SUPPLIES") {
-            fieldsToAppend.push(
+        if (formData.type === "LAB_SUPPLIES") {
+          fieldsToAppend.push(
             { key: 'loan_duration', value: formData.loan_duration },
-            );
-          }
-          else if (formData.type === "CONSUMABLES") {
-            fieldsToAppend.push(
+          );
+        } else if (formData.type === "CONSUMABLES") {
+          fieldsToAppend.push(
             { key: 'expiration_date', value: formData.expiration_date },
-            );
-          }
+          );
+        }
 
         // Append all fields to the form
         fieldsToAppend.forEach(({ key, value }) => {
-          if (value !== undefined && value !== null && value !== "" ) {
+          if (value !== undefined && value !== null && value !== "") {
             form.append(key, value);
           }
         });
-      if (materialID) {
-        try {
-          const csrftoken = getCookie('csrftoken');
-          const response = await fetch(`${config.apiUrl}/materials/${materialID}/`, {
-            method: 'PUT',
-            credentials: 'include',
-            headers: {
-              'X-CSRFToken': csrftoken, // Add this
-            },
-            body: form,
-          });
+        if (materialID) {
+          try {
+            const csrftoken = getCookie('csrftoken');
+            const response = await fetch(`${config.apiUrl}/materials/${materialID}/`, {
+              method: 'PUT',
+              credentials: 'include',
+              headers: {
+                'X-CSRFToken': csrftoken, // Add this
+              },
+              body: form,
+            });
 
-          if (!response.ok) {
-            const errorMessage = await response.text();
-            let decodeResponse = JSON.parse(errorMessage);
-            toast.error(decodeResponse.message, { autoClose: false });
+            if (!response.ok) {
+              const errorMessage = await response.text();
+              let decodeResponse = JSON.parse(errorMessage);
+              toast.error(decodeResponse.message, { autoClose: false });
 
-          } else {
-            const responseData = await response.json();
-            toast.success("Material details updated successfully!", { autoClose: false });
-            window.location.reload()
+            } else {
+              const responseData = await response.json();
+              toast.success("Material details updated successfully!", { autoClose: false });
+              window.location.reload()
+            }
+
+          } catch (error) {
+            toast.error(`Error trying to submit loan: ${error}`, { autoClose: false });
           }
-
-        } catch (error) {
-          toast.error(`Error trying to submit loan: ${error}`, { autoClose: false });
         }
       }
     }, [formData, materialID,selectedOwner,selectSubType]);
@@ -268,6 +287,7 @@ const handleChangeNum = useCallback((event) => {
                   onChange={handleChange}
                   value={formData.material_title}
                   InputLabelProps={{ shrink: true }}
+                  error={formErrors.title}
                 />
               </Grid>
               <Grid
@@ -299,6 +319,7 @@ const handleChangeNum = useCallback((event) => {
                             variant="standard"
                             label="Owner (activate account to see your name)"
                             margin="normal"
+                            error={formErrors.owner}
                             sx={{ marginTop: 0 }}
                             fullWidth
                             InputLabelProps={{ shrink: true }}
@@ -320,6 +341,7 @@ const handleChangeNum = useCallback((event) => {
                   disabled
                   value={formData.type}
                   InputLabelProps={{ shrink: true }}
+                  error={formErrors.type}
                 />
               </Grid>
               {!isFormDisabled &&
@@ -330,6 +352,7 @@ const handleChangeNum = useCallback((event) => {
                     labelId="sub-type-label"
                     name="sub_type"
                     value={selectSubType || ""}
+                    error={formErrors.sub_type}
                     onChange={onSelectSubType}
                     renderValue={(value) => (
                       <Typography>
@@ -415,6 +438,7 @@ const handleChangeNum = useCallback((event) => {
                   onChange={handleChange}
                   value={formData.description}
                   InputLabelProps={{ shrink: true }}
+                  error={formErrors.description}
                   sx={{
                     width: '100%',
                     overflow: 'hidden',
@@ -438,6 +462,7 @@ const handleChangeNum = useCallback((event) => {
                   fullWidth
                   label="Location / address"
                   name="origin"
+                  error={formErrors.location}
                   disabled={isFormDisabled}
                   onChange={handleChange}
                   value={formData.origin}
