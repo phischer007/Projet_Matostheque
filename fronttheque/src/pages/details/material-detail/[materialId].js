@@ -110,35 +110,35 @@ const Page = () => {
         .then(data => {
           setMaterialData(data);
 
-          if(data.owner_details.user_id === user.user_id) {
+          if (data.owner_details.user_id === user.user_id) {
             setCanDeleteOrRemove(true);
             setCanBeLoaned(data.available_for_loan)
-          }
-          else{
+          } else {
             setCanDeleteOrRemove(false);
             setCanBeLoaned(data.available_for_loan)
           }
-          if (user.is_staff){
+          if (user.is_staff) {
             setCanDeleteOrRemove(true);
             setCanBeLoaned(data.available_for_loan)
           }
-        })
-        .catch(error => console.error('Error fetching data:', error));
-  
-      //fetching events related to given material
-      fetch(`${config.apiUrl}/material/${materialId}/events/`)
-        .then(response => response.json())
-        .then(data => {
-          setEventsData(data);
+
+          //fetching events related to given material
+          if (data.type === "LAB_SUPPLIES")
+            fetch(`${config.apiUrl}/material/${materialId}/events/`)
+              .then(response => response.json())
+              .then(data => {
+                setEventsData(data);
+              })
+              .catch(error => console.error('Error fetching data:', error));
         })
         .catch(error => console.error('Error fetching data:', error));
     }
-  }, [materialId]);
+  }, [ materialId,user]);
 
   const handleBorrow = useCallback(() =>{
     const url = '/create/create-loan' + (materialId ? `?materialId=${materialId}` : '');
     router.push(url);
-  }, [materialId]);
+  }, [materialId, router]);
 
   return (
     <>
@@ -204,14 +204,15 @@ const Page = () => {
                     id = {materialData?.material_id}
                   />
                 </Grid>
-                <Grid
-                  xs={12}
-                >
-
-                  <MaterialDetailCalendar
-                    data = {eventsData}
-                  />
-                </Grid>
+                { materialData && materialData.type === "LAB_SUPPLIES" &&
+                  <Grid
+                    xs={12}
+                  >
+                    <MaterialDetailCalendar
+                      data = {eventsData}
+                    />
+                  </Grid>
+                }
                 <Divider />
                 {canDeleteOrRemove && <Grid
                   xs={12}
