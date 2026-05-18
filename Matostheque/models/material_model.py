@@ -148,6 +148,8 @@ class Materials(models.Model):
             if self.quantity_available is not None and isinstance(self.quantity_available, float):
                 if not self.quantity_available.is_integer():
                     raise Exception("The quantity must be a positive integer.")
+            if not self.sub_type in dict(LAB_SUPPLY_TYPE_CHOICES):
+                raise Exception("The subType must be part of the type")
 
         else:
             # A CONSUMABLES can't be loan
@@ -155,6 +157,9 @@ class Materials(models.Model):
 
             if self.expiration_date is not None and self.expiration_date < timezone.now().date():
                 raise Exception("You can't loan an expired material")
+            if not  self.sub_type in dict(TYPE_CHOICES):
+                raise Exception("The subType must be part of the type")
+
         if get_user_model().objects.get(pk=self.user_id).role == "user":
             raise Exception("Le propriétaire doit être un owner")
         super().save(*args, **kwargs)
