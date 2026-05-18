@@ -204,10 +204,6 @@ const handleChangeNum = useCallback((event) => {
       const excludedKeys = ['owner_details', 'material_id', 'created_at', 'updated_at', 'qrcode', 'available_for_loan', 'availability'];
       for (const key in props.data) {
         if (!excludedKeys.includes(key)) {
-          if(key=='expiration_date' && props.data[key] !== null){
-            newData[key] = new Date(props.data[key]) || null;
-            continue;
-          }
           newData[key] = props.data[key] || null;
         }
       }
@@ -218,7 +214,7 @@ const handleChangeNum = useCallback((event) => {
       setMaterialID(props.data.material_id);
       setSelectedOwner(ownersList.find((owner)=> Number(owner.user_id) === Number(newData.user)))
       setSelectedSubType(newData.sub_type)
-      setexpiration_date(newData.expiration_date)
+      setexpiration_date(new Date(newData.expiration_date))
     }
   }, [props.data,ownersList,user]);
 

@@ -153,7 +153,7 @@ class Materials(models.Model):
             # A CONSUMABLES can't be loan
             self.loan_duration = None
 
-            if self.expiration_date is not None and self.expiration_date < timezone.now():
+            if self.expiration_date is not None and self.expiration_date < timezone.now().date():
                 raise Exception("You can't loan an expired material")
         if get_user_model().objects.get(pk=self.user_id).role == "user":
             raise Exception("Le propriétaire doit être un owner")
