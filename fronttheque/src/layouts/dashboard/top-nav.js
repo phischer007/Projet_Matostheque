@@ -19,7 +19,7 @@ export const TopNav = (props) => {
   const accountPopover = usePopover();
   const notifPopover = usePopover();
   const user = useAuth().user;
-  const image = user.profil_pic;
+  const image = user.profil_pic && user.profil_pic.length !== 0 ? JSON.parse(user.profil_pic) : {};
   const image_path = image? `${process.env.NEXT_PUBLIC_ASSETS}/${image[0]}` : '';
 
   return (
