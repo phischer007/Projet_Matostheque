@@ -3,7 +3,7 @@ import { ChartBarIcon } from '@heroicons/react/24/solid';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useAuth } from 'src/hooks/use-auth';
-import { statusMap, loanStatus } from 'src/data/static_data'
+import { statusMap, transactionStatus } from 'src/data/static_data'
 
 
 export const MaterialTable = (props) => {

@@ -34,7 +34,7 @@ def send_validation_email(loan):
         'owner': {
             'first_name': loan.material.user.first_name
         },
-        'loan_date': loan.loan_date,
+        'transaction_date': loan.transaction_date,
         'duration': loan.duration,
         'location': loan.location,
         'message': loan.message

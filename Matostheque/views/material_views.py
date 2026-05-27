@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 
 from rest_framework.parsers import JSONParser 
-from rest_framework import status
+from rest_framework import status, request
 from rest_framework.decorators import api_view
 
 from django.core.paginator import Paginator
@@ -47,7 +47,7 @@ def get_materials(request):
 @login_required
 @api_view(['GET'])
 def get_materials_lite(request):
-    materials = Materials.objects.filter(available_for_loan=True)
+    materials = Materials.objects.filter(available_for_transaction=True)
         
     # Testing results                
     title = request.GET.get('material_title', None)
@@ -61,7 +61,8 @@ def get_materials_lite(request):
         'loan_duration',
         'validation', 
         'user_id',
-        'created_at'
+        'type',
+        'quantity_available'
     ) 
 
     return JsonResponse(list(selected_materials), safe=False)
@@ -87,11 +88,11 @@ def material_detail(request, pk):
             details_data = get_detailed_material(pk)
             return JsonResponse(details_data)
         except : 
-            return JsonResponse({'message': 'Error fetching material details!'}, status=status.HTTP_204_NO_CONTENT)
+            return JsonResponse({'message': 'Error fetching material details!'}, status=status.HTTP_404_NOT_FOUND)
  
     elif request.method == 'PUT':
-        if not request.user.is_staff or request.user.pk != material.user_id:
-            return JsonResponse({'message': 'You are not authorized to delete this Materials.'},status=status.HTTP_403_FORBIDDEN)
+        if not request.user.is_staff and request.user.pk != material.user_id:
+            return JsonResponse({'message': 'You are not authorized to modifie this Materials.'},status=status.HTTP_403_FORBIDDEN)
         try:
             material_data = request.data
             #we check that the qrcode is not modified
@@ -126,7 +127,7 @@ def material_detail(request, pk):
             return JsonResponse({'message': str(e)},status=status.HTTP_400_BAD_REQUEST)
  
     elif request.method == 'DELETE':
-        if not request.user.is_staff or request.user.pk != material.user_id:
+        if not request.user.is_staff and request.user.pk != material.user_id:
             return JsonResponse({'message': 'You are not authorized to delete this Materials.'},status=status.HTTP_403_FORBIDDEN)
         material.delete()
         return JsonResponse({'message': 'Material was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
@@ -143,14 +144,26 @@ def material_list_per_owner(request, pk):
 @login_required 
 @api_view(['GET'])
 def latest_material(request):
+    materials = []
     if Materials.objects.exists():
-        materials = Materials.objects.order_by('-created_at')[:4]
-    else:
-        materials = []
-        
-    if request.method == 'GET': 
-        materials_serializer = MaterialSerializer(materials, many=True)
-        return JsonResponse(materials_serializer.data, safe=False)
+        i = 0
+        for material in Materials.objects.order_by('-created_at')[:4]:
+            materials.append({})
+            materials[i]["material_id"] = material.material_id
+            materials[i]["available_for_transaction"] = material.available_for_transaction
+            materials[i]["material_title"] = material.material_title
+            materials[i]["updated_at"] = material.updated_at
+            materials[i]["images"] = material.images
+            if material.type == 'LAB_SUPPLIES':
+                materials[i]["availability"] = is_available(material.material_id)
+            else:
+                materials[i]["availability"] = material.available_for_transaction
+
+
+            i = i + 1
+
+    if request.method == 'GET':
+        return JsonResponse(materials, safe=False)
 
 
 @api_view(['GET'])
@@ -198,5 +211,22 @@ def get_total_count(request):
 def update_Consumable_Availability():
     Materials.objects.filter(
         expiration_date__lte=timezone.now(),
-        is_available_to_loan=True
-    ).update(is_available_to_loan=False)
+        available_for_transaction=True
+    ).update(available_for_transaction=False)
+
+@login_required
+@api_view(['PUT'])
+def update_material_availability(request,pk):
+    try:
+        material = Materials.objects.get(pk=pk)
+        print(material.user_id)
+        print(request.user.user_id)
+        print(request.user.is_staff)
+        if material.user_id != request.user.user_id and not request.user.is_staff:
+            return JsonResponse({'message': 'You are not authorized to modify this Materials.'},status=status.HTTP_403_FORBIDDEN)
+        else:
+            material.available_for_transaction = request.data.get('available_for_transaction')
+            material.save()
+            return JsonResponse("Success", status=status.HTTP_201_CREATED,safe=False)
+    except Exception as e:
+        return JsonResponse({'message': str(e)},status=status.HTTP_400_BAD_REQUEST)

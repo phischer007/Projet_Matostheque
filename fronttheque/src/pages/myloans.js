@@ -42,16 +42,16 @@ const Page = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [activeTab, setActiveTab] = useState('loans');
   const user = useAuth().user;
-  const btnTitle = user.is_staff ? "All loans" : "My loans";
+  const btnTitle = user.is_staff ? "All transactions" : "My transactions";
   const btnCreateUrl =  "/create/create-loan";
 
   useEffect(() => {
     let apiUrl;
 
     if (user.is_staff) {
-      apiUrl = `${config.apiUrl}/loans/details/`;
+      apiUrl = `${config.apiUrl}/transactions/details/`;
     } else {
-      apiUrl = `${config.apiUrl}/loans/details/user/${user.user_id}/`;
+      apiUrl = `${config.apiUrl}/transactions/details/user/${user.user_id}/`;
     }
 
     fetch(apiUrl, {
@@ -73,7 +73,7 @@ const Page = () => {
 
 
   useEffect(() => {
-    // Filter loans when searchTerm changes
+    // Filter transactions when searchTerm changes
     setFilteredLoans(searchTerm
       ? loanList.filter(loan => deepSearch(loan, searchTerm))
       : loanList
@@ -103,7 +103,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Loans</title>
+        <title>Transactions</title>
       </Head>
       <Box
         component="main"
@@ -118,7 +118,7 @@ const Page = () => {
               {/* First sub-grid */}
               <Grid xs={6} gap={1} container alignItems="center">
                 <SvgIcon fontSize="medium"><TicketIcon /></SvgIcon>
-                <Typography variant="h4" align="center">Loans</Typography>
+                <Typography variant="h4" align="center">Transactions</Typography>
               </Grid>
               <Grid xs={6} container justifyContent="flex-end">
                   <Button

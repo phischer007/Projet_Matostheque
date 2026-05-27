@@ -82,7 +82,7 @@ class Materials(models.Model):
     #lab_supply_type = models.CharField(max_length=100, choices=LAB_SUPPLY_TYPE_CHOICES, null=True, blank=True)
     #lab_supply_quantity = models.FloatField(default=0.0, null=True)  # Quantity of lab supplies
 
-    # The loan duration allowed for the material.
+    # The transaction duration allowed for the material.
     loan_duration = models.IntegerField(null=True, blank=True)
     ##################################################################################################################
 
@@ -92,17 +92,17 @@ class Materials(models.Model):
     # The original location of the material.
     origin = models.CharField(max_length=100, null=True)
     
-    # The loan duration allowed for the material.
+    # The transaction duration allowed for the material.
     #loan_duration = models.IntegerField(null=True)
     
     # A flag indicating whether the material is available or not.
     #availability = models.BooleanField(default=True)
     
-    # A flag indicating whether the loan of the material needs to be validated or not.
+    # A flag indicating whether the transaction of the material needs to be validated or not.
     validation = models.BooleanField(default=True)
     
-    # A flag indicating whether the material is available for loan or not.
-    available_for_loan = models.BooleanField(default=True)
+    # A flag indicating whether the material is available for transaction or not.
+    available_for_transaction = models.BooleanField(default=True)
 
     is_Movable = models.BooleanField(default=True)
 
@@ -137,7 +137,7 @@ class Materials(models.Model):
         This function overrides the default save method to update the availability flag.
         """
         # A Materials has a positive quantity
-        if self.quantity_available is not None and self.quantity_available<=0.0:
+        if self.quantity_available is not None and self.quantity_available<0:
             raise Exception("The quantity must be positive")
 
         if self.type == "LAB_SUPPLIES":
@@ -152,11 +152,11 @@ class Materials(models.Model):
                 raise Exception("The subType must be part of the type")
 
         else:
-            # A CONSUMABLES can't be loan
+            # A CONSUMABLES can't be loaned
             self.loan_duration = None
 
             if self.expiration_date is not None and self.expiration_date < timezone.now().date():
-                raise Exception("You can't loan an expired material")
+                raise Exception("You can't donate an expired material")
             if not  self.sub_type in dict(TYPE_CHOICES):
                 raise Exception("The subType must be part of the type")
 

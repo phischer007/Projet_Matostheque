@@ -14,7 +14,8 @@ import {
   TableBody, 
   TableCell, 
   TableHead, 
-  TableRow 
+  TableRow,
+  Link
 } from '@mui/material';
 import { Scrollbar } from 'src/components/scrollbar';
 import { SeverityPill } from 'src/components/severity-pill';
@@ -26,7 +27,7 @@ export const OverviewLatestLoans = (props) => {
   const user = useAuth().user;
   const loans = props?.loans;
   const sx = props?.sx;
-  const title = user.is_staff ? "Latest Loans" : "Your Loans";
+  const title = user.is_staff ? "Latest Transactions" : "Your Transactions";
 
   return (
     <Card sx={sx}>
@@ -42,14 +43,12 @@ export const OverviewLatestLoans = (props) => {
                 <TableCell>
                   Owner
                 </TableCell>
-                {user.is_staff ?
-                  <TableCell sortDirection="desc">
-                    Borrower
-                  </TableCell> :
-                  <TableCell sortDirection="desc">
-                    Date
-                  </TableCell>
-                }
+                <TableCell sortDirection="desc">
+                  Borrower
+                </TableCell>
+                <TableCell sortDirection="desc">
+                  Date
+                </TableCell>
                 <TableCell>
                   Status
                 </TableCell>
@@ -57,35 +56,41 @@ export const OverviewLatestLoans = (props) => {
             </TableHead>
             <TableBody>
               {loans ? loans.map((loan) => {
-                const loanDate = formatDate(loan.loan_date);
+                const loanDate = formatDate(loan.transaction_date);
 
                 return (
-                  <TableRow
-                    hover
-                    key={loan.loan_id}
+                  <Link
+                    key={loan.transaction_id}
+                    underline="none"
+                    color="inherit"
+                    href={`/matostheque/details/loan-detail/${loan.transaction_id}`}
+                    style={{ display: 'contents' }}
                   >
-                    <TableCell>
-                      {loan.material_title}
-                    </TableCell>
-                    <TableCell>
-                      {loan.owner_first_name} {loan.owner_last_name}
-                    </TableCell>
-                    {user.is_staff ?
+                    <TableRow
+                      hover
+                      key={loan.loan_id}
+                    >
+                      <TableCell>
+                        {loan.material_title}
+                      </TableCell>
+                      <TableCell>
+                        {loan.user_first_name} {loan.user_last_name}
+                      </TableCell>
                       <TableCell>
                         {loan.borrower_first_name} {loan.borrower_last_name}
-                      </TableCell> :
+                      </TableCell>
                       <TableCell>
                         {loanDate}
                       </TableCell>
-                    }
-                    <TableCell>
-                      <SeverityPill color={statusMap[loan.loan_status]}>
-                        {loan.loan_status}
-                      </SeverityPill>
-                    </TableCell>
-                  </TableRow>
-                );
-              }) : null}
+                      <TableCell>
+                        <SeverityPill color={statusMap[loan.transaction_status]}>
+                          {loan.transaction_status}
+                        </SeverityPill>
+                      </TableCell>
+                    </TableRow>
+                  </Link>
+                  );
+                }) : null}
             </TableBody>
           </Table>
         </Box>

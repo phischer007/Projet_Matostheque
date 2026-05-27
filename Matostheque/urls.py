@@ -1,7 +1,7 @@
 # File that links the api endpoint to their designated url path
 from django.urls import path 
 from Matostheque.views import material_views 
-from Matostheque.views import loan_views
+from Matostheque.views import transaction_views
 from Matostheque.views import user_views 
 from Matostheque.views import notification_views 
 from Matostheque.views import comment_views 
@@ -16,19 +16,24 @@ urlpatterns = [
     path('material/<int:pk>/events/', material_views.material_events_detail),#get a detailed list of all events relative to a specific material
     path('material/<int:pk>/events/lite/', material_views.material_events_lite),#get a lite list of all events relative to a specific material
     path('materials/count/', material_views.get_total_count),#get a lite list of all events relative to a specific material
+    path('materials/<int:pk>/availability/',material_views.update_material_availability),#
 
 
-    path('loans/', loan_views.loan_list),#get a list of all loans
-    path('loans/details/', loan_views.detailed_loans),#get a full indepth view of all loans
-    path('loans/details/<int:pk>/', loan_views.inDepth_detail_loan, {'isSingleRow': True}),#get a full indepth view of all loans
-    path('loans/details/user/<int:pk>/', loan_views.inDepth_detail_loan, {'isOwner': False}),#get a full indepth view for all loans that belong to one specific borrower
-    path('loans/details/owner/<int:pk>/', loan_views.inDepth_detail_loan, {'isOwner': True}),#get a full indepth view for all loans that belong to one specific owner
-    path('loans/<int:pk>/', loan_views.loan_detail),#get a full indepth view for a specific loan
-    path('loans/on/<str:s>/', loan_views.loan_activated),#get a list of all loan currently active
-    path('loans/overdue/', loan_views.loan_overdue),#get a list of all overdue materials
-    path('loans/latest/<int:pk>/', loan_views.latest_loan),#get the latest loan of a user
+    path('transactions/', transaction_views.transaction_list),#get a list of all transactions
+    path('transactions/details/', transaction_views.detailed_transactions),#get a full indepth view of all transactions
+    path('transactions/details/<int:pk>/', transaction_views.inDepth_detail_transaction, {'isSingleRow': True}),#get a full indepth view of all transactions
+    path('transactions/details/user/<int:pk>/', transaction_views.inDepth_detail_transaction, {'isOwner': False}),#get a full indepth view for all transactions that belong to one specific borrower
+    path('transactions/details/owner/<int:pk>/', transaction_views.inDepth_detail_transaction, {'isOwner': True}),#get a full indepth view for all transactions that belong to one specific owner
+    path('transactions/<int:pk>/', transaction_views.transaction_detail),#get a full indepth view for a specific transaction
+    path('transactions/on/<str:s>/', transaction_views.transaction_activated),#get a list of all transaction currently active
+    path('transactions/overdue/', transaction_views.transaction_overdue),#get a list of all overdue materials
+    path('transactions/latest/<int:pk>/', transaction_views.latest_transaction),#get the latest transaction of a user
+    path('transactions/cancel/<int:pk>/', transaction_views.cancel_transaction),  # cancel the transaction
+    path('transactions/approve/<int:pk>/', transaction_views.approve_transaction),  # approve the transaction
+    path('transactions/reject/<int:pk>/', transaction_views.reject_transaction),  # reject transaction
+    path('transactions/closed/<int:pk>/', transaction_views.closed_transaction),  # close the  transaction
 
-    path('loans/stats/', loan_views.get_loan_stats), #get loan statistics
+    path('transactions/stats/', transaction_views.get_transaction_stats), #get transaction statistics
 
     path('users/', user_views.user_list),  # get a list of all users
     path('users/<int:pk>/', user_views.user_detail),#get, update and delete user info

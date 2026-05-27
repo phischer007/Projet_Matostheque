@@ -37,7 +37,7 @@ export const OverviewLatestMaterials = (props) => {
   const handleMenuOpen = (event, material) => {
     setAnchorEl(event.currentTarget);
     setMaterialId(material.material_id);
-    setCanBeLoaned(material.available_for_loan);
+    setCanBeLoaned(material.available_for_transaction);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -46,13 +46,13 @@ export const OverviewLatestMaterials = (props) => {
   useEffect(() => {
     let list = [
       {
-        href: `${config.apiUrl}/details/material-detail/${materialId}`,
+        href: `details/material-detail/${materialId}`,
         label: 'View Details',
       },
     ];
     if (canBeLoaned) {
       list.push({
-        href: `${config.apiUrl}/create/create-loan?materialId=${materialId}`,
+        href: `create/create-loan?materialId=${materialId}`,
         label: 'Borrow',
       });
     }
@@ -64,6 +64,7 @@ export const OverviewLatestMaterials = (props) => {
       <CardHeader title="Latest Materials Added" />
       <List>
         {materials && materials.map((material, index) => {
+          console.log(material)
           const hasDivider = index < materials.length - 1;
           const ago = formatDistanceToNow(new Date(material.updated_at));
           // const images = material.images.length !== 0 ? JSON.parse(material.images) : {};
@@ -105,7 +106,7 @@ export const OverviewLatestMaterials = (props) => {
                     width: 15,
                     height: 15,
                     borderRadius: 1,
-                    bgcolor: (() => { return (!material.available_for_loan? '#808080' : material.availability ? '#4caf50' : '#f44336'); })
+                    bgcolor: (() => { return(material.availability ? '#4caf50' : '#f44336') })
                   }}
                 />
                 <IconButton edge="end" onClick={(event) => handleMenuOpen(event, material)}>

@@ -14,6 +14,7 @@ import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import NewLoanCard from 'src/sections/create-loan/new-loan-card';
 import config from '../../utils/config';
 import { useRouter } from 'next/router';
+import { MaterialDetailCalendar } from '../../sections/material-detail/material-detail-calendar';
 
 const Page = () => {
   const router =  useRouter();
@@ -41,7 +42,7 @@ const Page = () => {
     <>
       <Head>
         <title>
-          New loan 
+          New Transaction
         </title>
       </Head>
       <Box

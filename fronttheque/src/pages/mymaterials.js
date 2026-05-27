@@ -43,11 +43,11 @@ const Page = () => {
   const btnCreateUrl = "/create/create-material";
 
   useEffect(() => {
-    let loanApiUrl = `${config.apiUrl}/loans/details/owner/${user.user_id}/`;
+    let loanApiUrl = `${config.apiUrl}/transactions/details/owner/${user.user_id}/`;
     let materialApiUrl = `${config.apiUrl}/materials/owner/${user.user_id}`;
 
-    //TODO to erase loan data
-    // Fetch loans data
+    //TODO to erase transaction data
+    // Fetch transactions data
     fetch(loanApiUrl,{
       credentials: 'include'// Add this so the session cookie is sent!
     })
@@ -94,7 +94,7 @@ const Page = () => {
 
 
   useEffect(() => {
-    // Filter loans when searchTerm changes
+    // Filter transactions when searchTerm changes
     setFilteredLoans(searchTerm
       ? loanList.filter(loan => deepSearch(loan, searchTerm))
       : loanList

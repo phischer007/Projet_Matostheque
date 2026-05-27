@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import config from 'src/utils/config';
+import { getCookie } from '../utils/csrf';
 
 
 const NotificationContext = createContext();
@@ -18,16 +19,20 @@ export const NotificationProvider = ({ children }) => {
       user : params.user,
       priority: params.priority,
       title: params.title,
-      loan: params.loan
+      transaction_id: params.transaction_id,
     };
-
+//#todo transaction loan
     console.log("Sending notifications");
+    console.log(data)
     try {
       // Make API request to store notification in the database
+      const csrftoken = getCookie('csrftoken');
       const response = await fetch(`${config.apiUrl}/notifications/`, {
         method: 'POST',
+        credentials:'include',
         headers: {
           'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
         },
         body: JSON.stringify(data),
       });

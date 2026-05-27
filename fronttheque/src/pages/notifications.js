@@ -11,7 +11,7 @@ const Page = () => {
     const user = useAuth().user;
 
     useEffect(() => {
-        fetch(`${config.apiUrl}/notifications/${user.user_id}/`)
+        fetch(`${config.apiUrl}/notifications/${user.user_id}/`,{credentials:'include'})
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

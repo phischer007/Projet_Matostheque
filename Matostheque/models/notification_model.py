@@ -49,8 +49,8 @@ class Notifications(models.Model):
     # The date and time when the notification was updated.
     updated_at = models.DateTimeField(auto_now=True)
     
-    # The loan associated with the notification.
-    loan = models.ForeignKey('Loans', on_delete=models.CASCADE, null=True, blank=True, related_name='loan_notifications')
+    # The transaction associated with the notification.
+    transaction = models.ForeignKey('Transactions', on_delete=models.CASCADE, null=True, blank=True, related_name='transaction_notifications')
     
     # The user who received the notification.
     user = models.ForeignKey('CustomUsers', on_delete=models.CASCADE, related_name='user_notifications')

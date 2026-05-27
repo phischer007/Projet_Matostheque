@@ -19,12 +19,12 @@ export const NotificationPopover = (props) => {
       onClose?.();
       router.push(`/notifications`);
     },
-    [onClose, auth, router]
+    [onClose, router]
   );
 
   useEffect(() => {
     fetch(`${config.apiUrl}/notifications/${user.user_id}/`,{
-      credentials:"include"
+      credentials:'include'
     })
       .then(response => {
         if (!response.ok) {

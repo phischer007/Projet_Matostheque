@@ -41,7 +41,7 @@ const Page = () => {
 
   useEffect(() => {
     let loanApiUrl = `${config.apiUrl}/users`;
-    //TODO to erase loan data
+    //TODO to erase transaction data
     // Fetch users data
     fetch(loanApiUrl,{
       credentials: 'include'// Add this so the session cookie is sent!

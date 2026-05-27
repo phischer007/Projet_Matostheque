@@ -115,8 +115,8 @@ const Page = () => {
       .then(data => { setLastMaterialList(data);})
       .catch(error => console.error('Error fetching data:', error));
 
-    // 3. Fetch Latest Loans
-    let loanUrl = !user.is_staff ? `${config.apiUrl}/loans/latest/${user.user_id}/` : `${config.apiUrl}/loans/`
+    // 3. Fetch Latest Transactions
+    let loanUrl = !user.is_staff ? `${config.apiUrl}/transactions/latest/${user.user_id}/` : `${config.apiUrl}/transactions/`
     fetch(loanUrl,{
       credentials: 'include'// Add this so the session cookie is sent!
     })
@@ -141,14 +141,14 @@ const Page = () => {
       .catch(error => console.error('Error fetching data:', error));
 
       // 5. Fetch Loan Statistics
-      fetch(`${config.apiUrl}/loans/stats/`,{
+      fetch(`${config.apiUrl}/transactions/stats/`,{
       credentials: 'include'// Add this so the session cookie is sent!
     })
       .then(response => response.json())
       .then(data => {
         setLoanStats(data);
       })
-      .catch(error => console.error('Error fetching loan stats:', error));
+      .catch(error => console.error('Error fetching transaction stats:', error));
 
 
     
@@ -230,7 +230,7 @@ const Page = () => {
               </Card>
             </Grid>
 
-            {/* Total Loans Approved Card */}
+            {/* Total Transactions Approved Card */}
             <Grid xs={12} sm={6} lg={3}>
               <Card sx={{ height: '100%' }}>
                 <CardContent>
@@ -296,46 +296,6 @@ const Page = () => {
               />
             </Grid>
 
-            {/* Materials Per Team Bar Chart */}
-            <Grid xs={12} lg={12}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    Materials Inventory by Team
-                  </Typography>
-                  <Divider sx={{ mb: 3 }} />
-                  <Grid container spacing={4}>
-                    {dashboardStats.materials_per_team && dashboardStats.materials_per_team.map((team) => (
-                      <Grid xs={12} sm={6} md={4} key={team.team}>
-                        <Box sx={{ mb: 1 }}>
-                          <Stack direction="row" justifyContent="space-between" mb={1}>
-                            <Typography variant="body2" fontWeight="bold">
-                              {team.team}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                              {team.count} items
-                            </Typography>
-                          </Stack>
-                          <LinearProgress 
-                            variant="determinate" 
-                            value={maxMaterialCount > 0 ? (team.count / maxMaterialCount) * 100 : 0} 
-                            sx={{ 
-                              height: 10, 
-                              borderRadius: 5,
-                              backgroundColor: 'neutral.200',
-                              '& .MuiLinearProgress-bar': {
-                                borderRadius: 5,
-                                backgroundColor: 'blue.main'
-                              }
-                            }}
-                          />
-                        </Box>
-                      </Grid>
-                    ))}
-                  </Grid>
-                </CardContent>
-              </Card>
-            </Grid>
             {/* --- NEW STATS SECTION END --- */}
 
 

@@ -1,7 +1,7 @@
 import {
-    Box, Card, CardContent, TextField,
-    Typography, Paper, Stack, CardActions,
-    Button, Divider, Alert
+  Box, Card, CardContent, TextField,
+  Typography, Paper, Stack, CardActions,
+  Button, Divider, Alert, Link
 } from '@mui/material';
 //for tables only
 import { TableContainer, Table, TableRow, TableBody, TableCell } from '@mui/material';
@@ -10,7 +10,7 @@ import { CheckIcon, PencilIcon } from '@heroicons/react/24/solid';
 import React, { useState, useEffect, useCallback } from 'react';
 import config from '../../utils/config';
 import { useRouter } from 'next/router';
-import { useLoanDetailHandlers } from 'src/hooks/loan-detail-handlers';
+import { useTransactionDetailHandlers } from 'src/hooks/loan-detail-handlers';
 import { useAuth } from 'src/hooks/use-auth';
 import { statusMap } from 'src/data/static_data';
 
@@ -18,6 +18,10 @@ export const LoanDetailOverview = (props) => {
     const user = useAuth().user;
     const router = useRouter();
     const data = props.data ? props.data : null;
+    console.log(new Date(data.transaction_date) )
+    console.log(new Date())
+    console.log(new Date(data.transaction_date) <= new Date())
+
     const {
         formattedDate,
         daysLeft,
@@ -30,7 +34,7 @@ export const LoanDetailOverview = (props) => {
         handleSaveChanges,
         handleDelete,
         enableEdit
-    } = useLoanDetailHandlers(data);
+    } = useTransactionDetailHandlers(data);
 
 
 
@@ -55,18 +59,20 @@ export const LoanDetailOverview = (props) => {
                                             Material Title
                                         </TableCell>
                                         <TableCell style={{ minWidth: 160 }} align="left">
-                                            {data.material_details.title}
+                                            <Link href={'../material-detail/' + data.material }
+                                                  underline="none"
+                                            >
+                                              {data.material_details.title}</Link>
                                         </TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell component="th" variant="head" scope="row">
-                                            Duration (in days)
+                                            Material Type
                                         </TableCell>
-                                        <TableCell id="duration" style={{ minWidth: 160 }} align="left">
-                                            {data.duration}
+                                        <TableCell style={{ minWidth: 160 }} align="left">
+                                              {data.type}
                                         </TableCell>
                                     </TableRow>
-
                                     <TableRow>
                                         <TableCell component="th" variant="head" scope="row">
                                             Status
@@ -77,8 +83,8 @@ export const LoanDetailOverview = (props) => {
                                                 alignItems="center"
                                                 gap={1}
                                             >
-                                                <SeverityPill color={statusMap[data.loan_status]}>
-                                                    {data.loan_status}
+                                                <SeverityPill color={statusMap[data.transaction_status]}>
+                                                    {data.transaction_status}
                                                 </SeverityPill>
                                                 <p>{daysLeft ? `( ${daysLeft} )` : null}</p>
                                             </Stack>
@@ -94,7 +100,15 @@ export const LoanDetailOverview = (props) => {
                                     </TableRow>
                                     <TableRow>
                                         <TableCell component="th" variant="head" scope="row">
-                                            Loan starting date
+                                            Borrower&apos;s Email
+                                        </TableCell>
+                                        <TableCell style={{ minWidth: 160 }} align="left">
+                                            {data.borrower_details.email}
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell component="th" variant="head" scope="row">
+                                            Starting date
                                         </TableCell>
                                         <TableCell style={{ minWidth: 160 }} align="left">
                                             {formattedDate}
@@ -102,17 +116,88 @@ export const LoanDetailOverview = (props) => {
                                     </TableRow>
                                     <TableRow>
                                         <TableCell component="th" variant="head" scope="row">
-                                            Team
+                                            Duration (in day)
                                         </TableCell>
-                                        <TableCell style={{ minWidth: 160 }} align="left">
-                                            {data.material_details.team}
+                                        <TableCell id="duration" style={{ minWidth: 160 }} align="left">
+                                            {data.owner_details.user_id === user.user_id ? (
+                                            <Stack
+                                                  direction="rows"
+                                                  alignItems="center"
+                                                  gap={1}
+                                              >
+                                                  {editableRow === "duration" ? (
+                                                      <TextField
+                                                          name='duration'
+                                                          value={formData.duration}
+                                                          onChange={handleChange}
+                                                      />
+                                                  ) : (
+                                                      formData.duration
+                                                  )}
+                                                  {enableEdit ? editableRow === "duration" ? (
+                                                      <Button
+                                                          onClick={handleSave}
+                                                      >
+                                                          <CheckIcon style={{ width: 20, height: 20 }} />
+                                                      </Button>
+                                                  ) : (
+                                                      <Button
+                                                          onClick={() => handleEdit("duration")}
+                                                      >
+                                                          <PencilIcon style={{ width: 20, height: 20 }} />
+                                                      </Button>
+                                                  ) : null}
+                                              </Stack>
+                                              ) :
+                                            data.duration
+                                            }
                                         </TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell component="th" variant="head" scope="row">
-                                            Loan Location
+                                            Quantity
+                                        </TableCell>
+                                        <TableCell style={{ minWidth: 160 }} align="left">
+                                          {data.borrower_details.user_id === user.user_id && new Date(data.transaction_date) >= new Date() ? (
+                                            <Stack
+                                                  direction="rows"
+                                                  alignItems="center"
+                                                  gap={1}
+                                              >
+                                                  {editableRow === "transaction_quantity" ? (
+                                                      <TextField
+                                                          name='transaction_quantity'
+                                                          value={formData.transaction_quantity}
+                                                          onChange={handleChange}
+                                                      />
+                                                  ) : (
+                                                      formData.transaction_quantity
+                                                  )}
+                                                  {enableEdit ? editableRow === "transaction_quantity" ? (
+                                                      <Button
+                                                          onClick={handleSave}
+                                                      >
+                                                          <CheckIcon style={{ width: 20, height: 20 }} />
+                                                      </Button>
+                                                  ) : (
+                                                      <Button
+                                                          onClick={() => handleEdit("transaction_quantity")}
+                                                      >
+                                                          <PencilIcon style={{ width: 20, height: 20 }} />
+                                                      </Button>
+                                                  ) : null}
+                                              </Stack>
+                                              ) :
+                                            data.transaction_quantity
+                                            }
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell component="th" variant="head" scope="row">
+                                            Location
                                         </TableCell>
                                         <TableCell id="team" style={{ minWidth: 160 }} align="left">
+                                          {data.borrower_details.user_id === user.user_id ? (
                                             <Stack
                                                 direction="rows"
                                                 alignItems="center"
@@ -141,6 +226,9 @@ export const LoanDetailOverview = (props) => {
                                                     </Button>
                                                 ) : null}
                                             </Stack>
+                                          ) :
+                                            data.location
+                                          }
                                         </TableCell>
                                     </TableRow>
                                     <TableRow>
@@ -180,9 +268,17 @@ export const LoanDetailOverview = (props) => {
                         </Stack> : null}
                 </Box>
             </CardContent>
-            {enableEdit ? (<>
-                <Divider />
-                <CardActions sx={{ justifyContent: 'center' }}>
+            {enableEdit ? (
+              <Stack
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    'justify-content': 'center',
+                    flexWrap: 'wrap',
+                    gap: 1
+                  }}
+              >
+                <CardActions sx={{ justifyContent: 'center',grow:1 }}>
                     <Button
                         type="submit"
                         onClick={handleSaveChanges}
@@ -190,8 +286,6 @@ export const LoanDetailOverview = (props) => {
                         Save changes
                     </Button>
                 </CardActions>
-            </>) : null}
-            <Divider />
             {user.is_staff ?
                 <CardActions sx={{ justifyContent: 'center' }}>
                     <Button
@@ -199,10 +293,12 @@ export const LoanDetailOverview = (props) => {
                         color="error"
                         onClick={handleDelete}
                     >
-                        Delete loan record
+                        Delete Transaction record
                     </Button>
                 </CardActions>
                 : null}
+              </Stack>
+              ) : null}
         </Card>)
         : (
             <Card>

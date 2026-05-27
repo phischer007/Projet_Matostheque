@@ -48,8 +48,8 @@ const Page = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [activeTab, setActiveTab] = useState('loans');
   const user = useAuth().user;
-  const btnTitle = user.is_staff ? "All loans" : "Your loans";
-  const btnCreateUrl = user.is_staff ? "settings" : "/create/create-loan"; 
+  const btnTitle = user.is_staff ? "All transactions" : "Your transactions";
+  const btnCreateUrl = user.is_staff ? "settings" : "/create/create-transaction";
 
   useEffect(() => {
     let apiUrl;
@@ -86,7 +86,7 @@ const Page = () => {
 
 
   useEffect(() => {
-    // Filter loans when searchTerm changes
+    // Filter transactions when searchTerm changes
     setFilteredLoans(searchTerm
       ? loanList.filter(loan => deepSearch(loan, searchTerm))
       : loanList
@@ -116,7 +116,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Loans</title>
+        <title>Transactions</title>
       </Head>
       <Box
         component="main"
@@ -130,7 +130,7 @@ const Page = () => {
             <Grid container gap={2} alignItems="left">
               {/* First sub-grid */}
               <Grid item xs={12} container justifyContent="space-between" alignItems="center">
-                <Typography variant="h4" align="center">Loans</Typography>
+                <Typography variant="h4" align="center">Transactions</Typography>
                 <Button
                   component={NextLink}
                   href={btnCreateUrl}
@@ -143,7 +143,7 @@ const Page = () => {
               {/* Second sub-grid */}
               <Grid item xs={12} container alignItems="left">
                 <Stack direction="row" spacing={1} justifyContent="center">
-                  {/* Button for "Your loans" */}
+                  {/* Button for "Your transactions" */}
                   <Button
                     color="inherit"
                     startIcon={<SvgIcon fontSize="small"><UserIcon /></SvgIcon>}

@@ -18,7 +18,7 @@ import React, { useState,useEffect } from 'react';
 import { Scrollbar } from 'src/components/scrollbar';
 import { SeverityPill } from 'src/components/severity-pill';
 import { useAuth } from 'src/hooks/use-auth';
-import { statusMap, loanStatus, userStatus } from 'src/data/static_data';
+import { statusMap, transactionStatus, userStatus } from 'src/data/static_data';
 import { getCookie } from '../../utils/csrf';
 import { UsersList } from './users-list';
 

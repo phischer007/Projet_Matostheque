@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import config from 'src/utils/config';
 import NextLink from 'next/link';
-import { useLoanHandlers } from 'src/hooks/loan-handlers';
+import { useTransactionHandlers } from 'src/hooks/loan-handlers';
 
 
 const Page = () => {
@@ -15,7 +15,7 @@ const Page = () => {
   const { loanId } = router.query;
 
   const {
-    loanData,
+    transactionData,
     user,
     authorization,
     isOwner,
@@ -24,13 +24,13 @@ const Page = () => {
     OnRejectClick,
     OnCancelClick,
     OnReturnClick
-  } = useLoanHandlers(loanId);
+  } = useTransactionHandlers(loanId);
 
   return (
     <>
       <Head>
         <title>
-          Loan Details
+          Transaction Details
         </title>
       </Head>
       <Box
@@ -54,7 +54,7 @@ const Page = () => {
                 direction="row"
               >
                 <Typography variant="h4">
-                  Loan Details
+                  Transaction Details
                 </Typography>
                 <Stack
                   sx={{
@@ -65,9 +65,9 @@ const Page = () => {
                     gap: 1
                   }}
                 >
-                  {(loanData && user) && (
+                  {(transactionData && user) && (
                     <>
-                      {(isBorrower && (loanData.loan_status === 'Borrowed' || loanData.loan_status === 'Overdue')) && (
+                      {(isOwner && (transactionData.transaction_status === 'Borrowed' || transactionData.transaction_status === 'Overdue')) && (
                         <Button startIcon={(<SvgIcon fontSize="small"> <HandThumbUpIcon /> </SvgIcon>)}
                           variant="contained"
                           onClick={OnReturnClick}
@@ -75,7 +75,7 @@ const Page = () => {
                           Return
                         </Button>
                       )}
-                      {(isOwner && loanData.loan_status === 'Pending Validation') && (
+                      {(isOwner && transactionData.transaction_status === 'Pending Validation') && (
                         <>
                           <Button startIcon={(<SvgIcon fontSize="small"> <CheckIcon /> </SvgIcon>)}
                             variant="contained"
@@ -93,7 +93,7 @@ const Page = () => {
                           </Button>
                         </>
                       )}
-                      {(isBorrower && (loanData.loan_status === 'Pending Validation' || loanData.loan_status === 'Booked')) && (
+                      {(isBorrower && (transactionData.transaction_status === 'Pending Validation' || transactionData.transaction_status === 'Booked')) && (
                         <Button startIcon={(<SvgIcon fontSize="small"> <HandThumbDownIcon /> </SvgIcon>)}
                           variant="contained"
                           color="error"
@@ -117,7 +117,7 @@ const Page = () => {
                     lg={10}
                   >
                     <LoanDetailOverview
-                      data={loanData}
+                      data={transactionData}
                     />
                   </Grid>
                 </Grid>

@@ -6,6 +6,7 @@ import moment from 'moment';
 import { useAuth } from 'src/hooks/use-auth';
 import { useNotification } from 'src/contexts/notification-context';
 import { getCookie } from '../utils/csrf';
+import dayjs from 'dayjs';
 
 
 
@@ -14,27 +15,28 @@ export const useNewLoanHandlers = (props) => {
   const router = useRouter();
   const user = useAuth().user;
   const materialsArray = props.materialsList ? Object.values(props.materialsList) : null;
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
   const [events, setEvents] = useState(null);
   const [selectedMaterial, setSelectedMaterial] = useState(null);
-  const [loanDuration, setLoanDuration] = useState(null);
   const { addNotification } = useNotification();
-
+  const [maxDate, setMaxDate] = useState(null);
 
   const [formErrors, setFormErrors] = useState({
     material: false,
     startDate: false,
     endDate: false,
-    location: false
+    location: false,
+    message: false,
   });
 
   const [formData, setFormData] = useState({
     material: null,
-    loan_date: startDate? startDate : null,
+    transaction_date: startDate? startDate : null,
     duration: null,
     borrower: user ? user.user_id : null,
-    location: null
+    location: null,
+    transaction_quantity : null
   });
   
   const [message, setMessage] = useState({
@@ -44,47 +46,28 @@ export const useNewLoanHandlers = (props) => {
 
   //Functions to handle the form submission
   const handleStartDateChange = (date) => {
+   let newdate = moment(date).format("YYYY-MM-DD")
     setStartDate(date);
-    if (!endDate || date > endDate) {
-      setEndDate(date);
+    if (newdate !== "Invalid date"){
+      if(selectedMaterial){
+        setMaxDate(new Date(date).setDate(new Date(date).getDate()+selectedMaterial.loan_duration-1))
+      }
+      setFormData({
+      ...formData,
+      transaction_date: newdate ,
+    });
+    }else {
+      setMaxDate(null)
+      setFormData({
+      ...formData,
+      transaction_date: null ,
+    });
     }
-    setFormData((prevState) => ({
-      ...prevState,
-      loan_date: date
-    }));
   };
 
   const handleEndDateChange = (date) => {
     setEndDate(date);
   };
-
-  const isDateStartDisabled = (date) => {
-    if (date < subDays(new Date(), 1)) return true;
-    return isDataEventDisabled(date);
-  };
-
-  const isDateEndDisabled = (date) => {
-    if(!selectedMaterial) return false;
-    if(!startDate) return false;
-    if (date < (startDate + 1)) return true;
-    if (date > addDays(startDate, (loanDuration - 1))) return true;
-    return isDataEventDisabled(date);
-  };
-
-  const isDataEventDisabled = useCallback((date) => {
-    if (events) {
-      for (let e in events) {
-        const item = events[e];
-        if (item.loan_status == 'Borrowed' || item.loan_status == 'Overdue' || item.loan_status == 'Booked') {
-          let startDate = new Date(item.loan_date);
-          let endDate = addDays(startDate, (item.duration - 1))
-          if (isSameDay(date, startDate) || isWithinInterval(date, { start: startDate, end: endDate })) return true;
-        }
-      }
-    }
-    return false;
-  }, [events]
-  );
 
   const handleChange = useCallback(
     (event) => {
@@ -96,30 +79,73 @@ export const useNewLoanHandlers = (props) => {
     []
   );
 
+  const handleChangeNum = useCallback((event) => {
+    const { name, value } = event.target;
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value.replace(/\D/g, "") // garde seulement les chiffres
+    }));
+  }, []);
+
+  const handleChangeNumDec = useCallback((event) => {
+  const { name, value } = event.target;
+
+  let cleaned = value
+    .replace(/[^0-9.]/g, "") // garde chiffres + point
+    .replace(/(\..*)\./g, "$1"); // empêche plusieurs points
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: cleaned
+  }));
+}, []);
+
   const onSelectChange = useCallback(
     (event, values) => {
+      setSelectedMaterial(values);
       if (values) {
-        setSelectedMaterial(values);
+        if (startDate){
+          setMaxDate(new Date(startDate).setDate(new Date(startDate).getDate()+values.loan_duration-1))
+        }
+        if(endDate && values.type === 'CONSUMABLES'){
+          setEndDate(null)
+        }
         setFormData((prevState) => ({
           ...prevState,
           material: values.material_id
         }));
 
-        setLoanDuration(values.loan_duration);
+        if (values.type === "LAB_SUPPLIES") {
+          setMessage({
+            status: 'info',
+            value: `You can borrow the material up to ${values.loan_duration} days. \n You can borrow  up to ${values.quantity_available}`
+          });
+        }
+        else{
+          setMessage({
+            status: 'info',
+            value: `You can borrow  up to ${values.quantity_available} `
+          });
+        }
 
-        setMessage({
-          status: 'info',
-          value: `You can borrow the material up to ${values.loan_duration} days.`
-        });
-
-        fetch(`${config.apiUrl}/material/${values.material_id}/events/lite/`)
+        fetch(`${config.apiUrl}/material/${values.material_id}/events/`)
           .then(response => response.json())
           .then(data => {
             if (data) setEvents(data);
           })
           .catch(error => console.error('Error fetching data:', error));
       }
-    }, []
+      else {
+        setMaxDate(null)
+        setMessage(null)
+        setEvents(null)
+        setFormData((prevState) => ({
+          ...prevState,
+          material: null
+        }));
+      }
+    }, [endDate, startDate]
   );
 
   const calculateDuration = useCallback(() => {
@@ -140,7 +166,7 @@ export const useNewLoanHandlers = (props) => {
         user: owner_user_id,
         priority: validation? 'High' : 'Medium',
         title: 'New Request',
-        loan: loan
+        transaction_id: loan
     };
 
     const borrowerNotification = {
@@ -149,23 +175,11 @@ export const useNewLoanHandlers = (props) => {
         user: borrower_id,
         priority: validation? 'Medium' : 'Low',
         title: 'New Request',
-        loan: loan
+        transaction_id: loan
 
     };
-
-    if (owner_user_id !== borrower_id) {
-        addNotification(ownerNotification);
-        addNotification(borrowerNotification);
-    } else {
-        addNotification({
-            message: `You have reserved your material: ${material_title}`,
-            notificationType: 'General',
-            priority: 'Low',
-            title: 'Material Reservation',
-            user: owner_user_id,
-            loan: loan
-        });
-    }
+    addNotification(ownerNotification);
+    addNotification(borrowerNotification);
 }, [addNotification]);
 
 
@@ -173,35 +187,29 @@ export const useNewLoanHandlers = (props) => {
     async (e) => {
       e.preventDefault();
       const data = formData;
-      const formattedDate = moment(data.loan_date, 'YYYY-MM-DDTHH:mm:ss.SSS[Z]');
-      data.loan_date = formattedDate;
 
       // Check if each field is empty and set error state accordingly
       const newErrors = {
         material: data.material === null,
-        startDate: data.loan_date === null,
-        endDate: endDate === null,
-        location: data.location === null 
+        startDate: data.transaction_date === null,
+        endDate: endDate === null && selectedMaterial.type === "LAB_SUPPLIES",
+        location: data.location === null,
+        message: false,
       };
 
       setFormErrors(newErrors);
-
-      //Setting the approval_date to today if owner is reserving his own material
-      if(user.user_id == selectedMaterial.owner__user_id){
-        data.approval_date = new Date().toISOString();
-      }
 
       if (!Object.values(newErrors).some(error => error)) {
 
         try {
           const csrftoken = getCookie('csrftoken');
-          const response = await fetch(`${config.apiUrl}/loans/`, {
+          const response = await fetch(`${config.apiUrl}/transactions/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               'X-CSRFToken': csrftoken,
             },
-            credentials:"include",
+            credentials:'include',
             body: JSON.stringify(data),
           });
 
@@ -216,18 +224,16 @@ export const useNewLoanHandlers = (props) => {
               value: `${firstKey} : ${decodeResponse[firstKey]}`
             });
 
-            console.log(decodeResponse[firstKey]);
 
           } else {
             const data = await response.json();
-
             notifyInvolvedParties({
               material_title: selectedMaterial.material_title,
               borrower_id: user.user_id,
               borrower_name: user.first_name + " " + user.last_name,
-              owner_user_id: selectedMaterial.owner__user_id,
+              owner_user_id: selectedMaterial.user_id,
               validation: selectedMaterial.validation,
-              loan: data.loan_id
+              loan: data.transaction_id
             });
 
             setTimeout(() => {
@@ -253,10 +259,11 @@ export const useNewLoanHandlers = (props) => {
         duration: diffDays
       }));
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, calculateDuration]);
 
   useEffect(() => {
     if (props.selectedMaterial) {
+      console.log(1)
       const record = materialsArray.find(item => item.material_id === props.selectedMaterial);
 
       setSelectedMaterial(record);
@@ -266,9 +273,8 @@ export const useNewLoanHandlers = (props) => {
         material: props.selectedMaterial
       }));
 
-      setLoanDuration(record.loan_duration);
 
-      fetch(`${config.apiUrl}/material/${record.material_id}/events/lite/`)
+      fetch(`${config.apiUrl}/material/${record.material_id}/events/`)
         .then(response => response.json())
         .then(data => {
           if (data) setEvents(data);
@@ -290,13 +296,14 @@ export const useNewLoanHandlers = (props) => {
     message,
     handleStartDateChange,
     handleEndDateChange,
-    isDateStartDisabled,
-    isDateEndDisabled,
     handleChange,
     onSelectChange,
     handleSubmit,
     selectedMaterial,
-    formErrors
-
+    formErrors,
+    handleChangeNum,
+    handleChangeNumDec,
+    maxDate,
+    events
   };
 };

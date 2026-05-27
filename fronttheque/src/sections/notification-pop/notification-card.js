@@ -5,6 +5,7 @@ import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { getTimeDifference } from 'src/utils/get-time-difference';
+import { Link } from '@mui/material';
 
 const statusMap = {
     'Read': '#F0F0F0', 
@@ -13,26 +14,29 @@ const statusMap = {
 
 export const NotificationCard = ({ notification }) => {
   let date = getTimeDifference(notification.created_at);
+  console.log (notification)
   return (
-    <Card  
-        sx={{ 
-            py: 1,
-            mb: 1,  
-            bgcolor: `${statusMap[notification.status]}`,
-            borderRadius: '0px', // Add border radius
-            border: '1px solid #f0f0f0', // Add border
-        }}
-    >
-      <CardHeader
-        subheader={date == 0? 'Today' : `${date}`}
-        sx={{ py: 0 }}
-      />
-      <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
-        <Typography variant="body1" color="textPrimary">
-          {notification.description}
-        </Typography>
-      </CardContent>
-    </Card>
+    <Link href ={"details/loan-detail/"+notification.transaction}>
+      <Card
+          sx={{
+              py: 1,
+              mb: 1,
+              bgcolor: `${statusMap[notification.status]}`,
+              borderRadius: '0px', // Add border radius
+              border: '1px solid #f0f0f0', // Add border
+          }}
+      >
+        <CardHeader
+          subheader={date == 0? 'Today' : `${date}`}
+          sx={{ py: 0 }}
+        />
+        <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
+          <Typography variant="body1" color="textPrimary">
+            {notification.description}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Link>
   );
 };
 

@@ -1,4 +1,4 @@
-export const loanStatus = [
+export const transactionStatus = [
   {"value": "", "label": "None"},
   {"value": "Pending Validation", "label": "Pending Validation"},
   {"value": "Overdue", "label": "Overdue"},
@@ -112,3 +112,10 @@ export const requestTypes = [
     label: 'Inquiry about Formations',
   },
 ];
+
+export const transactionTypes = [
+    { value:'', label:'None'},
+  { value:'Loan', label:'Loan'},
+  { value: 'Donation',label:'Donation'}
+
+]

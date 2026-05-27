@@ -93,7 +93,7 @@ export const MaterialDetailOverview = (props) => {
               </Tooltip>
             </Stack>
           </Grid>
-          {!props.mode && <Avatar
+          <Avatar
               variant="square"
               sx={{
                 height: 250,
@@ -105,7 +105,7 @@ export const MaterialDetailOverview = (props) => {
                 alt="QRCode"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
-            </Avatar>}
+            </Avatar>
           <Typography
             gutterBottom
             variant="h6"
@@ -136,7 +136,7 @@ export const MaterialDetailOverview = (props) => {
           >
             Material Number : {material_number}
           </Typography>
-          {data.available_for_loan && <Grid
+          {data.available_for_transaction && <Grid
             container
             justifyContent="center"
             alignItems="center"

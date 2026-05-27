@@ -18,14 +18,14 @@ const Page = () => {
     //fetching material data
     useEffect(() => {
         if (materialId) {
-            fetch(`${config.apiUrl}/materials/${materialId}`)
+            fetch(`${config.apiUrl}/materials/${materialId}/`)
                 .then(response => response.json())
                 .then(data => {
-                    setMaterialData(data);
+                  setMaterialData(data);
                 })
                 .catch(error => console.error('Error fetching data:', error));
             
-            fetch(`${config.apiUrl}/material/${materialId}/events/`)
+            fetch(`${config.apiUrl}/material/${materialId}/events/lite/`)
                 .then(response => response.json())
                 .then(data => {
                     setEventsData(data);
@@ -35,7 +35,7 @@ const Page = () => {
     }, [materialId]);
 
     const handleBorrow = useCallback(() => {
-        const url = '/create/create-loan' + (materialId ? `?materialId=${materialId}` : '');
+        const url = '/create/create-transaction' + (materialId ? `?materialId=${materialId}` : '');
         router.push(url);
     }, [materialId]);
 

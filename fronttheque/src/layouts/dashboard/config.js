@@ -27,7 +27,7 @@ export const items = [
     )
   },
   {
-    title: 'My Loans',
+    title: 'My Transactions',
     path: '/myloans',
     icon: (
       <SvgIcon fontSize="small">

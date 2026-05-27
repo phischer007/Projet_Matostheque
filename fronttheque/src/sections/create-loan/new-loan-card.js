@@ -16,6 +16,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { withRouter } from 'next/router';
 import { useNewLoanHandlers } from 'src/hooks/new-loan-handlers';
 import { useTheme } from '@mui/material/styles';
+import dayjs from 'dayjs';
+import { MaterialDetailCalendar } from '../material-detail/material-detail-calendar';
+import React from 'react';
 
 const NewLoanCard = (props) => {
   const theme = useTheme();
@@ -26,14 +29,17 @@ const NewLoanCard = (props) => {
     message,
     handleStartDateChange,
     handleEndDateChange,
-    isDateStartDisabled,
-    isDateEndDisabled,
     handleChange,
     onSelectChange,
     handleSubmit,
     selectedMaterial,
-    formErrors
-  } = useNewLoanHandlers(props);  
+    formErrors,
+    formData,
+    handleChangeNum,
+    handleChangeNumDec,
+    maxDate,
+    events
+  } = useNewLoanHandlers(props);
 
   return (
     <form
@@ -84,25 +90,55 @@ const NewLoanCard = (props) => {
                     label="Start Date"
                     value={startDate}
                     onChange={handleStartDateChange}
-                    shouldDisableDate={isDateStartDisabled} // Apply custom disabling logic
+                    minDate={new Date()}
                     fullWidth
                     format="dd/MM/yyyy"
                   />
                 </LocalizationProvider>
               </Grid>
-              <Grid xs={12} sm={6}>
-                <LocalizationProvider>
-                  <DatePicker
-                    label="End Date"
-                    value={endDate}
-                    onChange={handleEndDateChange}
-                    disablePast // Disable dates in the past
-                    minDate={startDate ? startDate : new Date()} // Minimum date is the day after the start date
-                    shouldDisableDate={isDateEndDisabled} // Apply custom disabling logic
-                    fullWidth
-                    format="dd/MM/yyyy"
-                  />
-                </LocalizationProvider>
+              {selectedMaterial?.type !== 'CONSUMABLES' && (
+                <Grid xs={12} sm={6}>
+                  <LocalizationProvider>
+                    <DatePicker
+                      label="End Date"
+                      value={endDate}
+                      onChange={handleEndDateChange}
+                      minDate={startDate || new Date()}
+                      maxDate={maxDate }
+                      fullWidth
+                      format="dd/MM/yyyy"
+                    />
+                  </LocalizationProvider>
+                </Grid>
+              )}
+              <Grid
+                xs={12}
+                md={6}
+              >
+                <TextField
+                  fullWidth
+                  label="transaction_quantity"
+                  name="transaction_quantity"
+                  placeholder="Ex. 1"
+                  value={formData.transaction_quantity || ""}
+                  onChange={selectedMaterial?.type === "CONSUMABLES" ? handleChangeNumDec : handleChangeNum}
+                  type="text"
+                  InputLabelProps={{ shrink: true }}
+                  inputProps={{
+                    inputMode:
+                      selectedMaterial?.type === "CONSUMABLES"
+                        ? "decimal"
+                        : "numeric",
+                  }}
+                  sx={{
+                    input: {
+                      "&::placeholder": {
+                        opacity: 1,
+                        color: theme.palette.text.secondary
+                      }
+                    }
+                  }}
+                />
               </Grid>
               <Grid
                 xs={12}
@@ -135,6 +171,7 @@ const NewLoanCard = (props) => {
               >
                 <TextField
                   fullWidth
+                  required
                   label="Note to Owner"
                   name="message"
                   onChange={handleChange}
@@ -165,7 +202,15 @@ const NewLoanCard = (props) => {
           </Button>
         </CardActions>
       </Card>
+      <Grid>
+        {selectedMaterial && selectedMaterial.type === "LAB_SUPPLIES" &&(
+          <MaterialDetailCalendar
+          data={events}
+        />)
+        }
+      </Grid>
     </form>
+
   );
 };
 

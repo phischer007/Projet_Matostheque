@@ -1,6 +1,6 @@
 from rest_framework import serializers 
 from Matostheque.models.material_model import Materials
-from Matostheque.models.loan_model import Loans
+from Matostheque.models.transaction_model import Transactions
 from Matostheque.models.user_model import CustomUsers
 from Matostheque.models.notification_model import Notifications
 from Matostheque.models.comment_model import Comments
@@ -20,10 +20,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = CustomUsers
         exclude = ('password',) #comma to make it a tuple, not error
 
-class LoanSerializer(serializers.ModelSerializer):
+class TransactionSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = Loans
+        model = Transactions
         fields = '__all__'
 
         

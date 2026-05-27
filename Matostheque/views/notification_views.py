@@ -21,6 +21,8 @@ def notification_operations(request):
  
     elif request.method == 'POST':
         notification_data = request.data
+        if notification_data['transaction_id']:
+            notification_data['transaction'] = notification_data['transaction_id']
         notification_serializer = NotificationSerializer(data=notification_data)
         if notification_serializer.is_valid():
             notification_serializer.save()
@@ -47,17 +49,17 @@ def user_notification_list(request, pk):
                 'read_flag', 
                 'created_at', 
                 'updated_at', 
-                'loan', 
+                'transaction',
                 'user',
-                material_title=F('loan__material__material_title'),
-                borrower_first_name=F('loan__borrower__first_name'),
-                borrower_last_name=F('loan__borrower__last_name'),
+                material_title=F('transaction__material__material_title'),
+                borrower_first_name=F('transaction__borrower__first_name'),
+                borrower_last_name=F('transaction__borrower__last_name'),
             )
             detailed_notifications = detailed_notifications.order_by('-created_at')
             if request.method == 'GET': 
                 return JsonResponse(list(detailed_notifications), safe=False)
         except Exception as e:
-            print(e)
+            raise e
 
 @login_required
 @api_view(['GET'])

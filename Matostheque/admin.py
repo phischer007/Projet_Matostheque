@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from Matostheque.models.material_model import Materials
-from Matostheque.models.loan_model import Loans
+from Matostheque.models.transaction_model import Transactions
 from Matostheque.models.notification_model import Notifications
 from Matostheque.models.comment_model import Comments
 from .forms import CustomUserCreationForm, CustomUserChangeForm
@@ -49,8 +49,8 @@ class CustomUserAdmin(UserAdmin):
 
 class MaterialsAdmin(admin.ModelAdmin):
     # Define which fields to display in the list view and provide filtering options
-    list_display = ("material_title", "get_user_username", "validation","available_for_loan")
-    list_filter = ("material_title", "user", "validation","available_for_loan")
+    list_display = ("material_title", "get_user_username", "validation", "available_for_transaction")
+    list_filter = ("material_title", "user", "validation", "available_for_transaction")
     
     # Specify fields that should be read-only in the admin interface
     readonly_fields = ('created_at', 'updated_at')
@@ -62,17 +62,17 @@ class MaterialsAdmin(admin.ModelAdmin):
     # Set a custom description for the owner field in the admin interface
     get_user_username.short_description = 'Owner'
 
-class LoansAdmin(admin.ModelAdmin):
+class TransactionsAdmin(admin.ModelAdmin):
     # Define which fields to display in the list view and provide filtering options
-    list_display = ("material", "borrower", "loan_status", "loan_date")
-    list_filter = ("material", "borrower", "loan_status",)
+    list_display = ("material","type", "borrower", "transaction_status", "transaction_date")
+    list_filter = ("material","type", "borrower", "transaction_status",)
     
     # Set a custom description for the owner field in the admin interface
     readonly_fields = ('created_at', 'updated_at')
 
 class NotificationsAdmin(admin.ModelAdmin):
     # Define which fields to display in the list view and provide filtering options
-    list_display = ("user", "type", "priority", "description",)
+    list_display = ("user","transaction", "type", "priority", "description",)
     list_filter = ("user", "type", "priority", "description",)
     
     # Set a custom description for the owner field in the admin interface
@@ -89,6 +89,6 @@ class CommentsAdmin(admin.ModelAdmin):
 # Registering the models
 admin.site.register(CustomUsers, CustomUserAdmin)
 admin.site.register(Materials, MaterialsAdmin)
-admin.site.register(Loans, LoansAdmin)
+admin.site.register(Transactions, TransactionsAdmin)
 admin.site.register(Notifications, NotificationsAdmin)
 admin.site.register(Comments, CommentsAdmin)

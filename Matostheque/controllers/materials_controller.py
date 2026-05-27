@@ -6,8 +6,8 @@ from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404
 
 from Matostheque.models.material_model import Materials 
-from Matostheque.models.loan_model import Loans 
-from Matostheque.serializers import LoanSerializer
+from Matostheque.models.transaction_model import Transactions
+from Matostheque.serializers import TransactionSerializer
 from Matostheque.serializers import MaterialSerializer
 
 from rest_framework import status
@@ -152,7 +152,11 @@ def get_detailed_material(pk):
     material = get_object_or_404(Materials.objects.select_related('user'), pk=pk)
     detailed_materials = MaterialSerializer(material).data
     user = material.user
-    detailed_materials["availability"] = is_available(pk=pk)
+    if (material.type == 'LAB_SUPPLIES'):
+        detailed_materials["availability"] = is_available(pk=pk)
+    else:
+        detailed_materials["availability"] = material.available_for_transaction
+
     detailed_materials['owner_details'] = {
         "user_id": user.user_id,
         "first_name": user.first_name,
@@ -160,71 +164,72 @@ def get_detailed_material(pk):
         "phone_number": user.phone_number,
         "email": user.email,
     }
-    
+
     return detailed_materials
 
 def get_events_detail(pk):
     """
-    Function to return a list of loans related to a material.
+    Function to return a list of transactions related to a material.
 
     Args:
         pk (int) : The id of the material instance 
 
     Returns:
-       events (obj): A list of loan related to the material instance.
+       events (obj): A list of transaction related to the material instance.
     """
     events =  []
-    loans =  Loans.objects.filter(material=pk)
-    for loan in loans:
-        loan_data = LoanSerializer(loan).data
-        borrower = loan.borrower
-        loan_data['borrower_details'] = {
+    transactions =  Transactions.objects.filter(material=pk).filter(transaction_status__in=['Booked','Borrowed','Overdue','Closed'])
+    for transaction in transactions:
+        transaction_data = TransactionSerializer(transaction).data
+        borrower = transaction.borrower
+        transaction_data['borrower_details'] = {
             'first_name' : borrower.first_name,
             'last_name' : borrower.last_name,
             'email' : borrower.email
         }
-        events.append(loan_data)
+        events.append(transaction_data)
     return events
 
 def get_events_detail_lite(pk):
     """
-    Function to return a lite list of loans related to a material.
+    Function to return a lite list of transactions related to a material.
 
     Args:
         pk (int) : The id of the material instance 
 
     Returns:
-       events (obj): A lite list of loan related to the material instance.
+       events (obj): A lite list of transaction related to the material instance.
     """
     events =  []
-    loans =  Loans.objects.filter(material=pk)
-    if loans is not None : 
-        for loan in loans:
-            loan_data = LoanSerializer(loan).data
+    transactions =  Transactions.objects.filter(material=pk).filter(transaction_status__in=['Booked','Borrowed','Overdue','Closed'])
+    if transactions is not None :
+        for transaction in transactions:
+            transaction_data = TransactionSerializer(transaction).data
             events.append({
-                'loan_id': loan_data["loan_id"],
-                'material': loan_data["material"],
-                'loan_date': loan_data["loan_date"], 
-                'duration': loan_data["duration"],
-                'loan_status': loan_data["loan_status"]
+                'transaction_date': transaction_data["transaction_date"],
+                'duration': transaction_data["duration"],
             })
     return events
 
 
 def is_available(pk):
     """
-    Function to return boolean to know if a material is actually loan
+    Function to return boolean to know if a material is actually transaction
 
     Args:
         pk (int) : The id of the material instance
 
     Returns:
-       is_available (boolean): A boolean to know if a material is actually loan
+       is_available (boolean): A boolean to know if a material is actually transaction
     """
-    loans =  Loans.objects.filter(material=pk)
-    if loans is not None :
-        for loan in loans:
-            date_fin = loan.loan_date + timedelta(days=int(loan.duration))
-            if loan.loan_date <= timezone.now() <= date_fin:
-                return False
+    material = Materials.objects.get(pk=pk)
+    if not material.available_for_transaction:
+        return False
+    transactions =  Transactions.objects.filter(material=pk).filter(transaction_status__in=['Booked','Borrowed'])
+    if transactions is not None :
+        nbused = 0
+        for transaction in transactions:
+            date_fin = transaction.transaction_date + timedelta(days= int(transaction.duration) - 1)
+            if transaction.transaction_date <= timezone.now().date() <= date_fin:
+                nbused = nbused + transaction.transaction_quantity
     return True

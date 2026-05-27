@@ -48,7 +48,7 @@ export const MaterialListDoc = ({ materials }) => {
             <Text>{material.material_title}</Text>
             <Text>{material.owner_first_name} {material.owner_last_name}</Text>
             <Text>{material.owner_email}</Text>
-            <Text>{material.loan_duration}</Text>
+            <Text>{material.transaction_duration}</Text>
             <Text>{material.code_nacre}</Text>
             <Text>{material.purchase_price}</Text>
           </View>

@@ -11,6 +11,7 @@ import config from 'src/utils/config';
 import { useAuth } from 'src/hooks/use-auth';
 import { toast } from 'react-toastify';
 import { quickNotifyOption } from 'src/utils/notification-config';
+import { getCookie } from '../../../utils/csrf';
 
 const Page = () => {
   const router = useRouter();
@@ -37,10 +38,23 @@ const Page = () => {
         action = handleDelete
         break;
       case 'loan':
-        title = canBeLoaned ? 'Remove from Loan' : 'Put on Loan';
-        content = canBeLoaned ? 'Are you sure you want to remove this material from loan?' : 'Are you sure you want to make this material available for loan?';
-        buttonText = canBeLoaned ? 'Remove From Loan' : 'Put On Loan';
-        action = handleCanBeLoaned
+        if (materialData.type ==="LAB_SUPPLIES") {
+          title = canBeLoaned ? 'Remove from Loan' : 'Put on Loan';
+          content =
+            canBeLoaned
+              ? 'Are you sure you want to remove this material from Loan?'
+              : 'Are you sure you want to make this material available for Loan?';
+          buttonText = canBeLoaned ? 'Remove From Loan' : 'Put On Loan';
+          action = handleCanBeLoaned;
+        }else {
+          title = canBeLoaned ? 'Remove from Donation' : 'Put on Donation';
+          content =
+            canBeLoaned
+              ? 'Are you sure you want to remove this material from Donation?'
+              : 'Are you sure you want to make this material available for Donation?';
+          buttonText = canBeLoaned ? 'Remove From Donation' : 'Put On Donation';
+          action = handleCanBeLoaned;
+        }
         break;
       default:
         break;
@@ -77,12 +91,15 @@ const Page = () => {
 
   const handleCanBeLoaned =  useCallback( async () => {
     try {
-      const response = await fetch(`${config.apiUrl}/materials/${materialId}/`, {
+      const csrftoken = getCookie('csrftoken');
+      const response = await fetch(`${config.apiUrl}/materials/${materialId}/availability/`, {
         method: 'PUT',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
         },
-        body: JSON.stringify({available_for_loan: !materialData.available_for_loan})
+        body: JSON.stringify({available_for_transaction: !materialData.available_for_transaction})
       });
 
         if (!response.ok) {
@@ -112,14 +129,14 @@ const Page = () => {
 
           if (data.owner_details.user_id === user.user_id) {
             setCanDeleteOrRemove(true);
-            setCanBeLoaned(data.available_for_loan)
+            setCanBeLoaned(data.available_for_transaction)
           } else {
             setCanDeleteOrRemove(false);
-            setCanBeLoaned(data.available_for_loan)
+            setCanBeLoaned(data.available_for_transaction)
           }
           if (user.is_staff) {
             setCanDeleteOrRemove(true);
-            setCanBeLoaned(data.available_for_loan)
+            setCanBeLoaned(data.available_for_transaction)
           }
 
           //fetching events related to given material
@@ -168,9 +185,9 @@ const Page = () => {
                 <Button
                   variant="contained"
                   onClick={handleBorrow}
-                  disabled={!materialData?.available_for_loan || materialData.owner_details.user_id === user.user_id}
+                  disabled={!materialData?.available_for_transaction || materialData.owner_details.user_id === user.user_id}
                 >
-                 {materialData?.available_for_loan? "Book Material" : "Not Available For Loan"}
+                 {materialData?.available_for_transaction? "Book Material" : "Not Available For transaction"}
 
 
                 </Button>
