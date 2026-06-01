@@ -129,7 +129,8 @@ export const useNewLoanHandlers = (props) => {
           });
         }
 
-        fetch(`${config.apiUrl}/material/${values.material_id}/events/`)
+        fetch(`${config.apiUrl}/material/${values.material_id}/events/`,
+          {credentials:'include'})
           .then(response => response.json())
           .then(data => {
             if (data) setEvents(data);
@@ -274,7 +275,7 @@ export const useNewLoanHandlers = (props) => {
       }));
 
 
-      fetch(`${config.apiUrl}/material/${record.material_id}/events/`)
+      fetch(`${config.apiUrl}/material/${record.material_id}/events/`,{credentials:'include'})
         .then(response => response.json())
         .then(data => {
           if (data) setEvents(data);

@@ -20,6 +20,7 @@ import config from 'src/utils/config';
 import imageCompression from 'browser-image-compression';
 
 import { TrashIcon } from '@heroicons/react/24/solid';
+import { getCookie } from '../../utils/csrf';
 
 
 
@@ -79,10 +80,13 @@ export const MaterialDetailViewer = (props) => {
     try {
       // We send the updated list as a JSON string to the 'images' field
       // The backend serializer will update the TextField with this new string
+      const csrftoken = getCookie('csrftoken');
       const response = await fetch(`${config.apiUrl}/materials/${material_id}/`, {
         method: 'PUT',
+        credentials:'include',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
         },
         body: JSON.stringify({
             images: JSON.stringify(updatedImageList)
@@ -122,9 +126,14 @@ export const MaterialDetailViewer = (props) => {
     });
 
     try {
+      const csrftoken = getCookie('csrftoken');
       const response = await fetch(`${config.apiUrl}/materials/${material_id}/`, {
         method: 'PUT',
+        credentials:'include',
         body: form,
+        headers:{
+          'X-CSRFToken': csrftoken,
+        }
       });
 
       if (!response.ok) {
@@ -139,7 +148,7 @@ export const MaterialDetailViewer = (props) => {
     } catch (error) {
       toast.error(`Error trying to upload pictures: ${error}`, { autoClose: false });
     }
-  }, [images]);
+  }, [images, material_id]);
 
 
 

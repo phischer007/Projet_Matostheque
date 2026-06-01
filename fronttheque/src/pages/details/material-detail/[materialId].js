@@ -122,7 +122,9 @@ const Page = () => {
   useEffect(() => {
     if (materialId) {
       //fetching material data
-      fetch(`${config.apiUrl}/materials/${materialId}`)
+      fetch(`${config.apiUrl}/materials/${materialId}`,{
+        credentials:'include'
+      })
         .then(response => response.json())
         .then(data => {
           setMaterialData(data);
@@ -141,7 +143,7 @@ const Page = () => {
 
           //fetching events related to given material
           if (data.type === "LAB_SUPPLIES")
-            fetch(`${config.apiUrl}/material/${materialId}/events/`)
+            fetch(`${config.apiUrl}/material/${materialId}/events/`,{credentials:"include"})
               .then(response => response.json())
               .then(data => {
                 setEventsData(data);
