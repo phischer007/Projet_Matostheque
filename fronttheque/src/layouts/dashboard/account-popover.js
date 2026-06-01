@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import { Box, Divider, MenuItem, MenuList, Popover, Typography } from '@mui/material';
+import { Box, Divider, Link, MenuItem, MenuList, Popover, Typography } from '@mui/material';
 import { useAuth } from 'src/hooks/use-auth';
 
 export const AccountPopover = (props) => {
@@ -29,30 +29,39 @@ export const AccountPopover = (props) => {
       open={open}
       PaperProps={{ sx: { width: 200 } }}
     >
-      {user ? 
-      <Box
-        sx={{
-          py: 1.5,
-          px: 2
-        }}
-      >
-          <Typography variant="overline">
-            Account
-          </Typography>
-          <Typography
-            color="text.secondary"
-            variant="body2"
+      {user ?
+        <Link
+          href={'/matostheque/account/'}
+          style={{
+            textDecoration: 'none',
+            color: 'inherit'
+          }}
+        >
+          <Box
+            sx={{
+              py: 1.5,
+              px: 2
+            }}
           >
-            {user.first_name} {user.last_name}
-          </Typography>
-          <Typography
-            color="text.secondary"
-            variant="caption"
-          >
-            {user.role} account
-          </Typography>
-        
-      </Box> : null}
+            <Typography variant="overline">
+              Account
+            </Typography>
+            <Typography
+              color="text.secondary"
+              variant="body2"
+            >
+              {user.first_name} {user.last_name}
+            </Typography>
+            <Typography
+              color="text.secondary"
+              variant="caption"
+            >
+              {user.role} account
+            </Typography>
+          </Box>
+        </Link>
+      : null }
+
 
       <Divider />
       <MenuList
