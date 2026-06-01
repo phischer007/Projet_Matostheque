@@ -53,6 +53,7 @@ export const useNewMaterialHandlers = (data) => {
   const [filteredCNOptions, setFilteredCNOptions] = useState([]);
   const [isMovable, setisMovable] = useState(false);
   const [is_formation_required, setis_formation_required] = useState(false);
+  const [trust_circleList, setTrust_circle] = useState(null);
   const [expandedSections, setExpandedSections] = useState({
     general: true,
     supplier: true,
@@ -68,6 +69,7 @@ export const useNewMaterialHandlers = (data) => {
     material_title: null,
     description: null,
     owner: null,
+    trust_circle:null,
     origin: null,
     loan_duration: null,
     code_nacre: null,
@@ -92,10 +94,26 @@ export const useNewMaterialHandlers = (data) => {
         title: false,
         description: false,
         owner: false,
+        trust_circle:false,
         location: false,
         type : false,
         sub_type:false,
   });
+
+
+  useEffect(() => {
+    fetch(`${config.apiUrl}/trust_circle/`,{
+      credentials: 'include'// Add this so the session cookie is sent!
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Sort the data alphabetically by material_title
+        if (data) {
+            setTrust_circle(data);
+        }
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
 
   const handleCheckChange = () => {
     setIsValidationChecked(!isValidationChecked);
@@ -203,6 +221,7 @@ const handleChangeNum = useCallback((event) => {
         title: formData.material_title === null,
         description: formData.description === null,
         owner: selectedOwner === null,
+        trust_circle: formData.trust_circle == null,
         location: formData.origin === null,
         type : formData.type === null,
         sub_type: formData.sub_type === null,
@@ -219,6 +238,7 @@ const handleChangeNum = useCallback((event) => {
             { key: 'manual_link', value: formData.manual_link },
             { key: 'datasheet_link', value: formData.datasheet_link },
             { key: 'user', value: selectedOwner.user_id },
+            { key: 'trust_circle', value: formData.trust_circle},
             { key: 'origin', value: formData.origin },
             { key: 'code_nacre', value: formData.code_nacre },
             { key: 'purchase_price', value: formData.purchase_price },
@@ -421,11 +441,11 @@ const handleChangeNum = useCallback((event) => {
   useEffect(() => {
   if (ownersArray?.length) {
     const owner = ownersArray.find(
-      owner => Number(owner.user_id) === Number(owner.user_id)
+      owner => Number(owner.user_id) === Number(user.user_id)
     );
     setSelectedOwner(owner || null);
   }
-}, [ownersArray, user]);
+}, [ownersArray]);
   
 
   return {
@@ -455,5 +475,6 @@ const handleChangeNum = useCallback((event) => {
     handleisMovableBoxChange,
     isMovable,
     handleDateChange,
+    trust_circleList,
   };
 };

@@ -26,10 +26,12 @@ import config from 'src/utils/config';
 import { consumableTypes, lab_supplyTypes } from 'src/data/static_data';
 import moment from 'moment';
 import { getCookie } from '../../utils/csrf';
+import { useTheme } from '@mui/material/styles';
 
 
 export const MaterialDetailEdit = (props) => {
   const user = useAuth().user;
+  const theme = useTheme();
   const [isFormDisabled, setIsFormDisabled] = useState(false);
   const [materialID, setMaterialID] = useState(null);
   const [formData, setFormData] = useState({});
@@ -40,10 +42,12 @@ export const MaterialDetailEdit = (props) => {
   const [selectedOwner, setSelectedOwner] = useState(null);
   const [selectSubType, setSelectedSubType] = useState(null);
   const [expiration_date, setexpiration_date] = useState(null);
+  const [trust_circleList, setTrust_circle] = useState(null);
   const [formErrors, setFormErrors] = useState({
         title: false,
         description: false,
         owner: false,
+        trust_circle:false,
         location: false,
         type : false,
         sub_type:false,
@@ -123,6 +127,20 @@ const handleChangeNum = useCallback((event) => {
     }, []
   );
 
+    useEffect(() => {
+    fetch(`${config.apiUrl}/trust_circle/`,{
+      credentials: 'include'// Add this so the session cookie is sent!
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Sort the data alphabetically by material_title
+        if (data) {
+            setTrust_circle(data);
+        }
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
@@ -130,6 +148,7 @@ const handleChangeNum = useCallback((event) => {
         title: formData.material_title === null,
         description: formData.description === null,
         owner: selectedOwner === null,
+        trust_circle: formData.trust_circle == null,
         location: formData.origin === null,
         type : formData.type === null,
         sub_type: formData.sub_type === null,
@@ -146,6 +165,7 @@ const handleChangeNum = useCallback((event) => {
           { key: 'manual_link', value: formData.manual_link },
           { key: 'datasheet_link', value: formData.datasheet_link },
           { key: 'user', value: selectedOwner.user_id },
+          { key: 'trust_circle', value: formData.trust_circle},
           { key: 'origin', value: formData.origin },
           { key: 'validation', value: formData.validation },
           { key: 'code_nacre', value: formData.code_nacre },
@@ -294,7 +314,7 @@ const handleChangeNum = useCallback((event) => {
                 xs={12}
                 md={6}
               >
-                {!user.is_staff && (
+                {isFormDisabled && (
                   <TextField
                     fullWidth
                     label="Owner"
@@ -303,7 +323,7 @@ const handleChangeNum = useCallback((event) => {
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
-                  {ownersList && user.is_staff &&(
+                  {!isFormDisabled &&(
                     <Grid item xs={8} style={{ paddingRight: 8 }}>
                       <Autocomplete
                         label="Owner"
@@ -453,6 +473,48 @@ const handleChangeNum = useCallback((event) => {
                   }}
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth>
+                {isFormDisabled && (
+                  <TextField
+                    fullWidth
+                    label="trust_circle"
+                    disabled={isFormDisabled}
+                    value={formData.trust_circle ? trust_circleList.find(trust_circle => trust_circle.trust_circle_id === formData.trust_circle).trust_circle_name : 'Trust Circle *'}
+                    InputLabelProps={{ shrink: true }}
+                  />
+                )}
+                  {!isFormDisabled && (
+                    <Select
+                      labelId="trust_circle-label"
+                      name="trust_circle"
+                      required
+                      value={formData.trust_circle || ''}
+                      error={formErrors.trust_circle}
+                      onChange={handleChange}
+                      displayEmpty
+                      renderValue={(value) => (
+                        <Typography
+                          variant="subtitle2"
+                          style={{
+                            fontFamily: 'inherit',
+                            color: value ? 'inherit' : theme.palette.text.secondary
+
+                          }}
+                        >
+                          {value ? trust_circleList.find(type => type.trust_circle_id === value).trust_circle_name : 'Trust Circle *'}
+                        </Typography>
+                      )}
+                    >
+                      {trust_circleList.map((trust_circle) => (
+                        <MenuItem key={trust_circle.trust_circle_id} value={trust_circle.trust_circle_id}>
+                          {trust_circle.trust_circle_name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
+                </FormControl>
+                </Grid>
               <Grid
                 xs={12}
                 md={6}

@@ -39,9 +39,9 @@ const NewMaterialDetails = (props) => {
   // const ownersArray = props.ownersList ? Object.values(props.ownersList) : [];
 
   // Sort Owners Alphabetically
-  const ownersArray = props.ownersList 
-    ? Object.values(props.ownersList).sort((a, b) => (a.owner_name || '').localeCompare(b.owner_name || ''))
-    : [];
+  const ownersArray = props.ownersList
+    //? Object.values(props.ownersList).sort((a, b) => (a.owner_name || '').localeCompare(b.owner_name || ''))
+    //: [];
 
   // Create a sorted copy of the teams list
   const sortedTeams = [...teams].sort((a, b) => a.localeCompare(b));
@@ -73,6 +73,7 @@ const NewMaterialDetails = (props) => {
     handleisMovableBoxChange,
     isMovable,
     handleDateChange,
+    trust_circleList
 
 
   } = useNewMaterialHandlers(ownersArray);
@@ -156,6 +157,39 @@ const NewMaterialDetails = (props) => {
                     placeholder="Describe the material here to help others ..."
                     error={formErrors.description}
                   />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
+                    {trust_circleList &&
+                      <Select
+                        labelId="trust_circle-label"
+                        name="trust_circle"
+                        required
+                        value={formData.trust_circle || ''}
+                        error={formErrors.trust_circle}
+                        onChange={handleChange}
+                        displayEmpty
+                        renderValue={(value) => (
+                          <Typography
+                            variant="subtitle2"
+                            style={{
+                              fontFamily: 'inherit',
+                              color: value ? 'inherit' : theme.palette.text.secondary
+
+                            }}
+                          >
+                            {value ? trust_circleList.find(type => type.trust_circle_id === value).trust_circle_name : 'Trust Circle *'}
+                          </Typography>
+                        )}
+                      >
+                        {trust_circleList.map((trust_circle) => (
+                          <MenuItem key={trust_circle.trust_circle_id} value={trust_circle.trust_circle_id}>
+                            {trust_circle.trust_circle_name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    }
+                  </FormControl>
                 </Grid>
               </Grid>
             </AccordionDetails>

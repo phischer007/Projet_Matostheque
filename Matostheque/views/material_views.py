@@ -1,27 +1,15 @@
-import  base64, json
-import os
 from django.db.models import F, Count
 from django.utils.timezone import now
-from django.conf import settings
-from django.shortcuts import render
-from django.http.response import JsonResponse
 from django.contrib.auth.decorators import login_required
 
-
-from rest_framework.parsers import JSONParser 
-from rest_framework import status, request
 from rest_framework.decorators import api_view
-
-from django.core.paginator import Paginator
- 
-from Matostheque.models.material_model import Materials
-from Matostheque.serializers import MaterialSerializer
 from Matostheque.controllers.materials_controller import *
 
 @login_required
 @api_view(['GET'])
 def get_materials(request):
-    materials = Materials.objects.all()
+    materials = Materials.objects.filter(available_for_transaction=True,trust_circle__in=request.user.laboratory.trust_circles.all())
+    # materials = Materials.objects.all()
     # materials = Materials.objects.all().order_by('material_title') # Sort by 'material_title' in ascending order
     
     selected_materials = materials.values(
@@ -47,9 +35,10 @@ def get_materials(request):
 @login_required
 @api_view(['GET'])
 def get_materials_lite(request):
-    materials = Materials.objects.filter(available_for_transaction=True)
-        
-    # Testing results                
+    materials = Materials.objects.filter(available_for_transaction=True,trust_circle__in=request.user.laboratory.trust_circles.all()).exclude(user_id=request.user.user_id)
+    # materials = Materials.objects.filter(available_for_transaction=True)
+
+    # Testing results
     title = request.GET.get('material_title', None)
     if title is not None:
         materials = materials.filter(material_title__icontains=title)
@@ -80,6 +69,8 @@ def create_material(request):
 def material_detail(request, pk):
     try:
         material = get_material(pk)
+        if material.trust_circle not in request.user.laboratory.trust_circles.all() and not request.user.is_staff and request.user.pk != material.user_id:
+            return JsonResponse({'message': 'You are not authorized to use this Materials.'},status=status.HTTP_403_FORBIDDEN)
     except Materials.DoesNotExist:
         return JsonResponse({'message': 'The material does not exist'}, status=status.HTTP_404_NOT_FOUND) 
  
@@ -99,7 +90,7 @@ def material_detail(request, pk):
             if material_data.get('qrcode') is not None:
                 return JsonResponse({'message': "You can't add a qrcode yourself"},status=status.HTTP_400_BAD_REQUEST)
             #we check that the id is not modified
-            if int(material_data.get('material_id')) != int(pk):
+            if material_data.get('material_id') and int(material_data.get('material_id')) != int(pk):
                 return JsonResponse({'message': "You can't change the id of the materials"},status=status.HTTP_400_BAD_REQUEST)
 
             material_serializer = MaterialSerializer(material, data=material_data, partial=True)
@@ -168,11 +159,19 @@ def latest_material(request):
 
 @api_view(['GET'])
 def material_events_detail(request, pk):
+    material = get_material(pk)
+    if material.trust_circle not in request.user.laboratory.trust_circles.all():
+        return JsonResponse({'message': 'You are not authorized to use this Materials.'},
+                            status=status.HTTP_403_FORBIDDEN)
     events =  get_events_detail(pk)
     return JsonResponse(events, safe=False)
 
 @api_view(['GET'])
 def material_events_lite(request, pk):
+    material = get_material(pk)
+    if material.trust_circle not in request.user.laboratory.trust_circles.all():
+        return JsonResponse({'message': 'You are not authorized to use this Materials.'},
+                            status=status.HTTP_403_FORBIDDEN)
     events =  get_events_detail_lite(pk)
     return JsonResponse(events, safe=False)
 
@@ -199,12 +198,20 @@ def get_total_count(request):
     #    count=Count('material_id')
     #).order_by('-count')
 
+    # 2. Materials per Laboratory (For the Bar Chart)
+    from django.db.models import Count
+
+    materials_per_laboratory = (
+        Materials.objects
+        .values('user__laboratory__laboratory_name')
+        .annotate(nb_laboratory=Count('user__laboratory')).order_by('-nb_laboratory')
+    )
     if request.method == 'GET': 
         return JsonResponse({
             'total_count': materials_count,
             'added_this_month': materials_added_this_month,
             'added_this_year': materials_added_this_year,
-            #'materials_per_team': list(materials_per_team), # Converted to list for JSON serialization
+            'materials_per_laboratory': list(materials_per_laboratory), # Converted to list for JSON serialization
             # 'users_per_team': list(users_per_team)
         })
 
@@ -219,9 +226,6 @@ def update_Consumable_Availability():
 def update_material_availability(request,pk):
     try:
         material = Materials.objects.get(pk=pk)
-        print(material.user_id)
-        print(request.user.user_id)
-        print(request.user.is_staff)
         if material.user_id != request.user.user_id and not request.user.is_staff:
             return JsonResponse({'message': 'You are not authorized to modify this Materials.'},status=status.HTTP_403_FORBIDDEN)
         else:

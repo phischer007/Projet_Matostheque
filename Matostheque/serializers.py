@@ -1,6 +1,7 @@
 from rest_framework import serializers 
 from Matostheque.models.material_model import Materials
 from Matostheque.models.transaction_model import Transactions
+from Matostheque.models.trust_circle_modele import TrustCircle
 from Matostheque.models.user_model import CustomUsers
 from Matostheque.models.notification_model import Notifications
 from Matostheque.models.comment_model import Comments
@@ -38,4 +39,10 @@ class CommentSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = Comments
+        fields = '__all__'
+
+class TrustCircleSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TrustCircle
         fields = '__all__'

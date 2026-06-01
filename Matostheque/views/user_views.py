@@ -28,7 +28,7 @@ def user_list(request):
             status=status.HTTP_403_FORBIDDEN
         )
     if request.method == 'GET':
-        users = get_user_model().objects.all()
+        users = get_user_model().objects.filter(laboratory_id=request.user.laboratory)
         users_serializer = UserSerializer(users, many=True)
         serialized_data = users_serializer.data
         return JsonResponse(serialized_data, safe=False)

@@ -6,6 +6,8 @@ from Matostheque.models.transaction_model import Transactions
 from Matostheque.models.notification_model import Notifications
 from Matostheque.models.comment_model import Comments
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .models.laboratory_model import Laboratory
+from .models.trust_circle_modele import TrustCircle
 from .models.user_model import CustomUsers
 
 # Override the default UserAdmin to customize the admin interface for user management
@@ -24,7 +26,7 @@ class CustomUserAdmin(UserAdmin):
     # Group fields into sections for better organization in the admin interface
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'role', 'phone_number')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'role', 'phone_number','laboratory')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined', 'updated_at')}),
     )
@@ -33,7 +35,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2','phone_number', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}
+            'fields': ('email', 'password1', 'password2','phone_number', 'laboratory', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}
         ),
     )
     
@@ -49,8 +51,8 @@ class CustomUserAdmin(UserAdmin):
 
 class MaterialsAdmin(admin.ModelAdmin):
     # Define which fields to display in the list view and provide filtering options
-    list_display = ("material_title", "get_user_username", "validation", "available_for_transaction")
-    list_filter = ("material_title", "user", "validation", "available_for_transaction")
+    list_display = ("material_title", "get_user_username", "validation", "available_for_transaction","trust_circle")
+    list_filter = ("material_title", "user", "validation", "available_for_transaction","trust_circle")
     
     # Specify fields that should be read-only in the admin interface
     readonly_fields = ('created_at', 'updated_at')
@@ -86,9 +88,28 @@ class CommentsAdmin(admin.ModelAdmin):
     # Set a custom description for the owner field in the admin interface
     readonly_fields = ('created_at',)
 
+
+class LaboratoryAdmin(admin.ModelAdmin):
+    # Define which fields to display in the list view and provide filtering options
+    list_display = ("laboratory_id","laboratory_name")
+    list_filter = ("laboratory_id","laboratory_name")
+
+    # Set a custom description for the owner field in the admin interface
+    readonly_fields = ('created_at',)
+
+class TrustCircleAdmin(admin.ModelAdmin):
+    # Define which fields to display in the list view and provide filtering options
+    list_display = ("trust_circle_id","trust_circle_name")
+    list_filter = ("trust_circle_id","trust_circle_name")
+
+    # Set a custom description for the owner field in the admin interface
+    readonly_fields = ('created_at',)
+
 # Registering the models
 admin.site.register(CustomUsers, CustomUserAdmin)
 admin.site.register(Materials, MaterialsAdmin)
 admin.site.register(Transactions, TransactionsAdmin)
 admin.site.register(Notifications, NotificationsAdmin)
 admin.site.register(Comments, CommentsAdmin)
+admin.site.register(Laboratory, LaboratoryAdmin)
+admin.site.register(TrustCircle,TrustCircleAdmin)

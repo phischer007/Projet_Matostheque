@@ -6,6 +6,8 @@ from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser
 
 from Matostheque.managers import CustomUserManager
+from Matostheque.models.laboratory_model import Laboratory
+
 
 class CustomUsers(AbstractBaseUser, PermissionsMixin):
     """
@@ -22,6 +24,9 @@ class CustomUsers(AbstractBaseUser, PermissionsMixin):
     
     # A unique identifier for the user.
     user_id = models.AutoField(primary_key=True, serialize=False, verbose_name='ID')
+
+    # The laboratory of the user
+    laboratory = models.ForeignKey(Laboratory, on_delete=models.CASCADE, null=True, blank=True)
     
     # The email address of the user.
     email = models.EmailField(unique=True)

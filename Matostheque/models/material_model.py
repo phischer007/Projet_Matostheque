@@ -116,6 +116,9 @@ class Materials(models.Model):
     
     # The user associated to/ of the material
     user = models.ForeignKey('CustomUsers', on_delete=models.CASCADE, related_name='User_materials')
+
+    # The trust circle the material is visible in
+    trust_circle = models.ForeignKey('TrustCircle', on_delete=models.CASCADE, related_name='Trust_circle_materials')
     
     # The date and time when the material was created.
     created_at = models.DateTimeField(auto_now_add=True)
@@ -162,6 +165,8 @@ class Materials(models.Model):
 
         if get_user_model().objects.get(pk=self.user_id).role == "user":
             raise Exception("Le propriétaire doit être un owner")
+        if self.trust_circle not in self.user.laboratory.trust_circles.all():
+            raise Exception("The owner is not a memeber of the trust circle ")
         super().save(*args, **kwargs)
 
 

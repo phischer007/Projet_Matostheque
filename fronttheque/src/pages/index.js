@@ -157,8 +157,8 @@ const Page = () => {
   }, [user]);
 
   // Helper to calculate max value for bar chart scaling
-  const maxMaterialCount = dashboardStats.materials_per_team?.length > 0 
-    ? Math.max(...dashboardStats.materials_per_team.map(item => item.count)) 
+  const maxMaterialCount = dashboardStats.materials_per_laboratory?.length > 0
+    ? Math.max(...dashboardStats.materials_per_laboratory.map(item => item['nb_laboratory']))
     : 0;
   
   return (
@@ -295,6 +295,48 @@ const Page = () => {
                 sx={{ height: '100%' }}
               />
             </Grid>
+
+            {/* Materials Per Team Bar Chart */}
+            <Grid xs={12} lg={12}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom>
+                    Materials Inventory by Team
+                  </Typography>
+                  <Divider sx={{ mb: 3 }} />
+                  <Grid container spacing={4}>
+                    {dashboardStats.materials_per_laboratory && dashboardStats.materials_per_laboratory.map((laboratory) => (
+                      <Grid xs={12} sm={6} md={4} key={laboratory['user__laboratory__laboratory_name']}>
+                        <Box sx={{ mb: 1 }}>
+                          <Stack direction="row" justifyContent="space-between" mb={1}>
+                            <Typography variant="body2" fontWeight="bold">
+                              {laboratory['user__laboratory__laboratory_name']}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              {laboratory['nb_laboratory']} items
+                            </Typography>
+                          </Stack>
+                          <LinearProgress
+                            variant="determinate"
+                            value={maxMaterialCount > 0 ? (laboratory['nb_laboratory'] / maxMaterialCount) * 100 : 0}
+                            sx={{
+                              height: 10,
+                              borderRadius: 5,
+                              backgroundColor: 'neutral.200',
+                              '& .MuiLinearProgress-bar': {
+                                borderRadius: 5,
+                                backgroundColor: 'blue.main'
+                              }
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </CardContent>
+              </Card>
+            </Grid>
+
 
             {/* --- NEW STATS SECTION END --- */}
 
