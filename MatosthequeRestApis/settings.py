@@ -2,8 +2,6 @@
 import os
 from dotenv import load_dotenv
 
-from corsheaders.defaults import default_headers
-
 # Load environment variables from .env file
 load_dotenv()
 
@@ -17,8 +15,7 @@ DEBUG = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-env_allowed_hosts = os.getenv('ALLOWED_HOSTS', '')
-ALLOWED_HOSTS = [host for host in env_allowed_hosts.split(',') if host]
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',')
 
 MIGRATION_MODULES = {
     'Matostheque' : 'Matostheque.migrations'
@@ -57,15 +54,13 @@ SESSION_COOKIE_AGE = 10800 #3600 is 1 hour in seconds, set to 3 hours for now
 TIME_ZONE = 'Europe/Paris'
 USE_TZ = True
 
-# --- FIXED CORS SETTINGS ---
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://localhost:8081',
-]
-
-CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://localhost:3000']
+CORS_ALLOWED_ORIGINS = os.getenv('DJANGO_CORS_ALLOWED_ORIGINS', '').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('DJANGO_CSRF_TRUSTED_ORIGINS', '').split(',')
+CORS_ORIGIN_WHITELIST  = os.getenv('DJANGO_CORS_ORIGIN_WHITELIST', '').split(',')
 
 CORS_ALLOW_METHODS = [
     'GET',
@@ -86,21 +81,15 @@ CORS_ALLOW_HEADERS = [
     'User-Agent',
     "X-CSRFToken",
 ]
-""""
-env_cors_origins = os.getenv('CORS_ALLOWED_ORIGINS', '')
-CORS_ALLOWED_ORIGINS = [origin for origin in env_cors_origins.split(',') if origin]
 
 
-env_cors_whitelist = os.getenv('CORS_ORIGIN_WHITELIST', '')
-CORS_ORIGIN_WHITELIST = [origin for origin in env_cors_whitelist.split(',') if origin]
+CAS_SERVER_URL = 'https://authentification-preprod.univ-grenoble-alpes.fr'
+CAS_VERSION = '3'
+CAS_ADMIN_REDIRECT = False
+LOGIN_URL = '{}/cas/login?service={{}}'.format(CAS_SERVER_URL)
+LOGOUT_URL = '{}/cas/logout'.format(CAS_SERVER_URL)
 
 
-
-
-
-env_csrf_trusted = os.getenv('CSRF_TRUSTED_ORIGINS', '')
-CSRF_TRUSTED_ORIGINS = [origin for origin in env_csrf_trusted.split(',') if origin]
-"""
 ROOT_URLCONF = 'MatosthequeRestApis.urls'
 
 # From here on Email settings:
