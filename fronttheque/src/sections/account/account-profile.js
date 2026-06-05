@@ -13,7 +13,7 @@ export const AccountProfile = (user_data) => {
   const user = {
     ...user_data,
   }
-  const images = user.profil_pic && user.profil_pic.length !== 0 ? JSON.parse(user.profil_pic) : {};
+  const images = user.profil_pic && user.profil_pic.length !== 0 ? user.profil_pic : {};
   const image_path = images? `${process.env.NEXT_PUBLIC_ASSETS}${images[0]}` : '';
   const [selectedImage, setImage] = useState([]);
   const [filesSelected, setFilesSelected] = useState(false);
