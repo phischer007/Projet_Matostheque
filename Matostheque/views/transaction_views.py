@@ -185,9 +185,11 @@ def latest_transaction(request, pk):
 
     selected_transactions = transactions_filtered.values(
         'transaction_id',
+        'type',
         'transaction_date',
-        'transaction_status',
         'duration',
+        'transaction_status',
+        'transaction_quantity',
         material_title=F('material__material_title'),
         owner_first_name=F('material__user__first_name'),
         owner_last_name=F('material__user__last_name')

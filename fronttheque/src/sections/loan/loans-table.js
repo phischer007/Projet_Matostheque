@@ -108,8 +108,12 @@ export const LoansTable = (props) => {
               <TableRow>
                 <TableCell> Title </TableCell>
                 <TableCell> Type </TableCell>
-                <TableCell> Owner </TableCell>
-                <TableCell> Borrower </TableCell>
+                {activeTab === 'loans' &&
+                  <TableCell> Owner </TableCell>
+                }
+                {activeTab !== 'loans' &&
+                  <TableCell> Borrower </TableCell>
+                }
                 <TableCell> Duration</TableCell>
                 <TableCell> Loan Date </TableCell>
                 <TableCell> Quantity </TableCell>
@@ -146,10 +150,14 @@ export const LoansTable = (props) => {
                       <TableCell>
                         {loan.type}
                       </TableCell>
-                      <TableCell>
-                        {`${loan.owner_details.first_name} ${loan.owner_details.last_name}`}
-                      </TableCell>
-                      <TableCell> { `${loan.borrower_details.first_name} ${loan.borrower_details.last_name}` }</TableCell>
+                      {activeTab === 'loans' &&
+                        <TableCell>
+                          {`${loan.owner_details.first_name} ${loan.owner_details.last_name}`}
+                        </TableCell>
+                      }
+                      {activeTab !== 'loans' &&
+                        <TableCell> { `${loan.borrower_details.first_name} ${loan.borrower_details.last_name}` }</TableCell>
+                      }
                       <TableCell> {loan.duration}</TableCell>
                       <TableCell> {formatDate(loan.transaction_date)} </TableCell>
                       <TableCell> {loan.transaction_quantity}</TableCell>

@@ -22,6 +22,7 @@ import { SeverityPill } from 'src/components/severity-pill';
 import { useAuth } from 'src/hooks/use-auth';
 import NextLink from 'next/link';
 import { statusMap } from 'src/data/static_data';
+import React from 'react';
 
 export const OverviewLatestLoans = (props) => {
   const user = useAuth().user;
@@ -41,13 +42,22 @@ export const OverviewLatestLoans = (props) => {
                   Material
                 </TableCell>
                 <TableCell>
+                  Type
+                </TableCell>
+                <TableCell>
                   Owner
                 </TableCell>
-                <TableCell sortDirection="desc">
-                  Borrower
+                {/*<TableCell sortDirection="desc">*/}
+                {/*  Borrower*/}
+                {/*</TableCell>*/}
+                <TableCell>
+                  Duration
                 </TableCell>
                 <TableCell sortDirection="desc">
                   Date
+                </TableCell>
+                <TableCell>
+                  Quantity
                 </TableCell>
                 <TableCell>
                   Status
@@ -74,13 +84,22 @@ export const OverviewLatestLoans = (props) => {
                         {loan.material_title}
                       </TableCell>
                       <TableCell>
-                        {loan.user_first_name} {loan.user_last_name}
+                        {loan.type}
                       </TableCell>
                       <TableCell>
-                        {loan.borrower_first_name} {loan.borrower_last_name}
+                        {loan.owner_first_name} {loan.owner_last_name}
+                      </TableCell>
+                      {/*<TableCell>*/}
+                      {/*  {loan.borrower_first_name} {loan.borrower_last_name}*/}
+                      {/*</TableCell>*/}
+                      <TableCell>
+                        {loan.duration}
                       </TableCell>
                       <TableCell>
                         {loanDate}
+                      </TableCell>
+                      <TableCell>
+                        {loan.transaction_quantity}
                       </TableCell>
                       <TableCell>
                         <SeverityPill color={statusMap[loan.transaction_status]}>
