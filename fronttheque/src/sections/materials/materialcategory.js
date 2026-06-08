@@ -13,46 +13,8 @@ import ArrowPathIcon from '@heroicons/react/24/solid/ArrowPathIcon';
 import { consumableTypes, lab_supplyTypes } from 'src/data/static_data';
 
 
-export const MaterialCategory = forwardRef(({ materials = [], setFilteredMaterials, onCategoryChange, onReset }, ref) => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+export const MaterialCategory = forwardRef(({ handleInternalReset, handleTagClick, selectedCategory, setSelectedCategory}, ref) => {
 
-  // Allow parent to trigger reset if needed
-  useImperativeHandle(ref, () => ({
-    reset: () => {
-      setSelectedCategory(null);
-      setFilteredMaterials(materials);
-    }
-  }));
-
-  const handleInternalReset = () => {
-    // 1. Reset local state
-    setSelectedCategory(null);
-    
-    // 2. Reset the list to show all materials
-    setFilteredMaterials(materials);
-    
-    // 3. Trigger parent to reset Search Term and Page
-    if (onReset) onReset();
-  };
-
-  const handleTagClick = (categoryValue) => {
-    // Toggle off if clicking the already selected tag
-    if (selectedCategory === categoryValue) {
-      handleInternalReset();
-      return;
-    }
-
-    setSelectedCategory(categoryValue);
-
-    let filtered = [];
-
-    filtered = materials.filter(material => material.sub_type === categoryValue);
-    
-    setFilteredMaterials(filtered);
-    
-    // Notify parent to reset pagination
-    if (onCategoryChange) onCategoryChange();
-  };
 
   return (
     <Card 

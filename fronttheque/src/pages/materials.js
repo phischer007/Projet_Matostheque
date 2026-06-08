@@ -60,6 +60,7 @@ const Page = () => {
   const [page, setPage] = useState(0);
   const [cardPerPage, setRowsPerPage] = useState(16);
   const [qrCodeDataArray, setQrCodeDataArray] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const materialCategoryRef = useRef(null);
 
@@ -78,6 +79,7 @@ const Page = () => {
         });
 
         setMaterialList(sortedData);
+        setFilteredMaterials(sortedData)
         
         if (sortedData && user.is_staff) {
           setQrCodeDataArray(sortedData.map(material => ({
@@ -90,15 +92,6 @@ const Page = () => {
       .catch(error => console.error('Error fetching data:', error));
   }, [user.is_staff]);
 
-  // 2. Filter Effect (Preserves Order)
-  useEffect(() => {
-    // Since materialList is sorted, the filtered result will effectively remain sorted
-    let filtered = searchTerm 
-      ? materialList?.filter(material => deepSearch(material, searchTerm))
-      : materialList;
-
-    setFilteredMaterials(filtered);
-  }, [searchTerm, materialList, cardPerPage]); 
 
   const count = Math.ceil((filteredMaterials?.length || 0) / cardPerPage);
   const materials = useMaterials(filteredMaterials, page, cardPerPage);
@@ -117,15 +110,58 @@ const Page = () => {
     setPage(0);
   };
 
-  const handleCategoryChange = useCallback(() => {
-    setPage(0);
-  }, []);
 
-  const handleCategoryReset = useCallback(() => {
-    setSearchTerm('');
-    setPage(0);
-  }, []);
 
+  const handleInternalReset = () => {
+    // 1. Reset local state
+    setSelectedCategory(null);
+
+    // 2. Reset Page
+    setPage(0);
+
+  };
+
+  const handleTagClick = (categoryValue) => {
+    // Toggle off if clicking the already selected tag
+    if (selectedCategory === categoryValue) {
+      handleInternalReset();
+      return;
+    }
+    setSelectedCategory(categoryValue);
+
+    // Reset Page
+    setPage(0);
+  };
+
+  useEffect(() => {
+    if (selectedCategory) {
+      let filtered = materialList.filter(
+        material => material.sub_type === selectedCategory
+      );
+      filtered = searchTerm
+        ? filtered?.filter(material => deepSearch(material, searchTerm))
+        : filtered;
+      setFilteredMaterials(filtered);
+    }
+    else {
+      let filtered = searchTerm
+        ? materialList?.filter(material => deepSearch(material, searchTerm))
+        : materialList;
+      setFilteredMaterials(filtered);
+    }
+  }, [selectedCategory, materialList]);
+
+  useEffect(() =>{
+    let filtered = searchTerm
+      ? materialList?.filter(material => deepSearch(material, searchTerm))
+      : materialList;
+    if (selectedCategory) {
+      filtered = filtered.filter(
+        material => material.sub_type === selectedCategory
+      );
+    }
+    setFilteredMaterials(filtered);
+  },[materialList,searchTerm])
 
   return (
     <>
@@ -179,10 +215,10 @@ const Page = () => {
 
             <MaterialCategory 
               ref={materialCategoryRef}
-              materials={materialList || []}
-              setFilteredMaterials={setFilteredMaterials}
-              onCategoryChange={handleCategoryChange}
-              onReset={handleCategoryReset} 
+              handleInternalReset = {handleInternalReset}
+              handleTagClick = {handleTagClick}
+              selectedCategory = {selectedCategory}
+              setSelectedCategory = {setSelectedCategory}
             />
             
             <Grid container 
