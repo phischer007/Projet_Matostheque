@@ -29,7 +29,7 @@ const formatEvent = (data, mode) => {
         contact: item.borrower_details.email,
         location: item.location,
         start: new Date(item.transaction_date),
-        end: new Date(new Date().setDate(new Date(item.transaction_date).getDate() + (item.duration)) ), //converting duration to milliseconds and adding the duration to start date
+        end: new Date(new Date().setDate(new Date(item.transaction_date).getDate() + (item.duration - 1)) ), //converting duration to milliseconds and adding the duration to start date
         transaction_quantity: item.transaction_quantity
       };
     }
