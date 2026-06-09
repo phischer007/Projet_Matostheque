@@ -23,7 +23,8 @@ def get_formatted_user(user):
         "is_active": user.is_active,
         "is_staff": user.is_staff,
         "email": user.email,
-        "profil_pic": user.profil_pic
+        "profil_pic": user.profil_pic,
+        "laboratory_address": user.laboratory.laboratory_address,
     }
     
     return user_details

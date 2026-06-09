@@ -8,6 +8,9 @@ class Laboratory(models.Model):
     # A name for the laboratory
     laboratory_name = models.CharField(max_length=100)
 
+    # The adress of the laboratory
+    laboratory_address = models.TextField()
+
     # The date and time when the laboratory was created.
     created_at = models.DateTimeField(auto_now_add=True)
 

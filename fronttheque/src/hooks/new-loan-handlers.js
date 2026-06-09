@@ -36,7 +36,7 @@ export const useNewLoanHandlers = (props) => {
     transaction_date: startDate? startDate : null,
     duration: null,
     borrower: user ? user.user_id : null,
-    location: null,
+    location: user.laboratory_address,
     message:null,
     transaction_quantity : 1
   });

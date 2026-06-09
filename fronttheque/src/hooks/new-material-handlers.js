@@ -71,7 +71,7 @@ export const useNewMaterialHandlers = (data) => {
     description: null,
     owner: null,
     trust_circle:null,
-    origin: null,
+    origin: user.laboratory_address,
     loan_duration: 30,
     code_nacre: null,
     purchase_price: null,

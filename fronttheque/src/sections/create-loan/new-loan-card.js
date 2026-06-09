@@ -19,6 +19,7 @@ import { useTheme } from '@mui/material/styles';
 import dayjs from 'dayjs';
 import { MaterialDetailCalendar } from '../material-detail/material-detail-calendar';
 import React from 'react';
+import { useAuth } from '../../hooks/use-auth';
 
 const NewLoanCard = (props) => {
   const theme = useTheme();
@@ -162,6 +163,7 @@ const NewLoanCard = (props) => {
                   fullWidth
                   label="Location"
                   name="location"
+                  defaultValue={useAuth().user.laboratory_address}
                   error={formErrors.location}
                   helperText={formErrors.location && 'Please select a location'}
                   onChange={handleChange}

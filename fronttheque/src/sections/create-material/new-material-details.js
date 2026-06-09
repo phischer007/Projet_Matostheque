@@ -33,6 +33,7 @@ import { teams, materialTypes, consumableTypes, unitList, lab_supplyTypes } from
 
 import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon';
 import { useState } from 'react';
+import { useAuth } from '../../hooks/use-auth';
 
 const NewMaterialDetails = (props) => {
   const theme = useTheme();
@@ -617,6 +618,7 @@ const NewMaterialDetails = (props) => {
                     fullWidth
                     label="Location"
                     name="origin"
+                    defaultValue={useAuth().user.laboratory_address}
                     onChange={handleChange}
                     required
                     type="text"
