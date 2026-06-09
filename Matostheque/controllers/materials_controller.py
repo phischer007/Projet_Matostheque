@@ -107,6 +107,7 @@ def on_create_material(request):
     """
     # Retrieve the data posted before accessing the files (need to access POST before FILES)
     mutable_data = request.POST.copy()
+    mutable_data["available_for_transaction"] = "true"
 
     # Serializing the data
     material_serializer = MaterialSerializer(data=mutable_data)

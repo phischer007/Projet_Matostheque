@@ -104,7 +104,7 @@ class Materials(models.Model):
     # A flag indicating whether the material is available for transaction or not.
     available_for_transaction = models.BooleanField(default=True)
 
-    is_Movable = models.BooleanField(default=True)
+    is_Movable = models.BooleanField(default=False)
 
     is_formation_required = models.BooleanField(default=False)
 
