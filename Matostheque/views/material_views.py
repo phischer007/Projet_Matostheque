@@ -92,6 +92,8 @@ def material_detail(request, pk):
             #we check that the id is not modified
             if material_data.get('material_id') and int(material_data.get('material_id')) != int(pk):
                 return JsonResponse({'message': "You can't change the id of the materials"},status=status.HTTP_400_BAD_REQUEST)
+            if request.user.laboratory != material.user.laboratory:
+                return JsonResponse({'message': "You can't give a material for this owner"},status=status.HTTP_400_BAD_REQUEST)
 
             material_serializer = MaterialSerializer(material, data=material_data, partial=True)
             if material_serializer.is_valid():

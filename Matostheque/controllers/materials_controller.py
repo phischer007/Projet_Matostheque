@@ -2,6 +2,7 @@ from datetime import datetime
 import qrcode, io, os, json, base64, uuid
 
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404
 
@@ -108,7 +109,9 @@ def on_create_material(request):
     # Retrieve the data posted before accessing the files (need to access POST before FILES)
     mutable_data = request.POST.copy()
     mutable_data["available_for_transaction"] = "true"
-
+    user = get_user_model().objects.get(pk=mutable_data["user"])
+    if request.user.laboratory != user.laboratory:
+        return JsonResponse({'message': "You can't create a material for this owner"},status=status.HTTP_400_BAD_REQUEST)
     # Serializing the data
     material_serializer = MaterialSerializer(data=mutable_data)
 

@@ -171,7 +171,7 @@ def changeActivity(request,pk):
 @login_required
 @api_view(['GET'])
 def active_owners_lite(request):
-    users = CustomUsers.objects.filter(is_active=True,role='owner')
+    users = CustomUsers.objects.filter(is_active=True,role='owner', laboratory=request.user.laboratory)
     data = get_lite_Users(users)
     return JsonResponse(data, safe=False)
 
@@ -287,17 +287,31 @@ def cas_validate(request):
         if tree.find('.//cas:authenticationSuccess', namespaces={'cas': 'http://www.yale.edu/tp/cas'}):
             email = tree.find('.//cas:mail', namespaces={'cas': 'http://www.yale.edu/tp/cas'}).text
             cas_attributes = tree.findall('.//cas:attributes/*', namespaces={'cas': 'http://www.yale.edu/tp/cas'})
-        
+
             attributes_dict = {}
             for attribute in cas_attributes:
                 tag_parts = attribute.tag.split('}')
                 local_tag = tag_parts[-1]
+
                 if local_tag in ['sn', 'givenName', 'mail']:
                     attributes_dict[local_tag] = attribute.text
+                    
+                # elif local_tag == 'memberOf':
+                #     if 'memberOf' not in attributes_dict:
+                #         attributes_dict['memberOf'] = []
+                #     attributes_dict['memberOf'].append(attribute.text)
             
+            # --- ADD THIS LINE TO PRINT TO YOUR CONSOLE ---
+            # print("\n=== CAS ATTRIBUTES ===", attributes_dict, "\n")
+
+
             normalized_email = email.lower()
             user, created = get_user_model().objects.get_or_create(email=normalized_email, 
                                                                    defaults={'first_name': attributes_dict['givenName'], 'last_name': attributes_dict['sn']})
+
+            # user, created = get_user_model().objects.get_or_create(email=normalized_email, 
+            #                                                        defaults={'first_name': attributes_dict['givenName'], 'last_name': attributes_dict['sn'], 'Laboratory': attributes_dict.get('memberOf')})
+            
             user_data = get_formatted_user(user) if user is not None else {}
             user.backend = 'django.contrib.auth.backends.ModelBackend' 
             login(request, user)
