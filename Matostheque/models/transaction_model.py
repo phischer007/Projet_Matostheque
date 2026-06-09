@@ -46,7 +46,7 @@ class Transactions(models.Model):
     location = models.TextField()
     
     # A message associated with the transaction
-    message = models.TextField()
+    message = models.TextField(null=True,blank=True)
     
     # The current status of the transaction
     transaction_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=PENDING_STATUS)

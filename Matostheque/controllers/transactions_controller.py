@@ -30,6 +30,9 @@ def on_create_transaction(request):
         data = request.data
         # Serializing related material data
         material = get_material(data['material'])
+        # remove the quantity if the quantity is empty
+        if data.get("transaction_quantity") == "":
+            del data["transaction_quantity"]
         # Select a type depending on the type of the material
         if material.type == "CONSUMABLES":
             data["type"] = "Donation"

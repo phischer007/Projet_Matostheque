@@ -76,7 +76,7 @@ const NewLoanCard = (props) => {
                     <TextField
                       {...params}
                       variant="standard"
-                      label="Materials"
+                      label="Materials *"
                       placeholder="Select a material"
                       margin="normal"
                       fullWidth
@@ -89,12 +89,18 @@ const NewLoanCard = (props) => {
               <Grid xs={12} sm={6}>
                 <LocalizationProvider>
                   <DatePicker
-                    label="Start Date"
+                    label="Start Date *"
                     value={startDate}
                     onChange={handleStartDateChange}
                     minDate={new Date()}
                     fullWidth
                     format="dd/MM/yyyy"
+                    slotProps={{
+                      textField: {
+                        error: formErrors.startDate,
+                        helperText: formErrors.startDate ? "La date de debut est obligatoire" : "",
+                      },
+                    }}
                   />
                 </LocalizationProvider>
               </Grid>
@@ -102,13 +108,19 @@ const NewLoanCard = (props) => {
                 <Grid xs={12} sm={6}>
                   <LocalizationProvider>
                     <DatePicker
-                      label="End Date"
+                      label="End Date *"
                       value={endDate}
                       onChange={handleEndDateChange}
                       minDate={startDate || new Date()}
                       maxDate={maxDate }
                       fullWidth
                       format="dd/MM/yyyy"
+                      slotProps={{
+                        textField: {
+                          error: formErrors.endDate,
+                          helperText: formErrors.endDate ? "La date de fin est obligatoire" : "",
+                        },
+                      }}
                     />
                   </LocalizationProvider>
                 </Grid>
@@ -173,7 +185,6 @@ const NewLoanCard = (props) => {
               >
                 <TextField
                   fullWidth
-                  required
                   label="Note to Owner"
                   name="message"
                   onChange={handleChange}

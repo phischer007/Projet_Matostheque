@@ -37,7 +37,8 @@ export const useNewLoanHandlers = (props) => {
     duration: null,
     borrower: user ? user.user_id : null,
     location: null,
-    transaction_quantity : null
+    message:null,
+    transaction_quantity : 1
   });
   
   const [message, setMessage] = useState({
@@ -202,8 +203,8 @@ export const useNewLoanHandlers = (props) => {
       // Check if each field is empty and set error state accordingly
       const newErrors = {
         material: data.material === null,
-        startDate: data.transaction_date === null,
-        endDate: endDate === null && selectedMaterial.type === "LAB_SUPPLIES",
+        startDate: !(startDate instanceof Date) || isNaN(startDate.getTime()),
+        endDate: !(endDate instanceof Date) || isNaN(endDate.getTime()) && (selectedMaterial && selectedMaterial.type === "LAB_SUPPLIES") ,
         location: data.location === null,
         formation_required: formation_required !== true,
       };
@@ -259,7 +260,7 @@ export const useNewLoanHandlers = (props) => {
           });
         }
       }
-    }, [formData, router]);
+    }, [formData, formErrors, endDate, selectedMaterial, formation_required, notifyInvolvedParties, user, router]);
 
   //Event handlers on effect
   useEffect(() => {
@@ -274,7 +275,6 @@ export const useNewLoanHandlers = (props) => {
 
   useEffect(() => {
     if (props.selectedMaterial) {
-      console.log(1)
       const record = materialsArray.find(item => item.material_id === props.selectedMaterial);
 
       setSelectedMaterial(record);
