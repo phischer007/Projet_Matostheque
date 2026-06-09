@@ -136,9 +136,9 @@ def material_list_per_owner(request, pk):
 @api_view(['GET'])
 def latest_material(request):
     materials = []
-    if Materials.objects.exists():
+    if Materials.objects.filter(available_for_transaction=True,trust_circle__in=request.user.laboratory.trust_circles.all()).exists():
         i = 0
-        for material in Materials.objects.order_by('-created_at')[:4]:
+        for material in Materials.objects.filter(available_for_transaction=True,trust_circle__in=request.user.laboratory.trust_circles.all()).order_by('-created_at')[:4]:
             materials.append({})
             materials[i]["material_id"] = material.material_id
             materials[i]["available_for_transaction"] = material.available_for_transaction
