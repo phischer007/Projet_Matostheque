@@ -54,6 +54,7 @@ export const useNewMaterialHandlers = (data) => {
   const [isMovable, setisMovable] = useState(false);
   const [is_formation_required, setis_formation_required] = useState(false);
   const [trust_circleList, setTrust_circle] = useState(null);
+  const [condition, setCondition] = useState(null)
   const [expandedSections, setExpandedSections] = useState({
     general: true,
     supplier: true,
@@ -71,11 +72,11 @@ export const useNewMaterialHandlers = (data) => {
     owner: null,
     trust_circle:null,
     origin: null,
-    loan_duration: null,
+    loan_duration: 30,
     code_nacre: null,
     purchase_price: null,
     type: null,
-    quantity_available: null,
+    quantity_available: 1,
     expiration_date: null,
     manual_link: null,
     datasheet_link: null,
@@ -98,6 +99,7 @@ export const useNewMaterialHandlers = (data) => {
         location: false,
         type : false,
         sub_type:false,
+        condition:false,
   });
 
 
@@ -125,6 +127,14 @@ export const useNewMaterialHandlers = (data) => {
   const handleis_formation_requiredBoxChange = useCallback(() => {
     setis_formation_required((prevState) => !prevState);
   }, []);
+
+  const handleCondition = useCallback(() => {
+    setCondition((prevState) => !prevState)
+    setFormErrors(prev => ({
+      ...prev,
+      condition: false,
+    }));
+  })
 
 
 
@@ -209,7 +219,6 @@ const handleChangeNum = useCallback((event) => {
     async (e) => {
       e.preventDefault();
       setIsUploading(true);
-
       if (codeError) {
         toast.error("Please use a valid Code NACRE format.", { autoClose: false });
         return
@@ -218,16 +227,18 @@ const handleChangeNum = useCallback((event) => {
       const images = Array.from(formData.images);
       const compressedImages = images ? await compressAndUploadImages(images) : null;
       const newErrors = {
-        title: formData.material_title === null,
-        description: formData.description === null,
+        title: formData.material_title === null || formData.material_title.trim() === '',
+        description: formData.description === null || formData.material_title.trim() === '',
         owner: selectedOwner === null,
-        trust_circle: formData.trust_circle == null,
-        location: formData.origin === null,
+        trust_circle: formData.trust_circle === null,
+        location: formData.origin === null || formData.material_title.trim() === '',
         type : formData.type === null,
         sub_type: formData.sub_type === null,
+        condition: condition !== true,
       };
       //TODO: Add error for consummables
       setFormErrors(newErrors);
+      console.log(newErrors)
       if (!Object.values(newErrors).some(error => error)) {
         // try {
           //creating a new FormData to allow sending pictures
@@ -324,7 +335,7 @@ const handleChangeNum = useCallback((event) => {
 
       setIsUploading(false);
 
-    }, [formData, router, codeError, selectedOwner]);
+    }, [formData, router, codeError, selectedOwner, condition]);
   
     const filterOptions = useCallback((value) => {
       const inputWords = value.toLowerCase().split(' ');
@@ -476,5 +487,7 @@ const handleChangeNum = useCallback((event) => {
     isMovable,
     handleDateChange,
     trust_circleList,
+    condition,
+    handleCondition
   };
 };

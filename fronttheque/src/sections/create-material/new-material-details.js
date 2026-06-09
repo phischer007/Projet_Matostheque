@@ -73,8 +73,9 @@ const NewMaterialDetails = (props) => {
     handleisMovableBoxChange,
     isMovable,
     handleDateChange,
-    trust_circleList
-
+    trust_circleList,
+    condition,
+    handleCondition
 
   } = useNewMaterialHandlers(ownersArray);
 
@@ -158,38 +159,54 @@ const NewMaterialDetails = (props) => {
                     error={formErrors.description}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <FormControl fullWidth>
-                    {trust_circleList &&
-                      <Select
-                        labelId="trust_circle-label"
-                        name="trust_circle"
-                        required
-                        value={formData.trust_circle || ''}
-                        error={formErrors.trust_circle}
-                        onChange={handleChange}
-                        displayEmpty
-                        renderValue={(value) => (
-                          <Typography
-                            variant="subtitle2"
-                            style={{
-                              fontFamily: 'inherit',
-                              color: value ? 'inherit' : theme.palette.text.secondary
+                <Grid container xs={12} sm={6}>
+                  {/* Quantity Input */}
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Quantity"
+                      name="quantity_available"
+                      defaultValue={1}
+                      value={formData.quantity_available || "" }
+                      onChange={formData.type === "CONSUMABLES" ? handleChangeNumDec : handleChangeNum}
+                      inputProps={{
+                        inputMode: "decimal", // clavier numérique mobile
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} >
+                    <FormControl fullWidth>
+                      {trust_circleList &&
+                        <Select
+                          labelId="trust_circle-label"
+                          name="trust_circle"
+                          required
+                          value={formData.trust_circle || ''}
+                          error={formErrors.trust_circle}
+                          onChange={handleChange}
+                          displayEmpty
+                          renderValue={(value) => (
+                            <Typography
+                              variant="subtitle2"
+                              style={{
+                                fontFamily: 'inherit',
+                                color: value ? 'inherit' : theme.palette.text.secondary
 
-                            }}
-                          >
-                            {value ? trust_circleList.find(type => type.trust_circle_id === value).trust_circle_name : 'Trust Circle *'}
-                          </Typography>
-                        )}
-                      >
-                        {trust_circleList.map((trust_circle) => (
-                          <MenuItem key={trust_circle.trust_circle_id} value={trust_circle.trust_circle_id}>
-                            {trust_circle.trust_circle_name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    }
-                  </FormControl>
+                              }}
+                            >
+                              {value ? trust_circleList.find(type => type.trust_circle_id === value).trust_circle_name : 'Trust Circle *'}
+                            </Typography>
+                          )}
+                        >
+                          {trust_circleList.map((trust_circle) => (
+                            <MenuItem key={trust_circle.trust_circle_id} value={trust_circle.trust_circle_id}>
+                              {trust_circle.trust_circle_name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      }
+                    </FormControl>
+                  </Grid>
                 </Grid>
               </Grid>
             </AccordionDetails>
@@ -386,6 +403,7 @@ const NewMaterialDetails = (props) => {
                     <TextField
                       label="Allowed Loan Duration"
                       name="loan_duration"
+                      defaultValue={30}
                       value={formData.loan_duration || ''}
                       onChange={handleChangeNum}
                       error={formErrors.loan_duration}
@@ -666,20 +684,6 @@ const NewMaterialDetails = (props) => {
 
                   </>)}
                 </Grid>*/}
-
-                  {/* Quantity Input */}
-                  <Grid item xs={12}>
-                    <TextField
-                      fullWidth
-                      label="Quantity"
-                      name="quantity_available"
-                      value={formData.quantity_available || "" }
-                      onChange={formData.type === "CONSUMABLES" ? handleChangeNumDec : handleChangeNum}
-                      inputProps={{
-                        inputMode: "decimal", // clavier numérique mobile
-                      }}
-                    />
-                  </Grid>
               </Grid>
             </AccordionDetails>
           </Accordion>
@@ -840,17 +844,34 @@ const NewMaterialDetails = (props) => {
             Note that you can only upload a maximum of two photos at a time!
         </Typography>
         <Divider />
+        <Grid>
+          <Checkbox
+            name="condition"
+            checked={condition}
+            onChange={handleCondition}
+            error={formErrors.condition}
+            color="primary"
+            inputProps={{ 'aria-label': 'checkbox' }}
+          />
+          <Typography variant="caption" color="textSecondary"
+            style={{
+              color: !formErrors.condition ? "black" : "red",
+              fontWeight: !formErrors.condition ? "normal" : "bold",
+            }}>
+            By filling out this form, I certify my management’s agreement for the provision of scientific equipment.
+          </Typography>
 
-        <CardActions sx={{ justifyContent: 'flex-end' }}>
-          {/* Create button */}
-          <Button type="submit" variant="contained">
-            Create
-          </Button>
-          {/* Loading indicator */}
-          {isUploading && (
-            <Loading message={'Uploading'} />
-          )}
-        </CardActions>
+          <CardActions sx={{ justifyContent: 'flex-end' }}>
+            {/* Create button */}
+            <Button type="submit" variant="contained">
+              Create
+            </Button>
+            {/* Loading indicator */}
+            {isUploading && (
+              <Loading message={'Uploading'} />
+            )}
+          </CardActions>
+        </Grid>
       </Card>
     </form>
   );
