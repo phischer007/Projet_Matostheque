@@ -16,7 +16,7 @@ export const AccountProfileDetails = (user) => {
   const [formData, setFormData] = useState({
     first_name: null,
     last_name: null,
-    contact: null,
+    //contact: null,
     role: null
   });
 
@@ -100,7 +100,7 @@ export const AccountProfileDetails = (user) => {
     setFormData({
       first_name: values.first_name,
       last_name: values.last_name,
-      contact: values.owner_contact,
+      //contact: values.owner_contact,
       role: values.role
     });
   }, [values]);
@@ -155,7 +155,6 @@ export const AccountProfileDetails = (user) => {
                   fullWidth
                   label="Email Address"
                   name="email"
-                  onChange={handleChange}
                   disabled
                   value={values.email}
                 />
@@ -165,15 +164,22 @@ export const AccountProfileDetails = (user) => {
                 md={6}
               >
                 <TextField
+                  fullWidth
+                  label="Laboratory"
+                  name="laboratory"
+                  disabled
+                  value={values.laboratory_name}
+                />
+                {/*<TextField
                   type="number"
                   fullWidth
                   label="Phone Number"
                   name="owner_contact"
                   onChange={handleChange}
                   value={values.owner_contact}
-                  placeholder='Ex. 0612354525'
+                  placeholder="Ex. 0612354525"
                   InputLabelProps={{ shrink: true }}
-                />
+                />*/}
               </Grid>
               <Grid
                 xs={12}

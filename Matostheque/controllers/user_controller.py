@@ -18,13 +18,13 @@ def get_formatted_user(user):
         "user_id": user.user_id,
         "last_name": user.last_name,
         "first_name": user.first_name,
-        "phone_number": user.phone_number,
         "role": user.role,
         "is_active": user.is_active,
         "is_staff": user.is_staff,
         "email": user.email,
         "profil_pic": user.profil_pic,
         "laboratory_address": user.laboratory.laboratory_address,
+        "laboratory_name": user.laboratory.laboratory_name,
     }
     
     return user_details

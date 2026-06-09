@@ -26,7 +26,7 @@ class CustomUserAdmin(UserAdmin):
     # Group fields into sections for better organization in the admin interface
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'role', 'phone_number','laboratory')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'role', 'laboratory')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined', 'updated_at')}),
     )
@@ -35,7 +35,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2','phone_number', 'laboratory', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}
+            'fields': ('email', 'password1', 'password2', 'laboratory', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}
         ),
     )
     
