@@ -9,7 +9,7 @@ import {
   TextField,
   Autocomplete,
   Alert,
-  Unstable_Grid2 as Grid
+  Unstable_Grid2 as Grid, Checkbox, Typography
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -38,7 +38,9 @@ const NewLoanCard = (props) => {
     handleChangeNum,
     handleChangeNumDec,
     maxDate,
-    events
+    events,
+    formation_required,
+    handleFormation_required,
   } = useNewLoanHandlers(props);
 
   return (
@@ -191,6 +193,25 @@ const NewLoanCard = (props) => {
             </Grid>
           </Box>
         </CardContent>
+        {selectedMaterial && selectedMaterial.is_formation_required &&(
+          <Grid>
+            <Checkbox
+              name="formation_required"
+              checked={formation_required}
+              onChange={handleFormation_required}
+              error={formErrors.formation_required}
+              color="primary"
+              inputProps={{ 'aria-label': 'checkbox' }}
+            />
+            <Typography variant="caption" color="textSecondary"
+              style={{
+                color: !formErrors.formation_required ? "black" : "red",
+                fontWeight: !formErrors.formation_required ? "normal" : "bold",
+              }}>
+              I certify that I have the necessary skills and training to handle this equipment safely.
+            </Typography>
+          </Grid>
+        )}
 
         <Divider />
         

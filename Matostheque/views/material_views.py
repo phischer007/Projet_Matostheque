@@ -51,7 +51,8 @@ def get_materials_lite(request):
         'validation', 
         'user_id',
         'type',
-        'quantity_available'
+        'quantity_available',
+        'is_formation_required'
     ) 
 
     return JsonResponse(list(selected_materials), safe=False)

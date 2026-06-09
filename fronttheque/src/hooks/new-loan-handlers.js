@@ -21,13 +21,14 @@ export const useNewLoanHandlers = (props) => {
   const [selectedMaterial, setSelectedMaterial] = useState(null);
   const { addNotification } = useNotification();
   const [maxDate, setMaxDate] = useState(null);
+  const [formation_required, setFormation_required] = useState(null)
 
   const [formErrors, setFormErrors] = useState({
     material: false,
     startDate: false,
     endDate: false,
     location: false,
-    message: false,
+    formation_required: false,
   });
 
   const [formData, setFormData] = useState({
@@ -43,6 +44,15 @@ export const useNewLoanHandlers = (props) => {
     status: null,
     value: ''
   });
+
+  const handleFormation_required = () => {
+    setFormation_required((prevState) => !prevState)
+    setFormErrors(prev => ({
+      ...prev,
+      formation_required: false,
+    }));
+    console.log('dvsdfs')
+  }
 
   //Functions to handle the form submission
   const handleStartDateChange = (date) => {
@@ -195,7 +205,7 @@ export const useNewLoanHandlers = (props) => {
         startDate: data.transaction_date === null,
         endDate: endDate === null && selectedMaterial.type === "LAB_SUPPLIES",
         location: data.location === null,
-        message: false,
+        formation_required: formation_required !== true,
       };
 
       setFormErrors(newErrors);
@@ -305,6 +315,8 @@ export const useNewLoanHandlers = (props) => {
     handleChangeNum,
     handleChangeNumDec,
     maxDate,
-    events
+    events,
+    formation_required,
+    handleFormation_required,
   };
 };
