@@ -6,7 +6,8 @@ from django.contrib.auth import get_user_model
 from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404
 
-from Matostheque.models.material_model import Materials 
+from Matostheque.models.laboratory_model import Service
+from Matostheque.models.material_model import Materials
 from Matostheque.models.transaction_model import Transactions
 from Matostheque.serializers import TransactionSerializer
 from Matostheque.serializers import MaterialSerializer
@@ -110,8 +111,12 @@ def on_create_material(request):
     mutable_data = request.POST.copy()
     mutable_data["available_for_transaction"] = "true"
     user = get_user_model().objects.get(pk=mutable_data["user"])
+    # check if the user is creating a material for someon of his lab
     if request.user.laboratory != user.laboratory:
         return JsonResponse({'message': "You can't create a material for this owner"},status=status.HTTP_400_BAD_REQUEST)
+    # check if the service the material is part is part of the user service
+    if "service" in mutable_data and not Service.objects.get(pk=int(mutable_data["service"])).laboratories.all().contains(request.user.laboratory):
+        return JsonResponse({'message': "You can't create a material for this service"},status=status.HTTP_400_BAD_REQUEST)
     # Serializing the data
     material_serializer = MaterialSerializer(data=mutable_data)
 

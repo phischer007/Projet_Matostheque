@@ -14,7 +14,7 @@ from rest_framework import status
 
 from Matostheque.models import CustomUsers
 from Matostheque.models.material_model import Materials
-from Matostheque.serializers import UserSerializer
+from Matostheque.serializers import UserSerializer, ServiceSerializer
 from Matostheque.controllers.emails_controller import send_registration_email
 from Matostheque.controllers.user_controller import *
 
@@ -156,10 +156,6 @@ def changeActivity(request,pk):
             status=status.HTTP_403_FORBIDDEN
         )
     try:
-        user = get_user_model().objects.get(pk=pk)
-    except Exception:
-        return JsonResponse({'message': 'User not found!'}, status=status.HTTP_404_NOT_FOUND)
-    try:
         data = json.loads(request.body)
         user.is_active = data.get("is_active")
         user.save()
@@ -174,6 +170,10 @@ def active_owners_lite(request):
     users = CustomUsers.objects.filter(is_active=True,role='owner', laboratory=request.user.laboratory)
     data = get_lite_Users(users)
     return JsonResponse(data, safe=False)
+
+@login_required
+def my_services(request):
+    return JsonResponse(ServiceSerializer(request.user.laboratory.services, many=True).data, safe=False)
 
 # --------------------------------------------------------------------------
 # AUTHENTICATION & SESSION

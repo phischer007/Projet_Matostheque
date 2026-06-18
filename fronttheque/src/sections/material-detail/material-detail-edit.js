@@ -43,6 +43,7 @@ export const MaterialDetailEdit = (props) => {
   const [selectSubType, setSelectedSubType] = useState(null);
   const [expiration_date, setexpiration_date] = useState(null);
   const [trust_circleList, setTrust_circle] = useState(null);
+  const [serviceList, setServiceList] = useState(null)
   const [formErrors, setFormErrors] = useState({
         title: false,
         description: false,
@@ -139,6 +140,17 @@ const handleChangeNum = useCallback((event) => {
         }
       })
       .catch(error => console.error('Error fetching data:', error));
+    fetch(`${config.apiUrl}/services/`,{
+      credentials: 'include'// Add this so the session cookie is sent!
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Sort the data alphabetically by material_title
+        if (data) {
+            setServiceList(data);
+        }
+      })
+      .catch(error => console.error('Error fetching data:', error));
   }, []);
 
   const handleSubmit = useCallback(
@@ -175,6 +187,7 @@ const handleChangeNum = useCallback((event) => {
           { key: 'quantity_available', value: formData.quantity_available },
           { key: 'is_Movable', value: formData.is_Movable },
           { key: 'is_formation_required', value: formData.is_formation_required },
+          { key: 'service', value: formData.service },
         ];
 
         // Append additional fields based on specific conditions
@@ -348,6 +361,47 @@ const handleChangeNum = useCallback((event) => {
                           />
                         </Grid>
                   )}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                {isFormDisabled && formData.type &&(
+                  <TextField
+                    fullWidth
+                    label="Contact person"
+                    disabled={isFormDisabled}
+                    value={formData.service.service_name}
+                    InputLabelProps={{ shrink: true }}
+                  />
+                )}
+                {(!isFormDisabled && serviceList && formData.type) &&
+                  <Select
+                    fullWidth
+                    labelId="service-select"
+                    name="service"
+                    onChange={handleChange}
+                    value={formData.service}
+                    displayEmpty
+                    renderValue={(value) => (
+                      <Typography
+                        variant="subtitle2"
+                        style={{
+                          fontFamily: 'inherit',
+                          color: value ? 'inherit' : theme.palette.text.secondary
+                        }}
+                      >
+                        {value ? serviceList.find(service => service.service_id
+                          === value).service_name : 'Service'}
+                      </Typography>
+                    )}
+                  >
+                    <MenuItem key={null} value={null}>
+                      No services
+                    </MenuItem>
+                    {serviceList.map((service) => (
+                      <MenuItem key={service.service_id} value={service.service_id}>
+                        {service.service_name}
+                      </MenuItem>
+                    ))}
+                  </Select>}
               </Grid>
               <Grid
                 xs={12}

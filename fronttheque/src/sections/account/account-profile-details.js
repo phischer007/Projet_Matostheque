@@ -1,5 +1,19 @@
 import { useCallback, useState, useEffect } from 'react';
-import {Box,Button,Card,CardActions,CardContent,CardHeader,Divider,TextField,Switch,Typography,Checkbox,Unstable_Grid2 as Grid} from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Divider,
+  TextField,
+  Switch,
+  Typography,
+  Checkbox,
+  Unstable_Grid2 as Grid,
+  FormControl, Select, MenuItem
+} from '@mui/material';
 import { toast } from 'react-toastify';
 import config from 'src/utils/config';
 import { useAuth } from 'src/hooks/use-auth';
@@ -13,12 +27,28 @@ export const AccountProfileDetails = (user) => {
   });
 
   const [isChecked, setIsChecked] = useState(values.role == "owner"? true : false);
+  const [serviceList, setServiceList] = useState(null)
   const [formData, setFormData] = useState({
     first_name: null,
     last_name: null,
     //contact: null,
-    role: null
+    role: null,
+    service: null
   });
+
+  useEffect(() => {
+    fetch(`${config.apiUrl}/services/`,{
+      credentials: 'include'// Add this so the session cookie is sent!
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Sort the data alphabetically by material_title
+        if (data) {
+            setServiceList(data);
+        }
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
 
   const handleToggleChange = () => {
     setIsChecked(!isChecked);
@@ -101,7 +131,8 @@ export const AccountProfileDetails = (user) => {
       first_name: values.first_name,
       last_name: values.last_name,
       //contact: values.owner_contact,
-      role: values.role
+      role: values.role,
+      service: values.service
     });
   }, [values]);
   
@@ -181,6 +212,38 @@ export const AccountProfileDetails = (user) => {
                   InputLabelProps={{ shrink: true }}
                 />*/}
               </Grid>
+              <Grid item xs={12} >
+                    <FormControl fullWidth>
+                      {serviceList &&
+                        <Select
+                          labelId="service-label"
+                          name="service"
+                          required
+                          value={formData.service || ''}
+                          onChange={handleChange}
+                          displayEmpty
+                          renderValue={(value) => (
+                            <Typography
+                              variant="subtitle2"
+                              style={{
+                                fontFamily: 'inherit',
+                                color: 'inherit'
+
+                              }}
+                            >
+                              {value ? serviceList.find(service => service.service_id === value).service_name : 'Service'}
+                            </Typography>
+                          )}
+                        >
+                          {serviceList.map((service) => (
+                            <MenuItem key={service.service_id} value={service.service_id}>
+                              {service.service_name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      }
+                    </FormControl>
+                  </Grid>
               <Grid
                 xs={12}
                 md={6}

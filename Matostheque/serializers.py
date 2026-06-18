@@ -5,6 +5,8 @@ from Matostheque.models.trust_circle_modele import TrustCircle
 from Matostheque.models.user_model import CustomUsers
 from Matostheque.models.notification_model import Notifications
 from Matostheque.models.comment_model import Comments
+from Matostheque.models.laboratory_model import Laboratory,Service
+
  
 # Here, we're defining special kind of class called 'serializers'. 
 # These classes help us convert complex data from our models into a format that can be easily transferred over the web.
@@ -39,6 +41,16 @@ class CommentSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = Comments
+        fields = '__all__'
+
+class LaboratorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Laboratory
+        fields = '__all__'
+
+class ServiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Service
         fields = '__all__'
 
 class TrustCircleSerializer(serializers.ModelSerializer):

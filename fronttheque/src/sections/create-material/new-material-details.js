@@ -76,7 +76,8 @@ const NewMaterialDetails = (props) => {
     handleDateChange,
     trust_circleList,
     condition,
-    handleCondition
+    handleCondition,
+    serviceList
 
   } = useNewMaterialHandlers(ownersArray);
 
@@ -490,58 +491,58 @@ const NewMaterialDetails = (props) => {
                   </Grid>
                 </Grid>
 
-                {/* <Grid item xs={12} sm={6}>
-                  <Select
-                    fullWidth
-                    labelId="team-select"
-                    name="team"
-                    onChange={handleChange}
-                    value={formData.team}
-                    MenuProps={{
-                      PaperProps: {
-                        style: {
-                          maxHeight: '200px',
-                          overflowY: 'auto',
-                          // width: '150px', // Adjust the width of the dropdown menu
-                          // padding: '0px', // Reduce extra padding around the menu
-                        },
-                      },
-                    }}
-                    sx={{
-                      '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: formErrors.team ? 'red' : null,
-                      },
-                      '&:hover': {
-                        '& .MuiOutlinedInput-notchedOutline': {
-                          borderColor: 'transparent',
-                        },
-                      },
-                    }}
-                    displayEmpty
-                    renderValue={(selected) => (
-                      <Typography
-                        variant="subtitle2"
-                        style={{
-                          fontFamily: 'inherit',
-                          color: selected ? 'inherit' : theme.palette.text.secondary
-                        }}
-                      >
-                        {selected || 'Select your team'}
-                      </Typography>
-                    )}
-                  >
-                    {teams.map((team, index) => (
-                      <MenuItem key={index} value={team}
-                        // sx={{
-                        //   minHeight: '30px', // Reduce height of individual menu items
-                        //   padding: '4px 8px', // Compact padding for each menu item
-                        // }}
-                      >
-                        {team}
+                <Grid item xs={12} sm={6}>
+                  {serviceList &&
+                    <Select
+                      fullWidth
+                      labelId="service-select"
+                      name="service"
+                      onChange={handleChange}
+                      value={formData.service}
+                      // MenuProps={{
+                      //   PaperProps: {
+                      //     style: {
+                      //       maxHeight: '200px',
+                      //       overflowY: 'auto',
+                      //       // width: '150px', // Adjust the width of the dropdown menu
+                      //       // padding: '0px', // Reduce extra padding around the menu
+                      //     },
+                      //   },
+                      // }}
+                      // sx={{
+                      //   '& .MuiOutlinedInput-notchedOutline': {
+                      //     borderColor: formErrors.team ? 'red' : null,
+                      //   },
+                      //   '&:hover': {
+                      //     '& .MuiOutlinedInput-notchedOutline': {
+                      //       borderColor: 'transparent',
+                      //     },
+                      //   },
+                      // }}
+                      displayEmpty
+                      renderValue={(value) => (
+                        <Typography
+                          variant="subtitle2"
+                          style={{
+                            fontFamily: 'inherit',
+                            color: value ? 'inherit' : theme.palette.text.secondary
+                          }}
+                        >
+                          {value ? serviceList.find(service => service.service_id
+                            === value).service_name : 'Service'}
+                        </Typography>
+                      )}
+                    >
+                      <MenuItem key={null} value={null}>
+                        No services
                       </MenuItem>
-                    ))}
-                  </Select>
-                </Grid> */}
+                      {serviceList.map((service) => (
+                        <MenuItem key={service.service_id} value={service.service_id}>
+                          {service.service_name}
+                        </MenuItem>
+                      ))}
+                    </Select>}
+                </Grid>
 
 {/*                <Grid item xs={12} sm={6}>
                   <Select

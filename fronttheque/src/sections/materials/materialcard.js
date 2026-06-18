@@ -45,7 +45,7 @@ export const MaterialsCard = (props) => {
               variant="overline"
               size="small"
             >
-              {material.user_first_name + " " + material.user_last_name}
+              {material.service_name ? material.service_name : material.user_first_name + " " + material.user_last_name}
             </Typography>
             <Avatar
               sx={{

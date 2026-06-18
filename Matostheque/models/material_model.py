@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 
+from Matostheque.models.laboratory_model import Service
+
 GENERAL_TYPE_CHOICES = [
     ('LAB_SUPPLIES', 'Lab Supplies'),
     ('CONSUMABLES', 'Consumables'),
@@ -104,9 +106,14 @@ class Materials(models.Model):
     # A flag indicating whether the material is available for transaction or not.
     available_for_transaction = models.BooleanField(default=True)
 
+    # if the material is movable or not
     is_Movable = models.BooleanField(default=False)
 
+    # If the material require a formation to be used
     is_formation_required = models.BooleanField(default=False)
+
+    # The service the material belongs to
+    service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True, blank=True)
 
     # The NACRE code for the material.
     code_nacre = models.CharField(max_length=10, null=True, blank=True)

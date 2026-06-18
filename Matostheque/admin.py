@@ -6,7 +6,7 @@ from Matostheque.models.transaction_model import Transactions
 from Matostheque.models.notification_model import Notifications
 from Matostheque.models.comment_model import Comments
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models.laboratory_model import Laboratory
+from .models.laboratory_model import Laboratory, Service
 from .models.trust_circle_modele import TrustCircle
 from .models.user_model import CustomUsers
 
@@ -105,6 +105,11 @@ class TrustCircleAdmin(admin.ModelAdmin):
     # Set a custom description for the owner field in the admin interface
     readonly_fields = ('created_at',)
 
+class ServiceAdmin(admin.ModelAdmin):
+    # Define which fields to display in the list view and provide filtering options
+    list_display = ("service_name","laboratories")
+    list_filter = ("service_name","laboratories")
+
 # Registering the models
 admin.site.register(CustomUsers, CustomUserAdmin)
 admin.site.register(Materials, MaterialsAdmin)
@@ -113,3 +118,4 @@ admin.site.register(Notifications, NotificationsAdmin)
 admin.site.register(Comments, CommentsAdmin)
 admin.site.register(Laboratory, LaboratoryAdmin)
 admin.site.register(TrustCircle,TrustCircleAdmin)
+admin.site.register(Service, ServiceAdmin)

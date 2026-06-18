@@ -24,6 +24,7 @@ def get_materials(request):
         'sub_type',
         'is_Movable',
         'is_formation_required',
+        service_name=F('service__service_name'),
         user_first_name=F('user__first_name'),
         user_last_name=F('user__last_name'),
         user_email=F('user__email'),
@@ -95,6 +96,8 @@ def material_detail(request, pk):
                 return JsonResponse({'message': "You can't change the id of the materials"},status=status.HTTP_400_BAD_REQUEST)
             if request.user.laboratory != material.user.laboratory:
                 return JsonResponse({'message': "You can't give a material for this owner"},status=status.HTTP_400_BAD_REQUEST)
+            if "service" in material_data and not Service.objects.get(pk=int(material_data["service"])).laboratories.all().contains(request.user.laboratory):
+                return JsonResponse({'message': "You can't create a material for this service"},status=status.HTTP_400_BAD_REQUEST)
 
             material_serializer = MaterialSerializer(material, data=material_data, partial=True)
             if material_serializer.is_valid():

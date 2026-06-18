@@ -52,6 +52,8 @@ urlpatterns = [
 
     path('trust_circle/', trust_circle_views.my_trust_circle),
 
+    path('services/',user_views.my_services),
+
     #path('login/', user_views.api_login, name='api_login'),
     #path('register/', user_views.api_register, name='api_register'),
     #path('logout/', user_views.api_logout, name='api_logout'),

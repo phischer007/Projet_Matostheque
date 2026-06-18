@@ -11,7 +11,6 @@ def get_formatted_user(user):
     Returns:
         user_details (dict): A dictionary containing the user's details.
     """
-    #ToDO ajouter les labs auquelles il appartient
 
     # Initialize a dictionary to store the user's details
     user_details = {
@@ -25,6 +24,7 @@ def get_formatted_user(user):
         "profil_pic": user.profil_pic,
         "laboratory_address": user.laboratory.laboratory_address,
         "laboratory_name": user.laboratory.laboratory_name,
+        "service": user.service.service_id,
     }
     
     return user_details

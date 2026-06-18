@@ -6,7 +6,7 @@ from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser
 
 from Matostheque.managers import CustomUserManager
-from Matostheque.models.laboratory_model import Laboratory
+from Matostheque.models.laboratory_model import Laboratory, Service
 
 
 class CustomUsers(AbstractBaseUser, PermissionsMixin):
@@ -27,6 +27,9 @@ class CustomUsers(AbstractBaseUser, PermissionsMixin):
 
     # The laboratory of the user
     laboratory = models.ForeignKey(Laboratory, on_delete=models.CASCADE, null=True, blank=True)
+
+    # The service the user belongs to
+    service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True, blank=True)
     
     # The email address of the user.
     email = models.EmailField(unique=True)
