@@ -37,28 +37,30 @@ export const useTransactionHandlers = (props) => {
     }, [user, transactionData]);
 
     const notifyInvolvedParties = useCallback((data) => {
-        const { owner_user_id, borrower_id, ownerMessage, borrowerMessage, priority, title, loan } = data;
+        const { owner_user_id, borrower_id, ownerMessage, borrowerMessage, priority, title, loan, to_notify } = data;
         const { owner_priority, borrower_priority } = priority;
-        const ownerNotification = {
+        if (to_notify === 'cancel' || to_notify === 'all') {
+          const ownerNotification = {
             message: ownerMessage,
             notificationType: 'Event',
             user: owner_user_id,
             priority: owner_priority,
             title: title,
             transaction_id: loan
+          };
+          addNotification(ownerNotification);
 
-        };
-        const borrowerNotification = {
+        }
+        if (to_notify === 'approve' || to_notify === 'reject' || to_notify === 'closed' || to_notify === 'all'){
+          const borrowerNotification = {
             message: borrowerMessage,
             notificationType: 'Event',
             user: borrower_id,
             priority: borrower_priority,
             title: title,
             transaction_id: loan
-        };
-        if (owner_user_id !== borrower_id) {
-            addNotification(ownerNotification);
-            addNotification(borrowerNotification);
+          };
+          addNotification(borrowerNotification);
         }
 
     }, [addNotification]);
@@ -93,7 +95,8 @@ export const useTransactionHandlers = (props) => {
                     borrowerMessage: borrowerMessage,
                     priority: priority,
                     title: title,
-                    loan: transactionId
+                    loan: transactionId,
+                    to_notify:type
                 });
     
                 setTimeout(() => {

@@ -169,7 +169,7 @@ export const useNewLoanHandlers = (props) => {
 
   const notifyInvolvedParties = useCallback((data) => {
     const { owner_user_id, borrower_id, borrower_name, material_title, validation, loan } = data;
-    let borrowerMessage = validation ? `Your request to borrow: ${material_title} is waiting for approval.` : `You successfully booked the material: ${material_title}.`;
+    //The owner receive a notification
     let ownerMessage = validation ? `You have a new pending request: ${material_title}` : ` ${borrower_name} has booked your material: ${material_title}.`;
 
     const ownerNotification = {
@@ -180,18 +180,22 @@ export const useNewLoanHandlers = (props) => {
         title: 'New Request',
         transaction_id: loan
     };
+    addNotification(ownerNotification);
 
-    const borrowerNotification = {
+    // the borrower receive a notification if no validation is needed
+    if (validation === false) {
+      let borrowerMessage = `You successfully booked the material: ${material_title}.`;
+      const borrowerNotification = {
         message: borrowerMessage,
         notificationType: 'General',
         user: borrower_id,
-        priority: validation? 'Medium' : 'Low',
+        priority: validation ? 'Medium' : 'Low',
         title: 'New Request',
         transaction_id: loan
+      };
+      addNotification(borrowerNotification);
+    }
 
-    };
-    addNotification(ownerNotification);
-    addNotification(borrowerNotification);
 }, [addNotification]);
 
 

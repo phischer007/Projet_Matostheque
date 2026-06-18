@@ -5,7 +5,9 @@ import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { getTimeDifference } from 'src/utils/get-time-difference';
-import { Link } from '@mui/material';
+// import { Link } from '@mui/material';
+
+import  Link  from 'next/link';
 
 const statusMap = {
     'Read': '#F0F0F0', 

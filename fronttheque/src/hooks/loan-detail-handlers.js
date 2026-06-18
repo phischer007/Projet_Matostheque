@@ -66,28 +66,28 @@ export const useTransactionDetailHandlers = (data) => {
     }, [formData, data.material_details.duration]);
 
     const notifyInvolvedParties = useCallback((notificationData) => {
-        let owner_updater = notificationData?.is_user_owner ? "You have" : ` ${notificationData?.borrower_name} has`;
-        let user_updater = notificationData?.is_user_owner ? "The owner has" : "You have";
-
-        //notifying the owner
-        addNotification({
-            message: `${owner_updater} updated the location of the transacted material: ${notificationData?.material_title}`,
-            notificationType: 'General',
-            priority: 'Low',
-            title: 'transaction Update',
-            user: notificationData.owner_user_id,
-            transaction_id: notificationData.loan,
-        });
-
+      if (notificationData?.is_user_owner){
         //Notify the requestee
         addNotification({
-            message: `${user_updater} updated the location of the transacted material: ${notificationData?.material_title}`,
+            message: `The owner updated the duration of the transacted material: ${notificationData?.material_title}`,
             notificationType: 'General',
             priority: 'Low',
             title: 'transaction Update',
             user: notificationData.borrower_id,
             transaction_id: notificationData.loan,
         });
+      }
+      else {
+        //notifying the owner
+        addNotification({
+          message: `The borrower updated the location of the transacted material: ${notificationData?.material_title}`,
+          notificationType: 'General',
+          priority: 'Low',
+          title: 'transaction Update',
+          user: notificationData.owner_user_id,
+          transaction_id: notificationData.loan
+        });
+      }
     }, [addNotification]);
 
     useEffect(() => {
@@ -123,7 +123,6 @@ export const useTransactionDetailHandlers = (data) => {
                         });
 
                         if (!response.ok) {
-                          console.log("aa")
                             const errorMessage = await response.text();
                             setMessage({
                                 status: 'error',
