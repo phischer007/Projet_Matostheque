@@ -122,7 +122,7 @@ export const MaterialDetailOverview = (props) => {
             color="text.secondary"
             variant="body2"
           >
-            Owner : {data.owner_details.first_name} {data.owner_details.last_name}
+            Contact person : {data.owner_details.first_name} {data.owner_details.last_name}
           </Typography>
           <Typography
             color="text.secondary"

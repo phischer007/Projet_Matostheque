@@ -330,7 +330,7 @@ const handleChangeNum = useCallback((event) => {
                 {isFormDisabled && (
                   <TextField
                     fullWidth
-                    label="Owner"
+                    label="Contact person"
                     disabled={isFormDisabled}
                     value={props.data.owner_details && (`${props.data.owner_details.first_name} ${props.data.owner_details.last_name}`)}
                     InputLabelProps={{ shrink: true }}
@@ -350,7 +350,7 @@ const handleChangeNum = useCallback((event) => {
                           <TextField
                             {...params}
                             variant="standard"
-                            label="Owner (activate account to see your name)"
+                            label="Contact person (activate account to see your name)"
                             margin="normal"
                             error={formErrors.owner}
                             sx={{ marginTop: 0 }}
@@ -657,7 +657,7 @@ const handleChangeNum = useCallback((event) => {
                   inputProps={{ 'aria-label': 'checkbox' }}
                 />
                 <Typography variant="caption" color="textSecondary">
-                  If checked, a validation from the owner will be needed.
+                  If checked, a validation from the contact person will be needed.
                 </Typography>
               </Grid>
                 </Grid>
@@ -682,7 +682,7 @@ const handleChangeNum = useCallback((event) => {
                 <Grid xs={12}
                   md={6}>
                 <Typography variant="caption" color="textSecondary">
-                  A validation from the owner is needed.
+                  A validation from the contact person is needed.
                 </Typography>
                 </Grid>
               }

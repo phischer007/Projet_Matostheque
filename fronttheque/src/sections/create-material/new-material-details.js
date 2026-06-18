@@ -464,7 +464,7 @@ const NewMaterialDetails = (props) => {
                             <TextField
                               {...params}
                               variant="standard"
-                              label="Owner (activate account to see your name)"
+                              label="Contact person (activate account to see your name)"
                               margin="normal"
                               error={formErrors.owner}
                               sx={{ marginTop: 0 }}

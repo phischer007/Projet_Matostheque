@@ -233,7 +233,7 @@ export const LoanDetailOverview = (props) => {
                                     </TableRow>
                                     <TableRow>
                                         <TableCell component="th" variant="head" scope="row">
-                                            Owner
+                                            Contact person
                                         </TableCell>
                                         <TableCell style={{ minWidth: 160 }} align="left">
                                             {data.owner_details.first_name} {data.owner_details.last_name}
@@ -241,7 +241,7 @@ export const LoanDetailOverview = (props) => {
                                     </TableRow>
                                     <TableRow>
                                         <TableCell component="th" variant="head" scope="row">
-                                            Owner&apos;s Email
+                                            Contact person&apos;s Email
                                         </TableCell>
                                         <TableCell style={{ minWidth: 160 }} align="left">
                                             {data.owner_details.email}

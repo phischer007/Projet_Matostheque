@@ -255,7 +255,7 @@ export const AccountProfileDetails = (user) => {
                   inputProps={{ 'aria-label': 'toggle checkbox' }}
                 />
                 <Typography variant="caption" color="textSecondary">
-                  Activate Owner Account
+                  Activate the contact person account
                 </Typography>
               </Grid>
             </Grid>

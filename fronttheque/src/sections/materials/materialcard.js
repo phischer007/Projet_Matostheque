@@ -111,7 +111,7 @@ export const MaterialsCard = (props) => {
             display="inline"
             variant="body2"
           >
-            Owner: {material.user_first_name} {material.user_last_name}
+            Contact person: {material.user_first_name} {material.user_last_name}
           </Typography>
         </Stack>
         {material.loan_duration &&

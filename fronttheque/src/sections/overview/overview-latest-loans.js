@@ -45,7 +45,7 @@ export const OverviewLatestLoans = (props) => {
                   Type
                 </TableCell>
                 <TableCell>
-                  Owner
+                  Contact person
                 </TableCell>
                 {/*<TableCell sortDirection="desc">*/}
                 {/*  Borrower*/}

@@ -187,13 +187,13 @@ const NewLoanCard = (props) => {
               >
                 <TextField
                   fullWidth
-                  label="Note to Owner"
+                  label="Note to the contact person"
                   name="message"
                   onChange={handleChange}
                   type="text"
                   multiline
                   rows={4}
-                  placeholder="Write your message to the owner here..."
+                  placeholder="Write your message to the contact person here..."
                 />
               </Grid>
               {message && message.status?

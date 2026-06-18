@@ -109,7 +109,7 @@ export const LoansTable = (props) => {
                 <TableCell> Title </TableCell>
                 <TableCell> Type </TableCell>
                 {activeTab === 'loans' &&
-                  <TableCell> Owner </TableCell>
+                  <TableCell> Contact person </TableCell>
                 }
                 {activeTab !== 'loans' &&
                   <TableCell> Borrower </TableCell>
