@@ -66,7 +66,8 @@ def create_material(request):
             return on_create_material(request)
         except Exception as e:
             return JsonResponse({"error": str(e)},status=status.HTTP_400_BAD_REQUEST)
-   
+
+@login_required
 @api_view(['GET', 'PUT', 'DELETE'])
 def material_detail(request, pk):
     try:
@@ -129,6 +130,15 @@ def material_detail(request, pk):
         material.delete()
         return JsonResponse({'message': 'Material was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
+@api_view(['GET'])
+def public_material(request,pk):
+    if request.method == 'GET':
+        try:
+            lite_data = get_lite_material(pk)
+            return JsonResponse(lite_data)
+        except Exception as e:
+            return JsonResponse({'message': str(e)}, status=status.HTTP_404_NOT_FOUND)
+            # return JsonResponse({'message': 'Error fetching material details!'}, status=status.HTTP_404_NOT_FOUND)
 
 @login_required
 @api_view(['GET'])

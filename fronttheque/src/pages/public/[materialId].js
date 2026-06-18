@@ -7,7 +7,6 @@ import { MaterialDetailCalendar } from 'src/sections/material-detail/material-de
 import { useRouter } from 'next/router';
 import React, { useState, useEffect, useCallback, use } from 'react';
 import config from 'src/utils/config';
-import NextLink from 'next/link';
 
 const Page = () => {
     const router = useRouter();
@@ -18,7 +17,7 @@ const Page = () => {
     //fetching material data
     useEffect(() => {
         if (materialId) {
-            fetch(`${config.apiUrl}/materials/${materialId}/`)
+            fetch(`${config.apiUrl}/materials/public/${materialId}/`)
                 .then(response => response.json())
                 .then(data => {
                   setMaterialData(data);

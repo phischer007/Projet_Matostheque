@@ -175,6 +175,41 @@ def get_detailed_material(pk):
 
     return detailed_materials
 
+def get_lite_material(pk):
+    """
+    Function to return a lite list of information related to a materials.
+
+    Args:
+        pk (int) : The id of the material instance
+
+    Returns:
+       detailed_materials (obj): A list of information related to the material instance.
+    """
+    # get the material
+    material = Materials.objects.get(pk=pk)
+    # only keep the required data
+    detailed_materials = {'qrcode':material.qrcode,
+     'material_id':material.material_id,
+     'material_title':material.material_title,
+     'description':material.description,
+     'manual_link':material.manual_link,
+     'datasheet_link':material.datasheet_link
+     }
+    user = material.user
+    if (material.type == 'LAB_SUPPLIES'):
+        detailed_materials["availability"] = is_available(pk=pk)
+    else:
+        detailed_materials["availability"] = material.available_for_transaction
+
+    detailed_materials['owner_details'] = {
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "email": user.email,
+    }
+
+    return detailed_materials
+
+
 def get_events_detail(pk):
     """
     Function to return a list of transactions related to a material.

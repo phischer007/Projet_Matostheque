@@ -19,6 +19,7 @@ urlpatterns = [
     path('materials/count/', material_views.get_total_count),#get a lite list of all events relative to a specific material
     path('materials/<int:pk>/availability/',material_views.update_material_availability),# change the availability of the specific material
 
+    path('materials/public/<int:pk>/',material_views.public_material),
 
     path('transactions/', transaction_views.transaction_list),#get a list of all transactions
     path('transactions/details/', transaction_views.detailed_transactions),#get a full indepth view of all transactions
