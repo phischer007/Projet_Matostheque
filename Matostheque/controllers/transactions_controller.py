@@ -134,15 +134,6 @@ def on_update_transaction(transaction, request):
         if transaction_serializer.is_valid():
             saved_instance = transaction_serializer.save() #save instance
             material.save()
-            # Send an email to borrower if the transaction was approved - the request data contained approval_date
-            if initial_data.data['approval_date'] is None and saved_instance.approval_date is not None :
-                send_approved_email(transaction)
-            
-            # Send an email to the owner if the transaction was returned - the request data contained return_date
-            if initial_data.data['latest_change_status_date'] is None and saved_instance.latest_change_status_date is not None :
-                if saved_instance.material.owner.user != saved_instance.borrower : 
-                    send_returned_email(transaction)
-            
             # Return updated record
             return JsonResponse(transaction_serializer.data)
         

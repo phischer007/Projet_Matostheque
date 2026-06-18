@@ -64,6 +64,7 @@ def cancel_transaction(request, pk):
         return JsonResponse({'message': 'The transaction does not exist'}, status=status.HTTP_404_NOT_FOUND)
     try:
         on_cancel_transaction(transaction,request)
+        send_cancelled_email(transaction)
         return JsonResponse({'message': 'Transaction was canceled successfully!'}, status=status.HTTP_200_OK)
 
     except Exception as e:
@@ -78,6 +79,7 @@ def approve_transaction(request, pk):
         return JsonResponse({'message': 'The transaction does not exist'}, status=status.HTTP_404_NOT_FOUND)
     try:
         on_approve_transaction(transaction, request)
+        send_approved_email(transaction)
         return JsonResponse({'message': 'Transaction was approved successfully!'}, status=status.HTTP_200_OK)
 
     except Exception as e:
@@ -92,6 +94,7 @@ def reject_transaction(request, pk):
         return JsonResponse({'message': 'The transaction does not exist'}, status=status.HTTP_404_NOT_FOUND)
     try:
         on_reject_transaction(transaction, request)
+        send_refused_email(transaction)
         return JsonResponse({'message': 'Transaction was rejected successfully!'}, status=status.HTTP_200_OK)
 
     except Exception as e:

@@ -15,18 +15,19 @@ def send_registration_email(user):
     subject = 'Welcome Aboard!'
     from_email = settings.EMAIL_HOST_USER
     to_email = user['email']
-    #todo fix
-    #send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
 
 
 # Function to send an email to notify the owner of a pending request 
 def send_validation_email(loan):
     context = {
+        'domain': settings.ALLOWED_HOSTS[0], # Get the domain name of the server
+
         'material': {
             'name': loan.material.material_title,
             'id': loan.material.material_id
             ,
-            'link': f"/matostheque/details/material-detail/{loan.material.material_id}"
+            'link': f"/mutmat/details/material-detail/{loan.material.material_id}"
         },
         'requestee': {
             'full_name': loan.borrower.first_name + " " + loan.borrower.last_name,
@@ -37,26 +38,27 @@ def send_validation_email(loan):
         'transaction_date': loan.transaction_date,
         'duration': loan.duration,
         'location': loan.location,
-        'message': loan.message
+        'message': loan.message,
+        'id': loan.transaction_id
     }
     html_message = render_to_string('emails/loanvalidation_email.html', context)
     plain_message = strip_tags(html_message)
     # Send the email
-    subject = 'New Request Matostheque'
+    subject = 'New Request Mutmat'
     from_email = settings.EMAIL_HOST_USER
     to_email = loan.material.user.email
-    #Todo fix email
-    #send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
 
 
 # Function to send an email of reminder for return to the borrower of the equipment
 def send_reminder_email(loan):
     context = {
+        'domain': settings.ALLOWED_HOSTS[0],
         'material': {
             'name': loan.material.material_title,
             'id': loan.material.material_id
             ,
-            'link': f"/matostheque/details/material-detail/{loan.material.material_id}"
+            'link': f"/mutmat/details/material-detail/{loan.material.material_id}"
         },
         'borrower': {
             'first_name': loan.borrower.first_name
@@ -65,45 +67,44 @@ def send_reminder_email(loan):
     html_message = render_to_string('emails/loannearingend_email.html', context)
     plain_message = strip_tags(html_message)
     # Send the email
-    subject = 'Reminder Matostheque'
+    subject = 'Reminder Mutmat'
     from_email = settings.EMAIL_HOST_USER
     to_email = loan.borrower.email
-    #todo fix
-    #send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
 
 # Function to send an email to notify an owner of an equipment that was returned
-def send_returned_email(loan):
-    context = {
-        'material': {
-            'name': loan.material.material_title,
-            'id': loan.material.material_id
-            ,
-            'link': f"/matostheque/details/material-detail/{loan.material.material_id}"
-        },
-        'owner': {
-            'first_name': loan.material.user.first_name
-        },
-        'borrower': {
-            'name': loan.borrower.first_name + " " + loan.borrower.last_name
-        }
-    }
-    html_message = render_to_string('emails/materialreturn_email.html', context)
-    plain_message = strip_tags(html_message)
-    # Send the email
-    subject = 'Material Return'
-    from_email = settings.EMAIL_HOST_USER
-    to_email = loan.material.user.email
-    #todo fix
-    #send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
+# def send_returned_email(loan):
+#     context = {
+#         'material': {
+#             'name': loan.material.material_title,
+#             'id': loan.material.material_id
+#             ,
+#             'link': f"/mutmat/details/material-detail/{loan.material.material_id}"
+#         },
+#         'owner': {
+#             'first_name': loan.material.user.first_name
+#         },
+#         'borrower': {
+#             'name': loan.borrower.first_name + " " + loan.borrower.last_name
+#         }
+#     }
+#     html_message = render_to_string('emails/materialreturn_email.html', context)
+#     plain_message = strip_tags(html_message)
+#     # Send the email
+#     subject = 'Material Return'
+#     from_email = settings.EMAIL_HOST_USER
+#     to_email = loan.material.user.email
+#     send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
 
 # Function to send an email to notify the borrower after validation of a pending request
 def send_approved_email(loan):
     context = {
+        'domain': settings.ALLOWED_HOSTS[0],
         'material': {
             'name': loan.material.material_title,
             'id': loan.material.material_id
             ,
-            'link': f"/matostheque/details/material-detail/{loan.material.material_id}"
+            'link': f"/mutmat/details/material-detail/{loan.material.material_id}"
         },
         'borrower': {
             'first_name': loan.borrower.first_name
@@ -115,6 +116,43 @@ def send_approved_email(loan):
     subject = 'Loan Approved'
     from_email = settings.EMAIL_HOST_USER
     to_email =  loan.borrower.email
-    #Todo fix
-    #send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
+
+# Function to send an email to notify the owner that the loan is cancelled
+def send_cancelled_email(loan):
+    context = {
+        'domain': settings.ALLOWED_HOSTS[0],
+        'material': {
+            'name': loan.material.material_title,
+        },
+        'owner': {
+            'first_name': loan.material.owner.first_name
+        }
+    }
+    html_message = render_to_string('emails/loancancellation_email.html', context)
+    plain_message = strip_tags(html_message)
+    # Send the email
+    subject = 'Loan Approved'
+    from_email = settings.EMAIL_HOST_USER
+    to_email =  loan.borrower.email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
+
+# Function to send an email to notify the borrower that the loan is refused
+def send_refused_email(loan):
+    context = {
+        'domain': settings.ALLOWED_HOSTS[0],
+        'material': {
+            'name': loan.material.material_title,
+        },
+        'borrower': {
+            'first_name': loan.borrower.first_name
+        }
+    }
+    html_message = render_to_string('emails/loanrefused_email.html', context)
+    plain_message = strip_tags(html_message)
+    # Send the email
+    subject = 'Loan Approved'
+    from_email = settings.EMAIL_HOST_USER
+    to_email =  loan.borrower.email
+    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
 

@@ -1,10 +1,38 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Cancelled Template</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+    </style>
 </head>
 <body>
+
+```
+<div class="container">
+    <h2>A loan request has been cancelled.</h2><br />
+    <p>Hi {{ owner.first_name }},</p>
+    <p>The loan request for the material <b>{{ material.name }}</b> has been cancelled by the borrower.</p>
+    <p>The material is no longer reserved and is now available for other requests.</p>
+    <p><em>If this action doesn't concern you, please ignore this email.</em></p>
+    <p>Thanks,<br><b>Team Mutmat</b></p>
+</div>
+```
 
 </body>
 </html>
