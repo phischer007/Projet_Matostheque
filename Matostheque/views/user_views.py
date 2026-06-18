@@ -13,6 +13,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 
 from Matostheque.models import CustomUsers
+from Matostheque.models.laboratory_model import Laboratory
 from Matostheque.models.material_model import Materials
 from Matostheque.serializers import UserSerializer, ServiceSerializer
 from Matostheque.controllers.emails_controller import send_registration_email
@@ -289,29 +290,40 @@ def cas_validate(request):
             cas_attributes = tree.findall('.//cas:attributes/*', namespaces={'cas': 'http://www.yale.edu/tp/cas'})
 
             attributes_dict = {}
+            # Get the cas attributes
             for attribute in cas_attributes:
                 tag_parts = attribute.tag.split('}')
                 local_tag = tag_parts[-1]
-
+                # get the name surname and mail
                 if local_tag in ['sn', 'givenName', 'mail']:
                     attributes_dict[local_tag] = attribute.text
-                    
-                # elif local_tag == 'memberOf':
-                #     if 'memberOf' not in attributes_dict:
-                #         attributes_dict['memberOf'] = []
-                #     attributes_dict['memberOf'].append(attribute.text)
-            
+                # get the laboratory
+                elif local_tag == 'memberOf':
+                    #get only the line with uga-pers_structure-
+                    if attribute.text.find('uga-pers_structure-') != -1:
+                        # if there is already an attribute with uga-pers_structure- get the smaller of the two
+                        if 'memberOf' in attributes_dict:
+                            if attributes_dict['memberOf'] > attribute.text:
+                                attributes_dict['memberOf'] = attribute.text
+                        else:
+                            attributes_dict['memberOf'] = attribute.text
             # --- ADD THIS LINE TO PRINT TO YOUR CONSOLE ---
             # print("\n=== CAS ATTRIBUTES ===", attributes_dict, "\n")
-
-
+            # keep only the lab
+            attributes_dict['memberOf'] = attributes_dict['memberOf'].split(",")[0].rsplit("-", 1)[-1]
+            try:
+                # check if the lab is in the database
+                attributes_dict['memberOf'] = Laboratory.objects.get(laboratory_name=attributes_dict['memberOf'])
+            except Exception:
+                # if he's not redirect him to the accessDeniedPage
+                return redirect('/mutmat/public/accessDeniedPage')
             normalized_email = email.lower()
-            user, created = get_user_model().objects.get_or_create(email=normalized_email, 
-                                                                   defaults={'first_name': attributes_dict['givenName'], 'last_name': attributes_dict['sn']})
+            # user, created = get_user_model().objects.get_or_create(email=normalized_email,
+            #                                                        defaults={'first_name': attributes_dict['givenName'], 'last_name': attributes_dict['sn']})
+            #  if the lab is in the database get the user with the mail and if he don't exist create the user
+            user, created = get_user_model().objects.get_or_create(email=normalized_email,
+                                                                   defaults={'first_name': attributes_dict['givenName'], 'last_name': attributes_dict['sn'], 'laboratory': attributes_dict.get('memberOf')})
 
-            # user, created = get_user_model().objects.get_or_create(email=normalized_email, 
-            #                                                        defaults={'first_name': attributes_dict['givenName'], 'last_name': attributes_dict['sn'], 'Laboratory': attributes_dict.get('memberOf')})
-            
             user_data = get_formatted_user(user) if user is not None else {}
             user.backend = 'django.contrib.auth.backends.ModelBackend' 
             login(request, user)
