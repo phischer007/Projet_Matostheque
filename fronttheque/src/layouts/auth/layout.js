@@ -85,7 +85,7 @@ export const Layout = (props) => {
                 sx={{ color: '#15B79E' }}
                 target="_blank"
               >
-                Matostheque
+                Mutmat
               </Box>
             </Typography>
             <Typography
@@ -93,7 +93,7 @@ export const Layout = (props) => {
               sx={{ mb: 3 }}
               variant="subtitle1"
             >
-              A shared library to borrow and lend lab materials.
+              A shared library to borrow, lend lab materials among researchers, lab technicians and laboratories in Université Grenoble Alpes.
             </Typography>
           </Box>
         </Grid>

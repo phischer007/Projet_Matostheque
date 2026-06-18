@@ -3,7 +3,7 @@ import Document, { Head, Html, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
 import { createEmotionCache } from 'src/utils/create-emotion-cache';
 
-const logoUrl = process.env.NEXT_PUBLIC_ASSETS + 'images/app/liphy-logo.png';
+const logoUrl = process.env.NEXT_PUBLIC_ASSETS + 'logos/liphy-logo.png';
 
 const Favicon = () => (
   <>

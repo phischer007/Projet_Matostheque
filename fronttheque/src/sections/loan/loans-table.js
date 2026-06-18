@@ -10,8 +10,7 @@ import {
   TableHead, 
   TablePagination, 
   TableRow, 
-  Typography, 
-  Link 
+  Typography
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -20,6 +19,7 @@ import { SeverityPill } from 'src/components/severity-pill';
 import { formatDate } from 'src/utils/get-formatted-date';
 import { useAuth } from 'src/hooks/use-auth';
 import { statusMap, transactionStatus, transactionTypes } from 'src/data/static_data';
+import Link from 'next/link';
 
 
 // -------------------------------------------------------------------------------- //
@@ -128,7 +128,7 @@ export const LoansTable = (props) => {
                     key={loan.transaction_id}
                     underline="none"
                     color="inherit"
-                    href={`/matostheque/details/loan-detail/${loan.transaction_id}`}
+                    href={`/details/loan-detail/${loan.transaction_id}`}
                     style={{ display: 'contents' }}
                   >
 

@@ -133,7 +133,7 @@ export const SideNav = (props) => {
             color="neutral.100"
             variant="subtitle2"
           >
-            Ver. 1.0.0 {/*Versioning to go here*/}
+            Ver. 2.0.0
           </Typography>
         </Box>
       </Box>

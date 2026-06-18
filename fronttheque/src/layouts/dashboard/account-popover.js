@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import { Box, Divider, Link, MenuItem, MenuList, Popover, Typography } from '@mui/material';
+import { Box, Divider, MenuItem, MenuList, Popover, Typography } from '@mui/material';
 import { useAuth } from 'src/hooks/use-auth';
+import Link from 'next/link';
 
 export const AccountPopover = (props) => {
   const { anchorEl, onClose, open } = props;
@@ -31,7 +32,7 @@ export const AccountPopover = (props) => {
     >
       {user ?
         <Link
-          href={'/matostheque/account/'}
+          href="/account"
           style={{
             textDecoration: 'none',
             color: 'inherit'

@@ -173,8 +173,8 @@ export const MaterialDetailViewer = (props) => {
                 return (
                   <ImageListItem key={idx} sx={{ minHeight: 300 }}>
                     <img
-                      srcSet={`${process.env.NEXT_PUBLIC_ASSETS}/${value}`}
-                      src={`${process.env.NEXT_PUBLIC_ASSETS}/${value}`}
+                      srcSet={`${process.env.NEXT_PUBLIC_ASSETS}${value}`}
+                      src={`${process.env.NEXT_PUBLIC_ASSETS}${value}`}
                       alt="Pictures of the material"
                       loading="lazy"
                     />

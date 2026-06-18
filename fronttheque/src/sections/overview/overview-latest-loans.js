@@ -73,7 +73,7 @@ export const OverviewLatestLoans = (props) => {
                     key={loan.transaction_id}
                     underline="none"
                     color="inherit"
-                    href={`/matostheque/details/loan-detail/${loan.transaction_id}`}
+                    href={`/mutmat/details/loan-detail/${loan.transaction_id}`}
                     style={{ display: 'contents' }}
                   >
                     <TableRow

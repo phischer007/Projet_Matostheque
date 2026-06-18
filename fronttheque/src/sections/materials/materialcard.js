@@ -28,7 +28,7 @@ export const MaterialsCard = (props) => {
         <Link
           underline="none"
           color="inherit"
-          href={`/matostheque/details/material-detail/${material.material_id}`}>
+          href={`/mutmat/details/material-detail/${material.material_id}`}>
           <Stack
             xs={12}
             spacing={1} // Adjust spacing value as needed

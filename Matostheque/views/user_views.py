@@ -326,7 +326,8 @@ def cas_validate(request):
                 user_serializer = UserSerializer(user)
                 send_registration_email(user_serializer.data)
             
-            return redirect('/matostheque')
+            # return redirect('/matostheque')
+            return redirect('/mutmat')
     #temporary if error authenticating
     service_url = request.build_absolute_uri('/api/cas/validate/')
     login_url = settings.LOGIN_URL.format(service_url)

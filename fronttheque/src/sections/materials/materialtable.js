@@ -34,7 +34,7 @@ export const MaterialTable = (props) => {
             key={material.material_id}
             underline="none"
             color="inherit"
-            href={`/matostheque/details/material-detail/${material.material_id}`}
+            href={`/mutmat/details/material-detail/${material.material_id}`}
             style={{ display: 'contents' }}
           >
             <ListItem divider={hasDivider} key={material.material_id}>
