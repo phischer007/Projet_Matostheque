@@ -2,26 +2,29 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
+# ---------------------------------------------------------------------------
+# Core config.
+# ---------------------------------------------------------------------------
 load_dotenv()
+# load_dotenv('.env.example')
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = True
+DEBUG = (os.environ.get('DEBUG') == "True")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
 
 MIGRATION_MODULES = {
     'Matostheque' : 'Matostheque.migrations'
 }
 
-# Application definition
+# ---------------------------------------------------------------------------
+# INSTALLED APPS
+# ---------------------------------------------------------------------------
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -30,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_cas_ng',
     'corsheaders',
     'rest_framework',
     'Matostheque',
@@ -37,30 +41,30 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # CORS should be early in the middleware list
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',  # Common middleware should be before CSRF
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware', 
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    
-    'django.middleware.locale.LocaleMiddleware',
+
+    'django_cas_ng.middleware.CASMiddleware',
 ]
 
-SESSION_COOKIE_AGE = 10800 #3600 is 1 hour in seconds, set to 3 hours for now
-TIME_ZONE = 'Europe/Paris'
-USE_TZ = True
+# ---------------------------------------------------------------------------
+# CORS
+# ---------------------------------------------------------------------------
+CORS_ORIGIN_ALLOW_ALL = False
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CORS_ALLOWED_ORIGINS = os.environ.get('DJANGO_CORS_ALLOWED_ORIGINS', '').split(',')
 
-CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS', '').split(',')
 
-CORS_ALLOWED_ORIGINS = os.getenv('DJANGO_CORS_ALLOWED_ORIGINS', '').split(',')
-CSRF_TRUSTED_ORIGINS = os.getenv('DJANGO_CSRF_TRUSTED_ORIGINS', '').split(',')
-CORS_ORIGIN_WHITELIST  = os.getenv('DJANGO_CORS_ORIGIN_WHITELIST', '').split(',')
+CORS_ORIGIN_WHITELIST = os.environ.get('DJANGO_CORS_ORIGIN_WHITELIST', '').split(',')
 
 CORS_ALLOW_METHODS = [
     'GET',
@@ -69,6 +73,8 @@ CORS_ALLOW_METHODS = [
     'DELETE',
     'PUT'
 ]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CORS_ALLOW_HEADERS = [
     'Content-Type',
@@ -79,42 +85,47 @@ CORS_ALLOW_HEADERS = [
     'If-Modified-Since',
     'If-None-Match',
     'User-Agent',
-    "X-CSRFToken",
 ]
 
-
-CAS_SERVER_URL = 'https://authentification-preprod.univ-grenoble-alpes.fr'
-CAS_VERSION = '3'
+# ---------------------------------------------------------------------------
+# CAS Authentication
+# ---------------------------------------------------------------------------
+CAS_SERVER_URL = os.environ.get('DJANGO_CAS_SERVER_URL')
+CAS_VERSION = os.environ.get('DJANGO_CAS_VERSION')
 CAS_ADMIN_REDIRECT = False
 LOGIN_URL = '{}/cas/login?service={{}}'.format(CAS_SERVER_URL)
 LOGOUT_URL = '{}/cas/logout'.format(CAS_SERVER_URL)
 
-
+# ---------------------------------------------------------------------------
+# URLs / WSGI
+# ---------------------------------------------------------------------------
 ROOT_URLCONF = 'MatosthequeRestApis.urls'
+WSGI_APPLICATION = 'MatosthequeRestApis.wsgi.application'
 
-# From here on Email settings:
-# Set the email backend to use
+# ---------------------------------------------------------------------------
+# Email
+# ---------------------------------------------------------------------------
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# Check if DJANGO_ENV environment variable is set to 'production'
-# SMTP configuration for a remote server
-# # Really to come by because this not working for real
-if os.getenv('DJANGO_ENV') == 'production':
-    EMAIL_HOST = os.getenv('EMAIL_HOST')                    
-    EMAIL_PORT = 25                                             
-    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')         
-    DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')      
-    EMAIL_USE_TLS = False                                       
-    EMAIL_USE_SSL = False                                       
+if os.environ.get('DJANGO_ENV') == 'production':
+    EMAIL_HOST = os.environ.get('EMAIL_HOST')                        
+    EMAIL_PORT = os.environ.get('EMAIL_PORT')                                                                    
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')        
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')      
+    EMAIL_USE_TLS = (os.environ.get('EMAIL_USE_TLS') == 'True')                                       
+    EMAIL_USE_SSL = False                                      
 else:
     # Default SMTP configuration for testing locally
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
     EMAIL_USE_TLS = False
-    DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
-    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+    DEFAULT_FROM_EMAIL = 'liphy-direction@univ-grenoble-alpes.fr'
+    EMAIL_HOST_USER = 'liphy-direction@univ-grenoble-alpes.fr'
 
 
+# ---------------------------------------------------------------------------
+# Template
+# ---------------------------------------------------------------------------
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -133,56 +144,55 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'MatosthequeRestApis.wsgi.application'
 
-
+# ---------------------------------------------------------------------------
 # Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+# ---------------------------------------------------------------------------
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOST", "localhost"),
+        "PORT": os.environ.get("DB_PORT", "5432"),
     }
 }
 
+# ---------------------------------------------------------------------------
+# Customize users info and authentification backend models
+# ---------------------------------------------------------------------------
 AUTH_USER_MODEL = "Matostheque.CustomUsers"
 
 AUTHENTICATION_BACKENDS = [
-    'Matostheque.custom_auth.CustomAuth',           
-    'django.contrib.auth.backends.ModelBackend',    
+    'Matostheque.custom_auth.CustomAuth',           # Custom authentication
+    'django.contrib.auth.backends.ModelBackend',    # Optionally keeping Default Django authentication backend
+    'django_cas_ng.backends.CASBackend',            # CAS authentication backend
 ]
 
+# ---------------------------------------------------------------------------
 # Password validation
-# https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
+# ---------------------------------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
 
 # Internationalization
+SESSION_COOKIE_AGE = 10800
+TIME_ZONE = 'Europe/Paris'
 LANGUAGE_CODE = 'en-us'
 USE_I18N = True
 USE_L10N = True
+USE_TZ = True
 
 
+# ---------------------------------------------------------------------------
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
-
+# ---------------------------------------------------------------------------
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets/')
 STATICFILES_DIRS = [
@@ -190,7 +200,8 @@ STATICFILES_DIRS = [
 ]
 
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'assets')
-MEDIA_URL = '/assets/' # locally yet
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/' 
+
 DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
 FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800

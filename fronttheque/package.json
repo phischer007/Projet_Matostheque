@@ -1,5 +1,5 @@
 {
-  "name": "matostheque-front-react",
+  "name": "mutmat-react",
   "version": "3.0.0",
   "author": "Matostheque",
   "licence": "LIPHY",
@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3030",
     "export": "next export",
     "lint": "next lint",
     "lint-fix": "next lint --fix"
