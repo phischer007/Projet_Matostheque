@@ -89,7 +89,7 @@ export const OverviewLatestMaterials = (props) => {
                 />
               </ListItemAvatar>
 
-              <Link style={{ flexGrow: '1', marginLeft: '16px'}} underline="none" color="inherit" href={`/matostheque/details/material-detail/${material.material_id}`} passHref>
+              <Link component={NextLink} style={{ flexGrow: '1', marginLeft: '16px'}} underline="none" color="inherit" href={`/details/material-detail/${material.material_id}`} passHref>
                 <ListItemText
                   primary={material.material_title}
                   primaryTypographyProps={{ variant: 'subtitle1' }}

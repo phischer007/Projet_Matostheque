@@ -340,7 +340,8 @@ const NewMaterialDetails = (props) => {
             <Accordion expanded={expandedSections[formData.type]} onChange={() => handleAccordionChange(formData.type)} defaultExpanded>
             <AccordionSummary >
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Typography variant="overline">{formData.type} Information</Typography>
+                {/* <Typography variant="overline">{formData.type} Information</Typography> */}
+                <Typography variant="overline">{formData.type.replace('_', ' ')} Information</Typography>
                 <SvgIcon fontSize="smaller">
                   <ChevronRightIcon />
                 </SvgIcon>
@@ -348,7 +349,7 @@ const NewMaterialDetails = (props) => {
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={3}>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sm={6}>
                   <FormControl fullWidth>
                     <Select
                       labelId="sub-type-label"
@@ -398,12 +399,17 @@ const NewMaterialDetails = (props) => {
                   </FormControl>
                   </Grid>
                 {formData.type === "LAB_SUPPLIES" &&
-                  <Grid item >
-                    <Typography variant="caption" color="textSecondary">
+                  <Grid item xs={12} sm={6}>
+                    {/* <Typography variant="caption" color="textSecondary">
                       Type a number in days.<span>*</span>
-                    </Typography>
+                    </Typography> */}
                     <TextField
-                      label="Allowed Loan Duration"
+                      // label="Allowed Loan Duration"
+                      label={
+                        <>
+                          Allowed Loan Duration <span style={{ fontSize: '0.8em', fontWeight: 'normal' }}>(Type a number in days.*)</span>
+                        </>
+                      }
                       name="loan_duration"
                       defaultValue={30}
                       value={formData.loan_duration || ''}
@@ -416,7 +422,7 @@ const NewMaterialDetails = (props) => {
                   </Grid>
                 }
                 {formData.type === "CONSUMABLES" &&
-                  <Grid item >
+                  <Grid item xs={12} sm={6}>
                       <LocalizationProvider>
                         {/* Added slotProps to enable the Clear button */}
                         <DatePicker
@@ -846,7 +852,10 @@ const NewMaterialDetails = (props) => {
               }}>
             Note that you can only upload a maximum of two photos at a time!
         </Typography>
+
         <Divider />
+        
+        {/*}
         <Grid>
           <Checkbox
             name="condition"
@@ -856,25 +865,72 @@ const NewMaterialDetails = (props) => {
             color="primary"
             inputProps={{ 'aria-label': 'checkbox' }}
           />
+          
           <Typography variant="caption" color="textSecondary"
             style={{
               color: !formErrors.condition ? "black" : "red",
               fontWeight: !formErrors.condition ? "normal" : "bold",
-            }}>
+            }}
+          >
             By filling out this form, I certify my management’s agreement for the provision of scientific equipment.
           </Typography>
 
           <CardActions sx={{ justifyContent: 'flex-end' }}>
-            {/* Create button */}
+            
             <Button type="submit" variant="contained">
               Create
             </Button>
-            {/* Loading indicator */}
+            
             {isUploading && (
               <Loading message={'Uploading'} />
             )}
           </CardActions>
+        </Grid> */}
+ 
+        <Grid 
+          container 
+          direction="column" 
+          alignItems="center" 
+          justifyContent="center"
+          // sx={{ minHeight: '100vh' }} // Uncomment this if you want it centered in the middle of the entire screen
+        >
+          {/* Group the Checkbox and text together so they stay on the same row */}
+          <Grid item sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+            <Checkbox
+              name="condition"
+              checked={condition}
+              onChange={handleCondition}
+              error={formErrors.condition}
+              color="primary"
+              inputProps={{ 'aria-label': 'checkbox' }}
+            />
+            
+            <Typography 
+              variant="caption" 
+              style={{
+                color: !formErrors.condition ? "black" : "red",
+                fontWeight: !formErrors.condition ? "normal" : "bold",
+              }}
+            >
+              By filling out this form, I certify my management’s agreement for the provision of scientific equipment.
+            </Typography>
+          </Grid>
+
+          <Grid item>
+            {/* Changed justifyContent from 'flex-end' to 'center' */}
+            <CardActions sx={{ justifyContent: 'center' }}>
+              <Button type="submit" variant="contained">
+                Create
+              </Button>
+              
+              {isUploading && (
+                <Loading message={'Uploading'} />
+              )}
+            </CardActions>
+          </Grid>
         </Grid>
+
+
       </Card>
     </form>
   );

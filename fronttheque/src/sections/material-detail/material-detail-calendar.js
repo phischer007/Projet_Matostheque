@@ -51,6 +51,11 @@ export const MaterialDetailCalendar = (props) => {
   const [showInformation, setShowInformation] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
+  // DYNAMIC HEIGHT CALCULATION:
+  // Starts at a minimum of 500px so it looks good when empty.
+  // If there are more than 5 events, it adds 30px of height for each additional event.
+  const dynamicHeight = events.length > 5 ? 500 + ((events.length - 5) * 30) : 500;
+
   const handleEventClick = (event, item) => {
     if (props.mode !== 'public') {
       setSelectedEvent(event);
@@ -67,7 +72,11 @@ export const MaterialDetailCalendar = (props) => {
           views={['month']}
           showAllEvents
           className="my-calendar"
-          style={{ height: "100vh" }}
+          // style={{ height: "100vh" }}
+          // style={{ height: 500 }}
+
+          style={{ height: dynamicHeight }}
+          popup
           onSelectEvent={handleEventClick}
         />
       </CardContent>
@@ -84,7 +93,7 @@ export const MaterialDetailCalendar = (props) => {
                   <TableRow label="Name:" value={selectedEvent.user_name} />
                   <TableRow label="Contact:" value={selectedEvent.contact} />
                   <TableRow label="Location:" value={selectedEvent.location} />
-                  <TableRow label="quantity:" value={selectedEvent.transaction_quantity} />
+                  <TableRow label="Quantity:" value={selectedEvent.transaction_quantity} />
                 </tbody>
               </table>
             </Typography>

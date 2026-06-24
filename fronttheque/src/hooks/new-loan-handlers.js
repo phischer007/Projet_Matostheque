@@ -52,7 +52,7 @@ export const useNewLoanHandlers = (props) => {
       ...prev,
       formation_required: false,
     }));
-    console.log('dvsdfs')
+
   }
 
   //Functions to handle the form submission
@@ -171,7 +171,6 @@ export const useNewLoanHandlers = (props) => {
     const { owner_user_id, borrower_id, borrower_name, material_title, validation, loan } = data;
     //The owner receive a notification
     let ownerMessage = validation ? `You have a new pending request: ${material_title}` : ` ${borrower_name} has booked your material: ${material_title}.`;
-
     const ownerNotification = {
         message: ownerMessage,
         notificationType: validation ? 'Request Alert' : 'Event',
@@ -210,7 +209,7 @@ export const useNewLoanHandlers = (props) => {
         startDate: !(startDate instanceof Date) || isNaN(startDate.getTime()),
         endDate: !(endDate instanceof Date) || isNaN(endDate.getTime()) && (selectedMaterial && selectedMaterial.type === "LAB_SUPPLIES") ,
         location: data.location === null,
-        formation_required: formation_required !== true,
+        formation_required: formation_required !== true && selectedMaterial && selectedMaterial.is_formation_required === true,
       };
 
       setFormErrors(newErrors);

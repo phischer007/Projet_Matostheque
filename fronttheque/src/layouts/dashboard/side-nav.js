@@ -1,8 +1,7 @@
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import ArrowTopRightOnSquareIcon from '@heroicons/react/24/solid/ArrowTopRightOnSquareIcon';
-import ChevronUpDownIcon from '@heroicons/react/24/solid/ChevronUpDownIcon';
+
 import {
   Box,
   Button,
@@ -50,7 +49,7 @@ export const SideNav = (props) => {
             component={NextLink}
             href="/"
             sx={{
-              display: 'inline-flex',
+              display: 'flex',
               minHeight: 50,
               maxHeight:75,
               minWidth: 50,
@@ -59,7 +58,7 @@ export const SideNav = (props) => {
           >
             <Logo />
           </Box>
-          <Box
+          {/* <Box
             sx={{
               alignItems: 'center',
               backgroundColor: 'rgba(255, 255, 255, 0.04)',
@@ -71,21 +70,20 @@ export const SideNav = (props) => {
               p: '12px'
             }}
           >
-            <div>
-              <Typography
-                color="inherit"
-                variant="subtitle1"
-              >
+            
+          </Box> */}
+
+          <Typography
+            color="inherit"
+            variant="subtitle1"
+            sx={{ 
+              mt: 2, 
+              fontWeight: 'bold' 
+            }}
+          >
                 Matostheque
-              </Typography>
-            </div>
-            <SvgIcon
-              fontSize="small"
-              sx={{ color: 'neutral.500' }}
-            >
-              <ChevronUpDownIcon />
-            </SvgIcon>
-          </Box>
+          </Typography>
+
         </Box>
         <Divider sx={{ borderColor: 'neutral.700' }} />
         <Box

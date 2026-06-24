@@ -1,7 +1,8 @@
-import ChartBarIcon from '@heroicons/react/24/solid/ChartBarIcon';
-import TicketIcon from '@heroicons/react/24/solid/TicketIcon';
+import ChartPieIcon from '@heroicons/react/24/solid/ChartPieIcon';
+import CalendarDaysIcon from '@heroicons/react/24/solid/CalendarDaysIcon';
 import UserIcon from '@heroicons/react/24/solid/UserIcon';
-import FolderIcon from '@heroicons/react/24/solid/FolderIcon';
+import UserGroupIcon from '@heroicons/react/24/solid/UserGroupIcon';
+import ClipboardDocumentCheckIcon from '@heroicons/react/24/solid/ClipboardDocumentCheckIcon';
 import ArchiveBoxIcon from '@heroicons/react/24/solid/ArchiveBoxIcon';
 import AtSymbolIcon  from '@heroicons/react/24/solid/AtSymbolIcon';
 import { SvgIcon } from '@mui/material';
@@ -12,7 +13,7 @@ export const items = [
     path: '/',
     icon: (
       <SvgIcon fontSize="small">
-        <ChartBarIcon />
+        <ChartPieIcon />
       </SvgIcon>
     )
   },
@@ -22,7 +23,7 @@ export const items = [
     path: '/materials',
     icon: (
       <SvgIcon fontSize="small">
-        <FolderIcon />
+        <ClipboardDocumentCheckIcon />
       </SvgIcon>
     )
   },
@@ -31,7 +32,7 @@ export const items = [
     path: '/myloans',
     icon: (
       <SvgIcon fontSize="small">
-        <TicketIcon />
+        <CalendarDaysIcon />
       </SvgIcon>
     )
   },
@@ -63,11 +64,11 @@ export const items = [
     )
   },
   {
-    title: 'ListUser',
+    title: 'List of Users',
     path: '/Liste_user',
     icon: (
       <SvgIcon fontSize="small">
-        <UserIcon />
+        <UserGroupIcon />
       </SvgIcon>
     )
   }
