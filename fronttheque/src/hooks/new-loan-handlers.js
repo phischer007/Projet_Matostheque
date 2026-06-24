@@ -138,6 +138,9 @@ export const useNewLoanHandlers = (props) => {
             status: 'info',
             value: `You can borrow  up to ${values.quantity_available} `
           });
+          let newformErrors = formErrors
+          newformErrors.endDate =false
+          setFormErrors(newformErrors)
         }
 
         fetch(`${config.apiUrl}/material/${values.material_id}/events/`,
@@ -207,7 +210,7 @@ export const useNewLoanHandlers = (props) => {
       const newErrors = {
         material: data.material === null,
         startDate: !(startDate instanceof Date) || isNaN(startDate.getTime()),
-        endDate: !(endDate instanceof Date) || isNaN(endDate.getTime()) && (selectedMaterial && selectedMaterial.type === "LAB_SUPPLIES") ,
+        endDate: (!(endDate instanceof Date) || isNaN(endDate.getTime())) && (selectedMaterial && selectedMaterial.type === "LAB_SUPPLIES") ,
         location: data.location === null,
         formation_required: formation_required !== true && selectedMaterial && selectedMaterial.is_formation_required === true,
       };

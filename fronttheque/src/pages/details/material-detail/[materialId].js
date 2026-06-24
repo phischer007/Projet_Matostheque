@@ -105,7 +105,7 @@ const Page = () => {
         if (!response.ok) {
             toast.error('Could not update the material status.', { ...quickNotifyOption });
         } else {
-            toast.success(`The material was successfully ${canBeLoaned ? "removed from" : "put on"} loan`, { ...quickNotifyOption });
+            toast.success(`The material was successfully ${canBeLoaned ? "removed from" : "put on"} ${materialData.type === "LAB_SUPPLIES" ? "loan" : "donation"}`, { ...quickNotifyOption });
 
             setTimeout(() => {
               window.location.reload();
@@ -245,7 +245,7 @@ const Page = () => {
                         setDialogSubject("loan");
                       }}
                     >
-                      {canBeLoaned? "Remove From Loan" : "Put On Loan"}
+                      {materialData.type ==="LAB_SUPPLIES"? (canBeLoaned? "Remove From Loan" : "Put On Loan") : (canBeLoaned? "Remove From Donation" : "Put On Donation")}
                     </Button>
                     <Button
                       variant="contained"

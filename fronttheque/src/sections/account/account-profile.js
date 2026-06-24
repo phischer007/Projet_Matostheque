@@ -30,7 +30,7 @@ export const AccountProfile = (user_data) => {
   };
 
   const handleUploadPictures = useCallback(async () => {
-    if (!selectedImage) {
+    if (selectedImage.length === 0) {
       toast.error("No picture selected!", { autoClose: false });
       return;
     }

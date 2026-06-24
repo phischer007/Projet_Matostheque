@@ -85,7 +85,7 @@ class Materials(models.Model):
     #lab_supply_quantity = models.FloatField(default=0.0, null=True)  # Quantity of lab supplies
 
     # The transaction duration allowed for the material.
-    loan_duration = models.IntegerField(null=True, blank=True)
+    loan_duration = models.IntegerField(null=True, blank=True, default=30)
     ##################################################################################################################
 
     # The quantity of the material available. (consumable type)

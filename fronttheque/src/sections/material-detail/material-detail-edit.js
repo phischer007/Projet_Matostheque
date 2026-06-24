@@ -180,13 +180,11 @@ const handleChangeNum = useCallback((event) => {
           { key: 'trust_circle', value: formData.trust_circle},
           { key: 'origin', value: formData.origin },
           { key: 'validation', value: formData.validation },
-          { key: 'code_nacre', value: formData.code_nacre },
-          { key: 'purchase_price', value: formData.purchase_price },
           { key: 'type', value: formData.type },
           { key: 'sub_type', value: selectSubType },
           { key: 'quantity_available', value: formData.quantity_available },
-          { key: 'is_Movable', value: formData.is_Movable },
-          { key: 'is_formation_required', value: formData.is_formation_required },
+          { key: 'is_Movable', value: isMovable },
+          { key: 'is_formation_required', value: is_formation_required },
           { key: 'service', value: formData.service },
         ];
 
@@ -203,7 +201,7 @@ const handleChangeNum = useCallback((event) => {
 
         // Append all fields to the form
         fieldsToAppend.forEach(({ key, value }) => {
-          if (value !== undefined && value !== null && value !== "") {
+          if (value !== undefined && value !== null) {
             form.append(key, value);
           }
         });
@@ -222,7 +220,8 @@ const handleChangeNum = useCallback((event) => {
             if (!response.ok) {
               const errorMessage = await response.text();
               let decodeResponse = JSON.parse(errorMessage);
-              toast.error(decodeResponse.message, { autoClose: false });
+              const errors = Object.entries(decodeResponse).map(([field, messages]) => `${field}: ${messages.join(', ')}`).join('\n');
+              toast.error(errors);
 
             } else {
               const responseData = await response.json();
@@ -235,7 +234,7 @@ const handleChangeNum = useCallback((event) => {
           }
         }
       }
-    }, [formData, materialID,selectedOwner,selectSubType]);
+    }, [formData, materialID,selectedOwner,selectSubType,isMovable,is_formation_required]);
 
     useEffect(() => {
     fetch(`${config.apiUrl}/active_owners/lite/`,{
@@ -256,7 +255,7 @@ const handleChangeNum = useCallback((event) => {
       const excludedKeys = ['owner_details', 'material_id', 'created_at', 'updated_at', 'qrcode', 'available_for_loan', 'availability'];
       for (const key in props.data) {
         if (!excludedKeys.includes(key)) {
-          newData[key] = props.data[key] || null;
+          newData[key] = props.data[key] ?? null;
         }
       }
       setFormData(newData);
@@ -266,7 +265,9 @@ const handleChangeNum = useCallback((event) => {
       setMaterialID(props.data.material_id);
       setSelectedOwner(ownersList.find((owner)=> Number(owner.user_id) === Number(newData.user)))
       setSelectedSubType(newData.sub_type)
-      setexpiration_date(new Date(newData.expiration_date))
+      if (newData.expiration_date) {
+        setexpiration_date(new Date(newData.expiration_date));
+      }
     }
   }, [props.data,ownersList,user]);
 
