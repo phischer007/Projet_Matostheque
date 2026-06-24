@@ -184,10 +184,6 @@ def material_events_detail(request, pk):
 
 @api_view(['GET'])
 def material_events_lite(request, pk):
-    material = get_material(pk)
-    if material.trust_circle not in request.user.laboratory.trust_circles.all():
-        return JsonResponse({'message': 'You are not authorized to use this Materials.'},
-                            status=status.HTTP_403_FORBIDDEN)
     events =  get_events_detail_lite(pk)
     return JsonResponse(events, safe=False)
 
