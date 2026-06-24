@@ -24,8 +24,11 @@ def get_formatted_user(user):
         "profil_pic": user.profil_pic,
         "laboratory_address": user.laboratory.laboratory_address,
         "laboratory_name": user.laboratory.laboratory_name,
-        "service": user.service.service_id,
     }
+    if(user.service != None):
+        user_details["service"] = user.service.service_id
+    else:
+        user_details["service"] = None
     
     return user_details
 

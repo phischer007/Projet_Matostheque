@@ -55,6 +55,7 @@ export const useNewMaterialHandlers = (data) => {
   const [is_formation_required, setis_formation_required] = useState(false);
   const [trust_circleList, setTrust_circle] = useState(null);
   const [condition, setCondition] = useState(null)
+  const [serviceList, setServiceList] = useState(null)
   const [expandedSections, setExpandedSections] = useState({
     general: true,
     supplier: true,
@@ -84,6 +85,7 @@ export const useNewMaterialHandlers = (data) => {
     isMovable:false,
     is_formation_required:false,
     validation:true,
+    service: user.service,
   });
 
   const [message, setMessage] = useState({
@@ -112,6 +114,17 @@ export const useNewMaterialHandlers = (data) => {
         // Sort the data alphabetically by material_title
         if (data) {
             setTrust_circle(data);
+        }
+      })
+      .catch(error => console.error('Error fetching data:', error));
+    fetch(`${config.apiUrl}/services/`,{
+      credentials: 'include'// Add this so the session cookie is sent!
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Sort the data alphabetically by material_title
+        if (data) {
+            setServiceList(data);
         }
       })
       .catch(error => console.error('Error fetching data:', error));
@@ -227,11 +240,11 @@ const handleChangeNum = useCallback((event) => {
       const images = Array.from(formData.images);
       const compressedImages = images ? await compressAndUploadImages(images) : null;
       const newErrors = {
-        title: formData.material_title === null || formData.material_title.trim() === '',
-        description: formData.description === null || formData.material_title.trim() === '',
+        title: formData.material_title === null || formData.material_title?.trim() === '',
+        description: formData.description === null || formData.material_title?.trim() === '',
         owner: selectedOwner === null,
         trust_circle: formData.trust_circle === null,
-        location: formData.origin === null || formData.material_title.trim() === '',
+        location: formData.origin === null || formData.material_title?.trim() === '',
         type : formData.type === null,
         sub_type: formData.sub_type === null,
         condition: condition !== true,
@@ -259,6 +272,7 @@ const handleChangeNum = useCallback((event) => {
             { key: 'is_Movable', value: formData.isMovable },
             { key: 'is_formation_required', value: formData.is_formation_required },
             { key: 'validation', value: formData.validation },
+            { key: 'service', value: formData.service },
 
           ];
           // New append field for Lab Supply category conditions
@@ -488,6 +502,7 @@ const handleChangeNum = useCallback((event) => {
     handleDateChange,
     trust_circleList,
     condition,
-    handleCondition
+    handleCondition,
+    serviceList
   };
 };
