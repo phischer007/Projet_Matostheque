@@ -7,7 +7,7 @@ logs/
 assets
 
 nginx/nginx.conf
-nginx/ssl/*
+nginx/ssl/
 
 fronttheque/.env
 fronttheque/.next
