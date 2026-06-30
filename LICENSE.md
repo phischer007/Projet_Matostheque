@@ -1,33 +1,52 @@
-Custom Proprietary Software License
+# CUSTOM PROPRIETARY SOFTWARE LICENSE
 
-# Frontend Original Work (in folder fronttheque):
+## Frontend Original Work (in folder fronttheque):
 Copyright (c) 2021 Devias
 
-# Backend and Frontend Original Work
-**Copyright (c) 2024 Nomena I.S. RANDRIANIAINA and Laboratoire interdisciplinaire de physique (LIPhy)**
+### Backend and Frontend
+**Copyright (c) 2024**
 
-This Custom Proprietary Software License Agreement is entered into by and between Nomena I.S. RANDRIANIAINA ("Licensor") and the "laboratoire interdisciplinaire de Physique" of the University of Grenoble Alpes ("Licensee").
+**Between:**
+Nomena I.S. Randrianiaina, student of Université Grenoble Alpes ("Licensor")
+**And:**
+Laboratoire Interdisciplinaire de Physique (LIPhy) of CNRS and Université Grenoble Alpes, 140 rue de la physique, Saint-Martin d’Hères ("Institution")
+Regarding the Software: Matosthèque, Version [1.0]
 
-Licensor hereby grants Licensee a non-exclusive and transferable right to use the modified software for the purposes outlined herein.
+**1.PREAMBLE**
 
-**Licensee is granted the following rights**:
+Whereas the Licensor has developed the Software and holds the copyright and related rights thereto;
+Whereas the Institution wishes to use, distribute, and potentially modify the Software for its operational purposes and to distribute it throughout the European Union;
+Whereas both parties agree that the Software shall be governed by the European Union Public Licence (EUPL);
+IT IS AGREED AS FOLLOWS:
 
-- Use the Software for its internal non-commercial research purposes.
-- Modify the Software for its internal non-commercial research purposes.
-- Share and distribute the Software, in its original or modified form, with other non-commercial academic or government research institutions for the sole purpose of collaborative non-commercial research. Any such distribution must include a copy of this license agreement.
+**2.GRANT OF LICENSE**
+- The Licensor hereby grants the Institution a non-exclusive, worldwide, royalty-free license to use, reproduce, modify, adapt, and distribute the Software under the terms of the European Union Public Licence, Version 1.2 (hereinafter "EUPL").
+- A copy of the EUPL v.1.2 is attached as Annex A and forms an integral part of this Agreement. The official text is also available at:
+https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12 
 
-**Except as expressly permitted above, Licensee shall not**:
+**3.DISTRIBUTION OBLIGATIONS**
 
-- Sublicense the Software to any third party for commercial purposes.
-- Use the Software for any direct or indirect commercial purposes, including but not limited to commercial licensing, paid-for services, or product development.
-- Remove or alter any copyright, trademark, or other proprietary rights notices contained within the Software.
+**3.1** The Institution undertakes to comply with the EUPL requirements when distributing the Software, including but not limited to:
 
-This Agreement is effective as of July 28, 2024, and will remain in effect until terminated by either party. Upon termination, Licensee must cease all use of the Software and destroy all copies in its possession. The obligations to not use the Software commercially and to ensure downstream recipients abide by these terms shall survive termination.
+- Retaining all copyright notices and the EUPL license notice in the source code;
+- Making the source code available to any recipient who receives the Software;
+- Licensing any derivative works under the EUPL or a compatible license as defined in Article 5 of the EUPL.
 
-The Software is licensed, not sold. Licensor retains all rights, title, and interest in and to the Software, including all intellectual property rights.
+**3.2**	The Institution is authorized to distribute the Software throughout the European Union and beyond, subject to the terms of the EUPL.
 
-The Software is provided "as is," without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall Licensor be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with the use or performance of the Software.
+**4.INTELLECTUAL PROPERTY**
 
-This Agreement shall be governed by and construed in accordance with the laws of France. This Agreement constitutes the entire agreement between the parties and supersedes all prior or contemporaneous understandings, agreements, representations, and warranties, whether oral or written.
+- The Licensor retains full ownership of the copyright and all other intellectual property rights in the Software.
+- This Agreement does not transfer ownership of the Software; it only grants usage and distribution rights under the EUPL.
 
-For any inquiries or further information regarding this Agreement or the Software, please contact Licensor and/or Licensee at **ikoriantsouh11@gmail.com**; **liphy-direction@univ-grenoble-alpes.fr**; **vikhram-kofi.duffour@univ-grenoble-alpes.fr**.
+**5.WARRANTY DISCLAIMER**
+
+AS REQUIRED BY ARTICLE 8 OF THE EUPL:
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+**6.GOVERNING LAW**
+- This Agreement shall be governed by the law of France.
+
+**7.TERMINATION**
+- This license remains in effect for the duration of the intellectual property rights in the Software.
+- The license granted herein shall terminate automatically if the Institution fails to comply with the terms of the EUPL.

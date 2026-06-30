@@ -9,8 +9,6 @@ from Matostheque.controllers.materials_controller import *
 @api_view(['GET'])
 def get_materials(request):
     materials = Materials.objects.filter(available_for_transaction=True,trust_circle__in=request.user.laboratory.trust_circles.all())
-    # materials = Materials.objects.all()
-    # materials = Materials.objects.all().order_by('material_title') # Sort by 'material_title' in ascending order
     
     selected_materials = materials.values(
         'material_id',
@@ -24,6 +22,7 @@ def get_materials(request):
         'sub_type',
         'is_Movable',
         'is_formation_required',
+        'quantity_available',
         service_name=F('service__service_name'),
         user_first_name=F('user__first_name'),
         user_last_name=F('user__last_name'),
@@ -36,8 +35,10 @@ def get_materials(request):
 @login_required
 @api_view(['GET'])
 def get_materials_lite(request):
-    materials = Materials.objects.filter(available_for_transaction=True,trust_circle__in=request.user.laboratory.trust_circles.all()).exclude(user_id=request.user.user_id)
-    # materials = Materials.objects.filter(available_for_transaction=True)
+    materials = Materials.objects.filter(
+        available_for_transaction=True,
+        trust_circle__in=request.user.laboratory.trust_circles.all()
+    ).exclude(user_id=request.user.user_id)
 
     # Testing results
     title = request.GET.get('material_title', None)
@@ -86,9 +87,9 @@ def material_detail(request, pk):
  
     elif request.method == 'PUT':
         if not request.user.is_staff and request.user.pk != material.user_id:
-            return JsonResponse({'message': 'You are not authorized to modifie this Materials.'},status=status.HTTP_403_FORBIDDEN)
+            return JsonResponse({'message': 'You are not authorized to modify this Materials.'},status=status.HTTP_403_FORBIDDEN)
         try:
-            material_data = request.data
+            material_data = request.data.copy()
             #we check that the qrcode is not modified
             if material_data.get('qrcode') is not None:
                 return JsonResponse({'message': "You can't add a qrcode yourself"},status=status.HTTP_400_BAD_REQUEST)
@@ -97,7 +98,9 @@ def material_detail(request, pk):
                 return JsonResponse({'message': "You can't change the id of the materials"},status=status.HTTP_400_BAD_REQUEST)
             if request.user.laboratory != material.user.laboratory:
                 return JsonResponse({'message': "You can't give a material for this owner"},status=status.HTTP_400_BAD_REQUEST)
-            if "service" in material_data and not Service.objects.get(pk=int(material_data["service"])).laboratories.all().contains(request.user.laboratory):
+            if "service" in material_data and material_data["service"] == 'null':
+                material_data["service"] = None
+            if ("service" in material_data and material_data["service"] is not None) and not Service.objects.get(pk=int(material_data["service"])).laboratories.all().contains(request.user.laboratory):
                 return JsonResponse({'message': "You can't create a material for this service"},status=status.HTTP_400_BAD_REQUEST)
 
             material_serializer = MaterialSerializer(material, data=material_data, partial=True)
@@ -165,8 +168,6 @@ def latest_material(request):
                 materials[i]["availability"] = is_available(material.material_id)
             else:
                 materials[i]["availability"] = material.available_for_transaction
-
-
             i = i + 1
 
     if request.method == 'GET':
@@ -203,12 +204,6 @@ def get_total_count(request):
     materials_added_this_year = Materials.objects.filter(
         created_at__year=current_year
     ).count()
-
-    # 2. Materials per Team (For the Bar Chart)
-    # Groups by 'team' field and counts material_ids
-    #materials_per_team = Materials.objects.values('team').annotate(
-    #    count=Count('material_id')
-    #).order_by('-count')
 
     # 2. Materials per Laboratory (For the Bar Chart)
     from django.db.models import Count

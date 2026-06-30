@@ -201,16 +201,6 @@ export const AccountProfileDetails = (user) => {
                   disabled
                   value={values.laboratory_name}
                 />
-                {/*<TextField
-                  type="number"
-                  fullWidth
-                  label="Phone Number"
-                  name="owner_contact"
-                  onChange={handleChange}
-                  value={values.owner_contact}
-                  placeholder="Ex. 0612354525"
-                  InputLabelProps={{ shrink: true }}
-                />*/}
               </Grid>
               <Grid item xs={12} >
                     <FormControl fullWidth>
@@ -246,7 +236,7 @@ export const AccountProfileDetails = (user) => {
                   </Grid>
               <Grid
                 xs={12}
-                md={6}
+                md={12}
               >
                 <Switch
                   checked={isChecked}
@@ -255,7 +245,7 @@ export const AccountProfileDetails = (user) => {
                   inputProps={{ 'aria-label': 'toggle checkbox' }}
                 />
                 <Typography variant="caption" color="textSecondary">
-                  Activate the contact person account
+                  Activate your account to gain access to adding materials.
                 </Typography>
               </Grid>
             </Grid>

@@ -67,6 +67,7 @@ const NewLoanCard = (props) => {
               >
                 {materialsArray ? 
                 <Autocomplete
+                  readOnly
                   fullWidth
                   required
                   options={materialsArray}
@@ -132,7 +133,7 @@ const NewLoanCard = (props) => {
               >
                 <TextField
                   fullWidth
-                  label="transaction_quantity"
+                  label="Quantity"
                   name="transaction_quantity"
                   placeholder="Ex. 1"
                   value={formData.transaction_quantity || ""}
@@ -171,6 +172,7 @@ const NewLoanCard = (props) => {
                   required
                   placeholder="Ex. Room 203"
                   InputLabelProps={{ shrink: true }}
+                  InputProps={{ readOnly: true }}
                   sx={{
                     input: {
                       "&::placeholder": {

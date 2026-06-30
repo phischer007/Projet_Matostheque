@@ -63,6 +63,11 @@ export const LoansTable = (props) => {
     page * rowsPerPage + rowsPerPage
   );
 
+  const headerStyle = {
+    backgroundColor: '#162A42',
+    color: 'white',
+  };
+
   return (
     <Card
       sx={{
@@ -106,18 +111,18 @@ export const LoansTable = (props) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell> Title </TableCell>
-                <TableCell> Type </TableCell>
+                <TableCell style={headerStyle}> Title </TableCell>
+                <TableCell style={headerStyle}> Type </TableCell>
                 {activeTab === 'loans' &&
-                  <TableCell> Contact person </TableCell>
+                  <TableCell style={headerStyle}> Contact person </TableCell>
                 }
                 {activeTab !== 'loans' &&
-                  <TableCell> Borrower </TableCell>
+                  <TableCell style={headerStyle}> Borrower </TableCell>
                 }
-                <TableCell> Duration</TableCell>
-                <TableCell> Loan Date </TableCell>
-                <TableCell> Quantity </TableCell>
-                <TableCell> Status </TableCell>
+                <TableCell style={headerStyle}> Duration</TableCell>
+                <TableCell style={headerStyle}> Loan Date </TableCell>
+                <TableCell style={headerStyle}> Quantity </TableCell>
+                <TableCell style={headerStyle}> Status </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

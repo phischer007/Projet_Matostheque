@@ -47,7 +47,7 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware', 
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -201,7 +201,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-MEDIA_URL = '/media/' 
+MEDIA_URL = '/media/'
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
 FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800

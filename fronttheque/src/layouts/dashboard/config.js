@@ -65,7 +65,7 @@ export const items = [
   },
   {
     title: 'List of Users',
-    path: '/Liste_user',
+    path: '/userslist',
     icon: (
       <SvgIcon fontSize="small">
         <UserGroupIcon />

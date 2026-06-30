@@ -1,16 +1,30 @@
 import PropTypes from 'prop-types';
-import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
-import { EnvelopeIcon, ClockIcon } from '@heroicons/react/24/solid';
-import { Avatar, Box, Card, CardContent, CardMedia, Divider, Link, Stack, SvgIcon, Typography } from '@mui/material';
-import NextLink from 'next/link';
+import { 
+  ClockIcon, 
+  Square3Stack3DIcon, 
+  TruckIcon,
+  PencilSquareIcon
+} from '@heroicons/react/24/solid';
+import { 
+  Avatar, 
+  Box, 
+  Card, 
+  CardContent, 
+  CardMedia, 
+  Divider, 
+  Link, 
+  Stack, 
+  SvgIcon, 
+  Typography 
+} from '@mui/material';
+
+// ------------------------------------------------------------------------------------------------------ //
 
 export const MaterialsCard = (props) => {
   const { material } = props;
 
-  // const images =  JSON.parse(material.images);
   const images = material.images && material.images.length !== 0 ? JSON.parse(material.images) : {};
 
-  // let profil_image = JSON.parse(material.user_profil);
   let profil_image = material.user_profil && material.user_profil.length !== 0 ? JSON.parse(material.user_profil) : {};
 
   const profil_path = profil_image ? `${process.env.NEXT_PUBLIC_ASSETS}/${profil_image[0]}` : '';
@@ -22,6 +36,13 @@ export const MaterialsCard = (props) => {
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
+        border: '1px solid',       // Adds a 1px solid border
+        borderColor: 'grey.300',   // Uses a subtle light-grey color from MUI's palette
+        boxShadow: 3, 
+        transition: 'box-shadow 0.3s ease-in-out', 
+        '&:hover': {
+          boxShadow: 6, 
+        }
       }}
     >
       <CardContent sx={{pt:1}}>
@@ -29,33 +50,78 @@ export const MaterialsCard = (props) => {
           underline="none"
           color="inherit"
           href={`/mutmat/details/material-detail/${material.material_id}`}>
+          
           <Stack
-            xs={12}
-            spacing={1} // Adjust spacing value as needed
             direction="row"
             alignItems="center"
-            justifyContent= "flex-end"
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              p: 1
-            }}
+            justifyContent="space-between" 
+            sx={{ p: 1 }}
           >
-            <Typography
-              variant="overline"
-              size="small"
-            >
-              {material.service_name ? material.service_name : material.user_first_name + " " + material.user_last_name}
-            </Typography>
-            <Avatar
-              sx={{
-                height: 40,
-                width: 40
-              }}
-              src={profil_path}
-            />
+            <Stack direction="row" alignItems="center" spacing={2}>
+              {material.is_Movable &&
+                <Stack
+                  alignItems="center"
+                  direction="row"
+                  spacing={1}
+                >
+                  <Avatar sx={{ bgcolor: 'info.main', width: 32, height: 32 }}>
+                    <SvgIcon 
+                      sx={{ color: 'white' }} 
+                      fontSize="small"
+                    >
+                      <TruckIcon />
+                    </SvgIcon>
+                  </Avatar>
+                  <Typography>
+                    {material.is_Movable}
+                  </Typography>
+                </Stack>
+              }
 
+              {material.is_formation_required &&
+                <Stack
+                  alignItems="center"
+                  direction="row"
+                  spacing={1}
+                >
+                  <Avatar sx={{ bgcolor: 'warning.main', width: 32, height: 32 }}>
+                    <SvgIcon 
+                      sx={{ color: 'white' }} 
+                      fontSize="small"
+                    >
+                      <PencilSquareIcon />
+                    </SvgIcon>
+                  </Avatar>
+                  <Typography>
+                    {material.is_formation_required}
+                  </Typography>
+                </Stack>
+              }
+            </Stack>
+
+            {/* RIGHT SIDE: Name and Avatar */}
+            <Stack 
+              direction="row" 
+              alignItems="center" 
+              spacing={1}
+            >
+              <Typography
+                variant="overline"
+                size="small"
+              >
+                {material.service_name ? material.service_name : material.user_first_name + " " + material.user_last_name}
+              </Typography>
+              <Avatar
+                sx={{
+                  height: 40,
+                  width: 40
+                }}
+                src={profil_path}
+              />
+            </Stack>
           </Stack>
+          {/* END UPDATED TOP HEADER */}
+
           <Box
             sx={{
               display: 'flex',
@@ -87,7 +153,9 @@ export const MaterialsCard = (props) => {
         </Link>
       </CardContent>
       <Box sx={{ flexGrow: 1 }} />
+
       <Divider />
+
       <Stack
         alignItems="center"
         direction="row"
@@ -104,16 +172,17 @@ export const MaterialsCard = (props) => {
             color="action"
             fontSize="small"
           >
-            <EnvelopeIcon />
+            <Square3Stack3DIcon />
           </SvgIcon>
           <Typography
             color="text.secondary"
             display="inline"
             variant="body2"
           >
-            Contact person: {material.user_first_name} {material.user_last_name}
+            Quantity: {material.quantity_available} 
           </Typography>
         </Stack>
+
         {material.loan_duration &&
           <Stack
             alignItems="center"

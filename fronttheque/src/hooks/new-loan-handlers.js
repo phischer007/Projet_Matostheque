@@ -38,7 +38,9 @@ export const useNewLoanHandlers = (props) => {
     borrower: user ? user.user_id : null,
     location: user.laboratory_address,
     message:null,
-    transaction_quantity : 1
+    transaction_quantity : 1,
+    
+    transaction_enddate: endDate? endDate : null
   });
   
   const [message, setMessage] = useState({

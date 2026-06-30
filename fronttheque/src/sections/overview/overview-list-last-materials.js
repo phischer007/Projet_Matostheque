@@ -12,7 +12,7 @@ import {
   CardHeader, 
   Divider, 
   IconButton, 
-  Link, 
+  Link,
   List, 
   ListItem, 
   ListItemAvatar, 
@@ -23,9 +23,6 @@ import {
   MenuItem 
 } from '@mui/material';
 import NextLink from 'next/link';
-import config from '../../utils/config';
-
-
 
 export const OverviewLatestMaterials = (props) => {
   const { materials = [], sx } = props;
@@ -46,13 +43,13 @@ export const OverviewLatestMaterials = (props) => {
   useEffect(() => {
     let list = [
       {
-        href: `details/material-detail/${materialId}`,
+        href: `mutmat/details/material-detail/${materialId}`,
         label: 'View Details',
       },
     ];
     if (canBeLoaned) {
       list.push({
-        href: `create/create-loan?materialId=${materialId}`,
+        href: `mutmat/create/create-loan?materialId=${materialId}`,
         label: 'Borrow',
       });
     }
@@ -67,7 +64,6 @@ export const OverviewLatestMaterials = (props) => {
           console.log(material)
           const hasDivider = index < materials.length - 1;
           const ago = formatDistanceToNow(new Date(material.updated_at));
-          // const images = material.images.length !== 0 ? JSON.parse(material.images) : {};
           const images = material.images && material.images.length !== 0 ? JSON.parse(material.images) : {};
           const image_path = images ? `${process.env.NEXT_PUBLIC_ASSETS}/${images[0]}` : '';
 
@@ -127,7 +123,6 @@ export const OverviewLatestMaterials = (props) => {
                     horizontal: 'left',
                   }}
                   style={{ marginLeft: '20px' }}
-                  // style={{ marginRight: '50px' }}
                 >
                   {menuList.map((menuItem, index) => (
                     <MenuItem key={index} component="a" href={menuItem.href}>

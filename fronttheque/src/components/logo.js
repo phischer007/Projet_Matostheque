@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 export const Logo = () => {
   const theme = useTheme();
   const fillColor = theme.palette.primary.main;
-  const logoUrl = process.env.NEXT_PUBLIC_ASSETS + 'logos/liphy-logo.png';
+  const logoUrl = process.env.NEXT_PUBLIC_ASSETS + 'logos/mutmat-logo.png';
 
   return (
     <img
@@ -11,7 +11,7 @@ export const Logo = () => {
       src={logoUrl}
       height="100%"
       width="100%"
-      style={{ fill: fillColor}}
+      style={{ fill: fillColor }}
     />
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css'; // Import styles
 import moment from 'moment';
@@ -51,6 +51,13 @@ export const MaterialDetailCalendar = (props) => {
   const [showInformation, setShowInformation] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
+  useEffect(() => {
+    if (events.length > 0 && props.mode !== 'public') {
+      setSelectedEvent(events[0]);
+      setShowInformation(true);
+    }
+  }, [props.data, props.mode]);
+
   // DYNAMIC HEIGHT CALCULATION:
   // Starts at a minimum of 500px so it looks good when empty.
   // If there are more than 5 events, it adds 30px of height for each additional event.
@@ -59,7 +66,8 @@ export const MaterialDetailCalendar = (props) => {
   const handleEventClick = (event, item) => {
     if (props.mode !== 'public') {
       setSelectedEvent(event);
-      setShowInformation(!showInformation);
+      // setShowInformation(!showInformation);
+      setShowInformation(true);
     }
   };
 
@@ -72,33 +80,33 @@ export const MaterialDetailCalendar = (props) => {
           views={['month']}
           showAllEvents
           className="my-calendar"
-          // style={{ height: "100vh" }}
-          // style={{ height: 500 }}
-
           style={{ height: dynamicHeight }}
           popup
           onSelectEvent={handleEventClick}
         />
       </CardContent>
 
-      {showInformation && <><Divider/>
-      <CardContent
-        sx={{
-          paddingY: 0,
-        }}
-      >
-        <Typography variant="body1" component="div">
-              <table>
-                <tbody>
-                  <TableRow label="Name:" value={selectedEvent.user_name} />
-                  <TableRow label="Contact:" value={selectedEvent.contact} />
-                  <TableRow label="Location:" value={selectedEvent.location} />
-                  <TableRow label="Quantity:" value={selectedEvent.transaction_quantity} />
-                </tbody>
-              </table>
-            </Typography>
-      </CardContent></>
-      }
+      {showInformation && selectedEvent && ( 
+        <>
+          <Divider/>
+          <CardContent
+            sx={{
+              paddingY: 0,
+            }}
+          >
+            <Typography variant="body1" component="div">
+                  <table>
+                    <tbody>
+                      <TableRow label="Name:" value={selectedEvent.user_name} />
+                      <TableRow label="Contact:" value={selectedEvent.contact} />
+                      <TableRow label="Location:" value={selectedEvent.location} />
+                      <TableRow label="Quantity:" value={selectedEvent.transaction_quantity} />
+                    </tbody>
+                  </table>
+                </Typography>
+          </CardContent>
+        </>
+      )}
     </Card>
   );
 }

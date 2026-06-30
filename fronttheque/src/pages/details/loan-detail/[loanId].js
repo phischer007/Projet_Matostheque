@@ -94,7 +94,12 @@ const Page = () => {
                         </>
                       )}
                       {(isBorrower && (transactionData.transaction_status === 'Pending Validation' || transactionData.transaction_status === 'Booked')) && (
-                        <Button startIcon={(<SvgIcon fontSize="small"> <HandThumbDownIcon /> </SvgIcon>)}
+                        <Button 
+                          startIcon={(
+                            <SvgIcon fontSize="small">
+                              <HandThumbDownIcon /> 
+                            </SvgIcon>
+                          )}
                           variant="contained"
                           color="error"
                           onClick={OnCancelClick}

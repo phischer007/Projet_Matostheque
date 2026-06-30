@@ -20,7 +20,6 @@ class Laboratory(models.Model):
     # The list of services in the laboratories
     services = models.ManyToManyField('Service', related_name='laboratories')
 
-
     def __str__(self):
         return self.laboratory_name
 

@@ -47,9 +47,6 @@ export const OverviewLatestLoans = (props) => {
                 <TableCell>
                   Contact person
                 </TableCell>
-                {/*<TableCell sortDirection="desc">*/}
-                {/*  Borrower*/}
-                {/*</TableCell>*/}
                 <TableCell>
                   Duration
                 </TableCell>

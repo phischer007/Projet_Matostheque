@@ -7,7 +7,7 @@ export const UsersSearch = ({ searchTerm, onSearchChange }) => (
       value={searchTerm}
       onChange={onSearchChange}
       fullWidth
-      placeholder="User FirstName/ User LastName"
+      placeholder="Search by First Name, Last Name"
       startAdornment={(
         <InputAdornment position="start">
           <SvgIcon

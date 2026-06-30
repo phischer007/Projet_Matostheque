@@ -42,7 +42,6 @@ def generate_qrcode(device_id):
     server_host = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')[0].strip()  # Get the first allowed host or default to 'localhost'
 
     # Create a link to a web page with the material details
-    # webpage_link = f"https://localhost/matostheque/public/{device_id}"
     webpage_link = f"https://{server_host}/mutmat/public/{device_id}"
 
     # Generate the qrcode with the link

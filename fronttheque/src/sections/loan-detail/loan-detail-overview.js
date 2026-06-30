@@ -271,12 +271,12 @@ export const LoanDetailOverview = (props) => {
             {enableEdit ? (
               <Stack
                 sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    'justify-content': 'center',
-                    flexWrap: 'wrap',
-                    gap: 1
-                  }}
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  flexWrap: 'wrap',
+                  gap: 1
+                }}
               >
                 <CardActions sx={{ justifyContent: 'center',grow:1 }}>
                     <Button

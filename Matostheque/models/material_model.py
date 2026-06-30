@@ -67,38 +67,18 @@ class Materials(models.Model):
 
     # The subType of material.
     sub_type = models.CharField(max_length=100, choices= TYPE_CHOICES + LAB_SUPPLY_TYPE_CHOICES)
-    ##################################################################################################
-    # The consumable type of material if the type matches (consumable type)
-    #consumable_type = models.CharField(max_length=100, choices=TYPE_CHOICES, null=True, blank=True)
-    
-    # The unit of measurement for the material. (consumable type)
-    #unit = models.CharField(max_length=100, null=True, blank=True)
     
     # The expiration date of the material. (consumable type)
     expiration_date = models.DateField(null=True, blank=True)
-    ##################################################################################################
-
-    ##################################################################################################################
-    # Add for LAB_SUPPLIES type
-    ##################################################################################################################
-    #lab_supply_type = models.CharField(max_length=100, choices=LAB_SUPPLY_TYPE_CHOICES, null=True, blank=True)
-    #lab_supply_quantity = models.FloatField(default=0.0, null=True)  # Quantity of lab supplies
 
     # The transaction duration allowed for the material.
     loan_duration = models.IntegerField(null=True, blank=True, default=30)
-    ##################################################################################################################
 
     # The quantity of the material available. (consumable type)
     quantity_available =  models.FloatField(default=1)
 
     # The original location of the material.
     origin = models.CharField(max_length=100, null=True)
-    
-    # The transaction duration allowed for the material.
-    #loan_duration = models.IntegerField(null=True)
-    
-    # A flag indicating whether the material is available or not.
-    #availability = models.BooleanField(default=True)
     
     # A flag indicating whether the transaction of the material needs to be validated or not.
     validation = models.BooleanField(default=True)
@@ -179,5 +159,3 @@ class Materials(models.Model):
 
     def __str__(self):
         return self.material_title
-
-

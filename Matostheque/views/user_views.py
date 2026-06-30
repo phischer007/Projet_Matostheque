@@ -19,12 +19,11 @@ from Matostheque.serializers import UserSerializer, ServiceSerializer
 from Matostheque.controllers.emails_controller import send_registration_email
 from Matostheque.controllers.user_controller import *
 
-# Add by Vikhram
 import requests
 from django.shortcuts import redirect
 from xml.etree import ElementTree
 
-
+from django.db import transaction
 
 @login_required
 @api_view(['GET' ,'DELETE'])
@@ -144,25 +143,67 @@ def upload_profile_pic(request, pk):
         return JsonResponse({'message': 'Error occured when trying to upload pictures'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+# @login_required
+# @api_view(['PUT'])
+# def changeActivity(request,pk):
+#     try:
+#         user = get_user_model().objects.get(pk=pk)
+#     except Exception:
+#         return JsonResponse({'message': 'User not found!'}, status=status.HTTP_404_NOT_FOUND)
+#     if (not request.user.is_staff) | (request.user.user_id == user.user_id):
+#         return JsonResponse(
+#             {'message': 'You are not authorized to edit this profile.'},
+#             status=status.HTTP_403_FORBIDDEN
+#         )
+#     try:
+#         data = json.loads(request.body)
+#         user.is_active = data.get("is_active")
+#         user.save()
+#         return JsonResponse({'message': 'Activity updated successfully'}, status=status.HTTP_200_OK)
+#     except Exception:
+#         return JsonResponse({'message': 'Error occured when trying to update the Activity'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 @login_required
 @api_view(['PUT'])
-def changeActivity(request,pk):
+def changeActivity(request, pk):
+    User = get_user_model()
+    
     try:
-        user = get_user_model().objects.get(pk=pk)
-    except Exception:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
         return JsonResponse({'message': 'User not found!'}, status=status.HTTP_404_NOT_FOUND)
+        
     if (not request.user.is_staff) | (request.user.user_id == user.user_id):
         return JsonResponse(
             {'message': 'You are not authorized to edit this profile.'},
             status=status.HTTP_403_FORBIDDEN
         )
+        
     try:
         data = json.loads(request.body)
-        user.is_active = data.get("is_active")
-        user.save()
+        new_is_active = data.get("is_active")
+        
+        # Check if the user is actively being deactivated
+        is_deactivating = user.is_active and not new_is_active
+
+        # 2. Wrap the critical updates in an atomic transaction
+        with transaction.atomic():
+            
+            if is_deactivating:
+                Materials.objects.filter(user=user).update(user=request.user)
+
+            # Update the user's status
+            user.is_active = new_is_active
+            user.save()
+            
         return JsonResponse({'message': 'Activity updated successfully'}, status=status.HTTP_200_OK)
-    except Exception:
-        return JsonResponse({'message': 'Error occured when trying to update the Activity'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    except Exception as e:
+        # It is highly recommended to log the exception 'e' here in production
+        return JsonResponse(
+            {'message': 'Error occurred when trying to update the Activity'}, 
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
 
 @login_required
@@ -174,6 +215,7 @@ def active_owners_lite(request):
 
 @login_required
 def my_services(request):
+    print(request.user)
     return JsonResponse(ServiceSerializer(request.user.laboratory.services, many=True).data, safe=False)
 
 # --------------------------------------------------------------------------
@@ -294,6 +336,7 @@ def cas_validate(request):
             for attribute in cas_attributes:
                 tag_parts = attribute.tag.split('}')
                 local_tag = tag_parts[-1]
+                print(attribute.text)
                 # get the name surname and mail
                 if local_tag in ['sn', 'givenName', 'mail']:
                     attributes_dict[local_tag] = attribute.text
@@ -303,23 +346,23 @@ def cas_validate(request):
                     if attribute.text.find('uga-pers_structure-') != -1:
                         # if there is already an attribute with uga-pers_structure- get the smaller of the two
                         if 'memberOf' in attributes_dict:
+
                             if attributes_dict['memberOf'] > attribute.text:
                                 attributes_dict['memberOf'] = attribute.text
                         else:
                             attributes_dict['memberOf'] = attribute.text
-            # --- ADD THIS LINE TO PRINT TO YOUR CONSOLE ---
-            # print("\n=== CAS ATTRIBUTES ===", attributes_dict, "\n")
+
             # keep only the lab
             attributes_dict['memberOf'] = attributes_dict['memberOf'].split(",")[0].rsplit("-", 1)[-1]
+            print(attributes_dict['memberOf'])
             try:
                 # check if the lab is in the database
                 attributes_dict['memberOf'] = Laboratory.objects.get(laboratory_name=attributes_dict['memberOf'])
             except Exception:
-                # if he's not redirect him to the accessDeniedPage
+                # if he's not then redirect him to the accessDeniedPage
                 return redirect('/mutmat/public/accessDeniedPage')
             normalized_email = email.lower()
-            # user, created = get_user_model().objects.get_or_create(email=normalized_email,
-            #                                                        defaults={'first_name': attributes_dict['givenName'], 'last_name': attributes_dict['sn']})
+            
             #  if the lab is in the database get the user with the mail and if he don't exist create the user
             user, created = get_user_model().objects.get_or_create(email=normalized_email,
                                                                    defaults={'first_name': attributes_dict['givenName'], 'last_name': attributes_dict['sn'], 'laboratory': attributes_dict.get('memberOf')})
@@ -338,12 +381,11 @@ def cas_validate(request):
                 user_serializer = UserSerializer(user)
                 send_registration_email(user_serializer.data)
             
-            # return redirect('/matostheque')
             return redirect('/mutmat')
-    #temporary if error authenticating
+    
     service_url = request.build_absolute_uri('/api/cas/validate/')
     login_url = settings.LOGIN_URL.format(service_url)
-    return redirect(login_url) #need to change to back to authentication if error
+    return redirect(login_url) 
 
 def cas_logout(request):
     logout(request)

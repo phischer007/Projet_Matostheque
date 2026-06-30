@@ -1,0 +1,15 @@
+.env
+node_modules/
+
+.idea/
+matostheque_venv/
+logs/
+assets
+
+nginx/nginx.conf
+nginx/ssl/*
+
+fronttheque/.env
+fronttheque/.next
+fronttheque/node_modules/
+fronttheque/jsconfig.json__pycache__/

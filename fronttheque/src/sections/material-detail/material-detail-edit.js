@@ -204,6 +204,9 @@ const handleChangeNum = useCallback((event) => {
           if (value !== undefined && value !== null) {
             form.append(key, value);
           }
+          else if(key === "service"){
+            form.append(key, value);
+          }
         });
         if (materialID) {
           try {
@@ -367,9 +370,9 @@ const handleChangeNum = useCallback((event) => {
                 {isFormDisabled && formData.type &&(
                   <TextField
                     fullWidth
-                    label="Contact person"
+                    label="Team"
                     disabled={isFormDisabled}
-                    value={formData.service.service_name}
+                    value={formData.service ? serviceList.find(service => service.service_id === formData.service).service_name : 'Please Select a Team' }
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
@@ -395,7 +398,7 @@ const handleChangeNum = useCallback((event) => {
                     )}
                   >
                     <MenuItem key={null} value={null}>
-                      No services
+                      Please Select a Team
                     </MenuItem>
                     {serviceList.map((service) => (
                       <MenuItem key={service.service_id} value={service.service_id}>
@@ -414,7 +417,12 @@ const handleChangeNum = useCallback((event) => {
                   name="type"
                   helperText={!isFormDisabled ? "This field can't be edited." : ""}
                   disabled
-                  value={formData.type}
+                  // value={formData.type}
+                  value={
+                    formData.type === "LAB_SUPPLIES" ? "Lab Supplies" :
+                    formData.type === "CONSUMABLES" ? "Consumables" : 
+                    formData.type
+                  }
                   InputLabelProps={{ shrink: true }}
                   error={formErrors.type}
                 />
@@ -475,8 +483,10 @@ const handleChangeNum = useCallback((event) => {
               {/* End of consumableTypes dropdown section */}
               {/* Begin of lab_supplies_type */}
               {formData.type === "LAB_SUPPLIES" &&
-                <Grid xs={12}
-                md={6}>
+                <Grid 
+                  xs={12}
+                  md={6}
+                >
                   <TextField
                     fullWidth
                     label="Duration"
@@ -485,6 +495,9 @@ const handleChangeNum = useCallback((event) => {
                     onChange={handleChangeNum}
                     value={formData.loan_duration}
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      endAdornment: <InputAdornment position="end">days</InputAdornment>,
+                    }}
                   />
                 </Grid>
               }

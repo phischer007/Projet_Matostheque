@@ -35,7 +35,7 @@ export const SideNavItem = (props) => {
             backgroundColor: 'rgba(255, 255, 255, 0.04)'
           }),
           '&:hover': {
-            backgroundColor: 'rgba(255, 255, 255, 0.04)'
+            backgroundColor: 'rgba(3, 169, 244, 0.1)'
           }
         }}
         {...linkProps}
@@ -50,7 +50,7 @@ export const SideNavItem = (props) => {
               justifyContent: 'center',
               mr: 2,
               ...(active && {
-                color: 'primary.main'
+                color: 'warning.main'
               })
             }}
           >

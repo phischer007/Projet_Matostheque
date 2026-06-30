@@ -4,11 +4,9 @@ import PropTypes from 'prop-types';
 
 import {
   Box,
-  Button,
   Divider,
   Drawer,
   Stack,
-  SvgIcon,
   Typography,
   useMediaQuery
 } from '@mui/material';
@@ -44,48 +42,44 @@ export const SideNav = (props) => {
           height: '100%'
         }}
       >
-        <Box sx={{ p: 3 }}>
+        {/* Combine Logo and Typography inside this single centering Box */}
+        <Box 
+          sx={{ 
+            p: 3,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center' 
+          }}
+        >
           <Box
             component={NextLink}
             href="/"
             sx={{
               display: 'flex',
               minHeight: 50,
-              maxHeight:75,
+              maxHeight: 75,
               minWidth: 50,
-              maxWidth:75
+              maxWidth: 75,
+              justifyContent: 'center' // Ensures the logo itself is centered in its link box
             }}
           >
             <Logo />
           </Box>
-          {/* <Box
-            sx={{
-              alignItems: 'center',
-              backgroundColor: 'rgba(255, 255, 255, 0.04)',
-              borderRadius: 1,
-              cursor: 'pointer',
-              display: 'flex',
-              justifyContent: 'space-between',
-              mt: 2,
-              p: '12px'
-            }}
-          >
-            
-          </Box> */}
-
           <Typography
             color="inherit"
-            variant="subtitle1"
+            variant="h5"
             sx={{ 
-              mt: 2, 
-              fontWeight: 'bold' 
+              mt: 4, // Adjusted from 8 to 4 to give a balanced space, change back to 8 if you want a huge gap
+              fontWeight: 'bold',
+              textAlign: 'center'
             }}
           >
-                Matostheque
+            Mutmat UGA
           </Typography>
-
         </Box>
+
         <Divider sx={{ borderColor: 'neutral.700' }} />
+
         <Box
           component="nav"
           sx={{
@@ -105,7 +99,7 @@ export const SideNav = (props) => {
           >
             {items.map((item) => {
               const active = item.path ? (pathname === item.path) : false;
-              if ((item.path === "/mymaterials" && user.role !== "owner") ||(item.path === "/Liste_user" && !user.is_staff)) return;
+              if ((item.path === "/mymaterials" && user.role !== "owner") ||(item.path === "/userslist" && !user.is_staff)) return;
               return (
                 <SideNavItem
                   active={active}
@@ -131,7 +125,7 @@ export const SideNav = (props) => {
             color="neutral.100"
             variant="subtitle2"
           >
-            Ver. 2.0.0
+            Version 2.0.0
           </Typography>
         </Box>
       </Box>
@@ -145,7 +139,7 @@ export const SideNav = (props) => {
         open
         PaperProps={{
           sx: {
-            backgroundColor: 'neutral.800',
+            backgroundColor: '#162A42',
             color: 'common.white',
             width: 280
           }
@@ -164,7 +158,7 @@ export const SideNav = (props) => {
       open={open}
       PaperProps={{
         sx: {
-          backgroundColor: 'neutral.800',
+          backgroundColor: '#0B1120',
           color: 'common.white',
           width: 280
         }

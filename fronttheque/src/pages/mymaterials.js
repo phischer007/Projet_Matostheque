@@ -1,10 +1,7 @@
 import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import Head from 'next/head';
-import ArchiveBoxIcon from '@heroicons/react/24/solid/ArchiveBoxIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
-import CogIcon from '@heroicons/react/24/solid/CogIcon';
-import { Box, Button, Container, Stack, SvgIcon, Typography, Grid } from '@mui/material';
-import { useSelection } from 'src/hooks/use-selection';
+import { Box, Button, Container, Divider, Stack, SvgIcon, Typography, Grid } from '@mui/material';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { LoansTable } from 'src/sections/loan/loans-table';
 import { LoansSearch } from 'src/sections/loan/loans-search';
@@ -13,6 +10,9 @@ import { applyPagination } from 'src/utils/apply-pagination';
 import config from '../utils/config';
 import { useAuth } from 'src/hooks/use-auth';
 import NextLink from 'next/link';
+
+import { MaterialTableView } from 'src/sections/materials/materialtableview';
+
 
 const useLoans = (page, rowsPerPage, filteredLoans) => {
   return useMemo(() => {
@@ -138,7 +138,6 @@ const Page = () => {
             <Grid container xs={12} justifyContent="space-between" alignItems="center">
               {/* First sub-grid */}
               <Grid xs={6} gap={1} container alignItems="center">
-                <SvgIcon fontSize="medium"><ArchiveBoxIcon /></SvgIcon>
                 <Typography variant="h4" align="center">Personal Materials</Typography>
               </Grid>
               <Grid xs={6} container justifyContent="flex-end">
@@ -173,7 +172,7 @@ const Page = () => {
                   activeTab={"materials"}
                 />)}
             </Stack>
-            <Stack
+            {/* <Stack
               direction="column"
               justifyContent="space-between"
               spacing={4}
@@ -182,7 +181,22 @@ const Page = () => {
                 <MaterialTable
                   data={materialList}
                 />)}
-            </Stack>
+            </Stack> */}
+
+            {materialList && (
+              <Stack direction="column" spacing={6} sx={{ mt: 4 }}>
+                
+                {/* 1. Original Grid View */}
+                <MaterialTable data={materialList} />
+                
+                <Divider />
+
+                {/* 2. New Table View */}
+                <MaterialTableView data={materialList} />
+                
+              </Stack>
+            )}
+
           </Stack>
         </Container>
       </Box>

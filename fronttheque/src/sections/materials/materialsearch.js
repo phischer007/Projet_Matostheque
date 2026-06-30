@@ -19,7 +19,6 @@ export const MaterialsSearch = ({ searchTerm, onSearchChange }) => {
           value={searchTerm}
           onChange={onSearchChange}
           fullWidth
-          // placeholder="Material name/ Material number/ Owner name/ Team"
           placeholder="Material name/ Material number/ Contact person name/ Description"
 
           startAdornment={(

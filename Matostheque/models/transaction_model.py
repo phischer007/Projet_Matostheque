@@ -36,7 +36,6 @@ class Transactions(models.Model):
     type = models.CharField(max_length=20, choices=TYPE_CHOICES)
     
     # The date and time when the transaction starts
-    # transaction_date = models.DateTimeField(default=timezone.now)
     transaction_date = models.DateField()
     
     # The duration of transaction in days
@@ -54,26 +53,11 @@ class Transactions(models.Model):
     # The quantity involved in the transaction
     transaction_quantity = models.FloatField(default=1)
 
-    # A flag indicating whether the transaction is overdue or not
-    #overdue_flag = models.BooleanField(default=False)
-
     # The date and the time when the transaction was approved
     approval_date = models.DateTimeField(null=True, blank=True)
 
     # The Date and Time when the transaction entered its 'final status' so canceled, returned,rejected,Closed
     latest_change_status_date = models.DateTimeField(null=True, blank=True)
-
-    # The date and the time when the transaction was canceled
-    #cancellation_date = models.DateTimeField(null=True, blank=True)
-    
-    # The date and the time when the equipment was returned
-    #return_date = models.DateTimeField(null=True, blank=True)
-    
-    # The date and the time when the transaction was rejected
-    #rejection_date = models.DateTimeField(null=True, blank=True)
-    
-    # A flag indicating if the reminder email was sent
-    #email_sent = models.BooleanField(default=False)
     
     # The date and time when the transaction was created
     created_at = models.DateTimeField(default=timezone.now)
@@ -135,8 +119,6 @@ class Transactions(models.Model):
         if self.borrower_id == self.material.user_id:
             raise Exception('A borrower cannot be the material contact')
 
-
-    
     class Meta:
         """
         This is the metadata for the Transactions model.

@@ -105,6 +105,7 @@ const Page = () => {
       <Head>
         <title>Transactions</title>
       </Head>
+
       <Box
         component="main"
         sx={{
@@ -117,20 +118,11 @@ const Page = () => {
             <Grid container xs={12} justifyContent="space-between" alignItems="center">
               {/* First sub-grid */}
               <Grid xs={6} gap={1} container alignItems="center">
-                <SvgIcon fontSize="medium"><TicketIcon /></SvgIcon>
+                
                 <Typography variant="h4" align="center">Transactions</Typography>
               </Grid>
-              <Grid xs={6} container justifyContent="flex-end">
-                  <Button
-                    component={NextLink}
-                    href={btnCreateUrl}
-                    startIcon={<SvgIcon fontSize="small"><PlusIcon /></SvgIcon>}
-                    variant="contained"
-                  >
-                    Borrow
-                  </Button>
-              </Grid>
             </Grid>
+            
             <Stack
               direction="column"
               justifyContent="space-between"

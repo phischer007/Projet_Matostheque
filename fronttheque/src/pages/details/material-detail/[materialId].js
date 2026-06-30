@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Box, Container, Stack, Typography, Button, Divider, CardActions, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Unstable_Grid2 as Grid } from '@mui/material';
+import { Box, Container, Stack, Typography, Button, Divider, CardActions, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Unstable_Grid2 as Grid, Fab } from '@mui/material';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { MaterialDetailOverview } from 'src/sections/material-detail/material-detail-overview';
 import { MaterialDetailEdit } from 'src/sections/material-detail/material-detail-edit';
@@ -183,17 +183,35 @@ const Page = () => {
               <Typography variant="h4">
                 Material Details
               </Typography>
-             <div>
+             {/* <div>
                 <Button
                   variant="contained"
                   onClick={handleBorrow}
                   disabled={!materialData?.available_for_transaction || materialData.owner_details.user_id === user.user_id}
                 >
                  {materialData?.available_for_transaction? "Book Material" : "Not Available For transaction"}
-
-
                 </Button>
-              </div>
+              </div> */}
+
+              <Box
+                sx={{
+                  position: 'fixed',
+                  top: 100, 
+                  right: 48,  
+                  zIndex: 1000, 
+                }}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  onClick={handleBorrow}
+                  disabled={!materialData?.available_for_transaction || materialData.owner_details.user_id === user.user_id}
+                >
+                {materialData?.available_for_transaction ? "Book Material" : "Not Available For transaction"}
+                </Button>
+              </Box>
+
             </Stack>
             <div>
               <Grid

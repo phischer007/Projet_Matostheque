@@ -97,7 +97,7 @@ export const AccountProfile = (user_data) => {
             color="text.secondary"
             variant="body2"
           >
-            {user.role === "owner" ? "contact person" : user.role} account
+            Status: {user.role === "owner" ? "Lender" : "Borrower"}
           </Typography>
           <Typography
             color="text.secondary"

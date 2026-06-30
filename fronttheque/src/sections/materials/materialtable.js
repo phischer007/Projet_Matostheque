@@ -1,9 +1,16 @@
-import { Stack, Grid, List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography, Link } from '@mui/material';
-import { ChartBarIcon } from '@heroicons/react/24/solid';
+import { 
+  Grid, 
+  List, 
+  ListItem, 
+  ListItemAvatar, 
+  Avatar, 
+  ListItemText, 
+  Typography, 
+  Link 
+} from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { useAuth } from 'src/hooks/use-auth';
-import { statusMap, transactionStatus } from 'src/data/static_data'
 
 
 export const MaterialTable = (props) => {
@@ -20,7 +27,7 @@ export const MaterialTable = (props) => {
     </Grid>
     <List sx={{
       display: 'grid',
-      gridTemplateColumns: { xs: '1fr', sm: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }, // One column for xs and sm, two columns for md, and three columns for lg and above
+      gridTemplateColumns: { xs: '1fr', sm: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }, 
       gap: '16px'
     }}>
       {sortedData && sortedData.map((material, index) => {

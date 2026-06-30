@@ -55,15 +55,8 @@ urlpatterns = [
 
     path('services/',user_views.my_services),
 
-    #path('login/', user_views.api_login, name='api_login'),
-    #path('register/', user_views.api_register, name='api_register'),
-    #path('logout/', user_views.api_logout, name='api_logout'),
-    #path('session/', user_views.session_data, name='session_data'),
-
     path('cas/login/', user_views.cas_login, name='cas_ng_login'),
     path('cas/validate/', user_views.cas_validate, name='cas_validate'),
     path('cas/logout/', user_views.cas_logout, name='cas_logout'),
     path('session/', user_views.session_data, name='session_data'), 
-
-
 ]

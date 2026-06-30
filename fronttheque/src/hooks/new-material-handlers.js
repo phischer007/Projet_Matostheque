@@ -14,7 +14,6 @@ import { useAuth } from './use-auth';
 import { stringify } from 'node:querystring';
 
 
-
 const compressAndUploadImages = async (images) => {
   const compressedImages = [];
 
@@ -335,16 +334,11 @@ const handleChangeNum = useCallback((event) => {
               value: 'Material created successfully! You will be redirected soon.'
             });
 
-            // console.log(data);
-
             setTimeout(() => {
-              // router.push('/materials');
               router.push(`/details/material-detail/${data.material_id}`);
             }, 2000);
           }
-
           setIsUploading(false);
-        // }
       }
 
       setIsUploading(false);

@@ -629,7 +629,9 @@ const NewMaterialDetails = (props) => {
                     onChange={handleChange}
                     required
                     type="text"
-                    placeholder="140 Rue de la Physique, 38402 Saint-Martin-d'Hères"
+                    InputProps={{
+                      readOnly: true,
+                    }}
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -655,44 +657,6 @@ const NewMaterialDetails = (props) => {
                     Ask for validation
                   </Typography>
                 </Grid>
-{/*                <Grid container xs={12} sm={12}>
-                  <Grid item xs={12} sm={12}>
-                    <FormControlLabel
-                      control={
-                        <Switch
-                          checked={isDurationEnabled}
-                          onChange={handleToggleChange}
-                          color="primary"
-                        />
-                      }
-                      sx={{ px: 1, width: 250 }}
-                      label={
-                        <Typography variant="caption" color="textSecondary">
-                          Enable Loan Duration
-                        </Typography>
-                      }
-                    />
-                  </Grid>
-                  {isDurationEnabled && (<>
-                    <Grid item xs={12} lg={6} md ={6} sm={12}>
-                      <Typography variant="caption" color="textSecondary">
-                        Type a number in days.<span>*</span>
-                      </Typography>
-                      <TextField
-                        type="number"
-                        label="Allowed Loan Duration"
-                        name="loan_duration"
-                        value={formData.loan_duration}
-                        onChange={handleChange}
-                        error={formErrors.loan_duration}
-                        helperText={formErrors.loan_duration}
-                        inputProps={{ min: 1, max: 365 }}
-                        fullWidth
-                      />
-                    </Grid>
-
-                  </>)}
-                </Grid>*/}
               </Grid>
             </AccordionDetails>
           </Accordion>

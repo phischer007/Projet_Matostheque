@@ -16,7 +16,6 @@ from rest_framework.decorators import api_view
 from Matostheque.controllers.transactions_controller import *
 
 
-
 @login_required
 @api_view(['GET','POST'])
 def transaction_list(request):

@@ -72,30 +72,6 @@ def send_reminder_email(loan):
     to_email = loan.borrower.email
     send_mail(subject, plain_message, from_email, [to_email], html_message=html_message) # commenting sendig the email
 
-# Function to send an email to notify an owner of an equipment that was returned
-# def send_returned_email(loan):
-#     context = {
-#         'material': {
-#             'name': loan.material.material_title,
-#             'id': loan.material.material_id
-#             ,
-#             'link': f"/mutmat/details/material-detail/{loan.material.material_id}"
-#         },
-#         'owner': {
-#             'first_name': loan.material.user.first_name
-#         },
-#         'borrower': {
-#             'name': loan.borrower.first_name + " " + loan.borrower.last_name
-#         }
-#     }
-#     html_message = render_to_string('emails/materialreturn_email.html', context)
-#     plain_message = strip_tags(html_message)
-#     # Send the email
-#     subject = 'Material Return'
-#     from_email = settings.EMAIL_HOST_USER
-#     to_email = loan.material.user.email
-#     send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
-
 # Function to send an email to notify the borrower after validation of a pending request
 def send_approved_email(loan):
     context = {

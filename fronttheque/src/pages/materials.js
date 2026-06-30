@@ -18,9 +18,6 @@ import { MaterialsSearch } from 'src/sections/materials/materialsearch';
 import config from '../utils/config';
 import NextLink from 'next/link';
 import { useAuth } from 'src/hooks/use-auth';
-import { MaterialQRCodeDoc } from 'src/documents/material-qrcode-document';
-import { MaterialListDoc } from 'src/documents/material-export-document';
-import { PDFDownloadLink } from '@react-pdf/renderer';
 import { MaterialCategory } from 'src/sections/materials/materialcategory';
 
 
@@ -194,8 +191,11 @@ const Page = () => {
               </Stack>
               <div>
                 <Button
+                  // sx={{ backgroundColor: '#162A42' }}
                   startIcon={
-                    <SvgIcon fontSize="small">
+                    <SvgIcon 
+                      fontSize="small"
+                    >
                       <PlusIcon />
                     </SvgIcon>
                   }

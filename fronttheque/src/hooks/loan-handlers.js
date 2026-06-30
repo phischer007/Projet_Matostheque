@@ -168,8 +168,6 @@ export const useTransactionHandlers = (props) => {
         await handleTransactionAction(transactionId, message, priority, title,type);
     };
 
-
-
     useEffect(() => {
         if (transactionId) {
             fetch(`${config.apiUrl}/transactions/details/${transactionId}`, {
