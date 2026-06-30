@@ -1,0 +1,266 @@
+import { useCallback, useState, useEffect } from 'react';
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Divider,
+  TextField,
+  Switch,
+  Typography,
+  Checkbox,
+  Unstable_Grid2 as Grid,
+  FormControl, Select, MenuItem
+} from '@mui/material';
+import { toast } from 'react-toastify';
+import config from 'src/utils/config';
+import { useAuth } from 'src/hooks/use-auth';
+import { getCookie } from 'src/utils/csrf';
+
+export const AccountProfileDetails = (user) => {
+  const auth = useAuth();
+  //const sessionToken = auth.session_token
+  const [values, setValues] = useState({
+    ...user
+  });
+
+  const [isChecked, setIsChecked] = useState(values.role == "owner"? true : false);
+  const [serviceList, setServiceList] = useState(null)
+  const [formData, setFormData] = useState({
+    first_name: null,
+    last_name: null,
+    //contact: null,
+    role: null,
+    service: null
+  });
+
+  useEffect(() => {
+    fetch(`${config.apiUrl}/services/`,{
+      credentials: 'include'// Add this so the session cookie is sent!
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Sort the data alphabetically by material_title
+        if (data) {
+            setServiceList(data);
+        }
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
+  const handleToggleChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const handleChange = useCallback(
+    (event) => {
+      setValues((prevState) => ({
+        ...prevState,
+        [event.target.name]: event.target.value
+      }));
+    },
+    []
+  );
+
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
+      formData.role = isChecked ? "owner" : "user";
+      try {
+        const csrftoken = getCookie('csrftoken');
+        const response = await fetch(`${config.apiUrl}/users/${user.user_id}/`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken, // Add this
+            // 'Authorization': sessionToken
+          },
+          credentials: 'include', // Add this so the session cookie is sent!
+          body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+          const errorMessage = await response.text();
+          let decodeResponse = JSON.parse(errorMessage);
+
+          // Handle different types of errors
+          if (decodeResponse.error === "Session expired") {
+            // Handle session expired error
+            toast.error("Your session has expired. Please log in again.", { autoClose: false });
+            // Clear session token
+            setTimeout(() => {
+              auth.signOut();
+            }, 3000);
+
+          } else if (decodeResponse.message === "User not found") {
+            // Handle user not found error
+            toast.error("User not found. Please try again.", { autoClose: false });
+          } else if (decodeResponse.message === "Session token not found") {
+            // Handle session token not found error
+            toast.error("Session token not found. Please try again.", { autoClose: false });
+          } else if (decodeResponse.message === "You can't become a simple user") {
+            // Handle session token not found error
+            toast.error("You can't become a user because you still own materials", { autoClose: false });
+            setIsChecked(!isChecked)
+          } else {
+            // Handle other errors
+            toast.error("An error occurred. Please try again later.", { autoClose: false });
+          }
+
+        } else {
+          const updatedUserData = await response.json();
+
+          await auth.updateUser(updatedUserData.user_id);
+
+          toast.success("Your information was successfully updated!");
+          window.location.reload();
+        }
+
+      } catch (error) {
+         // Handle unexpected errors
+        console.error("An unexpected error occurred:", error);
+        toast.error("An unexpected error occurred. Please try again later.", { autoClose: false });
+      }
+
+  },[formData, isChecked, user]);
+
+  useEffect(() => {
+    setFormData({
+      first_name: values.first_name,
+      last_name: values.last_name,
+      //contact: values.owner_contact,
+      role: values.role,
+      service: values.service
+    });
+  }, [values]);
+  
+
+  return (
+    <form
+      autoComplete="off"
+      noValidate
+      onSubmit={handleSubmit}
+    >
+      <Card>
+        <CardHeader
+          subheader="The information can be edited"
+          title="Profile"
+        />
+        <CardContent sx={{ pt: 0 }}>
+          <Box sx={{ m: -1.5 }}>
+            <Grid
+              container
+              spacing={3}
+            >
+              <Grid
+                xs={12}
+                md={6}
+              >
+                <TextField
+                  fullWidth
+                  label="First name"
+                  name="first_name"
+                  onChange={handleChange}
+                  value={values.first_name}
+                />
+              </Grid>
+              <Grid
+                xs={12}
+                md={6}
+              >
+                <TextField
+                  fullWidth
+                  label="Last name"
+                  name="last_name"
+                  onChange={handleChange}
+                  value={values.last_name}
+                />
+              </Grid>
+              <Grid
+                xs={12}
+                md={6}
+              >
+                <TextField
+                  fullWidth
+                  label="Email Address"
+                  name="email"
+                  disabled
+                  value={values.email}
+                />
+              </Grid>
+              <Grid
+                xs={12}
+                md={6}
+              >
+                <TextField
+                  fullWidth
+                  label="Laboratory"
+                  name="laboratory"
+                  disabled
+                  value={values.laboratory_name}
+                />
+              </Grid>
+              <Grid item xs={12} >
+                    <FormControl fullWidth>
+                      {serviceList &&
+                        <Select
+                          labelId="service-label"
+                          name="service"
+                          required
+                          value={formData.service || ''}
+                          onChange={handleChange}
+                          displayEmpty
+                          renderValue={(value) => (
+                            <Typography
+                              variant="subtitle2"
+                              style={{
+                                fontFamily: 'inherit',
+                                color: 'inherit'
+
+                              }}
+                            >
+                              {value ? serviceList.find(service => service.service_id === value).service_name : 'Service'}
+                            </Typography>
+                          )}
+                        >
+                          {serviceList.map((service) => (
+                            <MenuItem key={service.service_id} value={service.service_id}>
+                              {service.service_name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      }
+                    </FormControl>
+                  </Grid>
+              <Grid
+                xs={12}
+                md={12}
+              >
+                <Switch
+                  checked={isChecked}
+                  onChange={handleToggleChange}
+                  color="primary"
+                  inputProps={{ 'aria-label': 'toggle checkbox' }}
+                />
+                <Typography variant="caption" color="textSecondary">
+                  Activate your account to gain access to adding materials.
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
+        </CardContent>
+        <Divider />
+        <CardActions sx={{ justifyContent: 'flex-end' }}>
+          <Button 
+            type="submit"
+            variant="contained"
+          >
+            Save details
+          </Button>
+        </CardActions>
+      </Card>
+    </form>
+  );
+};
