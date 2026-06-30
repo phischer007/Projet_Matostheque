@@ -7,12 +7,13 @@ logs/
 assets
 
 nginx/nginx.conf
-nginx/ssl
+nginx/ssl/
 
-media/
-media/users/
+media/images/
+media/images/users
 
 fronttheque/.env
 fronttheque/.next
 fronttheque/node_modules/
-fronttheque/jsconfig.json__pycache__/
+fronttheque/jsconfig.json
+__pycache__/
