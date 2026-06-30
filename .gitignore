@@ -9,8 +9,8 @@ assets
 nginx/nginx.conf
 nginx/ssl/
 
-media/images/*
-media/images/users/*
+media/
+
 
 fronttheque/.env
 fronttheque/.next
