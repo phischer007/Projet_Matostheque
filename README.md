@@ -64,5 +64,6 @@ python3 manage.py collectstatic --noinput --clear
 # Create a local user to access your Django Administration backend
 python3 manage.py createsuperuser
 ############ Example #################
-### Email: 
+### Email: admin@example.com
+### Password: admin1234
 ```
