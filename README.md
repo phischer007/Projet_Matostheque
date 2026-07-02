@@ -38,6 +38,31 @@ python3 -m venv matostheque_venv
 source matostheque_venv/bin/activate
 ```
 
+Edit these files
+```bash
+cp .env.example .env
+cp fronttheque/.env.example fronttheque/.env
+cp fronttheque/src/utils/config.example.js fronttheque/src/utils/config.js
+
+# Fill credentials and update secret keys as needed. 
+# For production, change
+## 1. server_name.example.com --> your servername
+## 2. cas-authentification.example.com --> your authentification servername
+```
+To generate a Django SECRET_KEY, you can use the following command:
+```bash
+echo "Generating Django SECRET KEY"
+
+SECRET_KEY=$(python3 <<EOF
+from django.core.management.utils import get_random_secret_key
+print(get_random_secret_key())
+EOF
+)
+echo "Django SECRET_KEY : $SECRET_KEY"
+
+echo "SECRET_KEY='$SECRET_KEY'" >> .env
+```
+
 **Install Python dependencies**
 ```bash
 # Delete the exiting migration files
@@ -47,23 +72,46 @@ find . -path "*/migrations/*.pyc" -delete
 pip install --force-reinstall django==4.2.23
 pip install -r requirements.txt
 
+# Take ownership of the entire project folder
+sudo chown -R $USER:$USER /Matostheque_App/
+chmod -R u+w assets
+chmod -R u+w media
+```
+**Configure PostgreSQL Database**
+```bash
+sudo apt update
+sudo apt install -y postgresql postgresql-contrib
+
+sudo -u -i postgres
+psql
+
+# Ensure the following credentials match your .env file configuration:
+## matostheque, your_database_username, your_database_password
+CREATE DATABASE matostheque;
+CREATE USER your_database_username WITH ENCRYPTED PASSWORD 'your_database_password';
+GRANT ALL PRIVILEGES ON DATABASE matostheque TO your_database_username;
+ALTER DATABASE matostheque OWNER TO your_database_username;
+```
+
+
+**Run migrations and start Django**
+```bash
 # Perform database migrations
 python manage.py makemigrations
 
 # Apply database migrations
 python manage.py migrate
 
-# Take ownership of the entire project folder
-sudo chown -R $USER:$USER /Matostheque_App/
-chmod -R u+w assets
-chmod -R u+w media
-
 # Collect static files (if needed)
-python3 manage.py collectstatic --noinput --clear
+python manage.py collectstatic --noinput --clear
 
 # Create a local user to access your Django Administration backend
-python3 manage.py createsuperuser
-############ Example #################
+python manage.py createsuperuser 
+############ Example #########################
+### Follow prompts to create an admin user
 ### Email: admin@example.com
 ### Password: admin1234
+##############################################
+
+python manage.py runserver 8030
 ```
