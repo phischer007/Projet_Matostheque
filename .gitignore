@@ -4,16 +4,18 @@ node_modules/
 .idea/
 matostheque_venv/
 logs/
-assets
+assets/
 
 nginx/nginx.conf
 nginx/ssl/
 
-media/
-
+media/images/users/*
+media/logos/*
 
 fronttheque/.env
 fronttheque/.next
 fronttheque/node_modules/
 fronttheque/jsconfig.json
+fronttheque/src/utils/config.js
+
 __pycache__/
