@@ -112,7 +112,7 @@ python manage.py collectstatic --noinput --clear
 python manage.py createsuperuser 
 ############ Example #########################
 ### Follow prompts to create an admin user
-### Email: admin@example.com
+### Email: admin@example.fr
 ### Password: admin1234
 ##############################################
 
