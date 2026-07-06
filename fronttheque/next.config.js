@@ -2,7 +2,7 @@
 const nextConfig = {
   basePath: '/mutmat',
   
-  // The 'env' object allows you to inject these variables 
+  // The '.env' object allows you to inject these variables 
   // into your client-side code at build time.
   env: {
     NEXT_PUBLIC_DJANGO_SERVER: process.env.NEXT_PUBLIC_DJANGO_SERVER || (

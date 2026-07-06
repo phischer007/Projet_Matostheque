@@ -25,7 +25,7 @@ else:
 "
 
 echo "Starting Gunicorn..."
-python -m gunicorn --bind 0.0.0.0:8000 \
+python -m gunicorn --bind 0.0.0.0:8030 \
     --workers 3 \
     --timeout 120 \
     MatosthequeRestApis.wsgi:application

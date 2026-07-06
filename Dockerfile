@@ -42,7 +42,7 @@ USER appuser
 RUN mkdir -p /app/assets /app/media && \
     chown -R appuser:appuser /app/assets /app/media
 
-EXPOSE 8000
+EXPOSE 8030
 
 RUN chmod +x /app/entrypoint.prod.sh
 

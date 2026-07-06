@@ -25,7 +25,7 @@ See `MatosthequeRestApis/settings.py` for backend settings details.
 - Git
 - Docker
 
-### Quick start
+## Quick start
 #### Clone the repository
 ```bash
 git clone https://gricad-gitlab.univ-grenoble-alpes.fr/duffouvi/xxxxxxxxxxxxxx.git
@@ -91,6 +91,9 @@ CREATE DATABASE matostheque;
 CREATE USER your_database_username WITH ENCRYPTED PASSWORD 'your_database_password';
 GRANT ALL PRIVILEGES ON DATABASE matostheque TO your_database_username;
 ALTER DATABASE matostheque OWNER TO your_database_username;
+
+\q
+exit
 ```
 
 
@@ -115,3 +118,17 @@ python manage.py createsuperuser
 
 python manage.py runserver 8030
 ```
+
+## Local URLs
+- **Django**
+    - **Development:** [http://localhost:8030/admin](http://localhost:8030/admin)
+    - **Production:** `https://your_host_server_name/admin`
+
+- **Frontend**
+    - **Development:** [http://localhost:3030/mutmat](http://localhost:3030/mutmat)
+    - **Production:** `https://your_host_server_name/mutmat`
+
+## Reverse proxy - NGINX
+To ensure seamless communication between the frontend and backend without triggering CORS restrictions, you can deploy the Nginx reverse proxy provided in the *`/nginx/nginx_example.conf`* file.
+
+**Note:** You may want to rename *nginx_example.conf* to something like default.conf or reverse-proxy.conf before finalizing your documentation for a cleaner file structure. [Read more on how to set-up NGINX Reverse Proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)

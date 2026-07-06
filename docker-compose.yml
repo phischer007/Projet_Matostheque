@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     shm_size: 128mb 
     ports:
-      - "5434:5432" # HOST_PORT:CONTAINER_PORT
+      - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     env_file:
@@ -15,8 +15,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    networks:
-      - dockerNet
 
   backend:
     image: mutmat-backend
@@ -28,13 +26,9 @@ services:
     env_file:
       - .env
     restart: unless-stopped
-    # ports:
-    #   - "8020:8020"
     volumes:
       - assets:/app/assets
       - media:/app/media
-    networks:
-      - dockerNet
 
   front:
     image: mutmat-frontend
@@ -43,17 +37,14 @@ services:
       dockerfile: Dockerfile
     container_name: frontend-mutmat
     restart: unless-stopped
-    # ports:
-    #   - "3020:3020"
     env_file:
       - .env
     depends_on:
       - backend
-    networks:
-      - dockerNet
+
 
   frontend-proxy:
-    image: nginx:latest
+    image: nginx
     container_name: nginx-mutmat
     restart: unless-stopped
     ports:
@@ -68,14 +59,8 @@ services:
       - ./nginx/ssl:/etc/nginx/ssl:ro
       - assets:/app/assets
       - media:/app/media
-    networks:
-      - dockerNet
 
 volumes:
   postgres_data:
   assets:
   media:
-
-networks:
-  dockerNet:
-    external: true # Ensure you run `docker network create dockerNet` first
