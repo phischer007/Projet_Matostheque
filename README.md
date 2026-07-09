@@ -8,7 +8,7 @@ Our goal is to develop a multi-laboratory equipment loan management platform tha
 
 ### Technology Stack
 
-- a Django backend in `Matostheque/` and `MatosthequeRestApis/`
+- a Django backend in `Mutmat/` and `MutmatRestApis/`
 - an NextJS frontend in `fronttheque/`
 
 ### Overview
@@ -16,7 +16,7 @@ Our goal is to develop a multi-laboratory equipment loan management platform tha
 - PostgreSQL is expected as the database.
 - Frontend build artifacts are integrated into Django static files via `STATICFILES_DIRS`.
 
-See `MatosthequeRestApis/settings.py` for backend settings details.
+See `MutmatRestApis/settings.py` for backend settings details.
 
 ### Requirements
 - Python 3
@@ -28,8 +28,8 @@ See `MatosthequeRestApis/settings.py` for backend settings details.
 ## Quick start
 #### Clone the repository
 ```bash
-git clone https://gricad-gitlab.univ-grenoble-alpes.fr/duffouvi/xxxxxxxxxxxxxx.git
-cd Matostheque_App
+git clone https://gitlab.in2p3.fr/vikhram-kofi.duffour/matostheque.git
+cd mutmat
 ```
 
 #### Set up you Python environment (Django)
@@ -73,7 +73,7 @@ pip install --force-reinstall django==4.2.23
 pip install -r requirements.txt
 
 # Take ownership of the entire project folder
-sudo chown -R $USER:$USER /Matostheque_App/
+sudo chown -R $USER:$USER /mutmat/
 chmod -R u+w assets
 chmod -R u+w media
 ```

@@ -375,7 +375,7 @@ const Page = () => {
               disableBackdropClick
               disableEscapeKeyDown
             >
-              <DialogTitle>Welcome to Matostheque!</DialogTitle>
+              <DialogTitle>Welcome to Mutmat!</DialogTitle>
               <DialogContent>
                 <DialogContentText>
                   We are happy you joined the community. Please choose the type of account you want.

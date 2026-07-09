@@ -18,4 +18,6 @@ fronttheque/node_modules/
 fronttheque/jsconfig.json
 fronttheque/src/utils/config.js
 
+mutmat_server.conf
+
 __pycache__/
