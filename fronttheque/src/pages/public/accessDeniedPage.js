@@ -1,79 +1,13 @@
-// import Head from 'next/head';
-// import { Box, Button, Container, SvgIcon, Typography } from '@mui/material';
-
-// const Page = () => (
-//   <>
-//     <Head>
-//       <title>
-//         Connexion impossible
-//       </title>
-//     </Head>
-//     <Box
-//       component="main"
-//       sx={{
-//         alignItems: 'center',
-//         display: 'flex',
-//         flexGrow: 1,
-//         minHeight: '100%'
-//       }}
-//     >
-//       <Container maxWidth="md">
-//         <Box
-//           sx={{
-//             alignItems: 'center',
-//             display: 'flex',
-//             flexDirection: 'column'
-//           }}
-//         >
-//           <Box
-//             sx={{
-//               mb: 3,
-//               textAlign: 'center'
-//             }}
-//           >
-//             <img
-//               alt="Under development"
-//               src="/mutmat/assets/errors/error-404.png"
-//               style={{
-//                 display: 'inline-block',
-//                 maxWidth: '100%',
-//                 width: 400
-//               }}
-//             />
-//           </Box>
-//           <Typography
-//             align="center"
-//             sx={{ mb: 3 }}
-//             variant="h3"
-//           >
-//             Votre laboratoire ne fait pas partie des établissements actuellement inscrits à l'application.
-//           </Typography>
-//           <Typography
-//             align="center"
-//             color="text.secondary"
-//             variant="body1"
-//           >
-//           Veuillez contacter votre direction afin qu'elle effectue une demande
-//           d'adhésion au projet.
-//           </Typography>
-//                     <Typography
-//             align="center"
-//             color="text.secondary"
-//             variant="body1"
-//           >
-//           L'accès à l'application sera possible une fois votre laboratoire
-//           enregistré et validé.
-//           </Typography>
-//         </Box>
-//       </Container>
-//     </Box>
-//   </>
-// );
-
-// export default Page;
+import { 
+  Box, 
+  Button, 
+  Container, 
+  Typography 
+} from '@mui/material';
 
 
-import { Box, Button, Container, Typography } from '@mui/material';
+// -------------------------------------------------------------------------------------- //
+
 
 const Page = () => (
   <Box

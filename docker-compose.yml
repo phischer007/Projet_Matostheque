@@ -11,7 +11,7 @@ services:
     env_file:
       - .env
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${DB_USER:-mutmat_user} -d $${DB_NAME:-mutmat}"]
+      test: ["CMD-SHELL", "pg_isready -U $${DB_USER:-apptestmatostheque_user} -d $${DB_NAME:-apptestmatostheque}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -43,23 +43,23 @@ services:
       - backend
 
 
-  frontend-proxy:
+  reverse-proxy:
     image: nginx
     container_name: nginx-mutmat
     restart: unless-stopped
     ports:
-      # Expose both HTTP and HTTPS to the outside world
-      - "80:8001"
+      # # Expose both HTTP and HTTPS to the outside world
+      - "80:8030"
       - "443:443"
 
-      # ONLY expose HTTP to localhost. Hidden from the outside world.
-      # - "127.0.0.1:8089:80"
+      # # Expose port 80 internally mapped to 8480 on the host machine
+      # - "127.0.0.1:8480:80"
     depends_on:
       - backend
       - front   
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/ssl:/etc/nginx/ssl:ro # Removed the SSL volume mount, if Host NGINX handles this part
+      - ./nginx/ssl:/etc/nginx/ssl:ro 
       - assets:/app/assets
       - media:/app/media
 

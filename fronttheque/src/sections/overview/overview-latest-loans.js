@@ -30,6 +30,12 @@ export const OverviewLatestLoans = (props) => {
   const sx = props?.sx;
   const title = user.is_staff ? "Latest Transactions" : "Your Transactions";
 
+  const headerStyle = {
+    backgroundColor: '#162A42',
+    color: 'white',
+    width: 280
+  };
+
   return (
     <Card sx={sx}>
       <CardHeader title={title} />
@@ -38,25 +44,25 @@ export const OverviewLatestLoans = (props) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>
+                <TableCell style={headerStyle}>
                   Material
                 </TableCell>
-                <TableCell>
+                <TableCell style={headerStyle}>
                   Type
                 </TableCell>
-                <TableCell>
+                <TableCell style={headerStyle}>
                   Contact person
                 </TableCell>
-                <TableCell>
+                <TableCell style={headerStyle}>
                   Duration
                 </TableCell>
-                <TableCell sortDirection="desc">
+                <TableCell style={headerStyle} sortDirection="desc">
                   Date
                 </TableCell>
-                <TableCell>
+                <TableCell style={headerStyle}>
                   Quantity
                 </TableCell>
-                <TableCell>
+                <TableCell style={headerStyle}>
                   Status
                 </TableCell>
               </TableRow>
@@ -86,9 +92,6 @@ export const OverviewLatestLoans = (props) => {
                       <TableCell>
                         {loan.owner_first_name} {loan.owner_last_name}
                       </TableCell>
-                      {/*<TableCell>*/}
-                      {/*  {loan.borrower_first_name} {loan.borrower_last_name}*/}
-                      {/*</TableCell>*/}
                       <TableCell>
                         {loan.duration}
                       </TableCell>
