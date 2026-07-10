@@ -2,7 +2,7 @@
 node_modules/
 
 .idea/
-matostheque_venv/
+/.matostheque_venv/
 logs/
 assets/
 
