@@ -15,7 +15,6 @@ media/logos/
 fronttheque/.env
 fronttheque/.next
 fronttheque/node_modules/
-fronttheque/jsconfig.json
 fronttheque/src/utils/config.js
 
 mutmat_server.conf
