@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import Head from 'next/head';
-import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
+import PlusCircleIcon from '@heroicons/react/24/solid/PlusCircleIcon';
 import { Box, Button, Container, Divider, Stack, SvgIcon, Typography, Grid } from '@mui/material';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { LoansTable } from 'src/sections/loan/loans-table';
@@ -43,13 +43,12 @@ const Page = () => {
   const btnCreateUrl = "/create/create-material";
 
   useEffect(() => {
-    let loanApiUrl = `${config.apiUrl}/transactions/details/owner/${user.user_id}/`;
+    let loanApiUrl = `${config.apiUrl}/loans/details/owner/${user.user_id}/`;
     let materialApiUrl = `${config.apiUrl}/materials/owner/${user.user_id}`;
 
-    //TODO to erase transaction data
-    // Fetch transactions data
+    // Fetch loans data
     fetch(loanApiUrl,{
-      credentials: 'include'// Add this so the session cookie is sent!
+      credentials: 'include' // Add this so the session cookie is sent!
     })
       .then(response => {
         if (!response.ok) {
@@ -66,7 +65,7 @@ const Page = () => {
 
     // Fetch Materials -- recent fix for JSON.parse() crashes in MaterialTable
     fetch(materialApiUrl,{
-      credentials: 'include'// Add this so the session cookie is sent!
+      credentials: 'include' // Add this so the session cookie is sent!
     })
       .then(response => {
         if (!response.ok) {
@@ -84,7 +83,6 @@ const Page = () => {
           return item;
         });
         setMaterialList(safeData);
-        // --- FIX ENDS HERE ---
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -94,7 +92,7 @@ const Page = () => {
 
 
   useEffect(() => {
-    // Filter transactions when searchTerm changes
+    // Filter loans when searchTerm changes
     setFilteredLoans(searchTerm
       ? loanList.filter(loan => deepSearch(loan, searchTerm))
       : loanList
@@ -144,22 +142,35 @@ const Page = () => {
                   <Button
                     component={NextLink}
                     href={btnCreateUrl}
-                    startIcon={<SvgIcon fontSize="small"><PlusIcon /></SvgIcon>}
+                    startIcon={
+                      <SvgIcon fontSize="small">
+                        <PlusCircleIcon />
+                      </SvgIcon>
+                    }
                     variant="contained"
                   >
                     Add
                   </Button>
               </Grid>
             </Grid>
+            
             <Stack
               direction="column"
               justifyContent="space-between"
-              spacing={4}
+              spacing={5} 
             >
+              {/* 1. Search at the top */}
               <LoansSearch
                 searchTerm={searchTerm}
                 onSearchChange={handleSearchChange}
               />
+              
+              {/* 2. List of materials */}
+              {materialList && (
+                <MaterialTable data={materialList} />
+              )}
+              
+              {/* 3. Loan table */}
               {filteredLoans && (
                 <LoansTable
                   count={filteredLoans.length}
@@ -170,32 +181,17 @@ const Page = () => {
                   rowsPerPage={rowsPerPage}
                   userRole={user.role}
                   activeTab={"materials"}
-                />)}
-            </Stack>
-            {/* <Stack
-              direction="column"
-              justifyContent="space-between"
-              spacing={4}
-            >
+                />
+              )}
+              
+              {/* 4. Material table view */}
               {materialList && (
-                <MaterialTable
-                  data={materialList}
-                />)}
-            </Stack> */}
-
-            {materialList && (
-              <Stack direction="column" spacing={6} sx={{ mt: 4 }}>
-                
-                {/* 1. Original Grid View */}
-                <MaterialTable data={materialList} />
-                
-                <Divider />
-
-                {/* 2. New Table View */}
-                <MaterialTableView data={materialList} />
-                
-              </Stack>
-            )}
+                <Stack spacing={4}>
+                  <Divider />
+                  <MaterialTableView data={materialList} />
+                </Stack>
+              )}
+            </Stack>
 
           </Stack>
         </Container>

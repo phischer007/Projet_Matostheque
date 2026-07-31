@@ -1,4 +1,4 @@
-export const transactionStatus = [
+export const loanStatus = [
   {"value": "", "label": "None"},
   {"value": "Pending Validation", "label": "Pending Validation"},
   {"value": "Overdue", "label": "Overdue"},
@@ -113,7 +113,7 @@ export const requestTypes = [
   },
 ];
 
-export const transactionTypes = [
+export const loanTypes = [
     { value:'', label:'None'},
   { value:'Loan', label:'Loan'},
   { value: 'Donation',label:'Donation'}

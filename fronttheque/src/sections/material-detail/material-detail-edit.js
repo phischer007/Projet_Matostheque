@@ -15,9 +15,9 @@ import {
   TextField,
   Typography,
   Checkbox,
-  Unstable_Grid2 as Grid,
 Autocomplete
 } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useAuth } from 'src/hooks/use-auth';
@@ -36,19 +36,14 @@ export const MaterialDetailEdit = (props) => {
   const [materialID, setMaterialID] = useState(null);
   const [formData, setFormData] = useState({});
   const [checked, setChecked] = useState(false);
-  const [isMovable, setisMovable] = useState(false);
-  const [is_formation_required, setis_formation_required] = useState(false);
   const [ownersList, setOwnersList] = useState(null);
   const [selectedOwner, setSelectedOwner] = useState(null);
   const [selectSubType, setSelectedSubType] = useState(null);
   const [expiration_date, setexpiration_date] = useState(null);
-  const [trust_circleList, setTrust_circle] = useState(null);
-  const [serviceList, setServiceList] = useState(null)
   const [formErrors, setFormErrors] = useState({
         title: false,
         description: false,
         owner: false,
-        trust_circle:false,
         location: false,
         type : false,
         sub_type:false,
@@ -58,36 +53,28 @@ export const MaterialDetailEdit = (props) => {
     setChecked((prevState) => !prevState);
   }, []);
 
-  const handleisMovableBoxChange = useCallback(() => {
-    setisMovable((prevState) => !prevState);
-  }, []);
-
-  const handleis_formation_requiredBoxChange = useCallback(() => {
-    setis_formation_required((prevState) => !prevState);
-  }, []);
-
   const handleChangeNumDec = useCallback((event) => {
-  const { name, value } = event.target;
+    const { name, value } = event.target;
 
-  let cleaned = value
-    .replace(/[^0-9.]/g, "") // garde chiffres + point
-    .replace(/(\..*)\./g, "$1"); // empêche plusieurs points
+    let cleaned = value
+      .replace(/[^0-9.]/g, "") // garde chiffres + point
+      .replace(/(\..*)\./g, "$1"); // empêche plusieurs points
 
-  setFormData((prev) => ({
-    ...prev,
-    [name]: cleaned
-  }));
-}, []);
+    setFormData((prev) => ({
+      ...prev,
+      [name]: cleaned
+    }));
+  }, []);
 
 
-const handleChangeNum = useCallback((event) => {
-  const { name, value } = event.target;
+  const handleChangeNum = useCallback((event) => {
+    const { name, value } = event.target;
 
-  setFormData((prevState) => ({
-    ...prevState,
-    [name]: value.replace(/\D/g, "") // garde seulement les chiffres
-  }));
-}, []);
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value.replace(/\D/g, "") // garde seulement les chiffres
+    }));
+  }, []);
 
 
 
@@ -128,31 +115,6 @@ const handleChangeNum = useCallback((event) => {
     }, []
   );
 
-    useEffect(() => {
-    fetch(`${config.apiUrl}/trust_circle/`,{
-      credentials: 'include'// Add this so the session cookie is sent!
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Sort the data alphabetically by material_title
-        if (data) {
-            setTrust_circle(data);
-        }
-      })
-      .catch(error => console.error('Error fetching data:', error));
-    fetch(`${config.apiUrl}/services/`,{
-      credentials: 'include'// Add this so the session cookie is sent!
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Sort the data alphabetically by material_title
-        if (data) {
-            setServiceList(data);
-        }
-      })
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
-
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
@@ -160,7 +122,6 @@ const handleChangeNum = useCallback((event) => {
         title: formData.material_title === null,
         description: formData.description === null,
         owner: selectedOwner === null,
-        trust_circle: formData.trust_circle == null,
         location: formData.origin === null,
         type : formData.type === null,
         sub_type: formData.sub_type === null,
@@ -177,15 +138,11 @@ const handleChangeNum = useCallback((event) => {
           { key: 'manual_link', value: formData.manual_link },
           { key: 'datasheet_link', value: formData.datasheet_link },
           { key: 'user', value: selectedOwner.user_id },
-          { key: 'trust_circle', value: formData.trust_circle},
           { key: 'origin', value: formData.origin },
           { key: 'validation', value: formData.validation },
           { key: 'type', value: formData.type },
           { key: 'sub_type', value: selectSubType },
           { key: 'quantity_available', value: formData.quantity_available },
-          { key: 'is_Movable', value: isMovable },
-          { key: 'is_formation_required', value: is_formation_required },
-          { key: 'service', value: formData.service },
         ];
 
         // Append additional fields based on specific conditions
@@ -202,9 +159,6 @@ const handleChangeNum = useCallback((event) => {
         // Append all fields to the form
         fieldsToAppend.forEach(({ key, value }) => {
           if (value !== undefined && value !== null) {
-            form.append(key, value);
-          }
-          else if(key === "service"){
             form.append(key, value);
           }
         });
@@ -237,18 +191,18 @@ const handleChangeNum = useCallback((event) => {
           }
         }
       }
-    }, [formData, materialID,selectedOwner,selectSubType,isMovable,is_formation_required]);
+    }, [formData, materialID,selectedOwner,selectSubType]);
 
     useEffect(() => {
-    fetch(`${config.apiUrl}/active_owners/lite/`,{
-      credentials: 'include', // Add this
-    })
-      .then(response => response.json())
-      .then(datas => {
-        setOwnersList(datas);
+      fetch(`${config.apiUrl}/active_owners/lite/`,{
+        credentials: 'include', // Add this
       })
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
+        .then(response => response.json())
+        .then(datas => {
+          setOwnersList(datas);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }, []);
 
   useEffect(() => {
     if (props.data) {
@@ -263,14 +217,29 @@ const handleChangeNum = useCallback((event) => {
       }
       setFormData(newData);
       setChecked(newData.validation);
-      setisMovable(newData.is_Movable);
-      setis_formation_required(newData.is_formation_required);
       setMaterialID(props.data.material_id);
-      setSelectedOwner(ownersList.find((owner)=> Number(owner.user_id) === Number(newData.user)))
       setSelectedSubType(newData.sub_type)
       if (newData.expiration_date) {
         setexpiration_date(new Date(newData.expiration_date));
       }
+
+      if (ownersList) {
+        const targetUserId = newData.user || props.data.owner_details?.user_id;
+        const matchedOwner = ownersList.find((owner) => Number(owner.user_id) === Number(targetUserId));
+        
+        if (matchedOwner) {
+          setSelectedOwner(matchedOwner);
+        } else if (props.data?.owner_details) {
+          // Fallback: Manually construct an object matching what Autocomplete expects
+          setSelectedOwner({
+            user_id: targetUserId,
+            owner_name: `${props.data.owner_details.first_name || ''} ${props.data.owner_details.last_name || ''}`.trim() || 'Unknown Owner'
+          });
+        } else {
+          setSelectedOwner(null);
+        }
+      }
+
     }
   }, [props.data,ownersList,user]);
 
@@ -280,20 +249,6 @@ const handleChangeNum = useCallback((event) => {
       validation: checked
     }));
   }, [checked])
-
-  useEffect(() => {
-    setFormData((prevData) => ({
-      ...prevData,
-      is_Movable: isMovable
-    }));
-  }, [isMovable])
-
-  useEffect(() => {
-    setFormData((prevData) => ({
-      ...prevData,
-      is_formation_required: is_formation_required
-    }));
-  }, [is_formation_required])
 
   return (props.data && user ?
     <form
@@ -327,6 +282,7 @@ const handleChangeNum = useCallback((event) => {
                   error={formErrors.title}
                 />
               </Grid>
+
               <Grid
                 xs={12}
                 md={6}
@@ -366,47 +322,7 @@ const handleChangeNum = useCallback((event) => {
                         </Grid>
                   )}
               </Grid>
-              <Grid item xs={12} sm={6}>
-                {isFormDisabled && formData.type &&(
-                  <TextField
-                    fullWidth
-                    label="Team"
-                    disabled={isFormDisabled}
-                    value={formData.service ? serviceList.find(service => service.service_id === formData.service).service_name : 'Please Select a Team' }
-                    InputLabelProps={{ shrink: true }}
-                  />
-                )}
-                {(!isFormDisabled && serviceList && formData.type) &&
-                  <Select
-                    fullWidth
-                    labelId="service-select"
-                    name="service"
-                    onChange={handleChange}
-                    value={formData.service}
-                    displayEmpty
-                    renderValue={(value) => (
-                      <Typography
-                        variant="subtitle2"
-                        style={{
-                          fontFamily: 'inherit',
-                          color: value ? 'inherit' : theme.palette.text.secondary
-                        }}
-                      >
-                        {value ? serviceList.find(service => service.service_id
-                          === value).service_name : 'Service'}
-                      </Typography>
-                    )}
-                  >
-                    <MenuItem key={null} value={null}>
-                      Please Select a Team
-                    </MenuItem>
-                    {serviceList.map((service) => (
-                      <MenuItem key={service.service_id} value={service.service_id}>
-                        {service.service_name}
-                      </MenuItem>
-                    ))}
-                  </Select>}
-              </Grid>
+
               <Grid
                 xs={12}
                 md={6}
@@ -514,6 +430,7 @@ const handleChangeNum = useCallback((event) => {
                   InputLabelProps={{ shrink: true }}
                 />
               </Grid>
+
               <Grid
                 xs={12}
                 md={6}
@@ -541,48 +458,6 @@ const handleChangeNum = useCallback((event) => {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth>
-                {isFormDisabled && (
-                  <TextField
-                    fullWidth
-                    label="trust_circle"
-                    disabled={isFormDisabled}
-                    value={formData.trust_circle ? trust_circleList.find(trust_circle => trust_circle.trust_circle_id === formData.trust_circle).trust_circle_name : 'Trust Circle *'}
-                    InputLabelProps={{ shrink: true }}
-                  />
-                )}
-                  {!isFormDisabled && (
-                    <Select
-                      labelId="trust_circle-label"
-                      name="trust_circle"
-                      required
-                      value={formData.trust_circle || ''}
-                      error={formErrors.trust_circle}
-                      onChange={handleChange}
-                      displayEmpty
-                      renderValue={(value) => (
-                        <Typography
-                          variant="subtitle2"
-                          style={{
-                            fontFamily: 'inherit',
-                            color: value ? 'inherit' : theme.palette.text.secondary
-
-                          }}
-                        >
-                          {value ? trust_circleList.find(type => type.trust_circle_id === value).trust_circle_name : 'Trust Circle *'}
-                        </Typography>
-                      )}
-                    >
-                      {trust_circleList.map((trust_circle) => (
-                        <MenuItem key={trust_circle.trust_circle_id} value={trust_circle.trust_circle_id}>
-                          {trust_circle.trust_circle_name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                </FormControl>
-                </Grid>
               <Grid
                 xs={12}
                 md={6}
@@ -606,34 +481,6 @@ const handleChangeNum = useCallback((event) => {
                   container
                   xs={12}
                 >
-                <Grid xs={12}
-                  md={6}>
-                  <Checkbox
-                    name="is_Movable"
-                    disabled={isFormDisabled}
-                    checked={isMovable}
-                    onChange={handleisMovableBoxChange}
-                    color="primary"
-                    inputProps={{ 'aria-label': 'checkbox' }}
-                  />
-                  <Typography variant="caption" color="textSecondary">
-                    If checked, The material will be diplayed as not movable from the lab.
-                  </Typography>
-                </Grid>
-                <Grid xs={12}
-                  md={6}>
-                  <Checkbox
-                    name="is_formation_required"
-                    disabled={isFormDisabled}
-                    checked={is_formation_required}
-                    onChange={handleis_formation_requiredBoxChange}
-                    color="primary"
-                    inputProps={{ 'aria-label': 'checkbox' }}
-                  />
-                  <Typography variant="caption" color="textSecondary">
-                    If checked, The material will require a formation.
-                  </Typography>
-                </Grid>
                   <Grid item xs={12} md={6}>
                     <TextField
                       fullWidth
@@ -656,40 +503,22 @@ const handleChangeNum = useCallback((event) => {
                       InputLabelProps={{ shrink: true }}
                     />
                   </Grid>
-
-
-              <Grid
-                xs={12}
-                md={6}
-              >
-                <Checkbox
-                  name="validation"
-                  disabled={isFormDisabled}
-                  checked={checked}
-                  onChange={handleCheckBoxChange}
-                  color="primary"
-                  inputProps={{ 'aria-label': 'checkbox' }}
-                />
-                <Typography variant="caption" color="textSecondary">
-                  If checked, a validation from the contact person will be needed.
-                </Typography>
-              </Grid>
-                </Grid>
-                }
-              {isFormDisabled && isMovable &&
-                <Grid xs={12}
-                  md={6}>
-                <Typography variant="caption" color="textSecondary">
-                 The material is not movable from the lab.
-                </Typography>
-                </Grid>
-              }
-              {isFormDisabled && is_formation_required &&
-                <Grid xs={12}
-                  md={6}>
-                <Typography variant="caption" color="textSecondary">
-                  The material require a formation to be use.
-                </Typography>
+                  <Grid
+                    xs={12}
+                    md={6}
+                  >
+                    <Checkbox
+                      name="validation"
+                      disabled={isFormDisabled}
+                      checked={checked}
+                      onChange={handleCheckBoxChange}
+                      color="primary"
+                      inputProps={{ 'aria-label': 'checkbox' }}
+                    />
+                    <Typography variant="caption" color="textSecondary">
+                      If checked, a validation from the contact person will be needed.
+                    </Typography>
+                  </Grid>
                 </Grid>
               }
               {isFormDisabled && checked &&

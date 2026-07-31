@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { Box, Container, Stack, Typography, Button, Divider, CardActions, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Unstable_Grid2 as Grid, Fab } from '@mui/material';
+import { Box, Container, Stack, Typography, Button, Divider, CardActions, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { MaterialDetailOverview } from 'src/sections/material-detail/material-detail-overview';
 import { MaterialDetailEdit } from 'src/sections/material-detail/material-detail-edit';
@@ -99,7 +100,7 @@ const Page = () => {
           'Content-Type': 'application/json',
           'X-CSRFToken': csrftoken,
         },
-        body: JSON.stringify({available_for_transaction: !materialData.available_for_transaction})
+        body: JSON.stringify({available_for_loan: !materialData.available_for_loan})
       });
 
         if (!response.ok) {
@@ -131,14 +132,14 @@ const Page = () => {
 
           if (data.owner_details.user_id === user.user_id) {
             setCanDeleteOrRemove(true);
-            setCanBeLoaned(data.available_for_transaction)
+            setCanBeLoaned(data.available_for_loan)
           } else {
             setCanDeleteOrRemove(false);
-            setCanBeLoaned(data.available_for_transaction)
+            setCanBeLoaned(data.available_for_loan)
           }
           if (user.is_staff) {
             setCanDeleteOrRemove(true);
-            setCanBeLoaned(data.available_for_transaction)
+            setCanBeLoaned(data.available_for_loan)
           }
 
           //fetching events related to given material
@@ -187,9 +188,9 @@ const Page = () => {
                 <Button
                   variant="contained"
                   onClick={handleBorrow}
-                  disabled={!materialData?.available_for_transaction || materialData.owner_details.user_id === user.user_id}
+                  disabled={!materialData?.available_for_loan || materialData.owner_details.user_id === user.user_id}
                 >
-                 {materialData?.available_for_transaction? "Book Material" : "Not Available For transaction"}
+                 {materialData?.available_for_loan? "Book Material" : "Not Available For loan"}
                 </Button>
               </div> */}
 
@@ -206,9 +207,9 @@ const Page = () => {
                   color="primary"
                   size="large"
                   onClick={handleBorrow}
-                  disabled={!materialData?.available_for_transaction || materialData.owner_details.user_id === user.user_id}
+                  disabled={!materialData?.available_for_loan || materialData.owner_details.user_id === user.user_id}
                 >
-                {materialData?.available_for_transaction ? "Book Material" : "Not Available For transaction"}
+                {materialData?.available_for_loan ? "Book Material" : "Not Available For loan"}
                 </Button>
               </Box>
 

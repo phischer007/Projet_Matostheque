@@ -1,6 +1,6 @@
 import multiprocessing
 
-bind = "0.0.0.0:8030"
+bind = "0.0.0.0:8000"
 
 # --- Concurrency ---
 cores = multiprocessing.cpu_count()

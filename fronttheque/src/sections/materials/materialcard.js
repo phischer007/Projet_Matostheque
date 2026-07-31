@@ -49,78 +49,7 @@ export const MaterialsCard = (props) => {
         <Link
           underline="none"
           color="inherit"
-          href={`/mutmat/details/material-detail/${material.material_id}`}>
-          
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between" 
-            sx={{ p: 1 }}
-          >
-            <Stack direction="row" alignItems="center" spacing={2}>
-              {material.is_Movable &&
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  spacing={1}
-                >
-                  <Avatar sx={{ bgcolor: 'info.main', width: 32, height: 32 }}>
-                    <SvgIcon 
-                      sx={{ color: 'white' }} 
-                      fontSize="small"
-                    >
-                      <TruckIcon />
-                    </SvgIcon>
-                  </Avatar>
-                  <Typography>
-                    {material.is_Movable}
-                  </Typography>
-                </Stack>
-              }
-
-              {material.is_formation_required &&
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  spacing={1}
-                >
-                  <Avatar sx={{ bgcolor: 'warning.main', width: 32, height: 32 }}>
-                    <SvgIcon 
-                      sx={{ color: 'white' }} 
-                      fontSize="small"
-                    >
-                      <PencilSquareIcon />
-                    </SvgIcon>
-                  </Avatar>
-                  <Typography>
-                    {material.is_formation_required}
-                  </Typography>
-                </Stack>
-              }
-            </Stack>
-
-            {/* RIGHT SIDE: Name and Avatar */}
-            <Stack 
-              direction="row" 
-              alignItems="center" 
-              spacing={1}
-            >
-              <Typography
-                variant="overline"
-                size="small"
-              >
-                {material.service_name ? material.service_name : material.user_first_name + " " + material.user_last_name}
-              </Typography>
-              <Avatar
-                sx={{
-                  height: 40,
-                  width: 40
-                }}
-                src={profil_path}
-              />
-            </Stack>
-          </Stack>
-          {/* END UPDATED TOP HEADER */}
+          href={`/matostheque/details/material-detail/${material.material_id}`}>
 
           <Box
             sx={{

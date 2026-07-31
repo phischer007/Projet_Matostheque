@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { Box, Container, Stack, Typography, Button, Divider, Card, CardActions, Unstable_Grid2 as Grid } from '@mui/material';
+import { Box, Container, Stack, Typography, Button, Divider } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { PublicLayout } from 'src/layouts/public/public-layout';
 import { MaterialDetailOverview } from 'src/sections/material-detail/material-detail-overview';
 import { MaterialDetailViewer } from 'src/sections/material-detail/material-detail-viewer';
@@ -34,7 +35,7 @@ const Page = () => {
     }, [materialId]);
 
     const handleBorrow = useCallback(() => {
-        const url = '/create/create-transaction' + (materialId ? `?materialId=${materialId}` : '');
+        const url = '/create/create-loan' + (materialId ? `?materialId=${materialId}` : '');
         router.push(url);
     }, [materialId]);
 

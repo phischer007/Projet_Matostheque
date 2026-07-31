@@ -145,7 +145,7 @@ const UserRow = ({ user }) => {
           key={user.user_id}
           underline="none"
           color="inherit"
-          href={`/mutmat/materialsof?id=${user.user_id}`}
+          href={`/matostheque/materialsof?id=${user.user_id}`}
           style={{ display: 'contents' }}
         >
           {tableRowContent}

@@ -10,7 +10,7 @@ import { CheckIcon, PencilIcon } from '@heroicons/react/24/solid';
 import React, { useState, useEffect, useCallback } from 'react';
 import config from '../../utils/config';
 import { useRouter } from 'next/router';
-import { useTransactionDetailHandlers } from 'src/hooks/loan-detail-handlers';
+import { useLoanDetailHandlers } from 'src/hooks/loan-detail-handlers';
 import { useAuth } from 'src/hooks/use-auth';
 import { statusMap } from 'src/data/static_data';
 
@@ -18,9 +18,9 @@ export const LoanDetailOverview = (props) => {
     const user = useAuth().user;
     const router = useRouter();
     const data = props.data ? props.data : null;
-    console.log(new Date(data.transaction_date) )
+    console.log(new Date(data.loan_date) )
     console.log(new Date())
-    console.log(new Date(data.transaction_date) <= new Date())
+    console.log(new Date(data.loan_date) <= new Date())
 
     const {
         formattedDate,
@@ -34,7 +34,7 @@ export const LoanDetailOverview = (props) => {
         handleSaveChanges,
         handleDelete,
         enableEdit
-    } = useTransactionDetailHandlers(data);
+    } = useLoanDetailHandlers(data);
 
 
 
@@ -83,8 +83,8 @@ export const LoanDetailOverview = (props) => {
                                                 alignItems="center"
                                                 gap={1}
                                             >
-                                                <SeverityPill color={statusMap[data.transaction_status]}>
-                                                    {data.transaction_status}
+                                                <SeverityPill color={statusMap[data.loan_status]}>
+                                                    {data.loan_status}
                                                 </SeverityPill>
                                                 <p>{daysLeft ? `( ${daysLeft} )` : null}</p>
                                             </Stack>
@@ -158,22 +158,22 @@ export const LoanDetailOverview = (props) => {
                                             Quantity
                                         </TableCell>
                                         <TableCell style={{ minWidth: 160 }} align="left">
-                                          {data.borrower_details.user_id === user.user_id && new Date(data.transaction_date) >= new Date() ? (
+                                          {data.borrower_details.user_id === user.user_id && new Date(data.loan_date) >= new Date() ? (
                                             <Stack
                                                   direction="rows"
                                                   alignItems="center"
                                                   gap={1}
                                               >
-                                                  {editableRow === "transaction_quantity" ? (
+                                                  {editableRow === "loan_quantity" ? (
                                                       <TextField
-                                                          name='transaction_quantity'
-                                                          value={formData.transaction_quantity}
+                                                          name='loan_quantity'
+                                                          value={formData.loan_quantity}
                                                           onChange={handleChange}
                                                       />
                                                   ) : (
-                                                      formData.transaction_quantity
+                                                      formData.loan_quantity
                                                   )}
-                                                  {enableEdit ? editableRow === "transaction_quantity" ? (
+                                                  {enableEdit ? editableRow === "loan_quantity" ? (
                                                       <Button
                                                           onClick={handleSave}
                                                       >
@@ -181,14 +181,14 @@ export const LoanDetailOverview = (props) => {
                                                       </Button>
                                                   ) : (
                                                       <Button
-                                                          onClick={() => handleEdit("transaction_quantity")}
+                                                          onClick={() => handleEdit("loan_quantity")}
                                                       >
                                                           <PencilIcon style={{ width: 20, height: 20 }} />
                                                       </Button>
                                                   ) : null}
                                               </Stack>
                                               ) :
-                                            data.transaction_quantity
+                                            data.loan_quantity
                                             }
                                         </TableCell>
                                     </TableRow>
@@ -293,7 +293,7 @@ export const LoanDetailOverview = (props) => {
                         color="error"
                         onClick={handleDelete}
                     >
-                        Delete Transaction record
+                        Delete loan record
                     </Button>
                 </CardActions>
                 : null}

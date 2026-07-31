@@ -85,7 +85,7 @@ export const MaterialTableView = (props) => {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
           },
-          body: JSON.stringify({ available_for_transaction: isAvailable })
+          body: JSON.stringify({ available_for_loan: isAvailable })
         })
       );
 
@@ -161,7 +161,7 @@ export const MaterialTableView = (props) => {
             </Typography>
           ) : (
             <Typography sx={{ flex: '1 1 100%' }} variant="h6" id="tableTitle" component="div">
-              Manage Material Availability
+              Manage Personal Material Availability
             </Typography>
           )}
 
@@ -221,7 +221,7 @@ export const MaterialTableView = (props) => {
                   hover
                   selected={isSelected}
                   component={Link}
-                  href={`/mutmat/details/material-detail/${material.material_id}`}
+                  href={`/matostheque/details/material-detail/${material.material_id}`}
                   sx={{ 
                     textDecoration: 'none', 
                     color: 'inherit',
@@ -256,8 +256,8 @@ export const MaterialTableView = (props) => {
                   </TableCell>
 
                   <TableCell>
-                    <Typography variant="body2" color={material.available_for_transaction ? "success.main" : "text.secondary"}>
-                      {material.available_for_transaction ? "Available" : "Unavailable"}
+                    <Typography variant="body2" color={material.available_for_loan ? "success.main" : "text.secondary"}>
+                      {material.available_for_loan ? "Available" : "Unavailable"}
                     </Typography>
                   </TableCell>
                 </TableRow>

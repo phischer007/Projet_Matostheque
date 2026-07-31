@@ -5,8 +5,8 @@ import {
   Container,
   Stack,
   Typography,
-  Unstable_Grid2 as Grid
 } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import NewMaterialDetails from 'src/sections/create-material/new-material-details';
 import config from '../../utils/config';
@@ -24,7 +24,12 @@ const Page = () => {
     })
       .then(response => response.json())
       .then(data => {
-        setOwnersList(data);
+        // setOwnersList(data);
+        console.log("Data from Django:", data);
+        const filteredOwners = data.filter(person => 
+          person.role?.trim().toLowerCase() === 'owner'
+        );
+        setOwnersList(filteredOwners);
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);

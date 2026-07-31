@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import Head from 'next/head';
 import ArchiveBoxIcon from '@heroicons/react/24/solid/ArchiveBoxIcon';
-import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
+import PlusCircleIcon from '@heroicons/react/24/solid/PlusCircleIcon';
 import CogIcon from '@heroicons/react/24/solid/CogIcon';
 import { Box, Button, Container, Stack, SvgIcon, Typography, Grid } from '@mui/material';
 import { useSelection } from 'src/hooks/use-selection';
@@ -41,7 +41,7 @@ const Page = () => {
 
   useEffect(() => {
     let loanApiUrl = `${config.apiUrl}/users`;
-    //TODO to erase transaction data
+    //TODO to erase loan data
     // Fetch users data
     fetch(loanApiUrl,{
       credentials: 'include'// Add this so the session cookie is sent!

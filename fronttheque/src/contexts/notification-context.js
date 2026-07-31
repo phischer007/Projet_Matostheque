@@ -19,9 +19,9 @@ export const NotificationProvider = ({ children }) => {
       user : params.user,
       priority: params.priority,
       title: params.title,
-      transaction_id: params.transaction_id,
+      loan_id: params.loan_id,
     };
-//#todo transaction loan
+//#todo loan loan
     console.log("Sending notifications");
     console.log(data)
     try {

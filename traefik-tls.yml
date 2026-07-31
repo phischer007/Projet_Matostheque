@@ -1,0 +1,4 @@
+tls:
+  certificates:
+    - certFile: /etc/nginx/ssl/liphy-crip-hps1.u-ga.fr_fullchain.pem
+      keyFile: /etc/nginx/ssl/liphy-crip-hps1.u-ga.fr.key

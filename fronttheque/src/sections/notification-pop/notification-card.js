@@ -18,7 +18,7 @@ export const NotificationCard = ({ notification }) => {
   let date = getTimeDifference(notification.created_at);
   console.log (notification)
   return (
-    <Link href ={"details/loan-detail/"+notification.transaction}>
+    <Link href ={"details/loan-detail/"+notification.loan}>
       <Card
           sx={{
               py: 1,

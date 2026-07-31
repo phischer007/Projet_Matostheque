@@ -18,46 +18,56 @@ import { Scrollbar } from 'src/components/scrollbar';
 import { SeverityPill } from 'src/components/severity-pill';
 import { formatDate } from 'src/utils/get-formatted-date';
 import { useAuth } from 'src/hooks/use-auth';
-import { statusMap, transactionStatus, transactionTypes } from 'src/data/static_data';
+import { statusMap, loanStatus, loanTypes } from 'src/data/static_data';
 import Link from 'next/link';
 
-
 // -------------------------------------------------------------------------------- //
-
 
 export const LoansTable = (props) => {
   const user = useAuth().user;
   const {
-    // count = 0, // content is handled via filteredItems.length for client-side pagination
     items = [],
     onPageChange = () => { },
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 25,
     userRole = null,
-    activeTab = null
+    activeTab = null,
+    title,       // New optional prop
+    subtitle     // New optional prop
   } = props;
 
-  const [filter, setFilter] = useState(''); // State for filter option
-  const [filterType, setFilterType] = useState(''); // State for filter option
+  const [filter, setFilter] = useState('');
+  const [filterType, setFilterType] = useState('');
+
+  // Determine dynamic headers based on explicit props OR the activeTab state
+  const displayTitle = title || (
+    activeTab === 'loans' 
+      ? 'Personal Loan Requests' 
+      : 'Lending Management'
+  );
+  
+  const displaySubtitle = subtitle || (
+    activeTab === 'loans'
+      ? 'Track your active loans and requests'
+      : 'Manage active loans and review incoming requests'
+  );
 
   // 1. Filter the items based on status
   const filteredItems = items.filter((loan) => {
-    if (!filter && !filterType) return true; // If no filter selected, show all items
+    if (!filter && !filterType) return true;
     else if(!filter && filterType){
       return loan.type === filterType
     }
     else if (!filterType && filter){
-      return loan.transaction_status === filter;
+      return loan.loan_status === filter;
     }
     else {
-      return loan.transaction_status === filter && loan.type === filterType
+      return loan.loan_status === filter && loan.type === filterType
     }
-
   });
 
-  // 2. Pagination Logic (Adapted from material-table.js)
-  // Slice the filtered list based on the current page and rowsPerPage
+  // 2. Pagination Logic
   const paginatedLoans = filteredItems.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
@@ -71,11 +81,23 @@ export const LoansTable = (props) => {
   return (
     <Card
       sx={{
+        border: 1.5,
+        borderColor: 'divider',
+        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
         borderRadius: '0px',
       }}
     >
+      {/* Dynamic Title and Subtitle */}
+      <Box sx={{ px: 2, pt: 3 }}>
+        <Typography variant="h6" component="h2">
+          {displayTitle}
+        </Typography>
+        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+          {displaySubtitle}
+        </Typography>
+      </Box>
 
-      <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between" sx={{ px: 2, py: 1 }}>
+      <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between" sx={{ px: 2, py: 2 }}>
         <Stack direction="row" spacing={2} alignItems="center">
           <Typography variant="subtitle2">Filter by type:</Typography>
           <Select
@@ -85,7 +107,7 @@ export const LoansTable = (props) => {
             size="small"
             sx={{ minWidth: '100px' }}
           >
-            {transactionTypes && transactionTypes.map((item) => (
+            {loanTypes && loanTypes.map((item) => (
               <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
             ))}
           </Select>
@@ -99,7 +121,7 @@ export const LoansTable = (props) => {
             size="small"
             sx={{ minWidth: '100px' }}
           >
-            {transactionStatus && transactionStatus.map((item) => (
+            {loanStatus && loanStatus.map((item) => (
               <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
             ))}
           </Select>
@@ -114,7 +136,7 @@ export const LoansTable = (props) => {
                 <TableCell style={headerStyle}> Title </TableCell>
                 <TableCell style={headerStyle}> Type </TableCell>
                 {activeTab === 'loans' &&
-                  <TableCell style={headerStyle}> Contact person </TableCell>
+                  <TableCell style={headerStyle}> Owner's Name </TableCell>
                 }
                 {activeTab !== 'loans' &&
                   <TableCell style={headerStyle}> Borrower </TableCell>
@@ -126,20 +148,18 @@ export const LoansTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {/* 3. Map over paginatedLoans instead of the full filteredItems list */}
               {paginatedLoans.map((loan) => {
                 return (
                   <Link
-                    key={loan.transaction_id}
+                    key={loan.loan_id}
                     underline="none"
                     color="inherit"
-                    href={`/details/loan-detail/${loan.transaction_id}`}
+                    href={`/details/loan-detail/${loan.loan_id}`}
                     style={{ display: 'contents' }}
                   >
-
                     <TableRow
                       hover
-                      key={loan.transaction_id}
+                      key={loan.loan_id}
                     >
                       <TableCell>
                         <Stack
@@ -164,11 +184,11 @@ export const LoansTable = (props) => {
                         <TableCell> { `${loan.borrower_details.first_name} ${loan.borrower_details.last_name}` }</TableCell>
                       }
                       <TableCell> {loan.duration}</TableCell>
-                      <TableCell> {formatDate(loan.transaction_date)} </TableCell>
-                      <TableCell> {loan.transaction_quantity}</TableCell>
+                      <TableCell> {formatDate(loan.loan_date)} </TableCell>
+                      <TableCell> {loan.loan_quantity}</TableCell>
                       <TableCell>
-                        <SeverityPill color={statusMap[loan.transaction_status]}>
-                          {loan.transaction_status}
+                        <SeverityPill color={statusMap[loan.loan_status]}>
+                          {loan.loan_status}
                         </SeverityPill>
                       </TableCell>
                     </TableRow>
@@ -199,4 +219,7 @@ LoansTable.propTypes = {
   onRowsPerPageChange: PropTypes.func,
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
+  activeTab: PropTypes.string,
+  title: PropTypes.string,
+  subtitle: PropTypes.string
 };

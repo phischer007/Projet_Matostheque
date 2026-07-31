@@ -35,7 +35,7 @@ const Page = () => (
           >
             <img
               alt="Under development"
-              src="/mutmat/assets/errors/error-404.png"
+              src="/matostheque/assets/errors/error-404.png"
               style={{
                 display: 'inline-block',
                 maxWidth: '100%',

@@ -1,11 +1,6 @@
 import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import Head from 'next/head';
-import { subDays, subHours } from 'date-fns';
-import TicketIcon from '@heroicons/react/24/solid/TicketIcon';
-import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
-import CogIcon from '@heroicons/react/24/solid/CogIcon';
-import { Box, Button, Container, Stack, SvgIcon, Typography, Grid } from '@mui/material';
-import { useSelection } from 'src/hooks/use-selection';
+import { Box, Container, Stack, Typography, Grid } from '@mui/material';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { LoansTable } from 'src/sections/loan/loans-table';
 import { LoansSearch } from 'src/sections/loan/loans-search';
@@ -42,16 +37,16 @@ const Page = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [activeTab, setActiveTab] = useState('loans');
   const user = useAuth().user;
-  const btnTitle = user.is_staff ? "All transactions" : "My transactions";
+  const btnTitle = user.is_staff ? "All loans" : "My loans";
   const btnCreateUrl =  "/create/create-loan";
 
   useEffect(() => {
     let apiUrl;
 
     if (user.is_staff) {
-      apiUrl = `${config.apiUrl}/transactions/details/`;
+      apiUrl = `${config.apiUrl}/loans/details/`;
     } else {
-      apiUrl = `${config.apiUrl}/transactions/details/user/${user.user_id}/`;
+      apiUrl = `${config.apiUrl}/loans/details/user/${user.user_id}/`;
     }
 
     fetch(apiUrl, {
@@ -73,7 +68,7 @@ const Page = () => {
 
 
   useEffect(() => {
-    // Filter transactions when searchTerm changes
+    // Filter loans when searchTerm changes
     setFilteredLoans(searchTerm
       ? loanList.filter(loan => deepSearch(loan, searchTerm))
       : loanList
@@ -103,7 +98,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Transactions</title>
+        <title>Loans</title>
       </Head>
 
       <Box
@@ -119,7 +114,7 @@ const Page = () => {
               {/* First sub-grid */}
               <Grid xs={6} gap={1} container alignItems="center">
                 
-                <Typography variant="h4" align="center">Transactions</Typography>
+                <Typography variant="h4" align="center">Loans</Typography>
               </Grid>
             </Grid>
             

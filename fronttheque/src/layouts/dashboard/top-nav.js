@@ -19,8 +19,16 @@ export const TopNav = (props) => {
   const accountPopover = usePopover();
   const notifPopover = usePopover();
   const user = useAuth().user;
-  const image = user.profil_pic && user.profil_pic.length !== 0 ? user.profil_pic : {};
-  const image_path = image? `${process.env.NEXT_PUBLIC_ASSETS}/${image[0]}` : '';
+  
+  let image_path = '';
+  if (user?.profil_pic && user.profil_pic.length !== 0) {
+    try {
+      const images = JSON.parse(user.profil_pic);
+      image_path = images && images.length > 0 ? `${process.env.NEXT_PUBLIC_ASSETS}${images[0]}` : '';
+    } catch (e) {
+      console.error("Error parsing profile picture:", e);
+    }
+  }
 
   return (
     <>

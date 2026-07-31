@@ -7,7 +7,7 @@ import { useAuth } from './use-auth';
 import { getCookie } from '../utils/csrf';
 
 
-export const useTransactionDetailHandlers = (data) => {
+export const useLoanDetailHandlers = (data) => {
     const router = useRouter();
     const user = useAuth().user;
     const [formattedDate, setFormattedDate] = useState(null);
@@ -17,7 +17,7 @@ export const useTransactionDetailHandlers = (data) => {
     const { addNotification } = useNotification();
     const [formData, setFormData] = useState({
         location: '',
-        transaction_quantity:null,
+        loan_quantity:null,
     });
     const [message, setMessage] = useState({
         status: null,
@@ -40,7 +40,7 @@ export const useTransactionDetailHandlers = (data) => {
                 'Pending Validation',
                 'Overdue'
             ];
-            if (enableStatus.includes(data.transaction_status))
+            if (enableStatus.includes(data.loan_status))
                 setEnableEdit(true);
         }
     }, [data]);
@@ -58,7 +58,7 @@ export const useTransactionDetailHandlers = (data) => {
         if (formData.duration > data.material_details.duration) {
             setMessage({
                 status: "error",
-                value: `The new transaction term should be less than or equal to ${data.material_details.duration} days.`
+                value: `The new loan term should be less than or equal to ${data.material_details.duration} days.`
             });
             return false;
         }
@@ -72,9 +72,9 @@ export const useTransactionDetailHandlers = (data) => {
             message: `The owner updated the duration of the transacted material: ${notificationData?.material_title}`,
             notificationType: 'General',
             priority: 'Low',
-            title: 'transaction Update',
+            title: 'loan Update',
             user: notificationData.borrower_id,
-            transaction_id: notificationData.loan,
+            loan_id: notificationData.loan,
         });
       }
       else {
@@ -83,23 +83,23 @@ export const useTransactionDetailHandlers = (data) => {
           message: `The borrower updated the location of the transacted material: ${notificationData?.material_title}`,
           notificationType: 'General',
           priority: 'Low',
-          title: 'transaction Update',
+          title: 'loan Update',
           user: notificationData.owner_user_id,
-          transaction_id: notificationData.loan
+          loan_id: notificationData.loan
         });
       }
     }, [addNotification]);
 
     useEffect(() => {
         if (data) {
-            const formattedDate = formatDate(data.transaction_date);
+            const formattedDate = formatDate(data.loan_date);
             setFormattedDate(formattedDate);
 
             setFormData((prevData) => ({
                 ...prevData,
                 duration: data.duration,
                 location: data.location,
-                transaction_quantity: data.transaction_quantity
+                loan_quantity: data.loan_quantity
             }));
         }
     }, [data]);
@@ -112,7 +112,7 @@ export const useTransactionDetailHandlers = (data) => {
                 if (result) {
                     try {
                         const csrftoken = getCookie('csrftoken');
-                        const response = await fetch(`${config.apiUrl}/transactions/${data.transaction_id}/`, {
+                        const response = await fetch(`${config.apiUrl}/loans/${data.loan_id}/`, {
                             method: 'PUT',
                             headers: {
                                 'X-CSRFToken': csrftoken,
@@ -133,7 +133,7 @@ export const useTransactionDetailHandlers = (data) => {
 
                             setMessage({
                                 status: 'success',
-                                value: 'transaction updated successfully!'
+                                value: 'loan updated successfully!'
                             });
 
                             notifyInvolvedParties({
@@ -143,7 +143,7 @@ export const useTransactionDetailHandlers = (data) => {
                                 owner_user_id: data.owner_details.user_id,
                                 is_user_owner: user.user_id === data.owner_details.user_id,
                                 is_staff: user.is_staff,
-                                loan: data.transaction_id
+                                loan: data.loan_id
                             });
 
                             setTimeout(() => {
@@ -154,7 +154,7 @@ export const useTransactionDetailHandlers = (data) => {
                     } catch (error) {
                         setMessage({
                             status: 'error',
-                            value: `Error trying to submit transaction: ${error}`
+                            value: `Error trying to submit loan: ${error}`
                         });
                     }
                 }
@@ -167,7 +167,7 @@ export const useTransactionDetailHandlers = (data) => {
             e.preventDefault();
             const csrftoken = getCookie('csrftoken');
             try {
-                const response = await fetch(`${config.apiUrl}/transactions/${data.transaction_id}/`, {
+                const response = await fetch(`${config.apiUrl}/loans/${data.loan_id}/`, {
                     method: 'DELETE',
                     credentials:'include',
                     headers: {
@@ -199,10 +199,10 @@ export const useTransactionDetailHandlers = (data) => {
             } catch (error) {
                 setMessage({
                     status: 'error',
-                    value: `Error trying to delete transaction: ${error}`
+                    value: `Error trying to delete loan: ${error}`
                 });
             }
-        }, [formData, data.transaction_id, router]);
+        }, [formData, data.loan_id, router]);
 
     return {
         formattedDate,

@@ -34,7 +34,7 @@ export const OverviewLatestMaterials = (props) => {
   const handleMenuOpen = (event, material) => {
     setAnchorEl(event.currentTarget);
     setMaterialId(material.material_id);
-    setCanBeLoaned(material.available_for_transaction);
+    setCanBeLoaned(material.available_for_loan);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -43,13 +43,13 @@ export const OverviewLatestMaterials = (props) => {
   useEffect(() => {
     let list = [
       {
-        href: `mutmat/details/material-detail/${materialId}`,
+        href: `matostheque/details/material-detail/${materialId}`,
         label: 'View Details',
       },
     ];
     if (canBeLoaned) {
       list.push({
-        href: `mutmat/create/create-loan?materialId=${materialId}`,
+        href: `matostheque/create/create-loan?materialId=${materialId}`,
         label: 'Borrow',
       });
     }

@@ -3,12 +3,22 @@
 # Stop execution if any command fails
 set -e
 
-# python manage.py makemigrations
+# Wait for PostgreSQL to be ready
+if [ -n "$DB_HOST" ] && [ -n "$DB_PORT" ]; then
+    echo "Waiting for PostgreSQL to be ready..."
+    until nc -z "$DB_HOST" "$DB_PORT"; do
+        echo "PostgreSQL is unavailable - sleeping"
+        sleep 1
+    done
+    echo "PostgreSQL is up and running!"
+fi
+
+python manage.py makemigrations
 python manage.py migrate --noinput
 
 python manage.py collectstatic --noinput --clear
 
-echo "Checking / Creating superuser..."
+echo "Checking/Creating superuser..."
 python manage.py shell -c "
 from django.contrib.auth import get_user_model
 import os
@@ -25,7 +35,7 @@ else:
 "
 
 echo "Starting Gunicorn..."
-python -m gunicorn --bind 0.0.0.0:8030 \
+python -m gunicorn --bind 0.0.0.0:8000 \
     --workers 3 \
     --timeout 120 \
-    MutmatRestApis.wsgi:application
+    MatosthequeRestApis.wsgi:application

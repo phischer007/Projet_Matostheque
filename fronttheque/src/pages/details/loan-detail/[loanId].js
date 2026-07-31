@@ -1,13 +1,13 @@
 import Head from 'next/head';
-import { Box, Container, Stack, Typography, Button, SvgIcon, Unstable_Grid2 as Grid } from '@mui/material';
+import { Box, Container, Stack, Typography, Button, SvgIcon} from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { HandThumbDownIcon, HandThumbUpIcon, CheckIcon, DocumentArrowUpIcon } from '@heroicons/react/24/solid';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { LoanDetailOverview } from 'src/sections/loan-detail/loan-detail-overview';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import config from 'src/utils/config';
-import NextLink from 'next/link';
-import { useTransactionHandlers } from 'src/hooks/loan-handlers';
+
+import { useLoanHandlers } from 'src/hooks/loan-handlers';
 
 
 const Page = () => {
@@ -15,7 +15,7 @@ const Page = () => {
   const { loanId } = router.query;
 
   const {
-    transactionData,
+    loanData,
     user,
     authorization,
     isOwner,
@@ -24,13 +24,13 @@ const Page = () => {
     OnRejectClick,
     OnCancelClick,
     OnReturnClick
-  } = useTransactionHandlers(loanId);
+  } = useLoanHandlers(loanId);
 
   return (
     <>
       <Head>
         <title>
-          Transaction Details
+          Loan Details
         </title>
       </Head>
       <Box
@@ -54,7 +54,7 @@ const Page = () => {
                 direction="row"
               >
                 <Typography variant="h4">
-                  Transaction Details
+                  Loan Details
                 </Typography>
                 <Stack
                   sx={{
@@ -65,9 +65,9 @@ const Page = () => {
                     gap: 1
                   }}
                 >
-                  {(transactionData && user) && (
+                  {(loanData && user) && (
                     <>
-                      {(isOwner && (transactionData.transaction_status === 'Borrowed' || transactionData.transaction_status === 'Overdue')) && (
+                      {(isOwner && (loanData.loan_status === 'Borrowed' || loanData.loan_status === 'Overdue')) && (
                         <Button startIcon={(<SvgIcon fontSize="small"> <HandThumbUpIcon /> </SvgIcon>)}
                           variant="contained"
                           onClick={OnReturnClick}
@@ -75,7 +75,7 @@ const Page = () => {
                           Return
                         </Button>
                       )}
-                      {(isOwner && transactionData.transaction_status === 'Pending Validation') && (
+                      {(isOwner && loanData.loan_status === 'Pending Validation') && (
                         <>
                           <Button startIcon={(<SvgIcon fontSize="small"> <CheckIcon /> </SvgIcon>)}
                             variant="contained"
@@ -93,7 +93,7 @@ const Page = () => {
                           </Button>
                         </>
                       )}
-                      {(isBorrower && (transactionData.transaction_status === 'Pending Validation' || transactionData.transaction_status === 'Booked')) && (
+                      {(isBorrower && (loanData.loan_status === 'Pending Validation' || loanData.loan_status === 'Booked')) && (
                         <Button 
                           startIcon={(
                             <SvgIcon fontSize="small">
@@ -122,7 +122,7 @@ const Page = () => {
                     lg={10}
                   >
                     <LoanDetailOverview
-                      data={transactionData}
+                      data={loanData}
                     />
                   </Grid>
                 </Grid>

@@ -57,7 +57,7 @@ export const AccountPopover = (props) => {
               color="text.secondary"
               variant="caption"
             >
-              Status: {user.role === "owner" ? "Lender" : "Borrower"} 
+              {user.role} account
             </Typography>
           </Box>
         </Link>

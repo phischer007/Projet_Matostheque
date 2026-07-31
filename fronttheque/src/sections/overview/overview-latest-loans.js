@@ -28,7 +28,7 @@ export const OverviewLatestLoans = (props) => {
   const user = useAuth().user;
   const loans = props?.loans;
   const sx = props?.sx;
-  const title = user.is_staff ? "Latest Transactions" : "Your Transactions";
+  const title = user.is_staff ? "General loans information" : "Your loan information";
 
   const headerStyle = {
     backgroundColor: '#162A42',
@@ -51,7 +51,7 @@ export const OverviewLatestLoans = (props) => {
                   Type
                 </TableCell>
                 <TableCell style={headerStyle}>
-                  Contact person
+                  Owner's Name
                 </TableCell>
                 <TableCell style={headerStyle}>
                   Duration
@@ -69,14 +69,14 @@ export const OverviewLatestLoans = (props) => {
             </TableHead>
             <TableBody>
               {loans ? loans.map((loan) => {
-                const loanDate = formatDate(loan.transaction_date);
+                const loanDate = formatDate(loan.loan_date);
 
                 return (
                   <Link
-                    key={loan.transaction_id}
+                    key={loan.loan_id}
                     underline="none"
                     color="inherit"
-                    href={`/mutmat/details/loan-detail/${loan.transaction_id}`}
+                    href={`/matostheque/details/loan-detail/${loan.loan_id}`}
                     style={{ display: 'contents' }}
                   >
                     <TableRow
@@ -90,8 +90,11 @@ export const OverviewLatestLoans = (props) => {
                         {loan.type}
                       </TableCell>
                       <TableCell>
-                        {loan.owner_first_name} {loan.owner_last_name}
+                        {user.is_staff 
+                          ? `${loan.user_first_name} ${loan.user_last_name}` 
+                          : `${loan.owner_first_name} ${loan.owner_last_name}`}
                       </TableCell>
+
                       <TableCell>
                         {loan.duration}
                       </TableCell>
@@ -99,11 +102,11 @@ export const OverviewLatestLoans = (props) => {
                         {loanDate}
                       </TableCell>
                       <TableCell>
-                        {loan.transaction_quantity}
+                        {loan.loan_quantity}
                       </TableCell>
                       <TableCell>
-                        <SeverityPill color={statusMap[loan.transaction_status]}>
-                          {loan.transaction_status}
+                        <SeverityPill color={statusMap[loan.loan_status]}>
+                          {loan.loan_status}
                         </SeverityPill>
                       </TableCell>
                     </TableRow>

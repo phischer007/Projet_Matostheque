@@ -1,17 +1,15 @@
 import { 
   Grid, 
-  List, 
-  ListItem, 
-  ListItemAvatar, 
-  Avatar, 
-  ListItemText, 
+  Card, 
+  CardActionArea,
+  CardMedia,
+  CardContent,
   Typography, 
   Link 
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useAuth } from 'src/hooks/use-auth';
-
 
 export const MaterialTable = (props) => {
   const user = useAuth().user;
@@ -21,54 +19,88 @@ export const MaterialTable = (props) => {
     return a.material_title.localeCompare(b.material_title);
   }) : [];
 
-  return (<>
-    <Grid  gap={1} container alignItems="center">
-      <Typography variant="h6" align="center">List Of Materials</Typography>
-    </Grid>
-    <List sx={{
-      display: 'grid',
-      gridTemplateColumns: { xs: '1fr', sm: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }, 
-      gap: '16px'
-    }}>
-      {sortedData && sortedData.map((material, index) => {
-        const hasDivider = index < sortedData.length - 1;
-        const images = JSON.parse(material.images);
-        const image_path = images ? `${process.env.NEXT_PUBLIC_ASSETS}/${images[0]}` : '';
+  return (
+    <Grid container spacing={3}>
+      {sortedData && sortedData.map((material) => {
+        let images = [];
+        try {
+          images = JSON.parse(material.images);
+        } catch (e) {
+          console.error("Error parsing images for material:", material.material_id);
+        }
+        
+        const image_path = images && images.length > 0 
+          ? `${process.env.NEXT_PUBLIC_ASSETS}/${images[0]}` 
+          : ''; 
 
         return (
-
-          <Link
+          <Grid 
+            item 
+            xs={12} 
+            sm={6} 
+            md={4} 
+            lg={3} 
             key={material.material_id}
-            underline="none"
-            color="inherit"
-            href={`/mutmat/details/material-detail/${material.material_id}`}
-            style={{ display: 'contents' }}
           >
-            <ListItem divider={hasDivider} key={material.material_id}>
-              <ListItemAvatar>
-                <Avatar
-                  src={image_path}
-                  alt="Material"
-                  sx={{
-                    height: 150,
-                    width: 200,
-                    borderRadius: 1
-                  }}
-                />
-              </ListItemAvatar>
-              <ListItemText
-                primary={material.material_title}
-                primaryTypographyProps={{ variant: 'subtitle1', fontWeight: 'bold' }}
-                secondary={material.description}
-                secondaryTypographyProps={{ variant: 'body2' }}
-                sx={{ ml: 2 }}
-              />
-            </ListItem>
-          </Link>
+            <Card 
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+                border: '1px solid',       // Adds a 1px solid border
+                borderColor: 'grey.300',   // Uses a subtle light-grey color from MUI's palette
+                boxShadow: 3, 
+                transition: 'box-shadow 0.3s ease-in-out', 
+                '&:hover': {
+                  boxShadow: 6, 
+                }
+              }}
+            >
+              <Link
+                underline="none"
+                color="inherit"
+                href={`/matostheque/details/material-detail/${material.material_id}`}
+                style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+              >
+                <CardActionArea sx={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', flexGrow: 1 }}>
+                  <CardMedia
+                    component="img"
+                    height="180"
+                    image={image_path}
+                    alt={material.material_title}
+                    sx={{ backgroundColor: 'background.default' }}
+                  />
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography 
+                      gutterBottom 
+                      variant="h6" 
+                      component="div"
+                      sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}
+                    >
+                      {material.material_title}
+                    </Typography>
+                    <Typography 
+                      variant="body2" 
+                      color="text.secondary"
+                      sx={{
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2, // Limits description to 2 lines
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
+                      }}
+                    >
+                      {material.description}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Link>
+            </Card>
+          </Grid>
         );
       })}
-    </List>
-  </>);
+    </Grid>
+  );
 };
 
 MaterialTable.propTypes = {
@@ -78,4 +110,5 @@ MaterialTable.propTypes = {
   onRowsPerPageChange: PropTypes.func,
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
+  data: PropTypes.array
 };

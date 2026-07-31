@@ -11,7 +11,6 @@ import imageCompression from 'browser-image-compression';
 import codes from 'src/data/code_nacre/code_nacre.json'
 import { getCookie } from 'src/utils/csrf';
 import { useAuth } from './use-auth';
-import { stringify } from 'node:querystring';
 
 
 const compressAndUploadImages = async (images) => {
@@ -43,35 +42,31 @@ export const useNewMaterialHandlers = (data) => {
   const [wordIndex, setWordIndex] = useState({});
   const [isUploading, setIsUploading] = useState(false);
   const [isValidationChecked, setIsValidationChecked] = useState(true);
+  const [isShared, setIsShared] = useState(false);
+  const [superOwner, setSuperOwner] = useState(null);
   const [codeError, setCodeError] = useState(false);
   const [images, setImages] = useState([]);
-  const [selectedOwner, setSelectedOwner] = useState( null);
+  const [selectedOwner, setSelectedOwner] = useState(null);
+  const [isDurationEnabled, setIsDurationEnabled] = useState(false);
   const [filesSelected, setFilesSelected] = useState(false);
   const [inputCNValue, setInputCNValue] = useState('');
   const [selectedCode, setSelectedCode] = useState(null);
   const [filteredCNOptions, setFilteredCNOptions] = useState([]);
-  const [isMovable, setisMovable] = useState(false);
-  const [is_formation_required, setis_formation_required] = useState(false);
-  const [trust_circleList, setTrust_circle] = useState(null);
-  const [condition, setCondition] = useState(null)
-  const [serviceList, setServiceList] = useState(null)
   const [expandedSections, setExpandedSections] = useState({
     general: true,
     supplier: true,
     loan: true,
-    // Change 'additional' from false to true to have it expanded by default
     additional: true,
     consumable: true,
-
     lab_supply: true
   });
 
   const [formData, setFormData] = useState({
     material_title: null,
     description: null,
+    team: "",
     owner: null,
-    trust_circle:null,
-    origin: user.laboratory_address,
+    origin: null,
     loan_duration: 30,
     code_nacre: null,
     purchase_price: null,
@@ -81,10 +76,7 @@ export const useNewMaterialHandlers = (data) => {
     manual_link: null,
     datasheet_link: null,
     sub_type:null,
-    isMovable:false,
-    is_formation_required:false,
     validation:true,
-    service: user.service,
   });
 
   const [message, setMessage] = useState({
@@ -93,62 +85,21 @@ export const useNewMaterialHandlers = (data) => {
   });
 
   const [formErrors, setFormErrors] = useState({
-        title: false,
-        description: false,
-        owner: false,
-        trust_circle:false,
-        location: false,
-        type : false,
-        sub_type:false,
-        condition:false,
+    title: false,
+    description: false,
+    owner: false,
+    location: false,
+    type : false,
+    sub_type:false,
   });
-
-
-  useEffect(() => {
-    fetch(`${config.apiUrl}/trust_circle/`,{
-      credentials: 'include'// Add this so the session cookie is sent!
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Sort the data alphabetically by material_title
-        if (data) {
-            setTrust_circle(data);
-        }
-      })
-      .catch(error => console.error('Error fetching data:', error));
-    fetch(`${config.apiUrl}/services/`,{
-      credentials: 'include'// Add this so the session cookie is sent!
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Sort the data alphabetically by material_title
-        if (data) {
-            setServiceList(data);
-        }
-      })
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
 
   const handleCheckChange = () => {
     setIsValidationChecked(!isValidationChecked);
   };
-  const handleisMovableBoxChange = useCallback(() => {
-    setisMovable((prevState) => !prevState);
-  }, []);
 
-  const handleis_formation_requiredBoxChange = useCallback(() => {
-    setis_formation_required((prevState) => !prevState);
-  }, []);
-
-  const handleCondition = useCallback(() => {
-    setCondition((prevState) => !prevState)
-    setFormErrors(prev => ({
-      ...prev,
-      condition: false,
-    }));
-  })
-
-
+  const handleSharedChange = useCallback(() => {
+    setIsShared(!isShared);
+  }, [isShared]);
 
   const handleChange = useCallback(
     (event) => {
@@ -160,28 +111,27 @@ export const useNewMaterialHandlers = (data) => {
     []
   );
 
-const handleChangeNumDec = useCallback((event) => {
-  const { name, value } = event.target;
+  const handleChangeNumDec = useCallback((event) => {
+    const { name, value } = event.target;
 
-  let cleaned = value
-    .replace(/[^0-9.]/g, "") // garde chiffres + point
-    .replace(/(\..*)\./g, "$1"); // empêche plusieurs points
+    let cleaned = value
+      .replace(/[^0-9.]/g, "") // garde chiffres + point
+      .replace(/(\..*)\./g, "$1"); // empêche plusieurs points
 
-  setFormData((prev) => ({
-    ...prev,
-    [name]: cleaned
-  }));
-}, []);
+    setFormData((prev) => ({
+      ...prev,
+      [name]: cleaned
+    }));
+  }, []);
 
+  const handleChangeNum = useCallback((event) => {
+    const { name, value } = event.target;
 
-const handleChangeNum = useCallback((event) => {
-  const { name, value } = event.target;
-
-  setFormData((prevState) => ({
-    ...prevState,
-    [name]: value.replace(/\D/g, "") // garde seulement les chiffres
-  }));
-}, []);
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value.replace(/\D/g, "") // garde seulement les chiffres
+    }));
+  }, []);
 
   // Handle file upload
   const handleFileChange = useCallback(
@@ -192,7 +142,7 @@ const handleChangeNum = useCallback((event) => {
       } else {
         setFilesSelected(false);
       }
-  });
+  }, []);
   
 
   const handleCodeNacreValidation = useCallback(
@@ -213,11 +163,21 @@ const handleChangeNum = useCallback((event) => {
       }
     }, [formData]);
 
+  const handleToggleChange = useCallback(
+    () => {
+      setIsDurationEnabled(!isDurationEnabled);
+    },
+    [isDurationEnabled]
+  );
 
   const onSelectChange = useCallback(
     (event, values) => {
       setSelectedOwner(values);
-    }, []
+      const isOwnerShared = values && superOwner && superOwner.user_id !== undefined 
+        ? values.user_id === superOwner.user_id 
+        : false;
+      setIsShared(isOwnerShared);
+    }, [superOwner]
   );
 
   const handleAccordionChange = useCallback((section) => {
@@ -242,11 +202,10 @@ const handleChangeNum = useCallback((event) => {
         title: formData.material_title === null || formData.material_title?.trim() === '',
         description: formData.description === null || formData.material_title?.trim() === '',
         owner: selectedOwner === null,
-        trust_circle: formData.trust_circle === null,
         location: formData.origin === null || formData.material_title?.trim() === '',
         type : formData.type === null,
         sub_type: formData.sub_type === null,
-        condition: condition !== true,
+        loan_duration: isDurationEnabled && formData.loan_duration === null,
       };
       //TODO: Add error for consummables
       setFormErrors(newErrors);
@@ -261,18 +220,14 @@ const handleChangeNum = useCallback((event) => {
             { key: 'manual_link', value: formData.manual_link },
             { key: 'datasheet_link', value: formData.datasheet_link },
             { key: 'user', value: selectedOwner.user_id },
-            { key: 'trust_circle', value: formData.trust_circle},
             { key: 'origin', value: formData.origin },
             { key: 'code_nacre', value: formData.code_nacre },
             { key: 'purchase_price', value: formData.purchase_price },
             { key: 'type', value: formData.type },
             { key: 'sub_type', value: formData.sub_type },
             { key: 'quantity_available', value: formData.quantity_available },
-            { key: 'is_Movable', value: formData.isMovable },
-            { key: 'is_formation_required', value: formData.is_formation_required },
             { key: 'validation', value: formData.validation },
-            { key: 'service', value: formData.service },
-
+            { key: 'loan_duration', value: isDurationEnabled ? formData.loan_duration : indefiniteDuration },
           ];
           // New append field for Lab Supply category conditions
           if (formData.type === "LAB_SUPPLIES") {
@@ -303,10 +258,10 @@ const handleChangeNum = useCallback((event) => {
           const csrftoken = getCookie('csrftoken');
           const response = await fetch(`${config.apiUrl}/materials/create/`, {
             method: 'POST',
-            body: form, // Use the FormData object directly as the body
+            body: form, 
             credentials: 'include',
             headers: {
-              'X-CSRFToken': csrftoken, // Add this
+              'X-CSRFToken': csrftoken, 
             },
           });
 
@@ -343,7 +298,7 @@ const handleChangeNum = useCallback((event) => {
 
       setIsUploading(false);
 
-    }, [formData, router, codeError, selectedOwner, condition]);
+    }, [formData, router, codeError, isDurationEnabled, selectedOwner]);
   
     const filterOptions = useCallback((value) => {
       const inputWords = value.toLowerCase().split(' ');
@@ -426,20 +381,6 @@ const handleChangeNum = useCallback((event) => {
     }));
   }, [isValidationChecked]);
 
-  useEffect(() => {
-    setFormData((prevState) => ({
-      ...prevState,
-      isMovable: isMovable
-    }));
-  }, [isMovable]);
-
-  useEffect(() => {
-    setFormData((prevState) => ({
-      ...prevState,
-      is_formation_required: is_formation_required
-    }));
-  }, [is_formation_required]);
-
   /*Creating an index of the keywords, speed the search process*/
   useEffect(() => {
     let indexes = {};
@@ -457,22 +398,56 @@ const handleChangeNum = useCallback((event) => {
     setWordIndex(indexes);
   }, []);
 
+  // Identify the superOwner ("liphy")
   useEffect(() => {
-  if (ownersArray?.length) {
-    const owner = ownersArray.find(
-      owner => Number(owner.user_id) === Number(user.user_id)
-    );
-    setSelectedOwner(owner || null);
-  }
-}, [ownersArray]);
+    if (ownersArray) {
+      let owner = ownersArray.find(owner => {
+        // Adjust owner_name property if it differs in your objects
+        if (owner.is_staff && owner.owner_name?.toLowerCase().includes("liphy")) {
+          return true;
+        }
+      });
+      setSuperOwner(owner);
+    }
+  }, [ownersArray]);
+
+  // Handle auto-selection on load/update with isShared logic
+  useEffect(() => {
+    if (ownersArray?.length) {
+      const defaultOwner = ownersArray.find(
+        owner => Number(owner.user_id) === Number(user.user_id)
+      );
+      if (defaultOwner) {
+        setSelectedOwner(defaultOwner);
+        const isOwnerShared = superOwner && superOwner.user_id !== undefined 
+          ? defaultOwner.user_id === superOwner.user_id 
+          : false;
+        setIsShared(isOwnerShared);
+      } else {
+        setSelectedOwner(null);
+      }
+    }
+  }, [ownersArray, user, superOwner]);
+
+  // Sync state when isShared toggles
+  useEffect(() => {
+    if (isShared) {
+      setSelectedOwner(superOwner);
+      setIsValidationChecked(false);
+    } else {
+      setIsValidationChecked(true);
+    }
+  }, [isShared, superOwner]);
   
 
   return {
     isValidationChecked,
+    isShared,
     formData,
     message,
     selectedOwner,
     handleCheckChange,
+    handleSharedChange,
     handleChange,
     handleChangeNum,
     handleChangeNumDec,
@@ -489,14 +464,9 @@ const handleChangeNum = useCallback((event) => {
     inputCNValue,
     handleInputCNChange,
     handleCodeNChange,
-    handleis_formation_requiredBoxChange,
-    is_formation_required,
-    handleisMovableBoxChange,
-    isMovable,
     handleDateChange,
-    trust_circleList,
-    condition,
-    handleCondition,
-    serviceList
+    handleCodeNacreValidation,
+    handleToggleChange,
+    isDurationEnabled
   };
 };

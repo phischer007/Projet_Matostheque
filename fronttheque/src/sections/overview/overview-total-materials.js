@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import ArrowDownIcon from '@heroicons/react/24/solid/ArrowDownIcon';
 import ArrowUpIcon from '@heroicons/react/24/solid/ArrowUpIcon';
-import { FlagIcon, PlusIcon } from '@heroicons/react/24/solid';
+import { FlagIcon, PlusCircleIcon } from '@heroicons/react/24/solid';
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
 
 export const OverviewTotalMaterials = (props) => {
@@ -55,7 +55,7 @@ export const OverviewTotalMaterials = (props) => {
                 color='success'
                 style={{ fontSize: '12px' }}
               >
-                <PlusIcon />
+                <PlusCircleIcon />
               </SvgIcon>
               <Typography
                 color='success.main'

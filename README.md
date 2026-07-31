@@ -1,134 +1,210 @@
-# Mutmat
-**Mutmat** is a full-stack virtual library platform designed to facilitate the sharing, lending, and borrowing of equipment, materials, books, and other resources across multiple laboratories and institutions within Université Grenoble Alpes (**UGA**). This initiative, championed by the Vice President for Research and Ecological Transformation of UGA, builds upon an existing internal solution developed by Laboratoire Interdisciplinare de Physique (**LIPhy**), scaling it from a single-laboratory tool into a comprehensive, university-wide resource-sharing ecosystem. 
+# Matostheque
 
-By enabling efficient peer-to-peer lending across UGA's research community, **Mutmat** aims to reduce redundant equipment purchases, minimize waste, and directly contribute to the university's sustainability and carbon reduction goals.
+**Matostheque** is a full-stack virtual library platform designed to facilitate the sharing, lending, and borrowing of equipment, books, and other materials within the Laboratoire Interdisciplinaire de Physique (**LIPhy**) of CNRS and Université Grenoble Alpes (**UGA**). 
 
-### Purpose
-Our goal is to develop a multi-laboratory equipment loan management platform that directly tackles the environmental impact of scientific research. With nearly 50% of a laboratory's greenhouse gas emissions stemming from the purchase and production of new equipment, this tool will promote resource sharing, extend equipment lifecycles, and significantly reduce the carbon footprint of participating labs through a collaborative, circular economy model.
+Championed by the laboratory's Environmental Footprint Commission, this peer-to-peer platform tackles the environmental impact of scientific research. Because nearly 50% of a laboratory's greenhouse gas emissions stem from producing and purchasing new equipment, Matostheque leverages a circular economy model to reduce redundant purchases, extend equipment lifecycles, and directly support the carbon reduction goals of UGA and CNRS.
+
+## Architecture & Requirements
 
 ### Technology Stack
+*   **Backend:** Django (located in `Matostheque/` and `MatosthequeRestApis/`)
+*   **Frontend:** Next.js (located in `fronttheque/`)
+*   **Database:** PostgreSQL
+*   **Configuration:** Environment variables loaded via `python-dotenv`
+*   **Static Files:** Frontend build artifacts are integrated into Django static files via `STATICFILES_DIRS`.
 
-- a Django backend in `Mutmat/` and `MutmatRestApis/`
-- an NextJS frontend in `fronttheque/`
+### Prerequisites
+Ensure your host system has the following installed:
+*   Python 3
+*   PostgreSQL
+*   Node.js (LTS) and NPM
+*   Git
+*   Docker (if choosing containerized deployment)
 
-### Overview
-- Backend configuration is driven by environment variables loaded from `.env` (`python-dotenv`).
-- PostgreSQL is expected as the database.
-- Frontend build artifacts are integrated into Django static files via `STATICFILES_DIRS`.
+---
 
-See `MutmatRestApis/settings.py` for backend settings details.
+## Phase 1: Initial Setup
 
-### Requirements
-- Python 3
-- PostgreSQL
-- Node.js LTS and NPM
-- Git
-- Docker
-
-## Quick start
-#### Clone the repository
+### 1. Clone the Repository
 ```bash
-git clone https://gitlab.in2p3.fr/vikhram-kofi.duffour/matostheque.git
-cd mutmat
+# Clone one of the repository
+
+git clone -b deployment --single-branch https://github.com/phischer007/Projet_Matostheque.git Matostheque_App
+
+OR 
+
+git clone -b sanscas --single-branch https://gricad-gitlab.univ-grenoble-alpes.fr/duffouvi/matostheque.git Matostheque_App
+
+cd Matostheque_App
 ```
+### 2. Configure Environment Variables
+Note: This configuration is tailored for Dockerized production environments.
 
-#### Set up you Python environment (Django)
+Copy the template configuration files to create your active .env files:
 ```bash
-python3 -m venv matostheque_venv
-source matostheque_venv/bin/activate
-```
+cp .env.local .env 
+## And make sure to change.env.local to .env in your docker-compose.yml
 
-Edit these files
-```bash
-cp .env.example .env
+cp docker-compose.example.yml docker-compose.yml
+## On line 14, change **-postgres** to your **DB_USER** and **-matostheque** to your **DB_NAME** in your .env file 
+
 cp fronttheque/.env.example fronttheque/.env
+cp fronttheque/Dockerfile.example fronttheque/Dockerfile
+cp fronttheque/package.example.json fronttheque/package.json
 cp fronttheque/src/utils/config.example.js fronttheque/src/utils/config.js
-
-# Fill credentials and update secret keys as needed. 
-# For production, change
-## 1. server_name.example.com --> your servername
-## 2. cas-authentification.example.com --> your authentification servername
 ```
-To generate a Django SECRET_KEY, you can use the following command:
+Update your new **.env** files with your specific credentials, including changing **your-server_name.example.com** to your actual domain.
+
+**Generate a Django Secret Key:**
+
+Run this snippet to generate a secure secret key, then copy the output into your backend **.env** file:
 ```bash
-echo "Generating Django SECRET KEY"
-
-SECRET_KEY=$(python3 <<EOF
-from django.core.management.utils import get_random_secret_key
-print(get_random_secret_key())
-EOF
-)
-echo "Django SECRET_KEY : $SECRET_KEY"
-
-echo "SECRET_KEY='$SECRET_KEY'" >> .env
+SECRET_KEY=$(python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')
+echo "Your new Django SECRET_KEY is: $SECRET_KEY"
 ```
+---
 
-**Install Python dependencies**
-```bash
-# Delete the exiting migration files
-find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
-find . -path "*/migrations/*.pyc" -delete
+## Phase 2: Database Configuration
+**Use this step, if you are not going to use Docker Containerization**
 
-pip install --force-reinstall django==4.2.23
-pip install -r requirements.txt
-
-# Take ownership of the entire project folder
-sudo chown -R $USER:$USER /mutmat/
-chmod -R u+w assets
-chmod -R u+w media
-```
-**Configure PostgreSQL Database**
+Install PostgreSQL and set up the matostheque database.
 ```bash
 sudo apt update
 sudo apt install -y postgresql postgresql-contrib
 
+# Access the PostgreSQL prompt
 sudo -u -i postgres
-psql
-
-# Ensure the following credentials match your .env file configuration:
-## matostheque, your_database_username, your_database_password
+```
+Execute the following SQL commands (ensure the credentials match what you set in your .env file):
+```sql
 CREATE DATABASE matostheque;
 CREATE USER your_database_username WITH ENCRYPTED PASSWORD 'your_database_password';
 GRANT ALL PRIVILEGES ON DATABASE matostheque TO your_database_username;
 ALTER DATABASE matostheque OWNER TO your_database_username;
-
 \q
-exit
 ```
 
-
-**Run migrations and start Django**
+## Phase 3: Backend Preparation
+Set up the Python environment, install dependencies, and configure directory permissions.
 ```bash
-# Perform database migrations
+# Initialize and activate the virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Clear out any existing compiled migrations
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+find . -path "*/migrations/*.pyc" -delete
+
+# Install requirements
+pip install --force-reinstall django==4.2.23
+pip install -r requirements.txt
+
+# Fix permissions for media and static assets
+sudo chown -R $USER:$USER . OR sudo chown -R $USER:$USER Matostheque_App
+chmod -R u+w assets media
+```
+
+## Phase 4: Deployment Options
+You can deploy Matostheque using Docker containers or directly on the host using systemd services.
+
+### Option A: Deployment With Docker
+If using [Docker](https://docs.docker.com/desktop/setup/install/linux/debian/), the deployment is orchestrated via [Compose](https://docs.docker.com/compose/install/):. Review and adjust the following files before launching:
+* docker-compose.yml
+* Dockerfile
+* entrypoint.prod.sh
+* fronttheque/Dockerfile
+
+### Option B.1 : Deployment without Docker (Systemd)
+If you are not using Docker, you will need to run database migrations (**Ref: Phase 2**), collect static files, and set up systemd services.
+
+**Initialize Django**
+```bash
 python manage.py makemigrations
-
-# Apply database migrations
 python manage.py migrate
-
-# Collect static files (if needed)
 python manage.py collectstatic --noinput --clear
 
-# Create a local user to access your Django Administration backend
-python manage.py createsuperuser 
-############ Example #########################
-### Follow prompts to create an admin user
-### Email: admin@example.fr
-### Password: admin1234
-##############################################
+# Create an administrator account (follow the prompts)
+python manage.py createsuperuser
+```
+**Create the Backend Service**
 
-python manage.py runserver 8030
+Create a new service file for Gunicorn
+```bash 
+sudo nano /etc/systemd/system/matostheque-backend.service
+```
+Add the following configuration (replace **user_name** and paths as necessary):
+```bash
+[Unit]
+Description=Matostheque Backend Service
+After=network.target
+
+[Service]
+Type=simple
+User=user_name
+WorkingDirectory=/home/user_name/Matostheque_App/
+ExecStart=/bin/bash -c 'source /home/user_name/Matostheque_App/.venv/bin/activate && gunicorn -c gunicorn.conf.py MatosthequeRestApis.wsgi'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+**Create the Frontend Service**
+
+First, install the Next.js dependencies:
+```bash
+cd fronttheque/
+npm install
+```
+Then, create the frontend service file:
+```bash
+sudo nano /etc/systemd/system/matostheque-frontend.service
+```
+Add the following configuration:
+```bash
+[Unit]
+Description=Matostheque Frontend Service
+After=network.target
+
+[Service]
+Type=simple
+User=user_name
+Group=user_name
+WorkingDirectory=/home/user_name/Matostheque_App/fronttheque/
+Environment=NODE_ENV=production
+
+# Note: Running npm run build in the service will delay startups. 
+# For production, it is recommended to run 'npm run build' manually and only keep 'npm run start' here.
+ExecStart=/bin/bash -c 'npm run build && npm run start'
+
+Restart=on-failure
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+Enable and start your services:
+```bash
+sudo systemctl daemon-reload
+
+sudo systemctl enable matostheque-backend matostheque-fronttheque
+sudo systemctl start matostheque-backend matostheque-fronttheque
 ```
 
-## Local URLs
-- **Django**
-    - **Development:** [http://localhost:8030/admin](http://localhost:8030/admin)
-    - **Production:** `https://your_host_server_name/admin`
+### Option B.2 :Routing & Access
 
-- **Frontend**
-    - **Development:** [http://localhost:3030/mutmat](http://localhost:3030/mutmat)
-    - **Production:** `https://your_host_server_name/mutmat`
+#### Nginx Reverse Proxy
 
-## Reverse proxy - NGINX
-To ensure seamless communication between the frontend and backend without triggering CORS restrictions, you can deploy the Nginx reverse proxy provided in the *`/nginx/nginx_example.conf`* file.
+To ensure seamless communication between the frontend and backend without triggering CORS restrictions, configure an NGINX reverse proxy.
 
-**Note:** You may want to rename *nginx_example.conf* to something like default.conf or reverse-proxy.conf before finalizing your documentation for a cleaner file structure. [Read more on how to set-up NGINX Reverse Proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
+Use the provided template at **nginx/nginx.example.conf**. Rename this file to **matostheque.conf** (or similar) and place it in your **/etc/nginx/sites-available/** directory. For detailed instructions, refer to the official [NGINX Reverse Proxy documentation](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/).
+
+#### Local URLs
+
+Frontend Application:
+* Development: http://localhost:3000/matostheque
+* Production: https://your-server-name.example.com/matostheque
+
+Django Administration:
+* Development: http://localhost:8000/admin
+* Production: https://your-server-name.example.com/admin

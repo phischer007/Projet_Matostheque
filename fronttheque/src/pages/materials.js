@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
-import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
-import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
+import PlusCircleIcon from '@heroicons/react/24/solid/PlusCircleIcon';
 import { 
   Box, 
   Button, 
@@ -10,8 +9,8 @@ import {
   Stack, 
   SvgIcon, 
   Typography, 
-  Unstable_Grid2 as Grid 
 } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { MaterialsCard } from 'src/sections/materials/materialcard';
 import { MaterialsSearch } from 'src/sections/materials/materialsearch';
@@ -107,8 +106,6 @@ const Page = () => {
     setPage(0);
   };
 
-
-
   const handleInternalReset = () => {
     // 1. Reset local state
     setSelectedCategory(null);
@@ -163,7 +160,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Materials</title>
+        <title>Catalog</title>
       </Head>
       <Box component="main" 
         sx={{ flexGrow: 1, py: 8 }}
@@ -179,7 +176,7 @@ const Page = () => {
                 <Typography 
                   variant="h4"
                 >
-                  Materials
+                  Catalog - Materials
                 </Typography>
                 {user.is_staff && (
                   <Stack alignItems="center" 
@@ -191,12 +188,11 @@ const Page = () => {
               </Stack>
               <div>
                 <Button
-                  // sx={{ backgroundColor: '#162A42' }}
                   startIcon={
                     <SvgIcon 
                       fontSize="small"
                     >
-                      <PlusIcon />
+                      <PlusCircleIcon />
                     </SvgIcon>
                   }
                   variant="contained"

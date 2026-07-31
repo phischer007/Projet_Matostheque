@@ -45,7 +45,7 @@ const Page = () => (
             variant="h5"
             component="h1"
           >
-            Accès restreint - Inscription à MUTMAT requise
+            Accès restreint - Inscription à Matostheque requise
           </Typography>
           
           <Typography
@@ -68,7 +68,7 @@ const Page = () => (
             >
               laboratoire
             </Box>{' '}
-            doit d'abord être inscrit et faire partie des établissements actuellement agréés par l'équipe du <strong> MUTMAT ou DGDSI</strong>.
+            doit d'abord être inscrit et faire partie des établissements actuellement agréés par l'équipe du <strong> Matostheque ou DGDSI</strong>.
           </Typography>
           
           <Typography
@@ -97,7 +97,7 @@ const Page = () => (
               }
             }}
           >
-            Contacter le support MUTMAT ou DGDSI
+            Contacter le support Matostheque ou DGDSI
           </Button>
     </Box>
   </Container>

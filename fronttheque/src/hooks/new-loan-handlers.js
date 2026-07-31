@@ -9,7 +9,6 @@ import { getCookie } from '../utils/csrf';
 import dayjs from 'dayjs';
 
 
-
 export const useNewLoanHandlers = (props) => {
   //State Variables and  their Setters
   const router = useRouter();
@@ -33,14 +32,14 @@ export const useNewLoanHandlers = (props) => {
 
   const [formData, setFormData] = useState({
     material: null,
-    transaction_date: startDate? startDate : null,
+    loan_date: startDate? startDate : null,
     duration: null,
     borrower: user ? user.user_id : null,
-    location: user.laboratory_address,
+    location: null,
     message:null,
-    transaction_quantity : 1,
+    loan_quantity : 1,
     
-    transaction_enddate: endDate? endDate : null
+    loan_enddate: endDate? endDate : null
   });
   
   const [message, setMessage] = useState({
@@ -67,13 +66,13 @@ export const useNewLoanHandlers = (props) => {
       }
       setFormData({
       ...formData,
-      transaction_date: newdate ,
+      loan_date: newdate ,
     });
     }else {
       setMaxDate(null)
       setFormData({
       ...formData,
-      transaction_date: null ,
+      loan_date: null ,
     });
     }
   };
@@ -102,17 +101,17 @@ export const useNewLoanHandlers = (props) => {
   }, []);
 
   const handleChangeNumDec = useCallback((event) => {
-  const { name, value } = event.target;
+    const { name, value } = event.target;
 
-  let cleaned = value
-    .replace(/[^0-9.]/g, "") // garde chiffres + point
-    .replace(/(\..*)\./g, "$1"); // empêche plusieurs points
+    let cleaned = value
+      .replace(/[^0-9.]/g, "") // garde chiffres + point
+      .replace(/(\..*)\./g, "$1"); // empêche plusieurs points
 
-  setFormData((prev) => ({
-    ...prev,
-    [name]: cleaned
-  }));
-}, []);
+    setFormData((prev) => ({
+      ...prev,
+      [name]: cleaned
+    }));
+  }, []);
 
   const onSelectChange = useCallback(
     (event, values) => {
@@ -182,7 +181,7 @@ export const useNewLoanHandlers = (props) => {
         user: owner_user_id,
         priority: validation? 'High' : 'Medium',
         title: 'New Request',
-        transaction_id: loan
+        loan_id: loan
     };
     addNotification(ownerNotification);
 
@@ -195,7 +194,7 @@ export const useNewLoanHandlers = (props) => {
         user: borrower_id,
         priority: validation ? 'Medium' : 'Low',
         title: 'New Request',
-        transaction_id: loan
+        loan_id: loan
       };
       addNotification(borrowerNotification);
     }
@@ -214,7 +213,6 @@ export const useNewLoanHandlers = (props) => {
         startDate: !(startDate instanceof Date) || isNaN(startDate.getTime()),
         endDate: (!(endDate instanceof Date) || isNaN(endDate.getTime())) && (selectedMaterial && selectedMaterial.type === "LAB_SUPPLIES") ,
         location: data.location === null,
-        formation_required: formation_required !== true && selectedMaterial && selectedMaterial.is_formation_required === true,
       };
 
       setFormErrors(newErrors);
@@ -223,7 +221,7 @@ export const useNewLoanHandlers = (props) => {
 
         try {
           const csrftoken = getCookie('csrftoken');
-          const response = await fetch(`${config.apiUrl}/transactions/`, {
+          const response = await fetch(`${config.apiUrl}/loans/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -253,7 +251,7 @@ export const useNewLoanHandlers = (props) => {
               borrower_name: user.first_name + " " + user.last_name,
               owner_user_id: selectedMaterial.user_id,
               validation: selectedMaterial.validation,
-              loan: data.transaction_id
+              loan: data.loan_id
             });
 
             setTimeout(() => {
@@ -264,7 +262,7 @@ export const useNewLoanHandlers = (props) => {
         } catch (error) {
           setMessage({
             status: 'error',
-            value: `Could not borrow. Please verify yor data or try ulteriorly`
+            value: `Could not borrow. Please verify your data or try ulteriorly`
           });
         }
       }

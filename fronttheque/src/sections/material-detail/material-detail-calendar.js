@@ -18,19 +18,19 @@ const formatEvent = (data, mode) => {
     if (mode === 'public'){
       return {
         title: "Hidden User",
-        start: new Date(item.transaction_date),
-        end: new Date(new Date().setDate(new Date(item.transaction_date).getDate() + (item.duration)) ), //converting duration to milliseconds and adding the duration to start date
+        start: new Date(item.loan_date),
+        end: new Date(new Date().setDate(new Date(item.loan_date).getDate() + (item.duration)) ), //converting duration to milliseconds and adding the duration to start date
       };
     }
-    else if (status.includes(item.transaction_status)) {
+    else if (status.includes(item.loan_status)) {
       return {
         title: getTitle(item),
         user_name: `${item.borrower_details.first_name} ${item.borrower_details.last_name}`,
         contact: item.borrower_details.email,
         location: item.location,
-        start: new Date(item.transaction_date),
-        end: new Date(new Date().setDate(new Date(item.transaction_date).getDate() + (item.duration - 1)) ), //converting duration to milliseconds and adding the duration to start date
-        transaction_quantity: item.transaction_quantity
+        start: new Date(item.loan_date),
+        end: new Date(new Date().setDate(new Date(item.loan_date).getDate() + (item.duration - 1)) ), //converting duration to milliseconds and adding the duration to start date
+        loan_quantity: item.loan_quantity
       };
     }
     return null; // Ensure to return null for events that should not be included
@@ -100,7 +100,7 @@ export const MaterialDetailCalendar = (props) => {
                       <TableRow label="Name:" value={selectedEvent.user_name} />
                       <TableRow label="Contact:" value={selectedEvent.contact} />
                       <TableRow label="Location:" value={selectedEvent.location} />
-                      <TableRow label="Quantity:" value={selectedEvent.transaction_quantity} />
+                      <TableRow label="Quantity:" value={selectedEvent.loan_quantity} />
                     </tbody>
                   </table>
                 </Typography>

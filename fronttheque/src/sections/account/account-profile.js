@@ -13,8 +13,10 @@ export const AccountProfile = (user_data) => {
   const user = {
     ...user_data,
   }
-  const images = user.profil_pic && user.profil_pic.length !== 0 ? user.profil_pic : {};
+  const images = user.profil_pic && user.profil_pic.length !== 0 ? JSON.parse(user.profil_pic) : {};
+  // const images = user.profil_pic;
   const image_path = images? `${process.env.NEXT_PUBLIC_ASSETS}${images[0]}` : '';
+
   const [selectedImage, setImage] = useState([]);
   const [filesSelected, setFilesSelected] = useState(false);
 
@@ -30,7 +32,7 @@ export const AccountProfile = (user_data) => {
   };
 
   const handleUploadPictures = useCallback(async () => {
-    if (selectedImage.length === 0) {
+    if (!selectedImage) {
       toast.error("No picture selected!", { autoClose: false });
       return;
     }
@@ -49,9 +51,9 @@ export const AccountProfile = (user_data) => {
       const response = await fetch(`${config.apiUrl}/users/upload_pictures/${user_data.user_id}/`, {
         method: 'POST',
         headers: {
-          'X-CSRFToken': csrftoken, // Add this
+          'X-CSRFToken': csrftoken, 
         },
-        credentials: 'include', // Add this
+        credentials: 'include',
         body: form,
       });
 
@@ -97,8 +99,9 @@ export const AccountProfile = (user_data) => {
             color="text.secondary"
             variant="body2"
           >
-            Status: {user.role === "owner" ? "Lender" : "Borrower"}
+            {user.role} account
           </Typography>
+          
           <Typography
             color="text.secondary"
             variant="body2"
@@ -123,11 +126,20 @@ export const AccountProfile = (user_data) => {
           }}
         >
           {filesSelected ? (
-            <CheckCircleIcon width="25px" height="25px" sx={{ color: 'success.main', }} /> // Render check icon when files are selected
+            <CheckCircleIcon width="25px" 
+              height="25px" 
+              sx={{ color: 'success.main', }} 
+            /> // Render check icon when files are selected
           ) : (
-            <ArrowUpOnSquareIcon width="25px" height="25px" />
+            <ArrowUpOnSquareIcon width="25px" 
+              height="25px" 
+            />
           )}
-          <span style={{ width: '120px' }}>{filesSelected ? 'File Selected' : 'Choose Picture'}</span>
+          <span 
+            style={{ width: '120px' }}
+          >
+            {filesSelected ? 'File Selected' : 'Choose Picture'}
+          </span>
           <input
             id="upload-button"
             type="file"

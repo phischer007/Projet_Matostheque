@@ -9,8 +9,8 @@ import {
   TextField,
   Autocomplete,
   Alert,
-  Unstable_Grid2 as Grid, Checkbox, Typography
 } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { withRouter } from 'next/router';
@@ -134,9 +134,9 @@ const NewLoanCard = (props) => {
                 <TextField
                   fullWidth
                   label="Quantity"
-                  name="transaction_quantity"
+                  name="loan_quantity"
                   placeholder="Ex. 1"
-                  value={formData.transaction_quantity || ""}
+                  value={formData.loan_quantity || ""}
                   onChange={selectedMaterial?.type === "CONSUMABLES" ? handleChangeNumDec : handleChangeNum}
                   type="text"
                   InputLabelProps={{ shrink: true }}
@@ -164,7 +164,6 @@ const NewLoanCard = (props) => {
                   fullWidth
                   label="Location"
                   name="location"
-                  defaultValue={useAuth().user.laboratory_address}
                   error={formErrors.location}
                   helperText={formErrors.location && 'Please select a location'}
                   onChange={handleChange}
@@ -172,7 +171,6 @@ const NewLoanCard = (props) => {
                   required
                   placeholder="Ex. Room 203"
                   InputLabelProps={{ shrink: true }}
-                  InputProps={{ readOnly: true }}
                   sx={{
                     input: {
                       "&::placeholder": {
@@ -208,25 +206,6 @@ const NewLoanCard = (props) => {
             </Grid>
           </Box>
         </CardContent>
-        {selectedMaterial && selectedMaterial.is_formation_required &&(
-          <Grid>
-            <Checkbox
-              name="formation_required"
-              checked={formation_required}
-              onChange={handleFormation_required}
-              error={formErrors.formation_required}
-              color="primary"
-              inputProps={{ 'aria-label': 'checkbox' }}
-            />
-            <Typography variant="caption" color="textSecondary"
-              style={{
-                color: !formErrors.formation_required ? "black" : "red",
-                fontWeight: !formErrors.formation_required ? "normal" : "bold",
-              }}>
-              I certify that I have the necessary skills and training to handle this equipment safely.
-            </Typography>
-          </Grid>
-        )}
 
         <Divider />
         

@@ -1,26 +1,34 @@
-import ChartPieIcon from '@heroicons/react/24/solid/ChartPieIcon';
-import CalendarDaysIcon from '@heroicons/react/24/solid/CalendarDaysIcon';
+import { SvgIcon } from '@mui/material';
+import ChatBubbleLeftRightIcon from '@heroicons/react/24/solid/ChatBubbleLeftRightIcon';
+import Squares2X2Icon from '@heroicons/react/24/solid/Squares2X2Icon';
+import RectangleStackIcon from '@heroicons/react/24/solid/RectangleStackIcon';
+import ClipboardDocumentCheckIcon from '@heroicons/react/24/solid/ClipboardDocumentCheckIcon';
+import BriefcaseIcon  from '@heroicons/react/24/solid/BriefcaseIcon';
 import UserIcon from '@heroicons/react/24/solid/UserIcon';
 import UserGroupIcon from '@heroicons/react/24/solid/UserGroupIcon';
-import ClipboardDocumentCheckIcon from '@heroicons/react/24/solid/ClipboardDocumentCheckIcon';
-import ArchiveBoxIcon from '@heroicons/react/24/solid/ArchiveBoxIcon';
-import AtSymbolIcon  from '@heroicons/react/24/solid/AtSymbolIcon';
-import { SvgIcon } from '@mui/material';
 
 export const items = [
   {
-    title: 'Dashboard',
+    title: 'Overview',
     path: '/',
     icon: (
       <SvgIcon fontSize="small">
-        <ChartPieIcon />
+        <Squares2X2Icon />
       </SvgIcon>
     )
   },
   {
-    // title: 'Materials Library',
-    title: 'Inventory',
+    title: 'Catalog',
     path: '/materials',
+    icon: (
+      <SvgIcon fontSize="small">
+        <RectangleStackIcon />
+      </SvgIcon>
+    )
+  },
+  {
+    title: 'Loans',
+    path: '/myloans',
     icon: (
       <SvgIcon fontSize="small">
         <ClipboardDocumentCheckIcon />
@@ -28,25 +36,16 @@ export const items = [
     )
   },
   {
-    title: 'My Transactions',
-    path: '/myloans',
-    icon: (
-      <SvgIcon fontSize="small">
-        <CalendarDaysIcon />
-      </SvgIcon>
-    )
-  },
-  {
-    title: 'My Materials',
+    title: 'Personal Materials',
     path: '/mymaterials',
     icon: (
       <SvgIcon fontSize="small">
-        <ArchiveBoxIcon />
+        <BriefcaseIcon />
       </SvgIcon>
     )
   },
   {
-    title: 'Account',
+    title: 'Profile',
     path: '/account',
     icon: (
       <SvgIcon fontSize="small">
@@ -59,12 +58,12 @@ export const items = [
     path: '/comments',
     icon: (
       <SvgIcon fontSize="small">
-        <AtSymbolIcon />
+        <ChatBubbleLeftRightIcon />
       </SvgIcon>
     )
   },
   {
-    title: 'List of Users',
+    title: 'User Management',
     path: '/userslist',
     icon: (
       <SvgIcon fontSize="small">

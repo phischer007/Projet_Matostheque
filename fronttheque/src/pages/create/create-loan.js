@@ -7,10 +7,9 @@ import {
   Stack,
   SvgIcon,
   Typography,
-  Unstable_Grid2 as Grid
 } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
-import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import NewLoanCard from 'src/sections/create-loan/new-loan-card';
 import config from '../../utils/config';
 import { useRouter } from 'next/router';
@@ -23,7 +22,7 @@ const Page = () => {
 
   useEffect(() => {
     fetch(`${config.apiUrl}/materials/lite/`,{
-      credentials: 'include'// Add this so the session cookie is sent!
+      credentials: 'include'
     })
       .then(response => response.json())
       .then(data => {
@@ -42,7 +41,7 @@ const Page = () => {
     <>
       <Head>
         <title>
-          New Transaction
+          Loan
         </title>
       </Head>
       <Box

@@ -74,7 +74,7 @@ export const SideNav = (props) => {
               textAlign: 'center'
             }}
           >
-            Mutmat UGA
+            Matosthèque
           </Typography>
         </Box>
 
