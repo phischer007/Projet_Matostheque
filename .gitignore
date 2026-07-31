@@ -2,8 +2,9 @@
 node_modules/
 
 .idea/
+/.venv
 /.matostheque_venv/
-logs/
+
 assets/
 
 docker-compose.yml
