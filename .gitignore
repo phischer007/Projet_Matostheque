@@ -12,8 +12,7 @@ docker-compose.yml
 nginx/nginx.conf
 nginx/ssl/
 
-media/images/users/
-media/logos/
+media/
 
 fronttheque/.env
 fronttheque/.next
