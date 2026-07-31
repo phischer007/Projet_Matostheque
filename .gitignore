@@ -6,6 +6,9 @@ node_modules/
 logs/
 assets/
 
+docker-compose.yml
+
+
 nginx/nginx.conf
 nginx/ssl/
 
@@ -16,6 +19,7 @@ fronttheque/.env
 fronttheque/.next
 fronttheque/node_modules/
 fronttheque/src/utils/config.js
+fronttheque/Dockerfile
 
 mutmat_server.conf
 

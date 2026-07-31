@@ -40,20 +40,48 @@ cd Matostheque_App
 ### 2. Configure Environment Variables
 Note: This configuration is tailored for Dockerized production environments.
 
-Copy the template configuration files to create your active .env files:
+* Set up the root environment file
+
+Copy the local template to create your active .env file
 ```bash
 cp .env.local .env 
-## And make sure to change.env.local to .env in your docker-compose.yml
+```
+* Configure the reverse proxy
 
-cp docker-compose.example.yml docker-compose.yml
-## On line 14, change **-postgres** to your **DB_USER** and **-matostheque** to your **DB_NAME** in your .env file 
+Depending on your preferred reverse proxy for HTTPS, copy the corresponding Docker Compose template:
 
+```bash
+# Option A: NGINX Reverse Proxy
+cp docker-compose-nginx.yml docker-compose.yml
+
+# Option B: Traefik
+cp docker-compose-traefik.yml docker-compose.yml
+```
+```bash
+## Make sure to change .env.local to .env in your docker-compose.yml
+
+# NB: There are two separate configuration for HTTPS (Production)
+# On line 14, change **-postgres** to your **DB_USER** and **-matostheque** to your **DB_NAME** in your .env file 
+
+# 1. Production using NGINX Reverse Proxy
+cp docker-compose-nginx.yml docker-compose.yml
+
+# 2. Production using Traefik Reverse Proxy
+cp docker-compose-traefik.yml docker-compose.yml
+```
+
+* Initialize frontend configurations
+
+Set up the fronttheque directory by creating the active files from their respective examples:
+```bash
 cp fronttheque/.env.example fronttheque/.env
 cp fronttheque/Dockerfile.example fronttheque/Dockerfile
 cp fronttheque/package.example.json fronttheque/package.json
 cp fronttheque/src/utils/config.example.js fronttheque/src/utils/config.js
+
+# Finalize domain and credentials
+# Review all newly created files (i.e., .env, Dockerfile, package.json, config.js) and configuration files to input your specific system credentials. Be sure to find and replace your-server_name.example.com with your actual production domain.
 ```
-Update your new **.env** files with your specific credentials, including changing **your-server_name.example.com** to your actual domain.
 
 **Generate a Django Secret Key:**
 
