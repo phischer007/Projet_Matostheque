@@ -1,0 +1,4 @@
+tls:
+  certificates:
+    - certFile: /etc/nginx/ssl/your-server-name.example.com_fullchain.pem
+      keyFile: /etc/nginx/ssl/your-server-name.example.com.key

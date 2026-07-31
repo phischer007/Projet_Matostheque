@@ -64,10 +64,14 @@ cp docker-compose-traefik.yml docker-compose.yml
 # On line 14, change **-postgres** to your **DB_USER** and **-matostheque** to your **DB_NAME** in your .env file 
 
 # 1. Production using NGINX Reverse Proxy
-cp docker-compose-nginx.yml docker-compose.yml
+cp docker-compose-nginx.yml docker-compose.yml  
+## Refer to nginx/nginx_example.conf, renome nginx_example.conf -- nginx.conf
+## And change 'your-server-name.example.com' to your actual production domain
+
 
 # 2. Production using Traefik Reverse Proxy
 cp docker-compose-traefik.yml docker-compose.yml
+## Change 'your-server-name.example.com' to your actual production domain
 ```
 
 * Initialize frontend configurations
