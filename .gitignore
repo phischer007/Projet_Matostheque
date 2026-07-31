@@ -8,7 +8,6 @@ assets/
 
 docker-compose.yml
 
-
 nginx/nginx.conf
 nginx/ssl/liphy-crip-hps1.u-ga.fr_fullchain.pem
 nginx/ssl/liphy-crip-hps1.u-ga.fr.key
