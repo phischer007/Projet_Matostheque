@@ -13,9 +13,6 @@ nginx/nginx.conf
 nginx/ssl/liphy-crip-hps1.u-ga.fr_fullchain.pem
 nginx/ssl/liphy-crip-hps1.u-ga.fr.key
 
-media/images/users/
-media/logos/
-
 fronttheque/.env
 fronttheque/.next
 fronttheque/node_modules/
