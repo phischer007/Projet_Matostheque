@@ -20,6 +20,7 @@ from Matostheque.serializers import UserSerializer
 
 from django.db import transaction
 
+from django.utils.translation import gettext as _
 
 # -------------------------------------------------------------------------------------------
 # USER MANAGEMENT
@@ -41,7 +42,7 @@ def user_list(request):
     
     elif request.method == 'DELETE':
         count = get_user_model().objects.all().delete()
-        return JsonResponse({'message': '{} users were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'message': _('{} users were deleted successfully!').format(count[0])}, status=status.HTTP_204_NO_CONTENT)
 
 
 @login_required
@@ -51,7 +52,7 @@ def user_detail(request, pk):
     # We compare the requested ID (pk) with the logged-in user's ID.
     if int(pk) != request.user.pk and not request.user.is_staff:
         return JsonResponse(
-            {'message': 'You are not authorized to view or edit this profile.'},
+            {'message': _('You are not authorized to view or edit this profile.')},
             status=status.HTTP_403_FORBIDDEN
         )
     # ---------------------------------------------------------
@@ -76,7 +77,7 @@ def user_detail(request, pk):
             if new_role == 'user' and role != 'user':
                 materials = Materials.objects.filter(user=user.user_id)
                 if materials.exists():
-                    return JsonResponse({'message': "You can't become a simple user"},status=status.HTTP_403_FORBIDDEN)
+                    return JsonResponse({'message': _("You can't become a simple user")},status=status.HTTP_403_FORBIDDEN)
 
             updated_user = user_serializer.save()
             detailed_user = get_formatted_user(updated_user)
@@ -86,7 +87,7 @@ def user_detail(request, pk):
 
     elif request.method == 'DELETE':
         user.delete()
-        return JsonResponse({'message': 'User was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'message': _('User was deleted successfully!')}, status=status.HTTP_204_NO_CONTENT)
 
 
 @login_required
@@ -95,7 +96,7 @@ def upload_profile_pic(request, pk):
     # --- SECURITY FIX: Restrict upload to own profile only ---
     if int(pk) != request.user.pk and not request.user.is_staff:
         return JsonResponse(
-            {'message': 'You are not authorized to upload pictures for this user.'},
+            {'message': _('You are not authorized to upload pictures for this user.')},
             status=status.HTTP_403_FORBIDDEN
         )
     # ---------------------------------------------------------
@@ -104,7 +105,7 @@ def upload_profile_pic(request, pk):
         try:
             user = get_user_model().objects.get(pk=pk)
         except Exception:
-            return JsonResponse({'message': 'User not found!'}, status=status.HTTP_404_NOT_FOUND)
+            return JsonResponse({'message': _('User not found!')}, status=status.HTTP_404_NOT_FOUND)
 
         response_data = None
 
@@ -140,7 +141,7 @@ def upload_profile_pic(request, pk):
             except Exception as e:
                 return JsonResponse({'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return JsonResponse({'message': 'Error occured when trying to upload pictures'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return JsonResponse({'message': _('Error occured when trying to upload pictures')}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @login_required
 @api_view(['PUT'])
@@ -150,11 +151,11 @@ def changeActivity(request, pk):
     try:
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
-        return JsonResponse({'message': 'User not found!'}, status=status.HTTP_404_NOT_FOUND)
+        return JsonResponse({'message': _('User not found!')}, status=status.HTTP_404_NOT_FOUND)
         
     if (not request.user.is_staff) | (request.user.user_id == user.user_id):
         return JsonResponse(
-            {'message': 'You are not authorized to edit this profile.'},
+            {'message': _('You are not authorized to edit this profile.')},
             status=status.HTTP_403_FORBIDDEN
         )
         
@@ -175,12 +176,12 @@ def changeActivity(request, pk):
             user.is_active = new_is_active
             user.save()
             
-        return JsonResponse({'message': 'Activity updated successfully'}, status=status.HTTP_200_OK)
+        return JsonResponse({'message': _('Activity updated successfully')}, status=status.HTTP_200_OK)
         
     except Exception as e:
         # It is highly recommended to log the exception 'e' here in production
         return JsonResponse(
-            {'message': 'Error occurred when trying to update the Activity'}, 
+            {'message': _('Error occurred when trying to update the Activity')}, 
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
@@ -206,7 +207,7 @@ def api_login(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             if not user.is_active:
-                return JsonResponse({'message': 'Account inactive.'}, status=status.HTTP_401_UNAUTHORIZED)
+                return JsonResponse({'message': _('Account inactive.')}, status=status.HTTP_401_UNAUTHORIZED)
 
             if not hasattr(user, 'backend'):
                 user.backend = 'django.contrib.auth.backends.ModelBackend'
@@ -222,7 +223,7 @@ def api_login(request):
                 'session_key': request.session.session_key
             }, status=status.HTTP_200_OK)
         else:
-            return JsonResponse({'message': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
+            return JsonResponse({'message': _('Invalid credentials.')}, status=status.HTTP_401_UNAUTHORIZED)
 
     except Exception as e:
         return JsonResponse({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -237,7 +238,7 @@ def api_register(request):
         last_name = data.get('last_name', '')
 
         if get_user_model().objects.filter(email=email).exists():
-            return JsonResponse({'message': 'User already exists.'}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({'message': _('User already exists.')}, status=status.HTTP_400_BAD_REQUEST)
 
         user = get_user_model().objects.create_user(
             email=email,
@@ -260,7 +261,7 @@ def api_register(request):
             pass
 
         return JsonResponse({
-            'message': 'User registered successfully',
+            'message': _('User registered successfully'),
             'user': formatted_user,
             'session_key': request.session.session_key
         }, status=status.HTTP_201_CREATED)
@@ -271,7 +272,7 @@ def api_register(request):
 @require_POST
 def api_logout(request):
     logout(request)
-    return JsonResponse({'message': 'Logged out'}, status=status.HTTP_200_OK)
+    return JsonResponse({'message': _('Logged out')}, status=status.HTTP_200_OK)
 
 @ensure_csrf_cookie
 def session_data(request):

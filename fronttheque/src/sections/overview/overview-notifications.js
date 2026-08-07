@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { ExclamationTriangleIcon, ClockIcon, BellIcon } from '@heroicons/react/24/solid';
 import { Grid, Card, CardContent, Stack, SvgIcon, Typography, IconButton } from '@mui/material';
 import { formatDate } from 'src/utils/get-formatted-date';
-import { alpha } from '@mui/material/styles';
 import XCircleIcon from '@heroicons/react/24/outline/XCircleIcon';
+
+import { useTranslation } from 'react-i18next';
+
+// -------------------------------------------------------------------------------------------------------- //
+
 
 export const OverviewNotification = (props) => {
   const { data } = props;
@@ -13,6 +17,8 @@ export const OverviewNotification = (props) => {
   const handleButtonClick = () => {
     setIsVisible(false);
   };
+
+  const { t } = useTranslation();
 
   return (
     <>

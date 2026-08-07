@@ -17,35 +17,26 @@ import config from 'src/utils/config';
 import { useAuth } from 'src/hooks/use-auth';
 import { getCookie } from 'src/utils/csrf';
 
+import { useTranslation } from 'react-i18next';
+
+// -------------------------------------------------------------------------------------- //
+
+
 export const AccountProfileDetails = (user) => {
   const auth = useAuth();
-  //const sessionToken = auth.session_token
   const [values, setValues] = useState({
     ...user
   });
+
+  const { t } = useTranslation();
 
   const [isChecked, setIsChecked] = useState(values.role == "owner"? true : false);
   const [formData, setFormData] = useState({
     first_name: null,
     last_name: null,
-    //contact: null,
     role: null,
     service: null
   });
-
-  // useEffect(() => {
-  //   fetch(`${config.apiUrl}/services/`,{
-  //     credentials: 'include'// Add this so the session cookie is sent!
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       // Sort the data alphabetically by material_title
-  //       if (data) {
-  //           setServiceList(data);
-  //       }
-  //     })
-  //     .catch(error => console.error('Error fetching data:', error));
-  // }, []);
 
   const handleToggleChange = () => {
     setIsChecked(!isChecked);
@@ -71,8 +62,7 @@ export const AccountProfileDetails = (user) => {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken, // Add this
-            // 'Authorization': sessionToken
+            'X-CSRFToken': csrftoken,
           },
           credentials: 'include', // Add this so the session cookie is sent!
           body: JSON.stringify(formData),
@@ -93,13 +83,13 @@ export const AccountProfileDetails = (user) => {
 
           } else if (decodeResponse.message === "User not found") {
             // Handle user not found error
-            toast.error("User not found. Please try again.", { autoClose: false });
+            toast.error(t('newAccount.notFoundUser', 'User not found. Please try again.'), { autoClose: false });
           } else if (decodeResponse.message === "Session token not found") {
             // Handle session token not found error
-            toast.error("Session token not found. Please try again.", { autoClose: false });
+            toast.error(t('newAccount.notFoundSession', 'Session token not found. Please try again.'), { autoClose: false });
           } else if (decodeResponse.message === "You can't become a simple user") {
             // Handle session token not found error
-            toast.error("You can't become a user because you still own materials", { autoClose: false });
+            toast.errot(t('newAccount.errorUserOwnership', "You can't become a user because you still own materials"), { autoClose: false });
             setIsChecked(!isChecked)
           } else {
             // Handle other errors
@@ -111,14 +101,13 @@ export const AccountProfileDetails = (user) => {
 
           await auth.updateUser(updatedUserData.user_id);
 
-          toast.success("Your information was successfully updated!");
+          toast.success(t('newAccount.successInfoUpdate', 'Your information was successfully updated!'), { autoClose: false });
           window.location.reload();
         }
 
       } catch (error) {
          // Handle unexpected errors
-        console.error("An unexpected error occurred:", error);
-        toast.error("An unexpected error occurred. Please try again later.", { autoClose: false });
+        toast.error(t('newAccount.errorInfoUpdate', 'An error occurred. Please try again later.'), { autoClose: false });
       }
 
   },[formData, isChecked, user]);
@@ -142,8 +131,8 @@ export const AccountProfileDetails = (user) => {
     >
       <Card>
         <CardHeader
-          subheader="The information can be edited"
-          title="Profile"
+          title={t('newAccount.profile', 'Profile')}
+          subheader={t('newAccount.profileSubtitle', 'The information can be edited')}
         />
         <CardContent sx={{ pt: 0 }}>
           <Box sx={{ m: -1.5 }}>
@@ -157,7 +146,7 @@ export const AccountProfileDetails = (user) => {
               >
                 <TextField
                   fullWidth
-                  label="First name"
+                  label={t('newAccount.firstName', 'First Name')}
                   name="first_name"
                   onChange={handleChange}
                   value={values.first_name}
@@ -169,7 +158,7 @@ export const AccountProfileDetails = (user) => {
               >
                 <TextField
                   fullWidth
-                  label="Last name"
+                  label={t('newAccount.lastName', 'Last Name')}
                   name="last_name"
                   onChange={handleChange}
                   value={values.last_name}
@@ -181,7 +170,7 @@ export const AccountProfileDetails = (user) => {
               >
                 <TextField
                   fullWidth
-                  label="Email Address"
+                  label={t('newAccount.emailaddress', 'Email Address')}
                   name="email"
                   disabled
                   value={values.email}
@@ -198,7 +187,7 @@ export const AccountProfileDetails = (user) => {
                   inputProps={{ 'aria-label': 'toggle checkbox' }}
                 />
                 <Typography variant="caption" color="textSecondary">
-                  Activate your account to gain access to adding materials.
+                  {t('newAccount.roleOwnership', 'Activate your account to gain access to adding materials.')}
                 </Typography>
               </Grid>
             </Grid>
@@ -210,7 +199,8 @@ export const AccountProfileDetails = (user) => {
             type="submit"
             variant="contained"
           >
-            Save details
+            {/* Save details */}
+            {t('newAccount.btnSave', 'Save details')}
           </Button>
         </CardActions>
       </Card>

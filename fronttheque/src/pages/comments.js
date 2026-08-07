@@ -7,9 +7,13 @@ import { CommentThread } from 'src/sections/comments/comments-thread';
 import config from 'src/utils/config';
 import { useAuth } from 'src/hooks/use-auth';
 
+import { useTranslation } from 'react-i18next';
+
 const Page = () => {
   const [commentsList, setCommentsList] = useState([]);
   const user = useAuth().user;
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetch(`${config.apiUrl}/comments/detailed/`,{
@@ -33,7 +37,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Threads</title>
+        <title>{t('newComment.title')}</title>
       </Head>
 
       <Box
@@ -61,7 +65,7 @@ const Page = () => {
                 sx={{ mb: 3 }}
               >
                 <Stack spacing={1}>
-                  <Typography variant="h4">@Threads</Typography>
+                  <Typography variant="h4">{t('newComment.title')}</Typography>
                 </Stack>
               </Stack>
                             

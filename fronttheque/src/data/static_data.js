@@ -114,8 +114,7 @@ export const requestTypes = [
 ];
 
 export const loanTypes = [
-    { value:'', label:'None'},
+  { value:'', label:'None'},
   { value:'Loan', label:'Loan'},
   { value: 'Donation',label:'Donation'}
-
 ]

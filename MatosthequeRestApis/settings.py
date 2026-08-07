@@ -2,6 +2,8 @@
 import os
 from dotenv import load_dotenv
 
+from django.utils.translation import gettext_lazy as _
+
 # ---------------------------------------------------------------------------
 # Core config.
 # ---------------------------------------------------------------------------
@@ -142,8 +144,8 @@ DATABASES = {
         "NAME": os.environ.get("DB_NAME"),
         "USER": os.environ.get("DB_USER"),
         "PASSWORD": os.environ.get("DB_PASSWORD"),
-        # "HOST": os.environ.get("DB_HOST", "localhost"),
-        "HOST": os.environ.get("DB_HOST", "db"),
+        "HOST": os.environ.get("DB_HOST", "localhost"),
+        # "HOST": os.environ.get("DB_HOST", "db"),
         "PORT": os.environ.get("DB_PORT", "5432"),
     }
 }
@@ -178,6 +180,14 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+LANGUAGES = [
+    ('en', _('English')),
+    ('fr', _('French')),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 # ---------------------------------------------------------------------------
 # Static files (CSS, JavaScript, Images)

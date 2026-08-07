@@ -9,7 +9,8 @@ import UserGroupIcon from '@heroicons/react/24/solid/UserGroupIcon';
 
 export const items = [
   {
-    title: 'Overview',
+    // title: 'Overview',
+    title: 'navbar.overview',
     path: '/',
     icon: (
       <SvgIcon fontSize="small">
@@ -18,7 +19,8 @@ export const items = [
     )
   },
   {
-    title: 'Catalog',
+    // title: 'Catalog',
+    title: 'navbar.catalog',
     path: '/materials',
     icon: (
       <SvgIcon fontSize="small">
@@ -27,7 +29,9 @@ export const items = [
     )
   },
   {
-    title: 'Loans',
+
+    // title: 'Loans',
+    title: 'navbar.loans',
     path: '/myloans',
     icon: (
       <SvgIcon fontSize="small">
@@ -36,7 +40,8 @@ export const items = [
     )
   },
   {
-    title: 'Personal Materials',
+    // title: 'Personal Materials',
+    title: 'navbar.personalMaterials',
     path: '/mymaterials',
     icon: (
       <SvgIcon fontSize="small">
@@ -45,7 +50,8 @@ export const items = [
     )
   },
   {
-    title: 'Profile',
+    // title: 'Profile',
+    title: 'navbar.profile',
     path: '/account',
     icon: (
       <SvgIcon fontSize="small">
@@ -54,7 +60,8 @@ export const items = [
     )
   },
   {
-    title: 'Threads',
+    // title: 'Threads',
+    title: 'navbar.threads',
     path: '/comments',
     icon: (
       <SvgIcon fontSize="small">
@@ -63,7 +70,8 @@ export const items = [
     )
   },
   {
-    title: 'User Management',
+    // title: 'User Management',
+    title: 'navbar.userManagement',
     path: '/userslist',
     icon: (
       <SvgIcon fontSize="small">

@@ -27,6 +27,10 @@ import { toast } from 'react-toastify';
 import { quickNotifyOption } from 'src/utils/notification-config';
 import { getCookie } from 'src/utils/csrf';
 
+import { useTranslation } from 'react-i18next';
+
+// ---------------------------------------------------------------------------------------------------- //
+
 export const MaterialTableView = (props) => {
   const { data, refreshData } = props;
 
@@ -37,6 +41,8 @@ export const MaterialTableView = (props) => {
   const sortedData = data ? [...data].sort((a, b) => {
     return a.material_title.localeCompare(b.material_title);
   }) : [];
+
+  const { t } = useTranslation();
 
   // --- Selection Handlers ---
   const handleToggle = (event, id) => {
@@ -93,9 +99,9 @@ export const MaterialTableView = (props) => {
       const hasErrors = responses.some(res => !res.ok);
 
       if (hasErrors) {
-        toast.error('Some materials could not be updated.', { ...quickNotifyOption });
+        toast.error(t('persManageMaterials.availabilityActions.error_message_not_updated', 'Some materials could not be updated.'), { ...quickNotifyOption });
       } else {
-        toast.success(`Materials successfully updated.`, { ...quickNotifyOption });
+        toast.success(t('persManageMaterials.availabilityActions.succes_message', 'Materials successfully updated.'), { ...quickNotifyOption });
         setSelectedItems([]);
         
         if (refreshData) {
@@ -105,7 +111,7 @@ export const MaterialTableView = (props) => {
         }
       }
     } catch (error) {
-      toast.error('Could not update materials, try again later', { ...quickNotifyOption });
+      toast.error(t('persManageMaterials.availabilityActions.error_message_try_again', 'Could not update materials, try again later'), { ...quickNotifyOption });
     }
     setDialogOpen(false);
   }, [selectedItems, actionType, refreshData]);
@@ -114,15 +120,15 @@ export const MaterialTableView = (props) => {
   const getDialogText = () => {
     if (actionType === 'make_available') {
       return {
-        title: 'Put Materials on Loan / Donation',
-        content: `Are you sure you want to make the selected materials available for borrowing again?`,
-        btnText: 'Make Available'
+        title: t('persManageMaterials.availabilityActions.title_available', 'Put on Loan / Donation'),
+        content: t('persManageMaterials.availabilityActions.available_content', 'Are you sure you want to make the selected materials available for borrowing again?'),
+        btnText: t('persManageMaterials.availabilityActions.btnAvailableText', 'Make Available')
       };
     }
     return {
-      title: 'Remove Materials from Loan / Donation',
-      content: `Are you sure you want to make the selected materials unavailable for borrowing?`,
-      btnText: 'Remove Availability'
+      title: t('persManageMaterials.availabilityActions.title_unavailable', 'Remove from Loan / Donation'),
+      content: t('persManageMaterials.availabilityActions.remove_content', 'Are you sure you want to make the selected materials unavailable for borrowing?'),
+      btnText: t('persManageMaterials.availabilityActions.btnRemoveText', 'Remove Availability')
     };
   };
 
@@ -161,7 +167,7 @@ export const MaterialTableView = (props) => {
             </Typography>
           ) : (
             <Typography sx={{ flex: '1 1 100%' }} variant="h6" id="tableTitle" component="div">
-              Manage Personal Material Availability
+              {t('persManageMaterials.title', 'Manage Personal Material Availability')}
             </Typography>
           )}
 
@@ -174,7 +180,8 @@ export const MaterialTableView = (props) => {
                 sx={{ whiteSpace: 'nowrap' }}
                 onClick={() => openConfirmationDialog('make_available')}
                >
-                 Put on Loan / Donation
+                 {/* Put on Loan / Donation */}
+                 {t('persManageMaterials.availabilityActions.title_available', 'Put on Loan / Donation')}
                </Button>
                <Button 
                 variant="outlined" 
@@ -183,7 +190,8 @@ export const MaterialTableView = (props) => {
                 sx={{ whiteSpace: 'nowrap', bgcolor: 'white' }}
                 onClick={() => openConfirmationDialog('make_unavailable')}
                >
-                 Remove from Loan / Donation
+                 {/* Remove from Loan / Donation */}
+                  {t('persManageMaterials.availabilityActions.title_unavailable', 'Remove from Loan / Donation')}
                </Button>
             </Stack>
           )}
@@ -204,10 +212,10 @@ export const MaterialTableView = (props) => {
                   onChange={handleSelectAllClick}
                 />
               </TableCell>
-              <TableCell style={headerStyle}>Title</TableCell>
-              <TableCell style={headerStyle}>Description</TableCell>
-              <TableCell style={{...headerStyle, width: '5%'}}>Quantity</TableCell>
-              <TableCell style={{...headerStyle, width: '5%'}}>Status</TableCell>
+                <TableCell style={headerStyle}>{t('persManageMaterials.headers.title', 'Title')}</TableCell>
+                <TableCell style={headerStyle}>{t('persManageMaterials.headers.description', 'Description')}</TableCell>
+              <TableCell style={{...headerStyle, width: '5%'}}>{t('persManageMaterials.headers.quantity', 'Quantity')}</TableCell>
+              <TableCell style={{...headerStyle, width: '5%'}}>{t('persManageMaterials.headers.status', 'Status')}</TableCell>
             </TableRow>
           </TableHead>
           
@@ -257,7 +265,10 @@ export const MaterialTableView = (props) => {
 
                   <TableCell>
                     <Typography variant="body2" color={material.available_for_loan ? "success.main" : "text.secondary"}>
-                      {material.available_for_loan ? "Available" : "Unavailable"}
+                      {material.available_for_loan 
+                        ? t('persManageMaterials.availabilityActions.textStatusAvailable', 'Available')
+                        : t('persManageMaterials.availabilityActions.textStatusUnavailable', 'Unavailable')
+                      }
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -276,7 +287,11 @@ export const MaterialTableView = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDialog}>Cancel</Button>
+          <Button 
+            onClick={handleCloseDialog}
+          >
+            {t('persManageMaterials.availabilityActions.btnCancelText', 'Cancel')}
+          </Button>
           <Button onClick={executeBulkUpdate} color="primary" variant="contained">
             {getDialogText().btnText}
           </Button>

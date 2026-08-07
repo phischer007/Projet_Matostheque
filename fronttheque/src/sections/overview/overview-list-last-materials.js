@@ -23,6 +23,9 @@ import {
   MenuItem 
 } from '@mui/material';
 import NextLink from 'next/link';
+import { useTranslation } from 'react-i18next';
+
+
 
 export const OverviewLatestMaterials = (props) => {
   const { materials = [], sx } = props;
@@ -36,9 +39,12 @@ export const OverviewLatestMaterials = (props) => {
     setMaterialId(material.material_id);
     setCanBeLoaned(material.available_for_loan);
   };
+
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     let list = [
@@ -58,7 +64,7 @@ export const OverviewLatestMaterials = (props) => {
 
   return (
     <Card sx={sx}>
-      <CardHeader title="Latest Materials Added" />
+      <CardHeader title={t('dashboard.latestMaterialsAdded', 'Latest Materials Added')} />
       <List>
         {materials && materials.map((material, index) => {
           console.log(material)
@@ -89,7 +95,7 @@ export const OverviewLatestMaterials = (props) => {
                 <ListItemText
                   primary={material.material_title}
                   primaryTypographyProps={{ variant: 'subtitle1' }}
-                  secondary={`Updated ${ago} ago`}
+                  secondary={t('dashboard.updatedMaterialsDays', { ago: ago })}
                   secondaryTypographyProps={{ variant: 'body2' }}
 
                   sx={{cursor: 'pointer'}} // Add cursor pointer style
@@ -149,7 +155,8 @@ export const OverviewLatestMaterials = (props) => {
           size="small"
           variant="text"
         >
-          View all
+          {/* View all */}
+          {t('dashboard.viewall', 'View All')}
         </Button>
       </CardActions>
     </Card>

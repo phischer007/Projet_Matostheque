@@ -13,6 +13,10 @@ import NextLink from 'next/link';
 
 import { MaterialTableView } from 'src/sections/materials/materialtableview';
 
+import { useTranslation } from 'react-i18next';
+
+// ---------------------------------------------------------------------------------------------------- //
+
 
 const useLoans = (page, rowsPerPage, filteredLoans) => {
   return useMemo(() => {
@@ -41,6 +45,8 @@ const Page = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const user = useAuth().user;
   const btnCreateUrl = "/create/create-material";
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     let loanApiUrl = `${config.apiUrl}/loans/details/owner/${user.user_id}/`;
@@ -122,7 +128,9 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Personal Materials</title>
+        <title>
+          {t('navbar.personalMaterials', 'Personal Materials')}
+        </title>
       </Head>
       <Box
         component="main"
@@ -136,7 +144,12 @@ const Page = () => {
             <Grid container xs={12} justifyContent="space-between" alignItems="center">
               {/* First sub-grid */}
               <Grid xs={6} gap={1} container alignItems="center">
-                <Typography variant="h4" align="center">Personal Materials</Typography>
+                <Typography 
+                  variant="h4" 
+                  align="center"
+                >
+                  {t('persMaterials.title', 'Personal Materials')}
+                </Typography>
               </Grid>
               <Grid xs={6} container justifyContent="flex-end">
                   <Button
@@ -149,7 +162,7 @@ const Page = () => {
                     }
                     variant="contained"
                   >
-                    Add
+                    {t('persMaterials.btnAdd', 'Add')}
                   </Button>
               </Grid>
             </Grid>

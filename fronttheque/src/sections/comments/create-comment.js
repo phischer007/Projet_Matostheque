@@ -6,9 +6,12 @@ import { useAuth } from 'src/hooks/use-auth';
 import { toast } from 'react-toastify';
 import config from 'src/utils/config';
 
+import { useTranslation } from 'react-i18next';
+
 export const CreateComment = () => {
     const user=  useAuth().user;
     const [content, setContent] = useState("");
+    const { t } = useTranslation();
 
     const onContentChange = (event) => {
         setContent(event.target.value);
@@ -61,7 +64,7 @@ export const CreateComment = () => {
                 fullWidth
                 multiline
                 rows={3}
-                placeholder="Your comment ..."
+                placeholder={t('newComment.yourComment')}
                 endAdornment={(
                     <InputAdornment position="end">
                         <SvgIcon

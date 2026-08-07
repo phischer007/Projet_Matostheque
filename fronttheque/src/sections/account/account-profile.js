@@ -7,12 +7,18 @@ import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon';
 import CheckCircleIcon from '@heroicons/react/24/solid/CheckCircleIcon';
 import { getCookie } from 'src/utils/csrf';
 
+import { useTranslation } from 'react-i18next';
+
+// -------------------------------------------------------------------------------------- //
 
 export const AccountProfile = (user_data) => {
   const auth = useAuth();
   const user = {
     ...user_data,
   }
+
+  const { t, i18n} = useTranslation();
+
   const images = user.profil_pic && user.profil_pic.length !== 0 ? JSON.parse(user.profil_pic) : {};
   // const images = user.profil_pic;
   const image_path = images? `${process.env.NEXT_PUBLIC_ASSETS}${images[0]}` : '';
@@ -33,7 +39,7 @@ export const AccountProfile = (user_data) => {
 
   const handleUploadPictures = useCallback(async () => {
     if (!selectedImage) {
-      toast.error("No picture selected!", { autoClose: false });
+      toast.error(t('newAccount.errorNoPicture', 'No picture selected!'), { autoClose: false });
       return;
     }
 
@@ -52,6 +58,7 @@ export const AccountProfile = (user_data) => {
         method: 'POST',
         headers: {
           'X-CSRFToken': csrftoken, 
+          'Accept-Language': i18n.language
         },
         credentials: 'include',
         body: form,
@@ -60,16 +67,19 @@ export const AccountProfile = (user_data) => {
       if (!response.ok) {
         const errorMessage = await response.text();
         let decodeResponse = JSON.parse(errorMessage);
-        toast.error(decodeResponse.message, { autoClose: false });
+        toast.error(
+          t('newAccount.errorUpload', { error: decodeResponse.message }), 
+          { autoClose: false }
+        );
       } else {
-        toast.success("Pictures uploaded successfully!", { autoClose: false });
+        toast.error(t('newAccount.errorUpload'), { autoClose: false });
         await auth.updateUser(user_data.user_id);
         window.location.reload();
       }
     } catch (error) {
-      toast.error(`Error trying to upload pictures: ${error}`, { autoClose: false });
+      toast.error(t('newAccount.errorUpload', { error: error.message || error }), { autoClose: false });
     }
-  }, [selectedImage]);
+  }, [selectedImage, t, i18n.language, user_data.user_id, auth]);
 
   return (
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -99,7 +109,7 @@ export const AccountProfile = (user_data) => {
             color="text.secondary"
             variant="body2"
           >
-            {user.role} account
+            {t('newAccount.roleAccount', { role: user.role })}
           </Typography>
           
           <Typography
@@ -123,22 +133,26 @@ export const AccountProfile = (user_data) => {
             alignItems: 'center',
             gap: 1,
             marginRight: 1,
+            width: 'fit-content',
           }}
         >
           {filesSelected ? (
             <CheckCircleIcon width="25px" 
               height="25px" 
               sx={{ color: 'success.main', }} 
-            /> // Render check icon when files are selected
+            /> 
           ) : (
             <ArrowUpOnSquareIcon width="25px" 
               height="25px" 
             />
           )}
           <span 
-            style={{ width: '120px' }}
+            style={{ width: 'max-content' }}
           >
-            {filesSelected ? 'File Selected' : 'Choose Picture'}
+            {filesSelected 
+              ? t('newAccount.txtFilesSelected', 'Files Selected') 
+              : t('newAccount.txtFilesPictures', 'Choose Picture')
+            }
           </span>
           <input
             id="upload-button"
@@ -152,7 +166,7 @@ export const AccountProfile = (user_data) => {
           onClick={handleUploadPictures}
           variant="outlined"
         >
-          Upload
+          {t('newAccount.btnUpload', 'Upload')}
         </Button>
       </CardActions>
     </Card>

@@ -1,12 +1,10 @@
 import { useRouter } from 'next/navigation';
 import { useCallback, useState, useEffect } from 'react';
 import config from 'src/utils/config';
-import { addDays, subDays, isSameDay, isWithinInterval } from 'date-fns';
 import moment from 'moment';
 import { useAuth } from 'src/hooks/use-auth';
 import { useNotification } from 'src/contexts/notification-context';
 import { getCookie } from '../utils/csrf';
-import dayjs from 'dayjs';
 
 
 export const useNewLoanHandlers = (props) => {

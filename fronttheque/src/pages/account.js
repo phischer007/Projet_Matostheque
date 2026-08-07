@@ -6,13 +6,18 @@ import { AccountProfile } from 'src/sections/account/account-profile';
 import { AccountProfileDetails } from 'src/sections/account/account-profile-details';
 import { useAuth } from 'src/hooks/use-auth';
 
+import { useTranslation } from 'react-i18next';
+
 const Page = () => {
   const user = useAuth().user;
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
         <title>
-          Account
+          {/* Account */}
+          {t('navbar.profile', 'Profile')}
         </title>
       </Head>
       <Box
@@ -26,7 +31,8 @@ const Page = () => {
           <Stack spacing={3}>
             <div>
               <Typography variant="h4">
-                Account
+                {/* Account */}
+                {t('newAccount.title', 'Account')}
               </Typography>
             </div>
             <div>
@@ -38,8 +44,6 @@ const Page = () => {
                   item
                   xs={12}
                   md={6}
-
-                  
                   lg={4}
                 >
                   <AccountProfile

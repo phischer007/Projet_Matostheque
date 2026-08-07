@@ -23,18 +23,27 @@ import { useAuth } from 'src/hooks/use-auth';
 import NextLink from 'next/link';
 import { statusMap } from 'src/data/static_data';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const OverviewLatestLoans = (props) => {
   const user = useAuth().user;
   const loans = props?.loans;
   const sx = props?.sx;
-  const title = user.is_staff ? "General loans information" : "Your loan information";
+
+  const { t } = useTranslation();
+
+  // const title = user.is_staff ? "General loans information" : "Your loan information";
+  const title = user.is_staff 
+  ? t('latestLoans.generalInfo', 'General loans information') 
+  : t('latestLoans.yourInfo', 'Your loan information');
 
   const headerStyle = {
     backgroundColor: '#162A42',
     color: 'white',
     width: 280
   };
+
+  
 
   return (
     <Card sx={sx}>
@@ -45,25 +54,29 @@ export const OverviewLatestLoans = (props) => {
             <TableHead>
               <TableRow>
                 <TableCell style={headerStyle}>
-                  Material
+                  {/* Material */}
+                  {t('latestLoans.material', 'Material')}
                 </TableCell>
                 <TableCell style={headerStyle}>
-                  Type
+                  {/* Type */}
+                  {t('latestLoans.type', 'Type')}
                 </TableCell>
                 <TableCell style={headerStyle}>
-                  Owner's Name
+                  {/* Owner's Name */}
+                  {t('latestLoans.ownerName', 'Owner\'s Name')}
                 </TableCell>
                 <TableCell style={headerStyle}>
-                  Duration
+                  {/* Duration */}
+                  {t('latestLoans.duration', 'Duration')}
                 </TableCell>
                 <TableCell style={headerStyle} sortDirection="desc">
-                  Date
+                  {t('latestLoans.date', 'Date')}
                 </TableCell>
                 <TableCell style={headerStyle}>
-                  Quantity
+                  {t('latestLoans.quantity', 'Quantity')}
                 </TableCell>
                 <TableCell style={headerStyle}>
-                  Status
+                  {t('latestLoans.status', 'Status')}
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -131,7 +144,8 @@ export const OverviewLatestLoans = (props) => {
           component={NextLink}
           href="/myloans"
         >
-          View all
+          {/* View all */}
+          {t('latestLoans.viewall', 'View All')}
         </Button>
       </CardActions>
     </Card>
