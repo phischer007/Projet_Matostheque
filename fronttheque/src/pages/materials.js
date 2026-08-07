@@ -14,11 +14,14 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { MaterialsCard } from 'src/sections/materials/materialcard';
 import { MaterialsSearch } from 'src/sections/materials/materialsearch';
+import { MaterialCategory } from 'src/sections/materials/materialcategory';
 import config from '../utils/config';
 import NextLink from 'next/link';
 import { useAuth } from 'src/hooks/use-auth';
-import { MaterialCategory } from 'src/sections/materials/materialcategory';
 
+import { useTranslation } from 'react-i18next';
+
+// ------------------------------------------------------------------------------------ //
 
 const useMaterials = (materials, page, cardPerPage) => {
   return useMemo(() => {
@@ -57,6 +60,8 @@ const Page = () => {
   const [cardPerPage, setRowsPerPage] = useState(16);
   const [qrCodeDataArray, setQrCodeDataArray] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const { t } = useTranslation();
 
   const materialCategoryRef = useRef(null);
 
@@ -160,7 +165,9 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Catalog</title>
+        <title>
+          {t('navbar.catalog', 'Catalog')}
+        </title>
       </Head>
       <Box component="main" 
         sx={{ flexGrow: 1, py: 8 }}
@@ -176,7 +183,7 @@ const Page = () => {
                 <Typography 
                   variant="h4"
                 >
-                  Catalog - Materials
+                  {t('inventoryMaterials.title', 'Catalog - Materials')}
                 </Typography>
                 {user.is_staff && (
                   <Stack alignItems="center" 
@@ -199,7 +206,7 @@ const Page = () => {
                   component={NextLink}
                   href="/create/create-material"
                 >
-                  Add
+                  {t('inventoryMaterials.btnAdd', 'Add')}
                 </Button>
               </div>
             </Stack>

@@ -1,13 +1,28 @@
 import { useState, useCallback } from 'react';
 import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon';
-import { Card, Divider, InputAdornment, OutlinedInput, IconButton, SvgIcon, Stack, Typography } from '@mui/material';
+import { 
+  Card, 
+  InputAdornment, 
+  OutlinedInput, 
+  IconButton, 
+  SvgIcon, 
+  Stack, 
+  Typography 
+} from '@mui/material';
 import InformationCircleIcon from '@heroicons/react/24/outline/InformationCircleIcon';
+
+import { useTranslation } from 'react-i18next';
+
+// ------------------------------------------------------------------------------------ //
 
 export const MaterialsSearch = ({ searchTerm, onSearchChange }) => {
   const [isCheckedInformation, setCheckedInformation] = useState(false);
   const handleInformationShow = useCallback(() => {
     setCheckedInformation(!isCheckedInformation);
   }, [isCheckedInformation]);
+
+  const { t } = useTranslation();
+
 
   return (
     <Card sx={{ p: 2, maxWidth: 800 }}>
@@ -19,8 +34,7 @@ export const MaterialsSearch = ({ searchTerm, onSearchChange }) => {
           value={searchTerm}
           onChange={onSearchChange}
           fullWidth
-          placeholder="Material name/ Material number/ Contact person name/ Description"
-
+          placeholder={t('inventoryMaterials.materialSearchField.placeholder', 'Material name or Material number or Owner or Description')}
           startAdornment={(
             <InputAdornment position="start">
               <SvgIcon
@@ -31,7 +45,7 @@ export const MaterialsSearch = ({ searchTerm, onSearchChange }) => {
               </SvgIcon>
             </InputAdornment>
           )}
-          sx={{ flex: 1 }} // Remove border radius and stretch input
+          sx={{ flex: 1 }}
         />
         <IconButton onClick={handleInformationShow}>
           <SvgIcon fontSize="small">
@@ -54,8 +68,11 @@ export const MaterialsSearch = ({ searchTerm, onSearchChange }) => {
             color="neutral.500"
             variant="caption"
           >
-            You can search a material by the material&apos;s name,
-            the owner&apos;s name, description, the material number on the qrcode (ex. Matostheque-001, type 001)
+            {t(
+              'inventoryMaterials.materialSearchField.informationText', 
+              "You can search a material by the material's name, the owner's name, description, the material number on the qrcode (ex. Matostheque-001, type 001)"
+              )
+            }
           </Typography>
         </Stack>
         : null}

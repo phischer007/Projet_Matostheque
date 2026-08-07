@@ -18,6 +18,8 @@ import {
   Typography 
 } from '@mui/material';
 
+import { useTranslation } from 'react-i18next';
+
 // ------------------------------------------------------------------------------------------------------ //
 
 export const MaterialsCard = (props) => {
@@ -30,14 +32,16 @@ export const MaterialsCard = (props) => {
   const profil_path = profil_image ? `${process.env.NEXT_PUBLIC_ASSETS}/${profil_image[0]}` : '';
   const image_path = images ? `${process.env.NEXT_PUBLIC_ASSETS}/${images[0]}` : '';
 
+  const { t } = useTranslation();
+  
   return (
     <Card
       sx={{
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        border: '1px solid',       // Adds a 1px solid border
-        borderColor: 'grey.300',   // Uses a subtle light-grey color from MUI's palette
+        border: '1px solid',      
+        borderColor: 'grey.300', 
         boxShadow: 3, 
         transition: 'box-shadow 0.3s ease-in-out', 
         '&:hover': {
@@ -108,7 +112,7 @@ export const MaterialsCard = (props) => {
             display="inline"
             variant="body2"
           >
-            Quantity: {material.quantity_available} 
+            {t('inventoryMaterials.materialListCard.quantity', 'Quantity: {{qty}}', { qty: material.quantity_available})}
           </Typography>
         </Stack>
 
@@ -129,7 +133,7 @@ export const MaterialsCard = (props) => {
               display="inline"
               variant="body2"
             >
-              {material.loan_duration} Days
+              {t('inventoryMaterials.materialListCard.durationDays', '{{duration}} Days', { duration: material.loan_duration })}
             </Typography>
           </Stack>
         }

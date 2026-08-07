@@ -14,6 +14,10 @@ import config from '../utils/config';
 import { useAuth } from 'src/hooks/use-auth';
 import NextLink from 'next/link';
 
+import { useTranslation } from 'react-i18next';
+
+// ------------------------------------------------------------------------------------ //
+
 const now = new Date();
 
 const useLoans = (page, rowsPerPage, filteredLoans) => {
@@ -50,6 +54,8 @@ const Page = () => {
   const user = useAuth().user;
   const btnTitle = user.is_staff ? "All loans" : "Your loans";
   const btnCreateUrl = user.is_staff ? "settings" : "/create/create-loan";
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     let apiUrl;
@@ -116,7 +122,9 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Loans</title>
+        <title>
+          {t('navbar.loans', 'Loans')}
+        </title>
       </Head>
       <Box
         component="main"

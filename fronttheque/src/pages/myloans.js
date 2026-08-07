@@ -9,6 +9,10 @@ import config from '../utils/config';
 import { useAuth } from 'src/hooks/use-auth';
 import NextLink from 'next/link';
 
+import { useTranslation } from 'react-i18next';
+
+// ------------------------------------------------------------------------------------ //
+
 const now = new Date();
 
 const useLoans = (page, rowsPerPage, filteredLoans) => {
@@ -37,8 +41,10 @@ const Page = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [activeTab, setActiveTab] = useState('loans');
   const user = useAuth().user;
-  const btnTitle = user.is_staff ? "All loans" : "My loans";
-  const btnCreateUrl =  "/create/create-loan";
+  // const btnTitle = user.is_staff ? "All loans" : "My loans";
+  // const btnCreateUrl =  "/create/create-loan";
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     let apiUrl;
@@ -98,7 +104,9 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Loans</title>
+        <title>
+          {t('navbar.loans', 'Loans')}
+        </title>
       </Head>
 
       <Box
@@ -114,7 +122,13 @@ const Page = () => {
               {/* First sub-grid */}
               <Grid xs={6} gap={1} container alignItems="center">
                 
-                <Typography variant="h4" align="center">Loans</Typography>
+                <Typography 
+                  variant="h4" 
+                  align="center"
+                >
+                  {/* Loans */}
+                  {t('latestLoans.title', 'Loans')}  
+                </Typography>
               </Grid>
             </Grid>
             

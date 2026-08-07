@@ -1,6 +1,7 @@
 // i18n.js
 
 import i18n from 'i18next';
+import { title } from 'node:process';
 import { initReactI18next } from 'react-i18next';
 
 const savedLanguage = typeof window !== 'undefined' ? localStorage.getItem('appLanguage') || 'en' : 'en';
@@ -65,6 +66,7 @@ i18n
             december: "December",
           },
           latestLoans: {
+            title: "Loans",
             generalInfo: "General loans information",
             yourinfo: "Your loan information",
             material: "Material",
@@ -164,12 +166,78 @@ i18n
               textStatusAvailable: "Available",
               textStatusUnavailable: "Unavailable",
               btnCancelText: "Cancel",
-
               error_message_not_updated: "Some materials could not be updated.",
               error_message_try_again: "Could not update materials, try again later",
               succes_message: "Materials successfully updated.",
             }
+          },
+          inventoryMaterials: {
+            title: "Catalog - Materials",
+            btnAdd: "Add",
+            materialSearchField: {
+              placeholder: "Material name or Material number or Owner or Description",
+              informationText: "You can search a material by the material's name, the owner's name, description, the material number on the qrcode (ex. Matostheque-001, type 001)"
+            },
+            materialFilterCategory: {
+              title: "Filter by Category",
+              resetBtn: "Reset Filters",
+              staticData: {
+                sectionConsumables: "Consumables",
+                sectionLabSupplies: "Lab Supplies",
+                filterConsumableTypes: {
+                  FILTERS_FILTRATION_SUPPLIES: "Filters and Filtration Supplies",
+                  BIOLOGICAL_CONSUMABLES: "Biological Consumables",
+                  CHEMICALS: "Chemicals",
+                  SAFETY_EQUIPMENT: "Safety Equipment",
+                  LAB_FURNITURE_FIXTURES: "Lab Fixtures",
+                  CLEANING_MAINTENANCE_SUPPLIES: "Cleaning and Maintenance Supplies"
+                },
+                filterLabSupplyTypes: {
+                  COMPUTING: "Computing",
+                  ELECTRONICS: "Electronics",
+                  MECHANICAL: "Mechanical",
+                  OPTICS_LASER: "Optics or Laser",
+                  GAS_FLUIDS: "Gas or Fluids",
+                  BIOLOGICAL: "Biological",
+                  CHEMISTRY: "Chemistry",
+                  BOOKS: "Books",
+                  OFFICE_BUILDING: "Office and Building",
+                  Others: "Others"
+                }
+              }
+            },
+            materialListCard: {
+              quantity: "Quantity {{qty}}",
+              durationDays: "{{duration}} Days"
+            }
+          },
+          reqLoanDetails: {
+            title: "Loan Details",
+            btnReturn: "Return",
+            btnApprove: "Approve",
+            btnReject: "Reject",
+            btnCancel: "Cancel",
+            unauthorizedText: "You don't have the authorization to access this page.",
+            loadingData: "...Loading data",
+            btnSaveChanges: "Save changes",
+            btnDeleteRecord: "Delete loan record",
+            noMaterialFound: "No material found!!",
+            fields: {
+              materialTitle: "Material Title",
+              materialType: "Material Type",
+              status: "Status",
+              borrower: "Borrower",
+              borrowerEmail: "Borrower's Email",
+              startingDate: "Starting date",
+              duration: "Duration (in day)",
+              quantity: "Quantity",
+              location: "Location",
+              contactPerson: "Contact person",
+              contactPersonEmail: "Contact person's Email",
+              borrowerNote: "Borrower's Note"
+            },
           }
+
         },
       },
 
@@ -229,6 +297,7 @@ i18n
             december: "Décembre",
           },
           latestLoans: {
+            title: "Emprunts",
             generalInfo: "Informations générales sur les emprunts",
             yourInfo: "Vos informations d'emprunt",
             material: "Matériel",
@@ -330,7 +399,74 @@ i18n
               error_message_try_again: "Impossible de mettre à jour le matériel, veuillez réessayer plus tard",
               succes_message: "Matériel mis à jour avec succès.",
             }
+          },
+          inventoryMaterials: {
+            title: "Catalogue - Matériel",
+            btnAdd: "Ajouter",
+            
+            materialSearchField: {
+              placeholder: "Nom du matériel ou Numéro du matériel ou Proprietaire ou Description",
+              informationText: "Vous pouvez rechercher un matériel par le nom du matériel, le nom du propriétaire, la description, le numéro du matériel sur le QR code (ex. Matostheque-001, type 001)"
+            },
+
+            materialFilterCategory: {
+              title: "Filtrer par catégorie",
+              resetBtn: "Réinitialiser les filtres",
+              sectionConsumables: "Consommables",
+              sectionLabSupplies: "Fournitures de laboratoire",
+              filterConsumableTypes: {
+                FILTERS_FILTRATION_SUPPLIES: "Filtres et matériel de filtration",
+                BIOLOGICAL_CONSUMABLES: "Consommables biologiques",
+                CHEMICALS: "Produits chimiques",
+                SAFETY_EQUIPMENT: "Équipement de sécurité",
+                LAB_FURNITURE_FIXTURES: "Mobilier de laboratoire",
+                CLEANING_MAINTENANCE_SUPPLIES: "Fournitures de nettoyage et d'entretien"
+              },
+              filterLabSupplyTypes: {
+                COMPUTING: "Informatique",
+                ELECTRONICS: "Électronique",
+                MECHANICAL: "Mécanique",
+                OPTICS_LASER: "Optique ou Laser",
+                GAS_FLUIDS: "Gaz ou Fluides",
+                BIOLOGICAL: "Biologique",
+                CHEMISTRY: "Chimie",
+                BOOKS: "Livres",
+                OFFICE_BUILDING: "Bureau et Bâtiment",
+                Others: "Autres"
+              }
+            },
+            materialListCard: {
+              quantity: "Quantité : {{qty}}",
+              durationDays: "{{duration}} Jours"
+            }
+          },
+          reqLoanDetails: {
+            title: "Détails du prêt",
+            btnReturn: "Retour",
+            btnApprove: "Approuver",
+            btnReject: "Refuser",
+            btnCancel: "Annuler",
+            unauthorizedText: "Vous n'avez pas l'autorisation d'accéder à cette page.",
+            loadingData: "...Chargement des données",
+            btnSaveChanges: "Enregistrer les modifications",
+            btnDeleteRecord: "Supprimer le dossier de prêt",
+            noMaterialFound: "Aucun matériel trouvé !!",
+            fields: {
+              materialTitle: "Titre du matériel",
+              materialType: "Type de matériel",
+              status: "Statut",
+              borrower: "Emprunteur",
+              borrowerEmail: "E-mail de l'emprunteur",
+              startingDate: "Date de début",
+              duration: "Durée (en jour)",
+              quantity: "Quantité",
+              location: "Lieu",
+              contactPerson: "Personne à contacter",
+              contactPersonEmail: "E-mail du contact",
+              borrowerNote: "Note de l'emprunteur"
+            },
           }
+
         },
       },
     },
@@ -339,6 +475,6 @@ i18n
     interpolation: {
       escapeValue: false, 
     },
-  });
+});
 
 export default i18n;

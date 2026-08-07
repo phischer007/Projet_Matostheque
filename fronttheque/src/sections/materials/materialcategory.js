@@ -1,4 +1,4 @@
-import React, { useState, useImperativeHandle, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { 
   Box,
   Typography,
@@ -12,9 +12,18 @@ import {
 import ArrowPathIcon from '@heroicons/react/24/solid/ArrowPathIcon';
 import { consumableTypes, lab_supplyTypes } from 'src/data/static_data';
 
+import { useTranslation } from 'react-i18next';
 
-export const MaterialCategory = forwardRef(({ handleInternalReset, handleTagClick, selectedCategory, setSelectedCategory}, ref) => {
 
+export const MaterialCategory = forwardRef(
+  ({ 
+    handleInternalReset, 
+    handleTagClick, 
+    selectedCategory, 
+    setSelectedCategory
+  }, ref) => {
+  
+  const { t } = useTranslation();
 
   return (
     <Card 
@@ -36,7 +45,8 @@ export const MaterialCategory = forwardRef(({ handleInternalReset, handleTagClic
           sx={{ mb: 2 }}
         >
           <Typography variant="h6">
-            Filter by Category
+            {/* Filter by Category */}
+            {t('inventoryMaterials.materialFilterCategory.title', 'Filter by Category')}
           </Typography>
           <Button
             startIcon={
@@ -50,19 +60,20 @@ export const MaterialCategory = forwardRef(({ handleInternalReset, handleTagClic
             variant="text"
             color="primary"
           >
-            Reset Filters
+            {/* Reset Filters */}
+            {t('inventoryMaterials.materialFilterCategory.resetBtn', 'Reset Filters')}
           </Button>
         </Stack>
 
         {/* SECTION 1: CONSUMABLES */}
         <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1, mt: 1 }}>
-          Consumables
+          {t('inventoryMaterials.materialFilterCategory.sectionConsumables', 'Consumables')}
         </Typography>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
           {consumableTypes.map((option) => (
             <Chip
               key={option.value}
-              label={option.label}
+              label={t(`inventoryMaterials.materialFilterCategory.filterConsumableTypes.${option.value}`, option.label)}
               clickable
               color={selectedCategory === option.value ? "primary" : "default"}
               variant={selectedCategory === option.value ? "filled" : "outlined"}
@@ -74,13 +85,15 @@ export const MaterialCategory = forwardRef(({ handleInternalReset, handleTagClic
 
         {/* SECTION 2: LAB SUPPLIES */}
         <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
-          Lab Supplies
+          {/* Lab Supplies */}
+          {t('inventoryMaterials.materialFilterCategory.sectionLabSupplies', 'Lab Supplies')}
         </Typography>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
           {lab_supplyTypes.map((option) => (
             <Chip
               key={option.value}
-              label={option.label}
+              // label={option.label}
+              label={t(`inventoryMaterials.materialFilterCategory.filterLabSupplyTypes.${option.value}`, option.label)}
               clickable
               color={selectedCategory === option.value ? "secondary" : "default"}
               variant={selectedCategory === option.value ? "filled" : "outlined"}

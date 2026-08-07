@@ -1,13 +1,22 @@
 import Head from 'next/head';
 import { Box, Container, Stack, Typography, Button, SvgIcon} from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import { HandThumbDownIcon, HandThumbUpIcon, CheckIcon, DocumentArrowUpIcon } from '@heroicons/react/24/solid';
+import { 
+  HandThumbDownIcon, 
+  HandThumbUpIcon, 
+  CheckIcon, 
+  DocumentArrowUpIcon 
+} from '@heroicons/react/24/solid';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { LoanDetailOverview } from 'src/sections/loan-detail/loan-detail-overview';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 
 import { useLoanHandlers } from 'src/hooks/loan-handlers';
+
+import { useTranslation } from 'react-i18next';
+
+// ----------------------------------------------------------------------------------- //
 
 
 const Page = () => {
@@ -26,11 +35,14 @@ const Page = () => {
     OnReturnClick
   } = useLoanHandlers(loanId);
 
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
         <title>
-          Loan Details
+          {/* Loan Details */}
+          {t('reqLoanDetails.title', 'Loan Details')}
         </title>
       </Head>
       <Box
@@ -54,7 +66,8 @@ const Page = () => {
                 direction="row"
               >
                 <Typography variant="h4">
-                  Loan Details
+                  {/* Loan Details */}
+                  {t('reqLoanDetails.title', 'Loan Details')}
                 </Typography>
                 <Stack
                   sx={{
@@ -72,7 +85,8 @@ const Page = () => {
                           variant="contained"
                           onClick={OnReturnClick}
                         >
-                          Return
+                          {/* Return */}
+                          {t('reqLoanDetails.btnReturn', 'Return')}
                         </Button>
                       )}
                       {(isOwner && loanData.loan_status === 'Pending Validation') && (
@@ -82,14 +96,16 @@ const Page = () => {
                             color="success"
                             onClick={OnApproveClick}
                           >
-                            Approve
+                            {/* Approve */}
+                            {t('reqLoanDetails.btnApprove', 'Approve')}
                           </Button>
                           <Button startIcon={(<SvgIcon fontSize="small"> <HandThumbDownIcon /> </SvgIcon>)}
                             variant="contained"
                             color="error"
                             onClick={OnRejectClick}
                           >
-                            Reject
+                            {/* Reject */}
+                            {t('reqLoanDetails.btnReject', 'Reject')}
                           </Button>
                         </>
                       )}
@@ -104,7 +120,8 @@ const Page = () => {
                           color="error"
                           onClick={OnCancelClick}
                         >
-                          Cancel
+                          {/* Cancel */}
+                          {t('reqLoanDetails.btnCancel', 'Cancel')}
                         </Button>
                       )}
                     </>
@@ -130,7 +147,8 @@ const Page = () => {
             </Stack>
 
             : <Typography variant="subtitle2">
-              You don&apos;t have the authorization to access this page.
+              {/* You don&apos;t have the authorization to access this page. */}
+              {t('reqLoanDetails.unauthorizedText', "You don't have the authorization to access this page.")}
             </Typography>
           }
         </Container>
