@@ -6,6 +6,8 @@ import { NotificationItem } from 'src/sections/notification/notification-item';
 import config from '../utils/config';
 import { useAuth } from 'src/hooks/use-auth';
 
+import { useTranslation } from 'react-i18next';
+
 const Page = () => {
     const [notificationsList, setNotificationsList] = useState(null);
     const user = useAuth().user;
@@ -26,10 +28,12 @@ const Page = () => {
             });
     }, []);
 
+    const { t } = useTranslation();
+
     return (
         <>
             <Head>
-                <title>Notifications</title>
+                <title>{t('reqNotifications.title', 'Notifications')}</title>
             </Head>
             <Box
                 component="main"
@@ -46,7 +50,9 @@ const Page = () => {
                             spacing={4}
                         >
                             <Stack spacing={1}>
-                                <Typography variant="h4">Notifications</Typography>
+                                <Typography variant="h4">
+                                    {t('reqNotifications.title', 'Notifications')}
+                                </Typography>
                             </Stack>
                         </Stack>
                         <Stack
@@ -64,7 +70,7 @@ const Page = () => {
                                     notification={item}
                                 />
                             )) : (
-                                <Typography variant="subtitle2">No notification to show yet</Typography>
+                                <Typography variant="subtitle2">{t('reqNotifications.subtitle', 'No notification to show yet')}</Typography>
                             )}
                         </Stack>
 

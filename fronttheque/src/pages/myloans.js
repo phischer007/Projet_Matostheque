@@ -41,8 +41,6 @@ const Page = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [activeTab, setActiveTab] = useState('loans');
   const user = useAuth().user;
-  // const btnTitle = user.is_staff ? "All loans" : "My loans";
-  // const btnCreateUrl =  "/create/create-loan";
 
   const { t } = useTranslation();
 

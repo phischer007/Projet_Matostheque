@@ -1,25 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
-import 'react-big-calendar/lib/css/react-big-calendar.css'; // Import styles
+import { 
+  Calendar, 
+  momentLocalizer 
+} from 'react-big-calendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css'; 
 import moment from 'moment';
-import { Card, CardContent, Typography, Divider } from '@mui/material';
+import 'moment/locale/fr'; 
+import { 
+  Card, 
+  CardContent, 
+  Typography, 
+  Divider 
+} from '@mui/material';
 import { getInitials } from 'src/utils/get-initials';
+
+import { useTranslation } from 'react-i18next';
+
+
+// ----------------------------------------------------------------------------------------------- //
+
 
 const localizer = momentLocalizer(moment);
 
 const status = ['Borrowed', 'Booked', 'Overdue'];
 
-const formatEvent = (data, mode) => {
+const formatEvent = (data, mode, t) => {
   const getTitle = (item) => {
-    return !mode ? getInitials(`${item.borrower_details.first_name} ${item.borrower_details.last_name}`) : 'Hidden User';
+    return !mode 
+      ? getInitials(`${item.borrower_details.first_name} ${item.borrower_details.last_name}`) 
+      : t('materialDetailCalendar.hiddenUser', 'Hidden User');
   }
 
   const events = data ? data.map((item) => {
     if (mode === 'public'){
       return {
-        title: "Hidden User",
+        title: t('materialDetailCalendar.hiddenUser', 'Hidden User'),
         start: new Date(item.loan_date),
-        end: new Date(new Date().setDate(new Date(item.loan_date).getDate() + (item.duration)) ), //converting duration to milliseconds and adding the duration to start date
+        end: new Date(new Date().setDate(new Date(item.loan_date).getDate() + (item.duration)) ), 
       };
     }
     else if (status.includes(item.loan_status)) {
@@ -29,12 +46,12 @@ const formatEvent = (data, mode) => {
         contact: item.borrower_details.email,
         location: item.location,
         start: new Date(item.loan_date),
-        end: new Date(new Date().setDate(new Date(item.loan_date).getDate() + (item.duration - 1)) ), //converting duration to milliseconds and adding the duration to start date
+        end: new Date(new Date().setDate(new Date(item.loan_date).getDate() + (item.duration - 1)) ), 
         loan_quantity: item.loan_quantity
       };
     }
-    return null; // Ensure to return null for events that should not be included
-  }).filter(Boolean) : []; // Filter out null events
+    return null; 
+  }).filter(Boolean) : []; 
 
   return events;
 };
@@ -47,7 +64,13 @@ const TableRow = ({ label, value }) => (
 );
 
 export const MaterialDetailCalendar = (props) => {
-  const events = formatEvent(props.data, props.mode);
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    moment.locale(i18n.language);
+  }, [i18n.language]);
+
+  const events = formatEvent(props.data, props.mode, t);
   const [showInformation, setShowInformation] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -56,23 +79,30 @@ export const MaterialDetailCalendar = (props) => {
       setSelectedEvent(events[0]);
       setShowInformation(true);
     }
-  }, [props.data, props.mode]);
+  }, [props.data, props.mode, events]);
 
-  // DYNAMIC HEIGHT CALCULATION:
-  // Starts at a minimum of 500px so it looks good when empty.
-  // If there are more than 5 events, it adds 30px of height for each additional event.
   const dynamicHeight = events.length > 5 ? 500 + ((events.length - 5) * 30) : 500;
 
   const handleEventClick = (event, item) => {
     if (props.mode !== 'public') {
       setSelectedEvent(event);
-      // setShowInformation(!showInformation);
       setShowInformation(true);
     }
   };
 
+  const calendarMessages = {
+    today: t('materialDetailCalendar.toolbar.today', 'Today'),
+    previous: t('materialDetailCalendar.toolbar.previous', 'Back'),
+    next: t('materialDetailCalendar.toolbar.next', 'Next'),
+    month: t('materialDetailCalendar.toolbar.month', 'Month'),
+    week: t('materialDetailCalendar.toolbar.week', 'Week'),
+    day: t('materialDetailCalendar.toolbar.day', 'Day'),
+    agenda: t('materialDetailCalendar.toolbar.agenda', 'Agenda'),
+    showMore: (total) => `+${total} ${t('materialDetailCalendar.toolbar.showMore', 'more')}`
+  };
+
   return (
-    <Card >
+    <Card>
       <CardContent>
         <Calendar
           localizer={localizer}
@@ -83,6 +113,7 @@ export const MaterialDetailCalendar = (props) => {
           style={{ height: dynamicHeight }}
           popup
           onSelectEvent={handleEventClick}
+          messages={calendarMessages}
         />
       </CardContent>
 
@@ -97,10 +128,22 @@ export const MaterialDetailCalendar = (props) => {
             <Typography variant="body1" component="div">
                   <table>
                     <tbody>
-                      <TableRow label="Name:" value={selectedEvent.user_name} />
-                      <TableRow label="Contact:" value={selectedEvent.contact} />
-                      <TableRow label="Location:" value={selectedEvent.location} />
-                      <TableRow label="Quantity:" value={selectedEvent.loan_quantity} />
+                      <TableRow 
+                        label={t('materialDetailCalendar.labels.name', 'Name:')} 
+                        value={selectedEvent.user_name} 
+                      />
+                      <TableRow 
+                        label={t('materialDetailCalendar.labels.contact', 'Contact:')} 
+                        value={selectedEvent.contact} 
+                      />
+                      <TableRow 
+                        label={t('materialDetailCalendar.labels.location', 'Location:')} 
+                        value={selectedEvent.location} 
+                      />
+                      <TableRow 
+                        label={t('materialDetailCalendar.labels.quantity', 'Quantity:')} 
+                        value={selectedEvent.loan_quantity} 
+                      />
                     </tbody>
                   </table>
                 </Typography>

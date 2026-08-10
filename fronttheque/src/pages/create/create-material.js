@@ -11,6 +11,9 @@ import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import NewMaterialDetails from 'src/sections/create-material/new-material-details';
 import config from '../../utils/config';
 
+import { useTranslation } from 'react-i18next';
+
+
 const gridStyles = {
   '--Grid-columns': 1, // Change the number of columns
 };
@@ -24,8 +27,6 @@ const Page = () => {
     })
       .then(response => response.json())
       .then(data => {
-        // setOwnersList(data);
-        console.log("Data from Django:", data);
         const filteredOwners = data.filter(person => 
           person.role?.trim().toLowerCase() === 'owner'
         );
@@ -34,11 +35,16 @@ const Page = () => {
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
+  
+  // 1. Initialize translation
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
         <title>
-          New Material
+          {/* New Material */}
+          {t('newMaterial.title', 'New Material')}
         </title>
       </Head>
       <Box
@@ -52,7 +58,8 @@ const Page = () => {
           <Stack spacing={3}>
             <div>
               <Typography variant="h4">
-                Add a new material
+                {/* Add a new material */}
+                {t('newMaterial.heading', 'Add a new material')}
               </Typography>
             </div>
             <div>

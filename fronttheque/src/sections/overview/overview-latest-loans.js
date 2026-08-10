@@ -1,7 +1,6 @@
-import { format } from 'date-fns';
 import PropTypes from 'prop-types';
 import ArrowRightIcon from '@heroicons/react/24/solid/ArrowRightIcon';
-import { formatDate } from 'src/utils/get-formatted-date';
+// import { formatDate } from 'src/utils/get-formatted-date';
 import { 
   Box, 
   Button, 
@@ -23,14 +22,18 @@ import { useAuth } from 'src/hooks/use-auth';
 import NextLink from 'next/link';
 import { statusMap } from 'src/data/static_data';
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
+import { format } from 'date-fns';
+import { enUS, fr } from 'date-fns/locale';
+
 
 export const OverviewLatestLoans = (props) => {
   const user = useAuth().user;
   const loans = props?.loans;
   const sx = props?.sx;
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // const title = user.is_staff ? "General loans information" : "Your loan information";
   const title = user.is_staff 
@@ -43,7 +46,7 @@ export const OverviewLatestLoans = (props) => {
     width: 280
   };
 
-  
+  const currentLocale = i18n.language === 'fr' ? fr : enUS;
 
   return (
     <Card sx={sx}>
@@ -54,19 +57,15 @@ export const OverviewLatestLoans = (props) => {
             <TableHead>
               <TableRow>
                 <TableCell style={headerStyle}>
-                  {/* Material */}
                   {t('latestLoans.material', 'Material')}
                 </TableCell>
                 <TableCell style={headerStyle}>
-                  {/* Type */}
                   {t('latestLoans.type', 'Type')}
                 </TableCell>
                 <TableCell style={headerStyle}>
-                  {/* Owner's Name */}
                   {t('latestLoans.ownerName', 'Owner\'s Name')}
                 </TableCell>
                 <TableCell style={headerStyle}>
-                  {/* Duration */}
                   {t('latestLoans.duration', 'Duration')}
                 </TableCell>
                 <TableCell style={headerStyle} sortDirection="desc">
@@ -82,7 +81,7 @@ export const OverviewLatestLoans = (props) => {
             </TableHead>
             <TableBody>
               {loans ? loans.map((loan) => {
-                const loanDate = formatDate(loan.loan_date);
+                const loanDate = format(new Date(loan.loan_date), 'PP', { locale: currentLocale });
 
                 return (
                   <Link
@@ -100,14 +99,13 @@ export const OverviewLatestLoans = (props) => {
                         {loan.material_title}
                       </TableCell>
                       <TableCell>
-                        {loan.type}
+                        {t(`staticData.loanTypes.${loan.type}`, loan.type)}
                       </TableCell>
                       <TableCell>
                         {user.is_staff 
                           ? `${loan.user_first_name} ${loan.user_last_name}` 
                           : `${loan.owner_first_name} ${loan.owner_last_name}`}
                       </TableCell>
-
                       <TableCell>
                         {loan.duration}
                       </TableCell>
@@ -119,7 +117,7 @@ export const OverviewLatestLoans = (props) => {
                       </TableCell>
                       <TableCell>
                         <SeverityPill color={statusMap[loan.loan_status]}>
-                          {loan.loan_status}
+                          {t(`staticData.loanStatus.${loan.loan_status}`, loan.loan_status)}
                         </SeverityPill>
                       </TableCell>
                     </TableRow>
@@ -144,7 +142,6 @@ export const OverviewLatestLoans = (props) => {
           component={NextLink}
           href="/myloans"
         >
-          {/* View all */}
           {t('latestLoans.viewall', 'View All')}
         </Button>
       </CardActions>

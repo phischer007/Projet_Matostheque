@@ -6,6 +6,8 @@ import { useAuth } from 'src/hooks/use-auth';
 import config from 'src/utils/config';
 import { NotificationCard } from 'src/sections/notification-pop/notification-card';
 
+import { useTranslation } from 'react-i18next';
+
 
 export const NotificationPopover = (props) => {
   const { anchorEl, onClose, open } = props;
@@ -21,6 +23,8 @@ export const NotificationPopover = (props) => {
     },
     [onClose, router]
   );
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetch(`${config.apiUrl}/notifications/${user.user_id}/`,{
@@ -62,7 +66,7 @@ export const NotificationPopover = (props) => {
           {lastNotifList && lastNotifList.length >0 ? lastNotifList.map(item =>
             < NotificationCard key={item.notif_id} notification={item} />
           ) : <Typography variant="subtitle2">
-            No notification to show.
+            {t('reqNofitications.popupNone', 'No notification to show.')}
           </Typography>}
 
         </Box> : null}
@@ -79,7 +83,7 @@ export const NotificationPopover = (props) => {
         }}
       >
         <MenuItem onClick={handleView}>
-          View all
+          {t('reqNofitications.popupView', 'View all')}
         </MenuItem>
       </MenuList>
     </Popover>

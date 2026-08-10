@@ -1,18 +1,17 @@
 import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import Head from 'next/head';
 import ArchiveBoxIcon from '@heroicons/react/24/solid/ArchiveBoxIcon';
-import PlusCircleIcon from '@heroicons/react/24/solid/PlusCircleIcon';
-import CogIcon from '@heroicons/react/24/solid/CogIcon';
-import { Box, Button, Container, Stack, SvgIcon, Typography, Grid } from '@mui/material';
-import { useSelection } from 'src/hooks/use-selection';
+import { Box, Container, Stack, SvgIcon, Typography, Grid } from '@mui/material';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { UsersTable } from 'src/sections/user/users-table';
 import { UsersSearch } from 'src/sections/user/users-search';
-import { MaterialTable } from 'src/sections/materials/materialtable';
 import { applyPagination } from 'src/utils/apply-pagination';
 import config from '../utils/config';
 import { useAuth } from 'src/hooks/use-auth';
-import NextLink from 'next/link';
+
+import { useTranslation } from 'react-i18next';
+
+// ----------------------------------------------------------------------------------------------- //
 
 const useUsers = (page, rowsPerPage, filteredUsers) => {
   return useMemo(() => {
@@ -38,6 +37,8 @@ const Page = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const user = useAuth().user;
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     let loanApiUrl = `${config.apiUrl}/users`;
@@ -92,7 +93,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Liste of Users</title>
+        <title>{t('userManagement.title', 'List of Users')}</title>
       </Head>
       <Box
         component="main"
@@ -106,8 +107,9 @@ const Page = () => {
             <Grid container justifyContent="space-between" alignItems="center">
               {/* First sub-grid */}
               <Grid  gap={1} container alignItems="center">
-                <SvgIcon fontSize="medium"><ArchiveBoxIcon /></SvgIcon>
-                <Typography variant="h4" align="center">List of Users</Typography>
+                <Typography variant="h4" align="center">
+                  {t('userManagement.title', 'List of Users')}  
+                </Typography>
               </Grid>
             </Grid>
             <Stack

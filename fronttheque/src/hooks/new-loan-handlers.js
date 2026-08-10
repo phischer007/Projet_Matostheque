@@ -6,6 +6,7 @@ import { useAuth } from 'src/hooks/use-auth';
 import { useNotification } from 'src/contexts/notification-context';
 import { getCookie } from '../utils/csrf';
 
+import { useTranslation } from 'react-i18next';
 
 export const useNewLoanHandlers = (props) => {
   //State Variables and  their Setters
@@ -19,6 +20,8 @@ export const useNewLoanHandlers = (props) => {
   const { addNotification } = useNotification();
   const [maxDate, setMaxDate] = useState(null);
   const [formation_required, setFormation_required] = useState(null)
+
+  const { t } = useTranslation();
 
   const [formErrors, setFormErrors] = useState({
     material: false,
@@ -129,13 +132,20 @@ export const useNewLoanHandlers = (props) => {
         if (values.type === "LAB_SUPPLIES") {
           setMessage({
             status: 'info',
-            value: `You can borrow the material up to ${values.loan_duration} days. \n You can borrow  up to ${values.quantity_available}`
+            // value: `You can borrow the material up to ${values.loan_duration} days. \n You can borrow  up to ${values.quantity_available}`
+            value: t('newLoan.messages.infoLabSupplies', 'You can borrow the material up to {{duration}} days. \n You can borrow up to {{quantity}}', {
+              duration: values.loan_duration,
+              quantity: values.quantity_available
+            })
           });
         }
         else{
           setMessage({
             status: 'info',
-            value: `You can borrow  up to ${values.quantity_available} `
+            // value: `You can borrow  up to ${values.quantity_available} `
+            value: t('newLoan.messages.infoConsumables', 'You can borrow up to {{quantity}}', { 
+              quantity: values.quantity_available 
+            })
           });
           let newformErrors = formErrors
           newformErrors.endDate =false
@@ -159,7 +169,7 @@ export const useNewLoanHandlers = (props) => {
           material: null
         }));
       }
-    }, [endDate, startDate]
+    }, [endDate, startDate, formErrors, t]
   );
 
   const calculateDuration = useCallback(() => {
@@ -172,7 +182,12 @@ export const useNewLoanHandlers = (props) => {
   const notifyInvolvedParties = useCallback((data) => {
     const { owner_user_id, borrower_id, borrower_name, material_title, validation, loan } = data;
     //The owner receive a notification
-    let ownerMessage = validation ? `You have a new pending request: ${material_title}` : ` ${borrower_name} has booked your material: ${material_title}.`;
+    // let ownerMessage = validation ? `You have a new pending request: ${material_title}` : ` ${borrower_name} has booked your material: ${material_title}.`;
+
+    let ownerMessage = validation 
+      ? t(`newLoan.notifications.ownerPending`, `You have a new pending request: {{title}}`, { title: material_title }) 
+      : t('newLoan.notifications.ownerBooked', '{{name}} has booked your material: {{title}}.', { name: borrower_name, title: material_title });
+
     const ownerNotification = {
         message: ownerMessage,
         notificationType: validation ? 'Request Alert' : 'Event',
@@ -185,7 +200,10 @@ export const useNewLoanHandlers = (props) => {
 
     // the borrower receive a notification if no validation is needed
     if (validation === false) {
-      let borrowerMessage = `You successfully booked the material: ${material_title}.`;
+      // let borrowerMessage = `You successfully booked the material: ${material_title}.`;
+      
+      let borrowerMessage = t('newLoan.notifications.borrowerSuccess', 'You successfully booked the material: {{title}}.', { title: material_title });
+
       const borrowerNotification = {
         message: borrowerMessage,
         notificationType: 'General',
@@ -197,7 +215,7 @@ export const useNewLoanHandlers = (props) => {
       addNotification(borrowerNotification);
     }
 
-}, [addNotification]);
+}, [addNotification, t]);
 
 
   const handleSubmit = useCallback(
@@ -260,11 +278,12 @@ export const useNewLoanHandlers = (props) => {
         } catch (error) {
           setMessage({
             status: 'error',
-            value: `Could not borrow. Please verify your data or try ulteriorly`
+            // value: `Could not borrow. Please verify your data or try ulteriorly`
+            value: t('newLoan.messages.errorSubmit', 'Could not borrow. Please verify your data or try again later.')
           });
         }
       }
-    }, [formData, formErrors, endDate, selectedMaterial, formation_required, notifyInvolvedParties, user, router]);
+    }, [formData, formErrors, endDate, selectedMaterial, formation_required, notifyInvolvedParties, user, router, t]);
 
   //Event handlers on effect
   useEffect(() => {
@@ -298,7 +317,8 @@ export const useNewLoanHandlers = (props) => {
 
       setMessage({
         status: 'info',
-        value: `You can borrow the material up to ${record.loan_duration} days.`
+        // value: `You can borrow the material up to ${record.loan_duration} days.`
+        value: t('newLoan.messages.infoDuration', 'You can borrow the material up to {{duration}} days.', { duration: record.loan_duration })
       });
     }
   }, [props.selectedMaterial]);

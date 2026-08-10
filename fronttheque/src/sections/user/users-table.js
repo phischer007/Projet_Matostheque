@@ -31,6 +31,8 @@ import { userStatus } from 'src/data/static_data';
 import { useAuth } from '../../hooks/use-auth';
 import { getCookie } from '../../utils/csrf';
 
+import { useTranslation } from 'react-i18next';
+
 // -------------------------------------------------------------------- //
 // 1. UserRow Component (Handles individual user logic & Dialog)
 // -------------------------------------------------------------------- //
@@ -41,6 +43,8 @@ const UserRow = ({ user }) => {
   const csrftoken = getCookie('csrftoken');
   const actual_user = useAuth().user;
   
+  const { t } = useTranslation();
+
   // Determine if this row belongs to the currently logged-in user
   const isActualUser = actual_user.email === user.email;
 
@@ -81,17 +85,16 @@ const UserRow = ({ user }) => {
         throw new Error('Failed to update status');
       }
 
-      // If we successfully deactivated the user, notify the admin about the transfer
       if (!newStatus) {
-        toast.success(`${user.first_name}'s materials were successfully transferred.`, { autoClose: 4000 });
+        toast.success(t('userManagement.toasts.transferSuccess', "{{firstName}}'s materials were successfully transferred.", { firstName: user.first_name }), { autoClose: 4000 });
       } else {
-        toast.success(`${user.first_name} is now active.`);
+        toast.success(t('userManagement.toasts.activeSuccess', "{{firstName}} is now active.", { firstName: user.first_name }));
       }
 
     } catch (error) {
       // If the backend fails, revert the toggle switch to its original state
       setIsChecked(!newStatus); 
-      toast.error('Could not update user status. Please try again.');
+      toast.error(t('userManagement.toasts.updateError', 'Could not update user status. Please try again.'));
     }
   };
 
@@ -115,7 +118,11 @@ const UserRow = ({ user }) => {
       <TableCell>{formatDate(user.last_login)}</TableCell>
       <TableCell onClick={(e) => e.stopPropagation()}> 
         <span style={{ color: isChecked ? 'inherit' : 'red', marginRight: '8px' }}>
-          {isChecked ? 'Active' : 'Not Active'}
+          {/* {isChecked ? 'Active' : 'Not Active'}
+           */}
+          {isChecked 
+            ? t('userManagement.table.statusActive', 'Active') 
+            : t('userManagement.table.statusNotActive', 'Not Active')}
         </span>
 
         <Switch
@@ -153,7 +160,7 @@ const UserRow = ({ user }) => {
       )}
 
       {/* The Confirmation Dialog */}
-      <Dialog 
+      {/* <Dialog 
         open={dialogOpen} 
         onClose={() => setDialogOpen(false)} 
         onClick={(e) => e.stopPropagation()} // Prevent row click from firing
@@ -172,7 +179,33 @@ const UserRow = ({ user }) => {
             Deactivate & Transfer
           </Button>
         </DialogActions>
+      </Dialog> */}
+
+      <Dialog 
+        open={dialogOpen} 
+        onClose={() => setDialogOpen(false)} 
+        onClick={(e) => e.stopPropagation()} 
+      >
+        <DialogTitle>{t('userManagement.dialog.title', 'Deactivate User & Transfer Materials?')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t('userManagement.dialog.content1', 'Are you sure you want to deactivate ')} 
+            <strong>{user.first_name} {user.last_name}</strong>
+            {t('userManagement.dialog.content2', '?')}
+            <br/><br/>
+            {t('userManagement.dialog.content3', 'Because if this user is deactivated, all materials currently owned by them will be automatically transferred to your Admin account to prevent them from being lost.')}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDialogOpen(false)}>
+            {t('userManagement.dialog.btnCancel', 'Cancel')}
+          </Button>
+          <Button onClick={() => executeStatusChange(false)} color="error" variant="contained">
+            {t('userManagement.dialog.btnDeactivate', 'Deactivate & Transfer')}
+          </Button>
+        </DialogActions>
       </Dialog>
+
     </>
   );
 };
@@ -192,6 +225,8 @@ export const UsersTable = (props) => {
   const [sortDirection, setSortDirection] = useState('asc');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25); 
+
+  const { t } = useTranslation();
 
   const filteredItems = items.filter((user) => {
     if (!filter || filter === 'All' || filter === 'Null' || filter === 'all') {
@@ -248,7 +283,8 @@ export const UsersTable = (props) => {
         <Box sx={{ p: 2, borderBottom: 1, borderColor: 'divider' }}>
           <Stack direction="row" spacing={2} alignItems="center">
             <Typography variant="subtitle2">
-              Filter by status:
+              {/* Filter by status: */}
+              {t('userManagement.table.filterStatus', 'Filter by status:')}
             </Typography>
             <Select
               value={filter}
@@ -264,7 +300,8 @@ export const UsersTable = (props) => {
               {userStatus &&
                 userStatus.map((item) => (
                   <MenuItem key={item.value} value={item.value}>
-                    {item.label}
+                    {/* {item.label} */}
+                    {t(`staticData.userStatus.${item.value || 'Null'}`, item.label)}
                   </MenuItem>
                 ))}
             </Select>
@@ -284,13 +321,21 @@ export const UsersTable = (props) => {
                     '& .MuiTableSortLabel-icon': { color: 'white !important' },
                   }}
                 >
-                  Name
+                  {t('userManagement.table.headers.name', 'Name')}
                 </TableSortLabel>
               </TableCell>
-              <TableCell style={{ ...headerStyle, width: '35%'}}>Email</TableCell>
-              <TableCell style={headerStyle}>Role</TableCell>
-              <TableCell style={headerStyle}>Date of last connection</TableCell>
-              <TableCell style={headerStyle}>Status</TableCell>
+              <TableCell style={{ ...headerStyle, width: '35%'}}>
+                {t('userManagement.table.headers.email', 'Email')}
+              </TableCell>
+              <TableCell style={headerStyle}>
+                {t('userManagement.table.headers.role', 'Role')}
+              </TableCell>
+              <TableCell style={headerStyle}>
+                {t('userManagement.table.headers.lastConnection', 'Date of last connection')}
+              </TableCell>
+              <TableCell style={headerStyle}>
+                {t('userManagement.table.headers.status', 'Status')}
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -308,9 +353,9 @@ export const UsersTable = (props) => {
           page={page}
           rowsPerPage={rowsPerPage}
           rowsPerPageOptions={[25, 50, 100, 150, 200, 250]}
-          labelRowsPerPage="Rows per page:"
+          labelRowsPerPage={t('userManagement.table.rowsPerPage', 'Rows per page:')}
           labelDisplayedRows={({ from, to, count }) =>
-            `${from}-${to} of ${count !== -1 ? count : `more than ${to}`}`
+            `${from}-${to} ${t('userManagement.table.of', 'of')} ${count !== -1 ? count : `${t('userManagement.table.moreThan', 'more than')} ${to}`}`
           }
         />
       </TableContainer>
